@@ -9,9 +9,9 @@
              <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
                  <a class="navbar-brand pull-lg-left" href="/">
                      {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
-                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
+                         <img alt="{{ companyName }}" src="{{ companyLogo }}" alt="ht-test" class="img-fluid"/>
                      {% else %}
-                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
+                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" alt="ht-test" class="img-fluid"/>
                      {% endif %}
                  </a>
 
