@@ -6,6 +6,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("login", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "modalElement",
         "backlink",
@@ -29,20 +31,23 @@ Vue.component("login", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.loginFields = $(".login-container").find(".input-unit");
+        this.$nextTick(() =>
+        {
+            this.loginFields = $(".login-container").find(".input-unit");
+        });
     },
 
     watch:
     {
-        password: function(val, oldVal)
-            {
+        password(val, oldVal)
+        {
             this.resetError();
         },
 
-        username: function(val, oldVal)
-            {
+        username(val, oldVal)
+        {
             this.resetError();
         }
     },
@@ -100,11 +105,6 @@ Vue.component("login", {
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(this.modalElement) !== null)
-                    {
-                        ModalService.findModal(document.getElementById(this.modalElement)).hide();
-                    }
-
                     NotificationService.success(Translations.Template.accLoginSuccessful).closeAfter(10000);
 
                     if (this.backlink !== null && this.backlink)
@@ -119,8 +119,6 @@ Vue.component("login", {
                     {
                         location.reload();
                     }
-
-                    this.isDisabled = false;
                 })
                 .fail(response =>
                 {

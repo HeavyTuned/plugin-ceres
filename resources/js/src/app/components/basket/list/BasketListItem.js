@@ -1,8 +1,10 @@
-var ResourceService       = require("services/ResourceService");
-// var ApiService          = require("services/ApiService");
-// var NotificationService = require("services/NotificationService");
+import ExceptionMap from "exceptions/ExceptionMap";
+
+const NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "basketItem",
@@ -11,17 +13,37 @@ Vue.component("basket-list-item", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             waiting: false,
+            waitForDelete: false,
             deleteConfirmed: false,
             deleteConfirmedTimeout: null,
             itemCondition: ""
         };
     },
 
-    created: function()
+    computed:
+    {
+        imageUrl()
+        {
+            const img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+
+            return img.url;
+        },
+
+        isInputLocked()
+        {
+            return this.waiting || this.isBasketLoading;
+        },
+
+        ...Vuex.mapState({
+            isBasketLoading: state => state.basket.isBasketLoading
+        })
+    },
+
+    created()
     {
         this.$options.template = this.template;
     },
@@ -31,31 +53,35 @@ Vue.component("basket-list-item", {
         /**
          * Delete item from basket
          */
-        deleteItem: function()
+        deleteItem()
         {
-            var self = this;
-
             if (!this.deleteConfirmed)
             {
                 this.deleteConfirmed = true;
                 this.deleteConfirmedTimeout = window.setTimeout(
-                    function()
+                    () =>
                     {
-                        self.resetDelete();
+                        this.resetDelete();
                     },
                     5000
                 );
             }
             else
             {
+                this.waitForDelete = true;
                 this.waiting = true;
-                ResourceService
-                    .getResource("basketItems")
-                    .remove(this.basketItem.id)
-                    .fail(function()
+
+                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
+                    response =>
                     {
-                        self.resetDelete();
-                        self.waiting = false;
+                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
+                        this.waiting = false;
+                    },
+                    error =>
+                    {
+                        this.resetDelete();
+                        this.waitForDelete = false;
+                        this.waiting = false;
                     });
             }
         },
@@ -64,45 +90,48 @@ Vue.component("basket-list-item", {
          * Update item quantity in basket
          * @param quantity
          */
-        updateQuantity: function(quantity)
+        updateQuantity(quantity)
         {
-            if (this.basketItem.quantity === quantity)
+            if (this.basketItem.quantity !== quantity)
             {
-                return;
+                this.waiting = true;
+
+                const origQty = this.basketItem.quantity;
+
+                this.$store.dispatch("updateBasketItemQuantity", {basketItem: this.basketItem, quantity: quantity}).then(
+                    response =>
+                    {
+                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
+                        this.waiting = false;
+                    },
+                    error =>
+                    {
+                        this.basketItem.quantity = origQty;
+
+                        if (this.size === "small")
+                        {
+                            this.$store.dispatch("addBasketNotification", {type: "error", message: Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]});
+                        }
+                        else
+                        {
+                            NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+                        }
+
+                        this.waiting = false;
+                    });
             }
-
-            this.basketItem.quantity = quantity;
-            this.waiting = true;
-
-            ResourceService
-                .getResource("basketItems")
-                .set(this.basketItem.id, this.basketItem)
-                .fail(function()
-                {
-                    this.waiting = false;
-                }.bind(this));
         },
 
         /**
          * Cancel delete
          */
-        resetDelete: function()
+        resetDelete()
         {
             this.deleteConfirmed = false;
             if (this.deleteConfirmedTimeout)
             {
                 window.clearTimeout(this.deleteConfirmedTimeout);
             }
-        }
-    },
-
-    computed:
-    {
-        imageUrl: function()
-        {
-            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
-
-            return img.url;
         }
     }
 });

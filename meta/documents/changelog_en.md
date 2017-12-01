@@ -1,5 +1,176 @@
 # Release Notes for Ceres
 
+## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The version of the JavaScript framework Vue has been updated from Vue1 to Vue2. For further information refer to the <a href="https://forum.plentymarkets.com/t/news-technologie-update-in-ceres-vue2-und-vuex/77116" target="_blank"><b>forum</b></a>.
+- The technology VueX has been integrated in the online store.
+- The template container `SingleItem.AdditionalContentAfterVAT` has been added for displaying additional content after the **VAT** information in the single item view (Thanks <a href="https://github.com/jalie" target="_blank"><b>@jalie</b></a>).
+- The template container `RegistrationOverlay.ExtendOverlayButtons` has been added for displaying additional content in the registration overlay (Thanks <a href="https://github.com/mkreusch" target="_blank"><b>@mkreusch</b></a>).
+- A mega menu has been added for the navigation. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#80" target="_blank"><b>Customising the header and footer</b></a>.
+- A default customer class for B2B customers can now be specified in Ceres. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#45" target="_blank"><b>Carrying out global settings</b></a>.
+- Items can now be sorted by stock in the category view using the **Recommended item sorting** option. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#200" target="_blank"><b>Customising the pagination and sorting</b></a>.
+- A customer that ordered as a guest may now change the payment method on the order confirmation page if enabled.
+- A customer that ordered as a guest can now pay an order subsequently, e.g. when the payment method changes.
+- An error message has been added that will be displayed when an error occurs during adding items to the shopping cart.
+- Currency settings can now be carried out in Ceres. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#203" target="_blank"><b>Carrying out settings for currencies</b></a>.
+- Various loading animations on buttons have been added to provide better feedback to customers when something is loaded.
+- If an element updates in the shopping cart, a loading animation is displayed.
+- When changing addresses in the **My account** area, the input fields will now be disabled until the address data is loaded from the server.
+- When changing the payment method or shipping method in the checkout, the related elements will now be disabled until the data is loaded from the server.
+
+### Fixed
+
+- Error messages triggered in the shopping cart preview will now be displayed correctly.
+- Various CSS styling issues have been fixed.
+- Due to an error, the item conditions hasn't been displayed in the single item view. This has been fixed.
+- Due to an error the **My Account** area could not be loaded when loading the orders of a customer.
+- Due to an error prices with different VAT rated haven't been displayed correctly. This has been fixed.
+- Sums and prices on the page for manually created orders will now be displayed correctly.
+- Due to an error the stock check in the shopping cart didn't work properly. This has been fixed.
+- It is not possible anymore to perform an empty search.
+
+### Changed
+
+- The buttons for changing the item quantity or for deleting an item in the shopping cart will now be deactivated until the server responded.
+- Every overlay has a footer to display the buttons.
+- The menu in the header that is displayed after logging in has been re-designed to match the global design of the header.
+- The search icon now displays where the search can be closed.
+- All menus in the header can now be closed by clicking anywhere in the online store.
+- The buttons for adding, editing and deleting addresses have been re-designed to be clearer to the customer.
+- A unique icon has been added to all buttons in Ceres in order to make the buttons more understandable.
+- A **Back** button has been added in the mobile navigation referring to the parent category.
+
+## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Events from plentymarkets or from other plugins can now be processed directly in Ceres.
+- Server notifications will now be output directly in Ceres. This way, plugin developers can access the notifications in Ceres in a more convenient way.
+
+### Fixed
+
+- Due to an error, shipping costs weren't displayed correctly on the order detail page and on the order confirmation page. This has been fixed.
+- Due to an error, additional item data wasn't displayed in the shopping cart when having more than 10 items in the shopping cart. This has been fixed.
+
+## v1.7.1 (2017-11-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the setting for displaying the unit price of an item has been ignored. This has been fixed.
+- Due to an error the manufacturing country hasn't been displayed in the details tab on the single item view even when the related setting has been activated. This has been fixed.
+- Due to an error, the the quantity of an item hasn't been displayed in the category view. This has been fixed.
+- Due to an error, customers were unable to change the password in the **My account** area. This has been fixed.
+- Due to an error, graduated prices were displayed for customer with a certain customer class, even though this price was not set for the customer class. This has been fixed.
+- Due to an error, graduated prices for items with a the quantity 1 have been displayed. This has been fixed.
+
+### Changed
+
+- The field **External variation ID** in the details tab on the single item view has been changed to **Variation ID**.
+
+## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Customer classes are now taken into consideration when displaying item data in the online store.
+
+### Fixed
+
+- The variation setting for unite prices **Show unit price** is now taken into account. When deactivating this setting, the unit price is not displayed in the online store.
+
+### Known issues
+
+- No discounts for customer classes are taken into consideration when calulating graduated prices.
+- The minimum order quantity set for a customer class is not yet displayed in the single item view.
+- Items that are only available for a certain customer class will also be displayed to all customer classes in the variation selection. These items still can only be purchased by the respective customer class.
+
+## v1.6.3 (2017-11-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.2...1.6.3" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Order properties will not be displayed twice on the single item view.
+
+## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- In the return history, only four images per order are loaded initially.
+- In the return history, a "Show more" button was added.
+- If items with order properties are in the basket, each surcharge is followed by "per item".
+- After the customer has filed a return request, they are forwarded to a confirmation page.
+
+### Fixed
+
+- The returns tab in the My account area is deactivated if the customer does not have any returns.
+
+## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Add
+
+- Meta descriptions and robots settings for static pages of the online store can now be entered in the **SEO** tab. For further information about this, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#201" target="_blank"><b>Carrying out settings for search engine optimisation</b></a>.
+
+### Changed
+
+- **Name of your store** and **URL to your company logo** have been moved to the **Global** tab of the configuration.
+- The **Allow returns** setting has been added in the **Checkout and My account** tab of the configuration and replaced the old setting for activating returns in the plentymarkets back end.
+
+## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Graduated prices are now integrated in Ceres and will be displayed below the order properties in the single item view. For further information about graduated prices, refer to <a href="https://knowledge.plentymarkets.com/en/item/managing-items#870" target="_blank"><b>Managing sales prices</b></a>.
+
+### Changed
+
+- The text of order properties will not be displayed in the shopping cart preview anymore. 
+- Order properties will now be displayed above the price in the single item view.
+- In the single item view, the item price is now calculated considering surcharges for order properties and graduated prices.
+- The item price is now calculated considering surcharges for order properties and graduated prices in the **Add to shopping cart** overlay.
+- In the order history, the clock icon has been replaced with a text.
+- In the return history, the clock icon has been replaced with a text.
+
+## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The **Container for customer feedback** container has been added.
+
+### Changed
+
+- Der template container **Single item: Add detail tabs** now contains the current `Item` object.
+- Der template container **Single item: Add content to detail tabs** now contains the current `Item` object.
+
+### Fixed
+
+- Surcharges for order properties are now correctly displayed in the shopping cart and shopping cart preview.
+- In the **My account** area the note **Payment method cannot be changed** will be hidden as soon as the order was paid.
+
+## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- It is now possible to return items of an order in the **My account** area. For further information about returns, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#430" target="_blank"><b>Activating returns</b></a>.
+
+### Fixed
+
+- Due to an error the shipping date on the order confirmation page was incorrect. This has been fixed.
+- Due to an error the order overview could not be loaded when an order with an old payment method was saved. This has been fixed.
+- Due to a randomly occurring error the checkout could not be opened when ordering as a guest. This has been fixed.
+- Due to an error the image gallery in the single item view wasn't displayed correctly when switching the variation of the item. This has been fixed.
+
+## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The `afterBasketItemRemoved` event has been added. This event will be triggered after removing an item from the shopping cart.
+- The `afterBasketItemQuantityUpdated` event has been added. This event will be triggered after updating the quantity of items in the shopping cart.
+- The `afterShippingCountryChanged` event has been added. This event will be triggered after changing the shipping country in the checkout.
+
+### Fixed
+
+- Due to an error the unit price wasn’t displayed correctly. This has been fixed.
+
 ## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added

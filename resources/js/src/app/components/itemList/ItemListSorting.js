@@ -1,8 +1,8 @@
-const ItemListService = require("services/ItemListService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("item-list-sorting", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "sortData",
@@ -30,7 +30,8 @@ Vue.component("item-list-sorting", {
                 "variation.updatedAt_desc"                  : "variationLastUpdateTimestamp_desc",
                 "item.manufacturer.externalName_asc"        : "itemProducerName_asc",
                 "item.manufacturer.externalName_desc"       : "itemProducerName_desc"
-            }
+            },
+            sortingList: this.sortData
         };
     },
 
@@ -40,7 +41,7 @@ Vue.component("item-list-sorting", {
 
         if (App.isSearch)
         {
-            this.sortData.unshift("item.score");
+            this.sortingList.unshift("item.score");
             this.dataTranslationMapping["item.score"] = "itemRelevance";
         }
 
@@ -54,16 +55,16 @@ Vue.component("item-list-sorting", {
     {
         buildData()
         {
-            for (const i in this.sortData)
+            for (const i in this.sortingList)
             {
-                const data = this.sortData[i];
+                const data = this.sortingList[i];
                 const sortItem =
                     {
                         value      : data,
                         displayName: Translations.Template[this.dataTranslationMapping[data]]
                     };
 
-                this.sortData[i] = sortItem;
+                this.sortingList[i] = sortItem;
             }
         },
 
@@ -71,13 +72,13 @@ Vue.component("item-list-sorting", {
         {
             const defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
 
-            this.selectedSorting = this.sortData.find(entry => entry.value === defaultSortKey);
+            this.selectedSorting = this.sortingList.find(entry => entry.value === defaultSortKey);
+            this.$store.commit("setItemListSorting", this.selectedSorting.value);
         },
 
         updateSorting()
         {
-            ItemListService.setOrderBy(this.selectedSorting.value);
-            ItemListService.getItemList();
+            this.$store.dispatch("selectItemListSorting", this.selectedSorting.value);
         },
 
         setSelectedValueByUrl()
@@ -86,12 +87,12 @@ Vue.component("item-list-sorting", {
 
             if (urlParams.sorting)
             {
-                for (const i in this.sortData)
+                for (const i in this.sortingList)
                 {
-                    if (this.sortData[i].value === urlParams.sorting)
+                    if (this.sortingList[i].value === urlParams.sorting)
                     {
-                        this.selectedSorting = this.sortData[i];
-                        ItemListService.setOrderBy(this.selectedSorting.value);
+                        this.selectedSorting = this.sortingList[i];
+                        this.$store.commit("setItemListSorting", this.selectedSorting.value);
                     }
                 }
             }

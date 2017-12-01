@@ -1,7 +1,9 @@
 Vue.component("category-image-carousel", {
 
+    delimiters: ["${", "}"],
+
     props: {
-        imageUrls      : {type: Array},
+        imageUrlsData  : {type: Array},
         itemUrl        : {type: String},
         altText        : {type: String},
         showDots       : {type: String},
@@ -14,19 +16,49 @@ Vue.component("category-image-carousel", {
         template       : {type: String}
     },
 
+    data()
+    {
+        return {
+            $_enableCarousel: false
+        };
+    },
+
+    computed:
+    {
+        imageUrls()
+        {
+            return this.imageUrlsData.sort((imageUrlA, imageUrlB) =>
+            {
+                if (imageUrlA.position > imageUrlB.position)
+                {
+                    return 1;
+                }
+                if (imageUrlA.position < imageUrlB.position)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    },
+
     created: function()
     {
         this.$options.template = this.template;
 
-        this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
+        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
 
-    ready: function()
+    mounted: function()
     {
-        if (this.enableCarousel)
+        this.$nextTick(() =>
         {
-            this.initializeCarousel();
-        }
+            if (this.$_enableCarousel)
+            {
+                this.initializeCarousel();
+            }
+        });
     },
 
     methods:

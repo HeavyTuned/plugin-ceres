@@ -5,12 +5,6 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
-        $("#btnMainMenuToggler").click(function()
-        {
-            $(".mobile-navigation").toggleClass("open");
-            $("body").toggleClass("menu-is-visible");
-        });
-
         $(window).scroll(function()
         {
             if ($(".wrapper-main").hasClass("isSticky"))
@@ -55,24 +49,6 @@ var init = (function($, window, document)
             }, "xml");
         });
 
-        // Sticky sidebar single item
-        if (window.matchMedia("(min-width: 768px)").matches)
-        {
-            var $singleRightside = $(".single-rightside");
-            var $headHeight = $(".top-bar").height();
-
-            $singleRightside.stick_in_parent({offset_top: $headHeight + 10});
-
-            $singleRightside.on("sticky_kit:bottom", function()
-            {
-                $(this).parent().css("position", "static");
-            })
-                .on("sticky_kit:unbottom", function()
-                {
-                    $(this).parent().css("position", "relative");
-                });
-        }
-
         var $toggleListView = $(".toggle-list-view");
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
@@ -84,35 +60,43 @@ var init = (function($, window, document)
             {
                 evt.preventDefault();
                 evt.stopPropagation();
-                $("body").toggleClass("open-right");
+                $("#vue-app").toggleClass("open-right");
             });
         }, 1);
 
-        $(document).on("click", "body.open-right", function(evt)
+        $(document).on("click", function(evt)
         {
-            if ($("body").hasClass("open-right"))
+            if ($("#vue-app").hasClass("open-right"))
             {
-                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0))
+                if ((evt.target != $(".basket-preview")) &&
+                    (evt.target.classList[0] != "message") &&
+                    ($(evt.target).parents(".basket-preview").length <= 0))
                 {
                     evt.preventDefault();
-                    $("body").toggleClass("open-right");
+                    $("#vue-app").toggleClass("open-right");
                 }
             }
-        });
 
-        $("#to-top").on("click", function()
-        {
-            $("html, body").animate({scrollTop: 0}, "slow");
-        });
+            if ((evt.target.id != "countrySettings") &&
+                ($(evt.target).parents("#countrySettings").length <= 0) &&
+                ($("#countrySettings").attr("aria-expanded") == "true"))
+            {
+                $("#countrySettings").collapse("hide");
+            }
 
-        $("#searchBox").on("show.bs.collapse", function()
-        {
-            $("#countrySettings").collapse("hide");
-        });
+            if ((evt.target.id != "searchBox") &&
+                ($(evt.target).parents("#searchBox").length <= 0) &&
+                ($("#searchBox").attr("aria-expanded") == "true"))
+            {
+                $("#searchBox").collapse("hide");
+            }
 
-        $("#countrySettings").on("show.bs.collapse", function()
-        {
-            $("#searchBox").collapse("hide");
+            if ((evt.target.id != "currencySelect") &&
+                ($(evt.target).parents("#currencySelect").length <= 0) &&
+                ($("#currencySelect").attr("aria-expanded") == "true"))
+            {
+                $("#currencySelect").collapse("hide");
+            }
         });
 
         $toggleListView.on("click", function(evt)
@@ -179,6 +163,22 @@ var init = (function($, window, document)
                 $("html, body").animate({scrollTop: 0}, duration);
 
                 return false;
+            });
+
+            $("#searchBox").on("show.bs.collapse", function()
+            {
+                $("#countrySettings").collapse("hide");
+            });
+
+            $("#countrySettings").on("show.bs.collapse", function()
+            {
+                $("#searchBox").collapse("hide");
+            });
+
+            $("#accountMenuList").click(function()
+            {
+                $("#countrySettings").collapse("hide");
+                $("#searchBox").collapse("hide");
             });
         });
     }

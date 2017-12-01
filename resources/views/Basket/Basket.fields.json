@@ -12,6 +12,7 @@
   "variation.maximumOrderQuantity",
   "variation.id",
   "variation.data.orderProperties.*",
+  "variation.mayShowUnitPrice",
   "item.id",
   "images.all.url*",
   "images.all.position",
@@ -22,5 +23,9 @@
   "properties.*",
   "filter.isSalable",
   "attributes.attribute.names.*",
-  "attributes.value.names.*"
+  "attributes.value.names.*",
+  "unit.content",
+  "unit.names.name",
+  "unit.names.lang",
+  "unit.unitOfMeasurement"
 ]

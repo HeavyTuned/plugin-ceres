@@ -1,30 +1,16 @@
-var ResourceService   = require("services/ResourceService");
-var currencySymbolMap = require("currency-symbol-map");
-var accounting        = require("accounting");
+const accounting = require("accounting");
 
-Vue.filter("currency", function(price, customCurrency)
+Vue.filter("currency", function(price)
 {
-    var basket = ResourceService.getResource("basket").val();
-
-    var currency = customCurrency || basket.currency;
-
-    if (currency)
-    {
-        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
-
-        if (currencySymbol)
-        {
-            currency = currencySymbol;
-        }
-    }
+    const currencyPattern = App.config.currencyPattern;
 
     // (%v = value, %s = symbol)
-    var options = {
-        symbol   : currency,
-        decimal  : ",",
-        thousand : ".",
+    const options = {
+        symbol   : App.config.activeCurrency,
+        decimal  : currencyPattern.separator_decimal,
+        thousand : currencyPattern.separator_thousands,
         precision: 2,
-        format   : "%v %s"
+        format   : currencyPattern.pattern.replace("¤", "%s").replace("#,##0.00", "%v")
     };
 
     return accounting.formatMoney(price, options);

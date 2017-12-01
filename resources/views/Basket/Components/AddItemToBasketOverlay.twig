@@ -4,7 +4,7 @@
 
     {% set configItemName = config("Ceres.item.name") %}
 
-    <div id="add-item-to-basket-overlay" v-if="startRendering()">
+    <div id="add-item-to-basket-overlay">
         <div class="modal fade">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -24,20 +24,26 @@
                         <div class="row is-table-row">
                             <div class="col-md-4" style="min-height: 80px;">
                                 <img style="max-height: 140px;" class="img-fluid m-x-auto"
-                                     :src="imageUrl" alt="${ texts | itemName {{ configItemName }} }"/>
+                                     :src="imageUrl" :alt="itemName"/>
                             </div>
                             <div class="col-md-8">
                                 <p>
-                                    <strong>${ texts | itemName {{ configItemName }} }</strong>
+                                    <strong>${ itemName }</strong>
                                 </p>
                                 <p class="small">
                                     <strong>
-                                        <span class="text-muted">${ basketItem.quantity } x</span>
-                                        <span v-text="price | currency currency"></span>
+                                        <span class="text-muted">${ latestBasketEntry.quantity } x</span>
+                                        <span>${ price | currency }</span>
                                     </strong>
                                 </p>
-                                <p class="small" v-for="property in basketItem.currentBasketItem.properties">
-                                    <strong v-if="property.property.value">${property.property.names.name} (${basketItem.currentBasketItem.properties | propertySurcharge property.propertyId | currency }):</strong>
+
+                                <p class="small" v-for="attribute in latestBasketEntry.item.attributes">
+                                    <strong>${ attribute.attribute.names.name }</strong>:
+                                    <span>${ attribute.value.names.name }</span>
+                                </p>
+
+                                <p class="small" v-for="property in latestBasketEntry.item.properties">
+                                    <strong v-if="property.property.value">${property.property.names.name} (+ ${latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
                                     <span v-if="property.property.value">${property.property.value}</span>
                                 </p>
                             </div>
@@ -48,22 +54,16 @@
                     <!-- MODAL FOOTER -->
                     <div class="modal-footer">
                         <div class="row">
-                            <div class="col-sm-7 m-b-1 item-confirm-special-case-blue">
-                                <a href="/checkout" class="btn btn-primary">
-                                    {{ trans("Ceres::Template.orderCheckout") }} <i class="fa fa-arrow-right"
-                                                                                    aria-hidden="true"></i>
-                                </a>
-                                <a href="/basket" class="btn btn-primary">
+                            <div class="col-sm-8 offset-sm-2 item-confirm-special-case-close">
+                                <a v-waiting-animation-infinite href="/basket" class="btn btn-primary btn-medium btn-m-r btn-outline-primary">
                                     {{ trans("Ceres::Template.basket") }} <i class="fa fa-shopping-cart"
                                                                              aria-hidden="true"></i>
                                 </a>
+                               <a v-waiting-animation-infinite href="/checkout" class="btn btn-primary btn-medium">
+                                    {{ trans("Ceres::Template.orderCheckout") }} <i class="fa fa-arrow-right"
+                                                                                    aria-hidden="true"></i>
+                                </a>
                                 {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
-                            </div>
-                            <div class="col-sm-3 offset-sm-2 item-confirm-special-case-close">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                    <i class="fa fa-times"
-                                       aria-hidden="true"></i> {{ trans("Ceres::Template.generalClose") }}
-                                </button>
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ Vue.component("add-to-wish-list", {
     {
         return {
             wishListCount: 0,
+            _isActive: this.isActive,
             isLoading: false
         };
     },
@@ -21,16 +22,19 @@ Vue.component("add-to-wish-list", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.changeTooltipText();
+        this.$nextTick(() =>
+        {
+            this.changeTooltipText();
+        });
     },
 
     methods:
     {
         switchState()
         {
-            if (this.isActive)
+            if (this.$data._isActive)
             {
                 this.removeFromWishList();
             }
@@ -45,21 +49,22 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                this.isActive = true;
+                this.$data._isActive = true;
                 this.changeTooltipText();
 
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(response =>
-                {
-                    this.isLoading = false;
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(
+                    response =>
+                    {
+                        this.isLoading = false;
 
-                    NotificationService.success(Translations.Template.itemWishListAdded);
-                },
-                error =>
-                {
-                    this.isLoading = false;
-                    this.isActive = false;
-                    this.changeTooltipText();
-                });
+                        NotificationService.success(Translations.Template.itemWishListAdded);
+                    },
+                    error =>
+                    {
+                        this.isLoading = false;
+                        this.$data._isActive = false;
+                        this.changeTooltipText();
+                    });
             }
         },
 
@@ -68,7 +73,7 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                this.isActive = false;
+                this.$data._isActive = false;
                 this.changeTooltipText();
 
                 this.$store.dispatch("removeWishListItem", {id: parseInt(this.variationId)}).then(response =>
@@ -80,7 +85,7 @@ Vue.component("add-to-wish-list", {
                 error =>
                 {
                     this.isLoading = false;
-                    this.isActive = true;
+                    this.$data._isActive = true;
                     this.changeTooltipText();
                 });
             }
@@ -88,7 +93,7 @@ Vue.component("add-to-wish-list", {
 
         changeTooltipText()
         {
-            const tooltipText = this.isActive ? "itemWishListRemove" : "itemWishListAdd";
+            const tooltipText = this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd";
 
             $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
         }

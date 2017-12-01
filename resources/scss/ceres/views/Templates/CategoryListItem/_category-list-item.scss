@@ -2,7 +2,6 @@
     padding: .8rem;
     width: 100%;
     overflow: hidden;
-    border: 1px solid #fff;
     background-color: #fff;
     margin-bottom: $grid-gutter-width/2;
 
@@ -166,6 +165,11 @@
         font-weight: 700;
         font-size: 1.2rem;
         min-height: 21px;
+    }
+
+    .category-unit-price {
+        font-size: .81em;
+        color: $gray-light;
     }
 
     .thumb-buy{

@@ -11,10 +11,16 @@
             </button>
         </header>
 
+        <div v-if="basketNotifications.length > 0">
+            <div class="alert fade in alert-danger" v-for="notification in basketNotifications">
+                <div>${ notification.message }</div>
+            </div>
+        </div>
+
         <!-- BASKET LIST -->
         <div class="p-a-1 list">
           <div class="cmp cmp-basket-preview-list" v-if="basketItems.length > 0">
-              <basket-list template="#vue-basket-list" size="small" trigger-event="true"></basket-list>
+              <basket-list template="#vue-basket-list" size="small"></basket-list>
           </div>
           <h5 v-else>{{ trans("Ceres::Template.orderNoItemsInBasket") }}</h5>
         </div>
@@ -27,7 +33,7 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 m-b-1">
-                    <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("Ceres::Template.basket") }}">
+                    <a v-waiting-animation-infinite href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("Ceres::Template.basket") }}">
                         {{ trans("Ceres::Template.basket") }} <i class="fa fa-shopping-cart"></i>
                     </a>
                 </div>
@@ -36,7 +42,7 @@
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
 
                     <div>
-                        <a href="/checkout" :class="{ 'disabled': basketItems.length <= 0 }" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.orderCheckout") }}">
+                        <a v-waiting-animation-infinite href="/checkout" :class="{ 'disabled': basketItems.length <= 0 }" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.orderCheckout") }}">
                             {{ trans("Ceres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>

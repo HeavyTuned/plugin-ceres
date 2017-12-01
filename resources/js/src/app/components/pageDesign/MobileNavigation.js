@@ -1,17 +1,14 @@
-import CategoryRendererService from "services/CategoryRendererService";
-const ResourceService = require("services/ResourceService");
-
 Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "categoryBreadcrumbs"
+        "currentCategoryId",
+        "navigationTreeData"
     ],
 
     data()
     {
         return {
-            categoryTree: [],
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
@@ -19,89 +16,87 @@ Vue.component("mobile-navigation", {
         };
     },
 
+    computed:
+    {
+        parentCategories()
+        {
+            const dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
+
+            if (dataContainer[0] && dataContainer[0].parent)
+            {
+                if (dataContainer[0].parent.parent)
+                {
+                    // returns upper level
+                    return dataContainer[0].parent.parent.children;
+                }
+
+                // return highest level of navigation
+                return this.navigationTree;
+            }
+
+            return false;
+        },
+
+        ...Vuex.mapState({
+            navigationTree: state => state.navigation.tree
+        })
+    },
+
     created()
     {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.categoryTree = ResourceService.getResource("navigationTree").val();
-
-        this.buildTree(this.categoryTree, null, (this.categoryBreadcrumbs && this.categoryBreadcrumbs.length) ? this.categoryBreadcrumbs.pop().id : null);
-
-        this.dataContainer1 = this.categoryTree;
-    },
-
-    methods: {
-        buildTree(currentArray, parent, currentCategoryId)
+        this.$nextTick(() =>
         {
-            let showChilds = false;
+            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
 
-            for (const category of currentArray)
+            if (this.currentCategoryId)
             {
-                category.parent = parent;
-
-                // hide category if there is no translation
-                if (!category.details[0])
-                {
-                    category.hideCategory = true;
-
-                    if (parent && parent.children && parent.children.length > 1 && !parent.showChilds)
-                    {
-                        parent.showChilds = false;
-                    }
-                }
-                else
-                {
-                    if (parent)
-                    {
-                        category.url = parent.url + "/" + category.details[0].nameUrl;
-                    }
-                    else
-                    {
-                        category.url = "/" + category.details[0].nameUrl;
-                    }
-
-                    if (category.details.length && category.details[0].name)
-                    {
-                        showChilds = true;
-                    }
-
-                    if (category.children)
-                    {
-                        this.buildTree(category.children, category, currentCategoryId);
-                    }
-
-                    if (category.id === currentCategoryId)
-                    {
-                        if (category.children && category.showChilds)
-                        {
-                            this.slideTo(category.children);
-                        }
-                        else if (category.parent)
-                        {
-                            this.slideTo(category.parent.children);
-                        }
-                    }
-                }
+                this.$store.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.currentCategoryId)});
+                this.initialSlide(this.$store.state.navigation.currentCategory);
             }
 
-            if (parent)
+            this.dataContainer1 = this.navigationTree;
+        });
+    },
+
+    methods:
+    {
+        initialSlide(currentCategory)
+        {
+            if (currentCategory)
             {
-                parent.showChilds = showChilds;
+                if (currentCategory.children && currentCategory.showChildren)
+                {
+                    this.slideTo(currentCategory.children);
+                }
+                else if (currentCategory.parent)
+                {
+                    this.slideTo(currentCategory.parent.children);
+                }
             }
         },
 
         navigateTo(category)
         {
-            if (category.children && category.showChilds)
-            {
-                this.slideTo(category.children);
-            }
-
             this.closeNavigation();
-            CategoryRendererService.renderItems(category, this.categoryTree);
+
+            if (!App.isCategoryView)
+            {
+                window.open(category.url, "_self");
+            }
+            else
+            {
+                this.$store.dispatch("selectCategory", {category});
+
+                if (category.children && category.showChildren)
+                {
+                    this.slideTo(category.children);
+                }
+            }
         },
 
         slideTo(children, back)
@@ -138,7 +133,7 @@ Vue.component("mobile-navigation", {
                 this.breadcrumbs.unshift(
                     {
                         name: root.parent.details[0].name,
-                        layer: root.parent ? root.parent.children : this.categoryTree
+                        layer: root.parent ? root.parent.children : this.navigationTree
                     });
 
                 root = root.parent;
@@ -147,30 +142,30 @@ Vue.component("mobile-navigation", {
 
         closeNavigation()
         {
-            $(".mobile-navigation").removeClass("open");
-            $("body").removeClass("menu-is-visible");
+            document.querySelector(".mobile-navigation").classList.remove("open");
+            document.querySelector("body").classList.remove("menu-is-visible");
         }
     },
 
     directives:
     {
         menu: {
-            bind()
+            bind(el)
             {
 				// add "activated" classes when menu is activated
-                $(this.el).on("menu-activated", (event, params) =>
+                $(el).on("menu-activated", (event, params) =>
                 {
                     $(event.target).addClass("menu-active");
                     $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
                 });
 				// add "deactivated" classes when menu is deactivated
-                $(this.el).on("menu-deactivated", (event, params) =>
+                $(el).on("menu-deactivated", (event, params) =>
                 {
                     $(event.target).removeClass("menu-active");
                     $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
                 });
 				// this removes the animation class automatically after the animation has completed
-                $(this.el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () =>
+                $(el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () =>
                 {
                     $(".mainmenu").removeClass((index, className) =>
                     {

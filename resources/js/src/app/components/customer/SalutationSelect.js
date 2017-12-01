@@ -1,7 +1,8 @@
 import AddressFieldService from "services/AddressFieldService";
-import ResourceService from "services/ResourceService";
 
 Vue.component("salutation-select", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "template",
@@ -12,7 +13,6 @@ Vue.component("salutation-select", {
     data()
     {
         return {
-            localization     : {},
             salutations      : {
                 complete      : {
                     de: [
@@ -87,16 +87,16 @@ Vue.component("salutation-select", {
         };
     },
 
+    computed: Vuex.mapState({
+        shopLanguage: state => state.localization.shopLanguage
+    }),
+
     /**
      * Get the shipping countries
      */
     created()
     {
-
         this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-        this.shopLanguage = this.localization.shopLanguage;
 
         if (this.shopLanguage === "de")
         {
@@ -119,18 +119,23 @@ Vue.component("salutation-select", {
         }
     },
 
-    ready()
+    mounted()
     {
-        this.addressData.addressSalutation = 0;
+        this.$nextTick(() =>
+        {
+            this.addressData.addressSalutation = 0;
+        });
     },
 
     methods:
     {
-        changeValue()
+        emitInputEvent(value)
         {
+            this.$emit("input", {field: "addressSalutation", value});
+
             if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "")
             {
-                this.addressData.name1 = "";
+                this.$emit("input", {field: "name1", value: ""});
             }
         }
     }

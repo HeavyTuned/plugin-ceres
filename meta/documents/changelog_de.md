@@ -1,5 +1,178 @@
 # Release Notes für Ceres
 
+## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Version des JavaScript-Frameworks wurde von Vue1 auf Vue2 aktualisiert. Weitere Informationen dazu finden Sie im <a href="https://forum.plentymarkets.com/t/news-technologie-update-in-ceres-vue2-und-vuex/77116" target="_blank"><b>Forum</b></a>.
+- Die Technologie VueX wurde in den Webshop integriert.
+- Der Template-Container `SingleItem.AdditionalContentAfterVAT` wurde hinzugefügt, um zusätzlichen Inhalt hinter der Mehrwehrtsteuer in der Einzelansicht eines Artikels anzuzeigen (Vielen Dank <a href="https://github.com/jalie" target="_blank"><b>@jalie</b></a>).
+- Der Template-Container `RegistrationOverlay.ExtendOverlayButtons` wurde hinzugefügt, um zusätzlichen Inhalt im Registrierungs-Overlay anzuzeigen (Vielen Dank <a href="https://github.com/mkreusch" target="_blank"><b>@mkreusch</b></a>).
+- Der Navigation wurde ein Mega-Menü hinzugefügt. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#80" target="_blank"><b>Header und Footer anpassen</b></a>.
+- In Ceres kann nun eine Standardkundenklasse für B2B-Kunden eingestellt werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#45" target="_blank"><b>Globale Einstellungen vornehmen</b></a>.
+- Über die **Empfohlene Artikelsortierung** können Artikel in der Kategorieansicht nun auch nach Bestand sortiert werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#200" target="_blank"><b>Paginierung und Sortierung anpassen</b></a>.
+- Zahlungsarten können nun auch bei Gastbestellungen auf der Auftragsbestätigungsseite geändert werden.
+- Aufträge können nun auch bei Gastbestellungen nachträglich bezahlt werden, z.B. wenn die Zahlungsart geändert wird.
+- Eine Fehlermeldung wurde hinzugefügt, die angezeigt wird, wenn beim Hinzufügen von Artikeln zum Warenkorb Fehler auftreten.
+- In Ceres können nun Währungseinstellungen vorgenommen werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#203" target="_blank"><b>Währungseinstellungen vornehmen</b></a>.
+- Es wurden diverse Ladeanimationen auf den Buttons hinzugefügt, um dem Benutzer ein besseres Feedback zu geben, wann etwas geladen wird.
+- Wenn sich innerhalb des Warenkorbs etwas aktualisiert, wird dies nun über eine Aktualisierungsanimation dargestellt.
+- Wenn sich im **Mein Konto**-Bereich die Adressen ändern, dann werden die Eingabefelder deaktiviert, bis die Adressdaten vom Server geladen wurden, um Fehlverhalten auszuschließen.
+- Wenn sich im Checkout die Zahlungs- oder Versandarten ändern, werden die Elemente deaktiviert, bis die Daten vom Server geladen wurden, um Fehlverhalten auszuschließen.
+
+### Behoben
+
+- Fehlermeldungen, die in der Warenkorbvorschau ausgelöst werden, werden nun besser dargestellt und nicht mehr hinter der Vorschau geladen.
+- Es wurden diverse Styling-Fehler im CSS behoben.
+- Ein Fehler führte dazu, dass der Artikelzustand auf der Einzelansicht eines Artikels nicht angezeigt wurde. Dies wurde behoben.
+- Durch einen Fehler konnte der **Mein Konto**-Bereich nicht geladen werden, wenn die Aufträge eines Kunden geladen wurden. Dies wurde behoben.
+- Durch einen Fehler wurden Preise mit verschiedenen Mehrwertsteuersätzen nicht korrekt angezeigt. Dies wurde behoben.
+- Summen auf der Auftragsseite für manuell erstellte Aufträge werden nun korrekt angezeigt.
+- Ein Fehler führte dazu, dass die Bestandsprüfung im Warenkorb nicht richtig funktionierte. Dies wurde behoben.
+- Eine leere Suche kann nun nicht mehr ausgeführt werden.
+
+### Geändert
+
+- Die Buttons zum Ändern der Artikelmenge oder zum Löschen von Artikeln im Warenkorb werden deaktiviert, wenn ein Request noch nicht vom Server zurückgekommen ist, um Fehlverhalten auszuschließen.
+- Jedes Overlay besitzt jetzt einen Footer, in dem die Buttons dargestellt werden.
+- Das Menü im Header, das angezeigt wird, nachdem man eingeloggt ist, hat ein neues Styling bekommen, um dem gesamten Style des Headers zu entsprechen.
+- Das Suche-Symbol zeigt nun deutlicher, dass die suche nach einem Klick wieder geschlossen werden kann.
+- Alle Menüs im Header können nun geschlossen werden, wenn man an eine andere Stelle im Webshop klickt.
+- Die Buttons zum Hinzufügen, Bearbeiten und Löschen von Adressen wurden angepasst, um für den Benutzer sichtbarer zu sein.
+- Allen Buttons in Ceres wurde ein eindeutiges Symbol hinzugefügt, um diese verständlicher zu machen.
+- In der mobilen Navigation wurde ein **Zurück**-Button auf die Oberkategorie hinzugefügt.
+
+## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Events aus plentymarkets oder aus anderen Plugins können jetzt direkt in Ceres verarbeitet werden.
+- Server-Benachrichtigungen werden jetzt direkt in Ceres ausgegeben, wodurch Plugin-Entwickler einfacher auf Benachrichtigungen von Ceres zugreifen können.
+
+### Behoben
+
+- Durch einen Fehler wurden in der Detailansicht eines Auftrags oder auf der Auftragsbestätigungsseite die Versandkosten nicht korrekt angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurden zusätzliche Artikeldaten im Warenkorb nicht geladen, wenn sich mehr als 10 verschiedene Artikel im Warenkorb befanden. Dies wurde behoben.
+
+
+## v1.7.1 (2017-11-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurde die Einstellung zum Anzeigen des Grundpreises eines Artikels ignoriert. Dies wurde behoben.
+- Durch einen Fehler wurde trotz aktivierter Einstellung das Herstellungsland nicht in den Details auf der Artikelansicht angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde die Stückzahl eines Artikels in der Kategorieansicht nicht angezeigt. Dies wurde behoben.
+- Ein Fehler führte dazu, dass das Passwort im **Mein Konto**-Bereich nicht geändert werden konnte. Dies wurde behoben.
+- Ein Fehler führte dazu, dass für Kunden mit einer bestimmten Kundenklasse Staffelpreise angezeigt wurden, auch wenn diese Preise nicht für die Kundenklasse freigeschaltet waren. Dies wurde behoben.
+- Es wurde ein Fehler behoben, der Staffelpreise ab Menge 1 angezeigt hatte.
+
+
+### Geändert
+
+- In den Artikeldetails auf der Artikelansicht wurde das Feld **Externe Varianten-ID** in **Varianten-ID** umbenannt.
+
+## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Kundenklassen werden nun bei der Anzeige von Artikeldaten berücksichtigt.
+
+### Behoben
+
+- Die Einstellung an der Variante für die Grundpreisangabe **Grundpreis anzeigen** wird nun berücksichtigt. Wenn diese Einstellung deaktiviert ist, wird der Grundpreis im Webshop nicht angezeigt.
+
+### Known issues
+
+- Bei der Berechnung von Staffelpreisen werden keine Rabatte berücksichtigt, die an der Kundenklasse definiert werden.
+- Die für eine Kundenklasse definierte Mindestbestellmenge wird in der Einzelansicht eines Artikels noch nicht dargestellt.
+- Artikel, die nur für eine bestimmte Kundenklasse verfügbar sind, werden trotzdem in der Variantenauswahl bei allen Kundenklassen angezeigt. Diese Artikel können dennoch nur von der entsprechenden Kundenklasse gekauft werden.
+
+## v1.6.3 (2017-11-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.2...1.6.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Die Bestellmerkmale werden in der Einzelansicht eines Artikels nicht mehr doppelt ausgegeben.
+
+## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- In der Retourenhistorie werden initial nur noch 4 Bilder pro Auftrag angezeigt.
+- In der Retourenhistorie wurde ein "Mehr anzeigen"-Button hinzugefügt.
+- Wenn Artikel mit Bestellmerkmalen im Warenkorb liegen, wird hinter dem Aufpreis "pro Artikel" angezeigt.
+- Nachdem der Kunde eine Retoure angelegt hat, wird er auf eine Bestätigungsseite geleitet.
+
+### Behoben
+
+- Der Retouren-Tab im Mein-Konto-Bereich wird ausgeblendet, wenn der Kunde keine Retouren hat.
+
+## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Meta-Beschreibungen und Robots-Einstellungen können jetzt für statische Seiten des Webshops im Tab **SEO** in der Konfiguration eingegeben werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#201" target="_blank"><b>Einstellungen für Suchmaschinenoptimierung vornehmen</b></a>.
+
+### Geändert
+
+- **Name of your store** and **URL to your company logo** befinden sich nun im Tab **Global** der Konfiguration.
+- Die Einstellung **Allow returns** wurde im Tab **Checkout and My account** der Konfiguration hinzugefügt und ersetzt die alte Einstellung zur Aktivierung von Retouren im plentymarkets Backend.
+
+## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Staffelpreise sind nun in Ceres integriert und werden unterhalb der Bestellmerkmale in der Einzelansicht eines Artikels ausgegeben. Weitere Informationen zu Staffelpreisen finden Sie unter <a href="https://knowledge.plentymarkets.com/artikel/artikel-verwalten#870" target="_blank"><b>Verkaufspreise verwalten</b></a>.
+
+### Geändert
+
+- Der Text von Bestellmerkmalen wird in der Warenkorbvorschau nicht mehr ausgegeben. 
+- Bestellmerkmale werden in der Einzelansicht eines Artikels oberhalb der Preise ausgegeben.
+- In der Einzelansicht eines Artikels wird der Artikelpreis nun live anhand der Merkmalaufpreise und Staffelpreise berechnet.
+- Im Overlay **Zum Warenkorb hinzufügen** wird der Artikelpreis nun korrekt anhand der Merkmalaufpreise und Staffelpreise berechnet.
+- Das Uhrensymbol in der Auftragshistorie wurde durch einen Text ersetzt.
+- Das Uhrensymbol in der Retourenhistorie wurde durch einen Text ersetzt.
+
+## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Der Container **Container for customer feedback** wurde hinzugefügt.
+
+### Geändert
+
+- Der Template-Container **Single item: Add detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.
+- Der Template-Container **Single item: Add content to detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.
+
+### Behoben
+
+- Die Aufpreise der Bestellmerkmale werden nun im Warenkorb und der Warenkorbvorschau wieder korrekt ausgegeben.
+- Im **Mein Konto**-Bereich wird der Hinweis **Zahlungsart kann nicht geändert werden** nicht mehr angezeigt, sobald der Auftrag bezahlt wurde.
+
+## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Im **Mein Konto**-Bereich ist es nun möglich Retouren abzuwickeln. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#430" target="_blank"><b>Retouren aktivieren</b></a>.
+
+### Behoben
+
+- Ein Fehler führte dazu, dass auf der Bestellbestätigungsseite das falsche Versanddatum angezeigt. Dies wurde behoben.
+- Ein Fehler führte dazu, dass die Auftragsübersicht nicht geladen werden konnte, wenn ein Auftrag mit einer alten Zahlungsart vorhanden war. Dies wurde behoben.
+- Durch einen sporadisch auftretenden Fehler wurde die Kaufabwicklung bei Gastbestellungen nicht aufgerufen. Dies wurde behoben.
+- Ein Fehler führte dazu, dass die Bildergalerie in der Einzelansicht eines Artikels beim Wechsel der Variante nicht richtig angezeigt wurde. Dies wurde behoben.
+
+## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Das Event `afterBasketItemRemoved` wurde hinzugefügt. Dieses Event wird ausgelöst, nachdem ein Artikel aus dem Warenkorb entfernt wurde.
+- Das Event `afterBasketItemQuantityUpdated` wurde hinzugefügt. Dieses Event wird ausgelöst, nachdem die Anzahl der Artikel im Warenkorb aktualisiert wurde.
+- Das Event `afterShippingCountryChanged` wurde hinzugefügt. Dieses Event wird ausgelöst, nachdem in der Kaufabwicklung das Lieferland geändert wurde.
+
+### Behoben
+
+- Ein Fehler führte dazu, dass die Grundpreisangabe nicht richtig funktionierte. Dies wurde behoben.
+
 ## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt

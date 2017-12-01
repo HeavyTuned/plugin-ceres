@@ -1,6 +1,6 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("quantity-input", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "value",
@@ -16,80 +16,128 @@ Vue.component("quantity-input", {
     data()
     {
         return {
+            compValue: this.value,
+            compTimeout: this.timeout,
+            compMin: this.min,
+            compMax: this.max,
+            compVertical: this.vertical,
             timeoutHandle: null,
             internalMin: null,
             internalMax: null,
-            basketItems: [],
             currentCount: 0
         };
+    },
+
+    computed: {
+        alreadyInBasketCount()
+        {
+            const basketObject = this.$store.state.basket.items.find(variations => variations.variationId === this.variationId);
+
+            return basketObject ? basketObject.quantity : 0;
+        },
+
+        ...Vuex.mapState({
+            basketItems: state => state.basket.items
+        })
+    },
+
+    watch: {
+        basketItems:
+        {
+            handler(val, oldVal)
+            {
+                if (oldVal)
+                {
+                    if (JSON.stringify(val) !== JSON.stringify(oldVal))
+                    {
+                        this.initDefaultVars();
+
+                        if (!this.compVertical)
+                        {
+                            this.handleMissingItems();
+                        }
+                    }
+                }
+            },
+            deep: true
+        },
+
+        value(val, oldVal)
+        {
+            if (val !== oldVal)
+            {
+                this.compValue = val;
+            }
+        }
     },
 
     created()
     {
         this.$options.template = this.template;
-    },
-
-    ready()
-    {
-        ResourceService.bind("basketItems", this);
 
         this.checkDefaultVars();
         this.initDefaultVars();
-        this.initValueWatcher();
 
-        if (!this.vertical)
+        if (!this.compVertical)
         {
-            this.initBasketValueWatcher();
             this.handleMissingItems();
         }
+
+        this.validateValue();
     },
 
     methods:
     {
         countValueUp()
         {
-            if (!(this.value === this.internalMax) && !this.waiting)
+            if (!(this.compValue === this.internalMax) && !this.waiting)
             {
-                this.value++;
+                this.compValue++;
+                this.validateValue();
             }
         },
 
         countValueDown()
         {
-            if (!(this.value === this.internalMin) && !this.waiting)
+            if (!(this.compValue === this.internalMin) && !this.waiting)
             {
-                this.value--;
+                this.compValue--;
+                this.validateValue();
             }
         },
 
-        checkDefaultVars()
+        setValue(value)
         {
-            this.min = this.min === 0 ? null : this.min;
-            this.max = this.max === 0 ? null : this.max;
+            this.compValue = parseInt(value);
+            this.validateValue();
         },
 
-        initDefaultVars()
+        validateValue()
         {
-            this.timeout = this.timeout || 300;
-            this.internalMin = this.min || 1;
-            this.internalMax = this.max || 9999;
-            this.vertical = this.vertical || false;
-        },
-
-        initValueWatcher()
-        {
-            this.$watch("value", newValue =>
+            if (isNaN(this.compValue))
             {
-                if (newValue < this.internalMin)
-                {
-                    this.value = this.internalMin;
-                }
+                this.compValue = this.internalMin === 0 ? 0 : this.internalMin || 1;
+            }
+            else if (this.compValue < this.internalMin)
+            {
+                this.compValue = this.internalMin;
+            }
+            else if (this.compValue > this.internalMax)
+            {
+                this.compValue = this.internalMax;
+            }
 
-                if (newValue > this.internalMax)
-                {
-                    this.value = this.internalMax;
-                }
+            this.onValueChanged();
+        },
 
+        onValueChanged()
+        {
+            if (this.compTimeout === 0)
+            {
+                this.$emit("quantity-change", this.compValue);
+            }
+            else
+            {
                 if (this.timeoutHandle)
                 {
                     window.clearTimeout(this.timeoutHandle);
@@ -97,62 +145,51 @@ Vue.component("quantity-input", {
 
                 this.timeoutHandle = window.setTimeout(() =>
                 {
-                    this.$dispatch("quantity-change", newValue);
-                }, this.timeout);
-            });
+                    this.$emit("quantity-change", this.compValue);
+                }, this.compTimeout);
+            }
+        },
+
+        checkDefaultVars()
+        {
+            this.compMin = this.compMin === 0 || typeof this.compMin === "undefined" ? null : this.compMin;
+            this.compMax = this.compMax === 0 || typeof this.compMax === "undefined" ? null : this.compMax;
+        },
+
+        initDefaultVars()
+        {
+            this.compTimeout = this.compTimeout === 0 ? 0 : this.compTimeout || 500;
+            this.internalMin = this.compMin || 1;
+            this.internalMax = this.compMax || 9999;
+            this.compVertical = this.compVertical || false;
         },
 
         handleMissingItems()
         {
-            if (this.alreadyInBasketCount() >= this.internalMin)
+            if (this.alreadyInBasketCount >= this.internalMin)
             {
                 this.internalMin = 1;
             }
 
-            if (this.max !== null)
+            if (this.compMax !== null)
             {
-                this.internalMax = this.max - this.alreadyInBasketCount();
+                this.internalMax = this.compMax - this.alreadyInBasketCount;
 
-                if (this.alreadyInBasketCount() === this.max)
+                if (this.alreadyInBasketCount === this.compMax)
                 {
                     this.internalMin = 0;
                     this.internalMax = 0;
-                    this.$dispatch("out-of-stock", true);
+                    this.$emit("out-of-stock", true);
                 }
                 else
                 {
-                    this.$dispatch("out-of-stock", false);
+                    this.$emit("out-of-stock", false);
                 }
             }
 
-            this.value = this.internalMin;
-        },
+            this.compValue = this.internalMin;
 
-        initBasketValueWatcher()
-        {
-            ResourceService.watch("basketItems", (newBasketItems, oldBasketItems) =>
-            {
-                if (oldBasketItems)
-                {
-                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems))
-                    {
-                        this.initDefaultVars();
-
-                        this.handleMissingItems();
-                    }
-                }
-            });
-        },
-
-        alreadyInBasketCount()
-        {
-            if (this.basketItems.find(variations => variations.variationId === this.variationId))
-            {
-                return this.basketItems.find(variations => variations.variationId === this.variationId).quantity;
-            }
-
-            return 0;
+            this.onValueChanged();
         }
     }
-
 });

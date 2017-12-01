@@ -1,11 +1,14 @@
-Vue.directive("change-lang", function(value)
-{
-    $(this.el).click(function(event)
+Vue.directive(
+    "change-lang",
     {
-        var subPath = window.location.pathname.split("/");
+        bind(el, binding)
+        {
+            el.onclick = function(event)
+            {
+                let subPath = window.location.pathname.split("/");
 
-        subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
-
-        window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
+                subPath = subPath[1] === binding.value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
+                window.location.assign(window.location.origin + "/" + binding.value.lang + "" + subPath);
+            };
+        }
     });
-});

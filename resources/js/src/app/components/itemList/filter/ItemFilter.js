@@ -1,39 +1,52 @@
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
 Vue.component("item-filter", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "template",
         "facet"
     ],
 
-    data: function()
+    computed:
     {
-        return {
-            facetParams: [],
-            isLoading: false
-        };
+        facets()
+        {
+            return this.facet.values.sort((facetA, facetB) =>
+            {
+                if (facetA.id > facetB.id)
+                {
+                    return 1;
+                }
+                if (facetA.id < facetB.id)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+
+        ...Vuex.mapState({
+            selectedFacets: state => state.itemList.selectedFacets,
+            isLoading: state => state.itemList.isLoading
+        })
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template || "#vue-item-filter";
-        ResourceService.bind("facetParams", this);
-    },
-
-    ready: function()
-    {
-        ResourceService.bind("isLoading", this);
     },
 
     methods:
     {
-        updateFacet: function()
+        updateFacet(facetValue)
         {
-            ResourceService.getResource("facetParams").set(this.facetParams);
-            ItemListService.setFacets(this.facetParams);
-            ItemListService.getItemList();
+            this.$store.dispatch("selectFacet", facetValue);
+        },
+
+        isSelected(facetValueId)
+        {
+            return this.selectedFacets.findIndex(selectedFacet => selectedFacet.id === facetValueId) > -1;
         }
     }
 });

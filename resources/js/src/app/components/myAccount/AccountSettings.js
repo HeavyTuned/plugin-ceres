@@ -4,6 +4,8 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "userData",
         "template"
@@ -27,9 +29,12 @@ Vue.component("account-settings", {
     /**
      * Initialise the account settings modal
      */
-    ready: function()
+    mounted: function()
     {
-        this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
+        this.$nextTick(() =>
+        {
+            this.accountSettingsModal = ModalService.findModal(this.$refs.accountSettingsModal);
+        });
     },
 
     computed: {
@@ -66,7 +71,7 @@ Vue.component("account-settings", {
 
             if (this.newPassword !== "" && (this.newPassword === this.confirmPassword))
             {
-                APIService.post("/rest/io/customer/password", {password: this.newPassword})
+                APIService.post("/rest/io/customer/password", {password: this.newPassword, password2: this.confirmPassword})
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();

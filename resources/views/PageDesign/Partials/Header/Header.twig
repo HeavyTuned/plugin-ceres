@@ -9,8 +9,10 @@
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
-
-<resource name="breadcrumbs" :data="{}"></resource>
+{% set activeCurrencies = config("Ceres.currency.available_currencies") | split(', ') %}
+{% set enableCurrencySelect = config("Ceres.currency.enable_selection") == "true" and activeCurrencies | length > 0 %}
+{% set currencyFormat = config("Ceres.currency.format") %}
+{% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
 
 <header class="top-bar">
     <div class="container-max">
@@ -30,14 +32,25 @@
                         <i class="flag-icon flag-icon-{{ lang }}"></i>
                     </a>
                 </li>
-                <li class="list-inline-item control-search">
-                    <a class="" data-toggle="collapse" href="#searchBox"
-                       aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
-                       aria-controls="searchBox"
+                {% if enableCurrencySelect == "true" %}
+                <li class="list-inline-item dropdown control-languages">
+                    <a class=""
+                       data-toggle="collapse"
+                       href="#currencySelect"
+                       aria-expanded="false"
+                       aria-controls="currencySelect"
                        data-parent="#controlsList">
-                        <i class="fa fa-search"></i>
-                        <i class="fa fa-close"></i>
-                        <span class="hidden-xs-down">{{ trans("Ceres::Template.generalSearchNoDot") }}</span>
+                        <span>{{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="list-inline-item control-search">
+                    <a class="anicon anicon-search-xcross" aria-label="toggle search"
+                            data-toggle="collapse" href="#searchBox"
+                            aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
+                            aria-controls="searchBox"
+                            data-parent="#controlsList">
+                        <span class="anicon-search-item" aria-hidden="true"></span>
                     </a>
                 </li>
                 {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
@@ -48,11 +61,12 @@
                 <li class="list-inline-item control-basket">
                     <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
                         {% if config("Ceres.header.basket_values") != "sum" %}
-                            <span class="badge-right" v-resource-bind:basket="itemQuantity">0</span>
+                            <span class="badge-right" v-basket-item-quantity="this.$store.state.basket.data.itemQuantity">0</span>
                         {% endif %}
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                        <i v-waiting-animation="this.$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
                         {% if config("Ceres.header.basket_values") != "quantity" %}
-                            <span class="badge" v-resource-bind:basket="itemSum" :filters="['currency']">0,00 €</span>
+                            <span class="badge" v-basket-item-sum="this.$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
                         {% endif %}
                     </a>
                 </li>
@@ -69,7 +83,7 @@
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
 
-<mobile-navigation :category-breadcrumbs="{{ categoryBreadcrumbs | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
+<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" current-category-id="{{ category.id }}" template="#vue-mobile-navigation"></mobile-navigation>
 
 <div class="container-max page-header">
     <div class="row">
@@ -77,29 +91,54 @@
             <item-search template="#vue-item-search"></item-search>
         </div>
 
-        <div id="countrySettings" class="cmp cmp-country-settings collapse">
-            <div class="country-settings-inner row">
+        {% if enableCurrencySelect == "true" %}
+        <div id="currencySelect" class="cmp cmp-currency-select collapse">
+            <div class="currency-select-inner row">
 
-                <div class="language-settings col-xs-12 col-sm-6">
+                <div class="currency-list col-xs-12">
                     <div class="list-title">
-                        <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
+                        <strong>{{ trans("Ceres::Template.currency") }}</strong>
                         <hr>
                     </div>
-                    <shop-language-select template="#vue-shop-language-select" country-flag-prefix="flag-icon-"/>
-                </div>
-
-                <div class="shipping-settings col-xs-12 col-sm-6">
-                    <div class="list-title">
-                        <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
-                        <hr>
-                    </div>
-                    <shipping-country-select template="#vue-shipping-country-select" country-flag-prefix="flag-icon-" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
+                    <ul>
+                        {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
+                        <li{% if currency.name == services.checkout.getCurrencyData().name %} class="active"{% endif %}>
+                            <a href="?currency={{ currency.name }}">
+                                {% if currencyFormatSelect == 'all' %}
+                                    {{ currency.name }} ({{ currency.symbol }})
+                                {% else %}
+                                    {{ currency[currencyFormatSelect] }}
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
+        {% endif %}
         
+        <shop-country-settings country-flag-prefix="flag-icon-" :localization-data="{{ services.localization.getLocalizationData() | json_encode }}">
+            <div id="countrySettings" class="cmp cmp-country-settings collapse">
+                <div class="country-settings-inner row">
 
-        
+                    <div class="language-settings col-xs-12 col-sm-6">
+                        <div class="list-title">
+                            <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
+                            <hr>
+                        </div>
+                        <shop-language-select template="#vue-shop-language-select"/>
+                    </div>
 
+                    <div class="shipping-settings col-xs-12 col-sm-6">
+                        <div class="list-title">
+                            <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
+                            <hr>
+                        </div>
+                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
+                    </div>
+                </div>
+            </div>
+        </shop-country-settings>
     </div>
 </div>

@@ -6,6 +6,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("registration", {
 
+    delimiters: ["${", "}"],
+
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
@@ -93,6 +95,11 @@ Vue.component("registration", {
                 {
                     component.isDisabled = false;
                 });
+        },
+
+        setAddressDataField({field, value})
+        {
+            this.billingAddress[field] = value;
         },
 
         /**

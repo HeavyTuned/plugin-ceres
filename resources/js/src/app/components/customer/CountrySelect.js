@@ -1,7 +1,8 @@
 var CountryService = require("services/CountryService");
-var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "countryList",
@@ -12,14 +13,17 @@ Vue.component("country-select", {
         "addressType"
     ],
 
-    data: function()
+    data()
     {
         return {
             stateList  : [],
-            selectedCountry: {},
-            localization: {}
+            selectedCountry: {}
         };
     },
+
+    computed: Vuex.mapState({
+        shippingCountryId: state => state.localization.shippingCountryId
+    }),
 
     /**
      * Get the shipping countries
@@ -27,9 +31,6 @@ Vue.component("country-select", {
     created()
     {
         this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-        this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -39,9 +40,18 @@ Vue.component("country-select", {
         /**
          * Method to fire when the country has changed
          */
-        countryChanged()
+        countryChanged(value)
         {
-            this.selectedStateId = null;
+            this.$emit("country-changed", parseInt(value));
+            this.$emit("state-changed", null);
+        },
+
+        /**
+         * @param {*} value
+         */
+        stateChanged(value)
+        {
+            this.$emit("state-changed", parseInt(value));
         },
 
         /**
@@ -66,14 +76,15 @@ Vue.component("country-select", {
     watch: {
         selectedCountryId()
         {
-            this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
-            this.selectedCountry = this.getCountryById(this.selectedCountryId);
+            const countryId = this.selectedCountryId || this.shippingCountryId;
+
+            this.selectedCountry = this.getCountryById(countryId);
 
             if (this.selectedCountry)
             {
-                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
+                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
 
-                this.$dispatch("selected-country-changed", this.selectedCountry);
+                this.$emit("selected-country-changed", this.selectedCountry);
             }
         }
     }

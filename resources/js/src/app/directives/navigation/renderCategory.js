@@ -1,11 +1,21 @@
-import {renderItems}from "services/CategoryRendererService";
+import store from "store/index.js";
 
-Vue.directive("render-category", function(value)
-{
-    $(this.el).click(function(event)
+Vue.directive("render-category",
     {
-        event.preventDefault();
+        bind(el, binding)
+        {
+            el.onclick = function(event)
+            {
+                event.preventDefault();
 
-        renderItems(value);
+                store.dispatch("selectCategory", {categoryId: parseInt(binding.value)});
+
+                if (!App.isCategoryView)
+                {
+                    const url = store.state.navigation.currentCategory.url;
+
+                    window.open(url, "_self");
+                }
+            };
+        }
     });
-});

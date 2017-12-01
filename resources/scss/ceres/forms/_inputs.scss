@@ -29,6 +29,16 @@ $border-width: 1px;
 	border-radius: $border-radius;
     overflow: hidden;
 
+    &.media-xs-d {
+        @include media-breakpoint-down(xs) { 
+            margin-bottom: $grid-gutter-width/2 !important;
+        }
+    }
+
+    &.no-bottom {
+        margin-bottom: 0px; 
+    }
+
   input[type="date"]{
     max-height: 38px;
   }
@@ -188,4 +198,8 @@ $border-width: 1px;
     }
 }
 
-
+.remove-disabled-coloring {
+    &:disabled {
+        background-color: initial !important;
+    }
+}

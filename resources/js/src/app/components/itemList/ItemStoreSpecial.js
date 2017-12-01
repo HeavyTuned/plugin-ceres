@@ -1,7 +1,8 @@
-var ResourceService = require("services/ResourceService");
 var accounting = require("accounting");
 
 Vue.component("item-store-special", {
+
+    delimiters: ["${", "}"],
 
     template: "#vue-item-store-special",
 
@@ -15,7 +16,6 @@ Vue.component("item-store-special", {
     data()
     {
         return {
-            localization  : {},
             tagClass: "",
             label: "",
             tagClasses:
@@ -29,8 +29,6 @@ Vue.component("item-store-special", {
 
     created()
     {
-        ResourceService.bind("localization", this);
-
         this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
         this.label = this.getLabel();
     },
@@ -53,6 +51,7 @@ Vue.component("item-store-special", {
 
         getPercentageSale()
         {
+            // eslint-disable-next-line
             const percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
 
             return accounting.formatNumber(percent, this.decimalCount, "");

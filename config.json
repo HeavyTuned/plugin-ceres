@@ -1,9 +1,30 @@
 [
     {
         "tab"       : "Global",
+        "key"       : "header.company_name",
+        "label"     : "Name of your store",
+        "type"      : "text",
+        "default"   : "Ceres Webshop"
+    },
+    {
+        "tab"       : "Global",
+        "key"       : "header.company_logo",
+        "label"     : "URL to your company logo",
+        "type"      : "text",
+        "default"   : "images/ceres-logo.svg"
+    },
+    {
+        "tab"       : "Global",
         "key"       : "global.shippingCostsCategoryId",
         "label"     : "Category to display shipping information",
         "type"      : "category_select"
+    },
+    {
+        "tab"       : "Global",
+        "key"       : "global.default_contact_class_b2b",
+        "label"     : "Default customer class B2B",
+        "type"      : "text",
+        "default"   : ""
     },
     {
         "tab"       : "Global",
@@ -178,20 +199,6 @@
     },
     {
         "tab"       : "Header",
-        "key"       : "header.company_logo",
-        "label"     : "URL to your company logo",
-        "type"      : "text",
-        "default"   : "images/ceres-logo.svg"
-    },
-    {
-        "tab"       : "Header",
-        "key"       : "header.company_name",
-        "label"     : "Name of your store",
-        "type"      : "text",
-        "default"   : "Ceres Webshop"
-    },
-    {
-        "tab"       : "Header",
         "key"       : "header.show_navbars",
         "label"     : "Position of the navigation bar",
         "type"      : "dropdown",
@@ -222,6 +229,41 @@
             "both"        : "Value and quantity of items"
         },
         "default"   : "sum"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_levels",
+        "label"         : "Category levels in mega menu",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "1"         : "inactive",
+            "2"         : "2",
+            "3"         : "3",
+            "4"         : "4"
+        },
+        "default"       : "1"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_1",
+        "label"         : "Number of categories in level 2",
+        "type"          : "text",
+        "default"       : "30"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_2",
+        "label"         : "Number of categories in level 3",
+        "type"          : "text",
+        "default"       : "3"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_3",
+        "label"         : "Number of categories in level 4",
+        "type"          : "text",
+        "default"       : "2"
     },
     {
         "tab"           : "Footer",
@@ -779,7 +821,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "texts.name_asc"
     },
@@ -814,7 +858,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -849,7 +895,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -910,7 +958,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "item.score"
     },
@@ -946,7 +996,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -982,7 +1034,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -992,6 +1046,27 @@
         "label"             : "Number of orders to show per page in order history",
         "type"              : "text",
         "default"           : "5"
+    },
+    {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.order_return_active",
+        "label"             : "Allow returns in My account",
+        "type"              : "checkbox",
+        "default"           : "true"
+    },
+    {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.order_return_days",
+        "label"             : "Number of days to return items of an order",
+        "type"              : "text",
+        "default"           : "14"
+    },
+    {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.order_return_initial_status",
+        "label"             : "Default status for return",
+        "type"              : "text",
+        "default"           : "9"
     },
     {
         "tab"               : "Checkout and My account",
@@ -1166,6 +1241,260 @@
 
       },
       "default"                   : ""
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.format",
+        "label" : "Format of currencies",
+        "type"  : "dropdown",
+        "possibleValues" :
+        {
+            "name"  :   "ISO code",
+            "symbol":   "Symbol"
+        },
+        "default"   : "name"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.enable_selection",
+        "label" : "Allow customer to change the currency",
+        "type"  : "checkbox",
+        "default": "true"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.format_selection",
+        "label" : "Format of currencies in header",
+        "type"  : "dropdown",
+        "possibleValues" :
+                  {
+                      "name"  :   "ISO code",
+                      "symbol":   "Symbol",
+                      "all"   :   "ISO code and symbol"
+                  },
+        "default"   : "all"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.available_currencies",
+        "label" : "Available currencies",
+        "type"  : "multi_select",
+        "possibleValues":
+        {
+            "AED" : "AED (United Arab Emirates dirham)",
+            "ARS" : "ARS (Argentine peso)",
+            "AUD" : "AUD (Australian dollar)",
+            "BGN" : "BGN (Bulgarian lev)",
+            "BHD" : "BHD (Bahraini dinar)",
+            "BRL" : "BRL (Brazilian real)",
+            "CAD" : "CAD (Canadian dollar)",
+            "CHF" : "CHF (Swiss franc)",
+            "CNY" : "CNY (Chinese Renminbi)",
+            "CZK" : "CZK (Czech koruna)",
+            "DKK" : "DKK (Danish krone)",
+            "EUR" : "EUR (Euro)",
+            "GBP" : "GBP (Pound sterling)",
+            "HKD" : "HKD (Hong Kong dollar)",
+            "HRK" : "HRK (Croatian kuna)",
+            "HUF" : "HUF (Hungarian forint)",
+            "IDR" : "IDR (Indonesian rupiah)",
+            "INR" : "INR (Indian rupee)",
+            "JPY" : "JPY (Japanese yen)",
+            "MXN" : "MXN (Mexican peso)",
+            "MYR" : "MYR (Malaysian ringgit)",
+            "NOK" : "NOK (Norwegian krone)",
+            "NZD" : "NZD (New Zealand dollar)",
+            "PHP" : "PHP (Philippine peso)",
+            "PLN" : "PLN (Polish zloty)",
+            "QAR" : "QAR (Qatari riyal)",
+            "RON" : "RON (Romanian leu)",
+            "RUB" : "RUB (Russian ruble)",
+            "SEK" : "SEK (Swedish krona)",
+            "SGD" : "SGD (Singapore dollar)",
+            "THB" : "THB (Thai baht)",
+            "TRY" : "TRY (Turkish lira)",
+            "TWD" : "TWD (New Taiwan dollar)",
+            "UAH" : "UAH (Ukrainian hryvnia)",
+            "USD" : "USD (United States dollar)",
+            "VND" : "VND (Vietnamese dong)",
+            "XCD" : "XCD (Eastern Caribbean dollar)",
+            "ZAR" : "ZAR (South African rand)"
+        },
+        "default" : "all"
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_home",
+        "label"                       : "Robots for homepage",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_home",
+        "label"     : "Meta description for homepage (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_home",
+        "label"     : "Meta description for homepage (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_contact",
+        "label"                       : "Robots for contact page",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_contact",
+        "label"     : "Meta description for contact page (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_contact",
+        "label"     : "Meta description for contact page (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_cancel_rights",
+        "label"                       : "Robots for cancellation rights",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_cancel_rights",
+        "label"     : "Meta description for cancellation rights (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_cancel_rights",
+        "label"     : "Meta description for cancellation rights (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_legal_disclosure",
+        "label"                       : "Robots for legal disclosure",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_legal_disclosure",
+        "label"     : "Meta description for legal disclosure (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_legal_disclosure",
+        "label"     : "Meta description for legal disclosure (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_privacy_policy",
+        "label"                       : "Robots for privacy policy",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_privacy_policy",
+        "label"     : "Meta description for privacy policy (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_privacy_policy",
+        "label"     : "Meta description for privacy policy (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_terms_and_conditions",
+        "label"                       : "Robots for terms and conditions",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_terms_and_conditions",
+        "label"     : "Meta description for terms and conditions (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_terms_and_conditions",
+        "label"     : "Meta description for terms and conditions (EN)",
+        "type"      : "textarea",
+        "default"   : ""
     },
     {
         "tab"               : "Logging and performance",

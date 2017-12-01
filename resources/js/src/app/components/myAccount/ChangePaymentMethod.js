@@ -3,6 +3,8 @@ const ApiService          = require("services/ApiService");
 
 Vue.component("change-payment-method", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "currentOrder",
@@ -16,6 +18,7 @@ Vue.component("change-payment-method", {
     data()
     {
         return {
+            compAllowedPaymentMethods: this.allowedPaymentMethods,
             changePaymentModal: {},
             paymentMethod: 0,
             isPending: false,
@@ -31,9 +34,12 @@ Vue.component("change-payment-method", {
     /**
      * Initialize the change payment modal
      */
-    ready()
+    mounted()
     {
-        this.changePaymentModal = ModalService.findModal(this.$els.changePaymentModal);
+        this.$nextTick(() =>
+        {
+            this.changePaymentModal = ModalService.findModal(this.$refs.changePaymentModal);
+        });
     },
 
     methods:
@@ -96,7 +102,7 @@ Vue.component("change-payment-method", {
             ApiService.get("/rest/io/order/paymentMethods", {orderId: this.currentOrder.id, paymentMethodId: paymentMethodId})
                 .done(response =>
                 {
-                    this.allowedPaymentMethods = response;
+                    this.compAllowedPaymentMethods = response;
                 })
                 .fail(() =>
                 {
@@ -126,7 +132,7 @@ Vue.component("change-payment-method", {
     {
         showIsSwitchableWarning()
         {
-            const currentPaymentMethod = this.allowedPaymentMethods.find(paymentMethod =>
+            const currentPaymentMethod = this.compAllowedPaymentMethods.find(paymentMethod =>
             {
                 return paymentMethod.id === this.paymentMethod;
             });

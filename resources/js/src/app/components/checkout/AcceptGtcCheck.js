@@ -1,39 +1,33 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.component("accept-gtc-check", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
-            isChecked: false,
-            checkoutValidation: {gtc: {}}
+            isChecked: false
         };
     },
 
-    created: function()
+    computed: Vuex.mapState({
+        showError: state => state.checkout.validation.gtc.showError
+    }),
+
+    created()
     {
         this.$options.template = this.template;
-        ResourceService.bind("checkoutValidation", this);
-        this.checkoutValidation.gtc.validate = this.validate;
+        this.$store.commit("setGtcValidator", this.validate);
     },
 
     methods:
     {
-        validate: function()
+        validate()
         {
-            this.checkoutValidation.gtc.showError = !this.isChecked;
-        }
-    },
-
-    watch:
-    {
-        isChecked: function()
-        {
-            this.checkoutValidation.gtc.showError = false;
+            this.$store.commit("setGtcShowError", !this.isChecked);
         }
     }
 });

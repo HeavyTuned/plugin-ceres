@@ -13,12 +13,15 @@ Vue.component("contact-map", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        if (!document.getElementById("maps-api"))
+        this.$nextTick(() =>
         {
-            this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
-        }
+            if (!document.getElementById("maps-api"))
+            {
+                this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
+            }
+        });
     },
 
     methods:
@@ -26,16 +29,14 @@ Vue.component("contact-map", {
         initMap()
         {
             const coordinates = {lat: -34.397, lng: 150.644};
-            const self = this;
 
             const gMap = new google.maps.Map(document.getElementById("contact-map"),
                 {
                     center: coordinates,
-                    zoom  : self.mapZoom
+                    zoom  : this.mapZoom
                 });
 
             this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
-
         },
 
         getLatLngByAddress(geocoder, resultsMap)

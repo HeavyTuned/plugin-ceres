@@ -1,53 +1,30 @@
-import CategoryRendererService from "services/CategoryRendererService";
-var ResourceService = require("services/ResourceService");
-
 Vue.component("category-breadcrumbs",
     {
 
+        delimiters: ["${", "}"],
+
         props: [
-            "template",
-            "currentCategoryTree"
+            "template"
         ],
 
-        data: function()
-        {
-            return {
-                breadcrumbs: {}
-            };
-        },
+        computed: Vuex.mapGetters([
+            "breadcrumbs"
+        ]),
 
-        created: function()
+        created()
         {
             this.$options.template = this.template;
-
-            this.init();
         },
 
         methods: {
             /**
-             * initialize values
-             */
-            init: function()
-            {
-                ResourceService.bind("breadcrumbs", this);
-
-                this.breadcrumbs = this.currentCategoryTree;
-            },
-
-            /**
              * render items in relation to location
-             * @param currentCategory
+             * @param category
              */
-            renderItems: function(currentCategory)
+            selectBreadcrumb(category)
             {
-                CategoryRendererService.renderItems(currentCategory);
-
+                this.$store.dispatch("selectCategory", {category});
                 return false;
-            },
-
-            getBreadcrumbURL: function(breadcrumb)
-            {
-                return CategoryRendererService.getScopeUrl(breadcrumb);
             }
         }
     });

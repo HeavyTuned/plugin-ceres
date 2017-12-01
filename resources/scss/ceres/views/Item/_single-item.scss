@@ -1,5 +1,5 @@
 
-.single{
+.single {
     
     .list-item-carousel {
         .list-control-special{
@@ -74,6 +74,32 @@
             &+.nav-item {
                 margin-left: 0;
             }
+        }
+    }
+
+    .graduated-prices-table {
+        td:first-child {
+            padding-right: 1rem;
+            font-style: italic;
+        }  
+        
+        & i {
+            color: $brand-success;
+        }
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .3s ease-out;
+    }
+    .fade-enter, .fade-leave-to {
+        opacity: 0
+    }
+
+    .order-property-input {
+        transition: border-color .3s ease-out;
+
+        &.active {
+            border-color: $brand-success;
         }
     }
 }

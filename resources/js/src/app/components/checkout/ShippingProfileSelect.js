@@ -1,52 +1,50 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.component("shipping-profile-select", {
+
+    delimiters: ["${", "}"],
 
     props: [
         "template"
     ],
 
-    data: function()
-    {
-        return {
-            checkout: {},
-            checkoutValidation: {shippingProfile: {}}
-        };
-    },
+    computed: Vuex.mapState({
+        shippingProfileList: state => state.checkout.shipping.shippingProfileList,
+        shippingProfileId: state => state.checkout.shipping.shippingProfileId,
+        showError: state => state.checkout.validation.shippingProfile.showError,
+        isBasketLoading: state => state.basket.isBasketLoading
+    }),
 
     /**
      * Add a shipping provider
      * Initialise the event listener
      */
-    created: function()
+    created()
     {
         this.$options.template = this.template;
-
-        ResourceService.bind("checkout", this);
-        ResourceService.bind("checkoutValidation", this);
-
-        this.checkoutValidation.shippingProfile.validate = this.validate;
+        this.$store.commit("setShippingProfileValidator", this.validate);
     },
 
     methods: {
         /**
          * Method on shipping profile changed
          */
-        onShippingProfileChange: function()
+        onShippingProfileChange(shippingProfileId)
         {
-            ResourceService.getResource("checkout")
-                .set(this.checkout)
-                .done(function()
+            this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(shippingProfile => shippingProfile.parcelServicePresetId === shippingProfileId))
+                .then(data =>
                 {
-                    document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {detail: this.checkout.shippingProfileId}));
-                }.bind(this));
+                    document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {detail: this.shippingProfileId}));
+                },
+                error =>
+                {
+                    console.log("error");
+                });
 
             this.validate();
         },
 
-        validate: function()
+        validate()
         {
-            this.checkoutValidation.shippingProfile.showError = !(this.checkout.shippingProfileId > 0);
+            this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
         }
     }
 });

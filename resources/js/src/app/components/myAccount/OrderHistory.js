@@ -2,6 +2,8 @@ const ApiService = require("services/ApiService");
 
 Vue.component("order-history", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "orderList",
         "itemsPerPage",
@@ -27,18 +29,21 @@ Vue.component("order-history", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.itemsPerPage = this.itemsPerPage || 10;
-        this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
-        this.setOrders(this.orderList);
+        this.$nextTick(() =>
+        {
+            this.itemsPerPage = this.itemsPerPage || 10;
+            this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
+            this.setOrders(this.orderList);
+        });
     },
 
     methods: {
 
         setOrders(orderList)
         {
-            this.$set("orderList", orderList);
+            this.$emit("orderListChanged", orderList);
             this.page = this.orderList.page;
             this.countStart = ((this.orderList.page - 1) * this.itemsPerPage) + 1;
             this.countEnd = this.orderList.page * this.itemsPerPage;
@@ -47,7 +52,6 @@ Vue.component("order-history", {
             {
                 this.countEnd = this.orderList.totalsCount;
             }
-
         },
 
         setCurrentOrder(order)
@@ -59,13 +63,11 @@ Vue.component("order-history", {
 
             Vue.nextTick(() =>
             {
-                $(this.$els.orderDetails).modal("show");
+                $(this.$refs.orderDetails).modal("show");
             });
 
-            const jsonEncodedOrder = JSON.stringify(order);
-
             ApiService
-                .get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder)
+                .get("/rest/io/order/template?template=Ceres::Checkout.OrderDetails&orderId=" + order.order.id)
                 .done(response =>
                 {
                     this.isLoading = false;

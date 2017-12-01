@@ -1,29 +1,42 @@
+const initTooltip = el =>
+{
+    setTimeout(() =>
+    {
+        $(el).tooltip({
+            trigger: "hover",
+            // eslint-disable-next-line
+            template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }, 1);
+};
+
 Vue.directive("tooltip", {
 
-    unbind()
+    unbind(el)
     {
-        $(this.el).tooltip("dispose");
+        $(el).tooltip("dispose");
     },
 
-    update(value)
+    update(el, binding)
     {
-        if (typeof value === "undefined" || value)
+        if (typeof binding.value === "undefined" || binding.value)
         {
-            setTimeout(() =>
-            {
-                $(this.el).tooltip({
-                    trigger: "hover",
-                    // eslint-disable-next-line
-                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-                });
-            }, 1);
+            initTooltip(el);
         }
         else
         {
             setTimeout(() =>
             {
-                $(this.el).tooltip("dispose");
+                $(el).tooltip("dispose");
             }, 1);
+        }
+    },
+
+    bind(el, binding)
+    {
+        if (typeof binding.value === "undefined" || binding.value)
+        {
+            initTooltip(el);
         }
     }
 });

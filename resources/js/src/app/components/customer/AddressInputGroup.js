@@ -1,12 +1,25 @@
 Vue.component("address-input-group", {
 
-    props: [
-        "addressData",
-        "defaultCountry",
-        "addressType",
-        "modalType",
-        "template"
-    ],
+    delimiters: ["${", "}"],
+
+    props:
+    {
+        addressData: Object,
+        defaultCountry: {
+            type: String,
+            default: "DE"
+        },
+        addressType: String,
+        modalType: String,
+        template: String,
+        value: {
+            type: Object,
+            default()
+            {
+                return {};
+            }
+        }
+    },
 
     data()
     {
@@ -23,13 +36,6 @@ Vue.component("address-input-group", {
     created()
     {
         this.$options.template = this.template;
-
-        if (!this.addressData)
-        {
-            this.addressData = {};
-        }
-
-        this.defaultCountry = "DE";
     },
 
     methods:
@@ -50,55 +56,9 @@ Vue.component("address-input-group", {
             }
         },
 
-        getOptionType(data, optionType)
+        emitInputEvent(field, value)
         {
-            for (var i = 0; i < data.length; i++)
-            {
-                if (optionType === data[i].typeId)
-                {
-                    return data[i].value;
-                }
-            }
-            return "";
-        },
-
-        equalOptionValues(newValue, data, optionType)
-        {
-            var oldValue = this.getOptionType(data, optionType);
-
-            if (typeof newValue === "undefined")
-            {
-                return oldValue;
-            }
-
-            return oldValue === newValue;
-        }
-    },
-
-    filters: {
-        optionType:{
-
-            read(value, optionType)
-            {
-                var data = this.addressData.options;
-
-                if (typeof data === "undefined")
-                {
-                    return value;
-                }
-                else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType))
-                {
-                    return value;
-                }
-
-                return this.getOptionType(data, optionType);
-
-            },
-
-            write(value)
-            {
-                return value;
-            }
+            this.$emit("input", {field, value});
         }
     }
 });
