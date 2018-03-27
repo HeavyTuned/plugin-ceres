@@ -1,10 +1,21 @@
+const browserDetect = require("detect-browser");
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
 {
-
     function CeresMain()
     {
+        const browser = browserDetect.detect();
+
+        if (browser && browser.name)
+        {
+            $("html").addClass(browser.name);
+        }
+        else
+        {
+            $("html").addClass("unkown-os");
+        }
+
         $(window).scroll(function()
         {
             if ($(".wrapper-main").hasClass("isSticky"))
@@ -52,28 +63,17 @@ var init = (function($, window, document)
         var $toggleListView = $(".toggle-list-view");
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
-        setTimeout(function()
-        {
-            var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
-
-            $toggleBasketPreview.on("click", function(evt)
-            {
-                evt.preventDefault();
-                evt.stopPropagation();
-                $("#vue-app").toggleClass("open-right");
-            });
-        }, 1);
-
         $(document).on("click", function(evt)
         {
-            if ($("#vue-app").hasClass("open-right"))
+            if ($("#vue-app").hasClass(App.config.basketOpenClass || "open-hover"))
             {
                 if ((evt.target != $(".basket-preview")) &&
+                    (evt.target != document.querySelector(".basket-preview-hover")) &&
                     (evt.target.classList[0] != "message") &&
-                    ($(evt.target).parents(".basket-preview").length <= 0))
+                    ($(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0))
                 {
                     evt.preventDefault();
-                    $("#vue-app").toggleClass("open-right");
+                    $("#vue-app").toggleClass(App.config.basketOpenClass || "open-hover");
                 }
             }
 
@@ -133,18 +133,28 @@ var init = (function($, window, document)
             var offset = 250;
             var duration = 300;
 
+            var isDesktop = window.matchMedia("(min-width: 768px)").matches;
+
             $(window).scroll(function()
             {
-                if ($(this).scrollTop() > offset)
+                if (isDesktop)
                 {
-                    $(".back-to-top").fadeIn(duration);
-                    $(".back-to-top-center").fadeIn(duration);
+                    if ($(this).scrollTop() > offset)
+                    {
+                        $(".back-to-top").fadeIn(duration);
+                        $(".back-to-top-center").fadeIn(duration);
+                    }
+                    else
+                    {
+                        $(".back-to-top").fadeOut(duration);
+                        $(".back-to-top-center").fadeOut(duration);
+                    }
                 }
-                else
-                {
-                    $(".back-to-top").fadeOut(duration);
-                    $(".back-to-top-center").fadeOut(duration);
-                }
+            });
+
+            window.addEventListener("resize", function()
+            {
+                isDesktop = window.matchMedia("(min-width: 768px)").matches;
             });
 
             $(".back-to-top").click(function(event)
@@ -163,22 +173,6 @@ var init = (function($, window, document)
                 $("html, body").animate({scrollTop: 0}, duration);
 
                 return false;
-            });
-
-            $("#searchBox").on("show.bs.collapse", function()
-            {
-                $("#countrySettings").collapse("hide");
-            });
-
-            $("#countrySettings").on("show.bs.collapse", function()
-            {
-                $("#searchBox").collapse("hide");
-            });
-
-            $("#accountMenuList").click(function()
-            {
-                $("#countrySettings").collapse("hide");
-                $("#searchBox").collapse("hide");
             });
         });
     }

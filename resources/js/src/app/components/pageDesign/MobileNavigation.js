@@ -2,7 +2,7 @@ Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "currentCategoryId",
+        "initialCategory",
         "navigationTreeData"
     ],
 
@@ -51,20 +51,32 @@ Vue.component("mobile-navigation", {
     {
         this.$nextTick(() =>
         {
-            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
-
-            if (this.currentCategoryId)
-            {
-                this.$store.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.currentCategoryId)});
-                this.initialSlide(this.$store.state.navigation.currentCategory);
-            }
-
-            this.dataContainer1 = this.navigationTree;
+            this.initNavigation();
         });
     },
 
     methods:
     {
+        initNavigation()
+        {
+            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
+
+            if (this.initialCategory && this.initialCategory.id)
+            {
+                if (this.initialCategory.linklist === "N")
+                {
+                    this.$store.commit("setCurrentCategory", this.initialCategory);
+                }
+                else
+                {
+                    this.$store.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.initialCategory.id)});
+                    this.initialSlide(this.$store.state.navigation.currentCategory);
+                }
+            }
+
+            this.dataContainer1 = this.navigationTree;
+        },
+
         initialSlide(currentCategory)
         {
             if (currentCategory)
@@ -84,18 +96,9 @@ Vue.component("mobile-navigation", {
         {
             this.closeNavigation();
 
-            if (!App.isCategoryView)
+            if (App.isCategoryView && category.children && category.showChildren)
             {
-                window.open(category.url, "_self");
-            }
-            else
-            {
-                this.$store.dispatch("selectCategory", {category});
-
-                if (category.children && category.showChildren)
-                {
-                    this.slideTo(category.children);
-                }
+                this.slideTo(category.children);
             }
         },
 

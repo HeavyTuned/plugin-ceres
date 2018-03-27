@@ -1,4 +1,5 @@
 import UrlService from "services/UrlService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("item-search", {
 
@@ -55,10 +56,15 @@ Vue.component("item-search", {
             }
         },
 
+        openItem(suggestion)
+        {
+            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
+        },
+
         updateTitle(searchString)
         {
-            document.querySelector("#searchPageTitle").innerHTML = Translations.Template.generalSearchResults + " " + searchString;
-            document.title = Translations.Template.generalSearchResults + " " + searchString + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerHTML = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString;
+            document.title = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.shopName;
         },
 
         initAutocomplete()
@@ -66,7 +72,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
-                params: {template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType},
+                params: {template: "Ceres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -76,7 +82,15 @@ Vue.component("item-search", {
                 {
                     this.$store.commit("setItemListSearchString", suggestion.value);
                     this.currentSearchString = suggestion.value;
-                    this.search();
+
+                    if (App.config.forwardToSingleItem)
+                    {
+                        this.openItem(suggestion);
+                    }
+                    else
+                    {
+                        this.search();
+                    }
                 },
                 beforeRender()
                 {
@@ -101,11 +115,11 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, dataItem =>
                     {
-                        const value = this.$options.filters.itemName(dataItem.data.texts, App.config.itemName);
+                        const value = this.$options.filters.itemName(dataItem.data);
 
                         return {
                             value: value,
-                            data : value
+                            data : dataItem.data
                         };
                     })
                 };

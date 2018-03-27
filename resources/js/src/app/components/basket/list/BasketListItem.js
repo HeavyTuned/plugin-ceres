@@ -1,4 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
+import TranslationService from "services/TranslationService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -17,20 +18,26 @@ Vue.component("basket-list-item", {
     {
         return {
             waiting: false,
-            waitForDelete: false,
-            deleteConfirmed: false,
-            deleteConfirmedTimeout: null,
-            itemCondition: ""
+            waitingForDelete: false,
+            itemCondition: "",
+            showMoreInformation: false
         };
     },
 
     computed:
     {
-        imageUrl()
+        image()
         {
             const img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
 
-            return img.url;
+            return img;
+        },
+
+        altText()
+        {
+            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
+
+            return altText;
         },
 
         isInputLocked()
@@ -55,33 +62,19 @@ Vue.component("basket-list-item", {
          */
         deleteItem()
         {
-            if (!this.deleteConfirmed)
+            if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading)
             {
-                this.deleteConfirmed = true;
-                this.deleteConfirmedTimeout = window.setTimeout(
-                    () =>
-                    {
-                        this.resetDelete();
-                    },
-                    5000
-                );
-            }
-            else
-            {
-                this.waitForDelete = true;
-                this.waiting = true;
+                this.waitingForDelete = true;
 
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
-                        this.waiting = false;
+                        this.waitingForDelete = false;
                     },
                     error =>
                     {
-                        this.resetDelete();
-                        this.waitForDelete = false;
-                        this.waiting = false;
+                        this.waitingForDelete = false;
                     });
             }
         },
@@ -110,27 +103,27 @@ Vue.component("basket-list-item", {
 
                         if (this.size === "small")
                         {
-                            this.$store.dispatch("addBasketNotification", {type: "error", message: Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]});
+                            this.$store.dispatch(
+                                "addBasketNotification",
+                                {
+                                    type: "error",
+                                    message: TranslationService.translate(
+                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                    )
+                                }
+                            );
                         }
                         else
                         {
-                            NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+                            NotificationService.error(
+                                TranslationService.translate(
+                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                )
+                            ).closeAfter(5000);
                         }
 
                         this.waiting = false;
                     });
-            }
-        },
-
-        /**
-         * Cancel delete
-         */
-        resetDelete()
-        {
-            this.deleteConfirmed = false;
-            if (this.deleteConfirmedTimeout)
-            {
-                window.clearTimeout(this.deleteConfirmedTimeout);
             }
         }
     }

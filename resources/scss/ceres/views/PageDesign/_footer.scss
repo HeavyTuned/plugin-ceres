@@ -82,6 +82,11 @@
 }
 
 .footer{
+
+	@media print {
+		display: none;
+	}
+
 	display: block;
 	background-color: $footer-bg;
 	
@@ -144,7 +149,7 @@
 
 	.footer-column{
 
-		h5{
+		h2{
 			font-weight: 700;
 		}
 	}

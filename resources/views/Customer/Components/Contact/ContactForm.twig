@@ -1,5 +1,5 @@
 {% set mailRegex		= "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" %}
-{% set gCapture 		= services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
+{% set gCapture 		= config("Ceres.global.google_recaptcha_api_key") %}
 {% set contactConfigSet = not config("Ceres.contact.show_data") is empty or config("Ceres.contact.show_data") == "all" %}
 {% set googleApiKey 	= config("Ceres.contact.api_key") %}
 {% set zip				= config("system.company.zip") %}
@@ -30,7 +30,7 @@
 
                 {% if googleApiKey and contactConfigSet %}
 					<div class="col-xs-12 col-md-6 p-b-3 p-t-2{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-						<contact-map template="#vue-contact-map" :zip="{{ zip }}" street="{{ street }}" :map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
 
@@ -46,8 +46,9 @@
 						</div>
 						<div class="col-xs-12 col-md-6 m-b-1">
 							<div class="input-unit input-mail-field" data-validate="regex" data-model="userMail">
-								<input type="email" name="email" v-model="userMail" id="txt_email" data-validate-ref="{{ mailRegex }}">
-								<label for="txt_email">{{ trans("Ceres::Template.contactMail") }}*</label>
+								{% set uid_mail = uid() %}
+								<input type="email" name="email" v-model="userMail" id="{{ uid_mail }}" data-validate-ref="{{ mailRegex }}">
+								<label for="{{ uid_mail }}">{{ trans("Ceres::Template.contactMail") }}*</label>
 							</div>
 							<div class="error-feedback">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</div>
 						</div>
@@ -93,14 +94,15 @@
 				</div>
 
 				<div class="col-xs-12 col-md-3 send-mail">
-					<button type="submit" class="btn btn-primary btn-block send-btn" :disabled="disabledSend" @click="validate({{ gCapture | length > 0 }})">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i> {{ trans("Ceres::Template.contactSend") }}
+					<button type="submit" class="btn btn-primary btn-block send-btn" :disabled="waiting" @click="validate({{ gCapture | length > 0 }})">
+						<i v-waiting-animation="waiting" class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+						{{ trans("Ceres::Template.contactSend") }}
 					</button>
 				</div>
 
                 {% if googleApiKey and not contactConfigSet %}
 					<div class="col-xs-12 m-t-3{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-						<contact-map template="#vue-contact-map" :zip="{{ zip }}" street="{{ street }}" :map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
 

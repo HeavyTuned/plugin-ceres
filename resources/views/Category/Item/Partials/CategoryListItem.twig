@@ -3,15 +3,10 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set image = item.data.images.all | first %}
-{% set configItemName = config("Ceres.item.name") %}
 {% set itemUrl =  item.data | itemURL %}
 
 {% if enableCarousel is not defined %}
-    {% if config("Ceres.item.enable_image_carousel") == "true" %}
-        {% set enableCarousel = true %}
-    {% else %}
-        {% set enableCarousel = false %}
-    {% endif %}
+    {% set enableCarousel = ceresConfig.item.enableImageCarousel %}
 {% endif %}
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
@@ -30,10 +25,10 @@
                     <category-image-carousel
                         template="#vue-category-image-carousel"
                         :image-urls-data="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
-                        alt-text="{{ item.data.texts | itemName(configItemName) }}"
+                        alt-text="{{ item.data | itemName }}"
                         item-url="{{ itemUrl }}"
-                        :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                        :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
+                        :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
+                        :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
                         :enable-carousel="{{ enableCarousel | json_encode }}">
                     </category-image-carousel>
 
@@ -56,10 +51,13 @@
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = (1 - item.data.calculatedPrices.default.price / item.data.calculatedPrices.rrp.price) * -100 %}
+                    {% set percent = 0 %}
+                    {% if item.data.prices.rrp is defined %}
+                        {% set percent = (1 - item.data.prices.default.unitPrice.value / item.data.prices.rrp.price.value ) * -100 %}
+                    {% endif %}
 
                     {% if percent <= 0 %}
-                        {% set dezimalcount = config('Ceres.item.storeSpecial') %}
+                        {% set dezimalcount = ceresConfig.item.storeSpecial %}
                         {% set percent = percent | number_format(dezimalcount, ',', '.') %}
                         {% set storeSpecial = percent ~"%" %}
                     {% endif %}
@@ -85,25 +83,23 @@
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
             <a href="{{ itemUrl }}" class="thumb-title small">
-                {{ item.data.texts | itemName(configItemName) }}
+                {{ item.data | itemName }}
             </a>
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
                 <div class="prices">
-                    {% if item.data.calculatedPrices.rrp.price != '0' %}
-                        <a href="{{ itemUrl }}" class="price-view-port">
+                    {% if item.data.prices.rrp is defined and item.data.prices.rrp.price.value != 0 %}
+                        <div class="price-view-port">
                             <del class="crossprice">
-                                {{ item.data.calculatedPrices.formatted.rrpUnitPrice }}
+                                {{ item.data.prices.rrp.price.formatted }}
                             </del>
-                        </a>
+                        </div>
                     {% endif %}
 
-                    <a href="{{ itemUrl }}">
-                        <div class="price">
-                            {{ item.data.calculatedPrices.formatted.defaultUnitPrice }} *
-                        </div>
-                    </a>
+                    <div class="price">
+                        {{ item.data.prices.default.unitPrice.formatted }} *
+                    </div>
                 </div>
 
                 {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
@@ -114,7 +110,7 @@
                         <span>{{ item.data.unit.names.name }}</span>
 
                         {% if item.data.variation.mayShowUnitPrice %}
-                            | {{ item.data.calculatedPrices.formatted.basePrice }}
+                            | {{ item.data.prices.default.basePrice }}
                         {% endif %}
                     </div>
                 {% endif %}

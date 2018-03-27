@@ -1,5 +1,277 @@
 # Release Notes für Ceres
 
+## v2.5.2 (2018-03-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.1...2.5.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden gelöschte Lieferadressen weiterhin in der Oberfläche angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde man beim Klick auf die Navigationspfeile im Bilderkarrussel der Kategorieübersicht zu dem Artikel weitergeleitet. Dies wurde behoben.
+- Durch einen Fehler konnten zusätzliche Inhalte von Zahlungs-Plugins im Checkout nicht korrekt angezeigt werden. Dies wurde behoben.
+
+## v2.5.1 (2018-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.0...2.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden bei einer Anfrage an ElasticSearch alle Artikeldaten zurückgeliefert.
+- Die mobile Navigation funktioniert nun wieder auf allen Touch-Endgeräten.
+- Durch einen Fehler wurder der Webshop nicht richtig geladen wenn er über eine App wie Facebook oder Instagram geöffnet wurde. Dies wurde behoben.
+
+## v2.5.0 (2018-03-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.4.0...2.5.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Es wurden Context-Klassen hinzugefügt, die für zugehörige Twig-Templates Daten zur Verfügung stellen.
+- Ceres kann nun auf alle Typen von Benachrichtigungs-Codes, die vom Server kommen, reagieren. Vorher konnten nur Codes vom Typ Fehlermeldung abgefangen werden.
+
+### Geändert
+
+- In der Wunschliste wurden überflüssige Style-Anweisungen entfernt.
+- Wenn ein Nutzer im Kassenbereich alle Artikel aus dem Warenkorb entfernt, wird er nun zur Warenkorbansicht geleitet.
+- Die Schriftfarbe der Variantenauswahl wurde abgedunkelt. Dadurch wird eine bessere Lesbarkeit für deaktivierte Werte in Dropdown-Listen auf Firefox Browsern gewährleistet.
+- Die nicht mobile Shop-Navigation wurde für Touch-Devices optimiert.
+
+### Behoben
+
+- Durch einen Fehler wurde das Tooltip für die Wunschliste nicht korrekt übersetzt. Dies wurde behoben.
+- Durch einen Fehler wurden mehrere HTML-Elemente mit derselben ID versehen. Dies wurde behoben.
+- Durch einen Fehler wurde eine falsche Anzahl von Bildern in der Bild-Vorschau der Artikelseite angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde das Kontaktformular nicht richtig ausgegeben wenn die Postleitzahl in den Stammdaten nicht ausgefüllt war. Dies wurde behoben.
+- Wenn man den Tab Beschreibung in der Einzelartikelansicht deaktiviert hat, wurde das nächste verfügbare Tab nicht selektiert. Dies wurde behoben.
+- Durch einen Fehler war die Artikelansicht leer, wenn in den Daten keine Verfügbarkeit enthalten war. Dies wurde behoben.
+- Die Hierarchie von Überschriften wurde auf der Kategorieseite optimiert.
+- Die URL des Firmenlogos im Footer wird nun von Suchmaschinen ignoriert.
+- Der Wert eines Bestellmerkmals verlief ab einer bestimmten Größe über den Rand hinaus. Dies wurde behoben.
+- Deaktivierte Tooltips führen nun nicht mehr dazu, dass HTML-Titles angezeigt werden.
+- Die Ansicht der Sprachen und Lieferländer wurde leicht angepasst, um die volle Funktionalität auch bei vielen aktiven Sprachen und Lieferländern zu gewährleisten.
+
+## v2.4.0 (2018-03-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Plugin-Konfiguration wurde in entsprechende Hilfsklassen ausgelagert.
+- Es wurde eine Konfigurationsmöglichkeit hinzugefügt, um beim Klicken auf vorgeschlagene Artikel direkt zum Artikel weitergeleitet zu werden.
+- Für eine bessere Performance werden mehrfache Aufrufe einer Funktion im Cache gehalten.
+- Das Design für den Warenkorb wurde von Grund auf neu gestaltet. Hierbei wurden Fehler der alten Version behoben, dass z.B. Text ineinander gerutscht ist und der Inhalt kaputt ging.
+
+### Geändert
+
+- Die im Warenkorb befindlichen Artikel werden nun nach dem Laden des Shops asynchron nachgeladen. Dies führt zu einem schnelleren Ausliefern der Seite.
+- Die Hinweisetexte für sichere Passwörter in der Registrierung wurden angepasst.
+- Die Einträge der Währungsauswahl wurden angepasst, um Suchmaschinen daran zu hindern, dieselbe Seite mehrfach zu crawlen.
+
+### Behoben
+
+- Durch einen Fehler wurde das Layout für Adresseingaben beim Bearbeiten von Adressen nicht an das ausgewählte Land angepasst. Dies wurde behoben.
+- Durch einen Fehler wurden durch den Wechsel der Währung bereits vorhandene URL-Parameter überschrieben. Dies wurde behoben.
+- Wenn im **Checkout** die Validierung der Eingabefelder durchgeführt wurde und ein unausgefülltes Feld rot markiert wurde, wurde die Einfärbung nach erfolgreicher Nutzereingabe nicht entfernt. Dieser Fehler wurde behoben.
+- Wenn man unter Adresseingaben die Option Firma ausgewählt hat, wurde das Feld nicht angezeigt. Dies wurde behoben.
+
+## v2.3.2 (2018-02-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.1...2.3.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- User Guide Kapitel zur EHI-Zertifizierung
+
+### Behoben
+
+- Der Betreff der "Passwort vergessen" Email wird nun aus den Sprachdateien von Ceres geladen.
+- Durch einen Fehler wurden über die mobile Navigation falsche Kategorien geöffnet. Dies wurde behoben.
+- Wenn eine Kategorie nicht in der Navigation angezeigt wurde, funktionierten Elemente wie Paginierung, Artikel pro Seite und Sortierung nicht. Dies wurde behoben.
+- Werte von Bestellmerkmalen werden nun zurückgesetzt wenn der Nutzer eine andere Variante des Artikels auswählt. Sollte diese Variante vorher bereits ausgewählt worden sein, wird der vorherige Wert des Bestellmerkmals geladen.
+- Durch einen Fehler wurde man in der Kategorieansicht beim Klick auf Buttons des Bilderkarussells direkt zum Artikel geleitet. Dieser Fehler wurde behoben.
+
+## v2.3.1 (2018-02-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.0...2.3.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Gutscheinrabatte werden nun auf der Auftragsbestätigungsseite und in den Auftragsdetails im MyAccount-Bereich angezeigt.
+- Die Retourenbestätigungsseite wird nun nach Anlage einer Retoure wieder angezeigt. (Die Route muss in IO config aktiviert sein)
+- Auf der Seite zur Retourenanlage werden nur noch Artikel angezeigt, die auch retourniert werden können. (Keine Versandkosten, Gutscheinpositionen etc.)
+- Durch einen Fehler wurden Ländernamen immer in Englisch dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurde beim Wechseln der Sprache auf falsche URLs geleitet. Dies wurde behoben.
+- Für die Sprachen Dänisch und Norwegisch waren keine Icons verfügbar. Dies wurde behoben.
+- In der Last seen Liste werden nun keine zufälligen Artikel mehr angezeigt, wenn vorher noch kein Artikel im Shop angeschaut wurde.
+
+## v2.3.0 (2018-02-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.2...2.3.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Hinweistexte in der Registrierung und Verwendungszweck wurden hinzugefügt (EHI).
+- Es wurde ein Container auf der OrderConfirmation Seite hinzugefügt, damit Shipping-Plugins zusätzliche Inhalte darstellen können.
+- Die Einstellung **Name of an item to display** wurde auf dem Tab **Item view** hinzugefügt. Mit diesem Wert wird festgelegt, ob im Webshop der Artikelname, der Variantenname (sofern verfügbar) oder eine Kombination aus beiden Namen angezeigt wird. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank">Artikelansicht anpassen</a>.
+- Kategorien vom Typ **Content** können nun in der Navigationsleiste angezeigt werden. Hierfür wurde in der Ceres-Konfiguration die Einstellung **Type of categories rendered in the navigation** im Tab **Header** hinzugefügt. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#70" target="_blank">Header und Footer anpassen</a>.
+
+### Behoben
+
+- Durch einen Fehler konnten Artikel die nicht auf der Kategorieseite angezeigt wurden nicht in den Warenkorb gelegt werden. Dies wurde behoben.
+- Durch einen Fehler wurde auch wenn man keine Artikel im Warenkorb hatte versucht ein Auftrag anzulegen. Dies wurde behoben.
+
+## v2.2.2 (2018-02-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.1...2.2.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Ein Fehler führte dazu, dass gelegentlich in der Artikelansicht eine 404-Seite angezeigt wurde, wenn man diese ohne Varianten-ID in der URL aufrief. Dies wurde behoben, indem auch in der Artikelansicht die Einstellung **Show variations by type** berücksichtigt wird.
+- Durch einen Fehler wurden Artikellisten nicht angezeigt, die Artikel mit mehreren Bildern enthielten. Dies wurde behoben.
+- Durch einen Fehler konnten Plugins auf der Artikelseite keine Tabs mehr hinzufügen. Dies wurde behoben.
+
+## v2.2.1 (2018-02-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.0...2.2.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Sortierung der Suchergebnisse wurde verbessert.
+- Die Einstellungen für das Google reCAPTCHA aus dem Menü **System » Mandant »Mandant wählen » Webshop » Einstellungen** wurde in die Ceres-Konfiguration in das Tab **Global** verschoben.
+- Die Einstellungen für die aktiven Webshop-Sprachen aus dem Menü **System » Mandant » Mandant wählen » Webshop » Multilingual** wurden in die Ceres-Konfiguration in das Tab **Languages** verschoben.
+
+## v2.2.0 (2018-02-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.5...2.2.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Es wurde eine Service-Klasse eingeführt, die Übersetzungen nun auch per JavaScript ermöglicht, analog zum Server-seitigen Umgang von Übersetzungen durch Laravel.
+- Texte in unterschiedlichen Sprachen werden nun direkt vom Server geladen. Es ist nicht länger notwendig sprachabhängige JavaScript-Dateien lokal zu kompilieren.
+- Ein Widerrufsformular wurde hinzugefügt. Sie können entweder ein Formular über die rechtlichen Angaben im Backend erstellen oder ein PDF-Dokument zum Download im Tab **Footer** der Ceres-Konfiguration angeben. Weitere Informationen dazu finden Sie unter [Rechtliche Angaben speichern](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#300).
+
+### Geändert
+
+- In der Addresseingabe wird nun bei Auswahl von **Firma** im Feld **Anrede** das Feld **Umsatzsteuer-ID** eingeblendet.
+- Der Button im Kontaktformular hat nun dieselbe Ladeanimation wie die restlichen Buttons im Webshop.
+- Die Performance des **Mein Konto**-Bereichs wurde verbessert.
+- Die Elemente in der **Kaufabwicklung** wurden nun in 2 optisch voneinander getrennten Spalten angeordnet, um rechtliche Anforderungen zu erfüllen.
+- Das Eingabefeld für Kundenwünsche in der **Kaufabwicklung** befindet sich nun unterhalb der Auswahl für die Zahlungsarten.
+- Die Checkbox für die rechtlichen Angaben, sowie der **Kaufen**-Button befinden sich in der **Kaufabwicklung** nun unterhalb der Warenkorbsumme.
+
+### Behoben
+
+- Durch einen Fehler wurde die Relevanz eines Artikels bei der Artikelsuche und -sortierung nicht richtig berücksichtigt. Dies wurde behoben.
+- Durch einen Fehler wurde das Feld **Firma** in der Registrierung nicht korrekt eingeblendet, wenn man unter **Anrede** den Wert **Firma** gewählt hat. Dies wurde behoben.
+- Durch einen Fehler wurden nicht übersetzte Kategorien ohne Inhalt in der Navigation oder den Breadcrumbs ausgegeben. Dies wurde behoben.
+- Durch einen Fehler konnten nicht übersetzte Kategorien im Megamenü per Hover geöffnet werden. Dies wurde behoben.
+- Durch einen Fehler funktionierte die Paginierung der Auftragshistorie nicht korrekt. Dies wurde behoben.
+
+
+## v2.1.5 (2018-02-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.4...2.1.5" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Ein Fehler führte dazu, dass die Paginierung bei verwendeter Einstellung **Show variations by type: Dynamically** nicht korrekt dargestellt wurde. Dies wurde behoben.
+- Durch einen Fehler waren die Links im Footer des Webshops in der mobilen Ansicht nicht klickbar. Dies wurde gefixt.
+- Durch fehlende Unterstützung benötigter JavaScript-Funktionen kam es zu Einschränkungen im Internet Explorer. Dies wurde behoben.
+- Durch ein von anderen Browsern abweichendes Verhalten des Internet Explorers war es nicht möglich bei einer Adresse das Land zu speichern. Zudem gab es ein Fehlverhalten, wenn man unter **Anrede** den Wert **Firma** ausgewählt hat. Dies wurde behoben.
+
+## v2.1.4 (2018-01-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.3...2.1.4" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Ein Fehler führte dazu, dass das Megamenü in Firefox nicht korrekt dargestellt wurde. Dies wurde behoben.
+
+## v2.1.3 (2018-01-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.2...2.1.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Der Sortierungswert **Item position** im Tab **Item view** wurde aus der empfohlenen Sortierung entfernt. Die Sortierung nach Position wird nun über die Positionsnummer der Variante gelöst.
+
+### Behoben
+
+- Durch einen Fehler wurde die Wunschliste nicht richtig initialisiert. Dies wurde behoben.
+
+## v2.1.2 (2018-01-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Einstellung **Combine variations** im Tab **Item view** der Konfiguration wurde umbenannt in **Dynamically**.
+
+### Behoben
+
+- Die Versandkosten in der Versandartenauswahl der Kaufabwicklung werden nun aktualisiert.
+- Das vorraussichtliche Lieferdatum in der **Bestellübersicht** wird nun nicht mehr ausgegeben, wenn das Datum nicht in den Auftragsdaten vorhanden ist.
+- Durch einen Fehler wurde der Back-to-top-Button ständig neu berechnet. Dies wurde behoben.
+- Durch einen Fehler wurde bei fehlenden Artikelinformationen die Artikelansicht nicht korrekt dargestellt. Dies wurde behoben.
+
+## v2.1.1 (2018-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.0...2.1.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Es wurde ein Fehler behoben, bei dem Artikel-URLs ohne definierten URL-Pfad nicht korrekt generiert werden konnten.
+
+## v2.1.0 (2018-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.3...2.1.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- **SEO:** Auf der Startseite wird nun der Webshop-Name als H1-Überschrift ausgegeben.
+
+### Geändert
+
+- In den Dropdown-Menüs der Adresskomponenten werden keine Adressen mehr angezeigt, die nicht ausgewählt werden können.
+- Das Overlay zum Löschen von Adressen wurde angepasst, um moderner zu wirken.
+- Für Artikelbilder, die im Warenkorb, auf der Kategorieseite und in der Artikelansicht angezeigt werden, werden die im Backend eingestellten alternativen Texte der Bilder gesetzt.
+- Artikellisten zeigen nun je nach aktueller Auflösung dynamisch unterschiedlich viele Artikel an.
+- **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
+- Die Schriftgröße der Zahlen in den Filtern wurde erhöht um besser lesbar zu sein.
+
+### Behoben
+
+- Im Checkout werden die Adresseingaben wieder korrekt validiert.
+- Bilder in den Artikellisten werden nun korrekt geladen, sobald sie sichtbar werden.
+- Die Artikel im Slider auf der Startseite werden nun korrekt ausgegeben.
+- Ein Fehler führte dazu, dass Filter nicht gerendert wurden. Dies wurde behoben.
+- Ein Fehler führte dazu, dass die Artikelansicht für Artikel ohne Artikelvorlagen nicht angezeigt werden konnte. Dies wurde behoben.
+
+### TODO
+
+- Durch Anpassungen an der Suchlogik müssen Facettenverknüpfungen für den Mandanten gesetzt werden. Öffnen Sie im zentralen Login das Menü **System » Mandant » Mandant wählen » Dienste » Facettenverknüpfungen**. Wählen Sie eine Facette und klicken Sie auf **Facette verknüpfen**.
+
+## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahl-Plugin sich selbst deaktivieren kann.
+- Wenn man sich mit einer E-Mail registriert, die bereits existiert, bleibt das Overlay nun geöffnet und man sieht die Fehlermeldung besser.
+- Artikel und Varianten können nun dynamisch angezeigt werden. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank">Artikelansicht anpassen</a>.
+
+### Behoben
+
+- In der **Wunschliste** werden Bilder von Varianten nun korrekt ausgegeben.
+- Der Button, um einen Artikel aus der **Wunschliste** zu entfernen, wird nun mittig angezeigt.
+- Auf iOS-Geräten sollte nun der Cursor in Modalen nicht mehr verrutschen. iOS [Bug-Report](https://bugs.webkit.org/show_bug.cgi?id=176896).
+- Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** manchmal nicht geöffnet hat bei Klick auf den entsprechenden Button.
+- Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** nicht geöffnet hat, nachdem ein Artikel in den Warenkorb gelegt wurde (insofern konfiguriert).
+- In der Artikelansicht werden die Versandkosten nun wieder korrekt verlinkt (wenn konfiguriert).
+- Es wurde ein Fehler behoben, der dazu führte, dass manche Seite nicht die maximale Höhe genommen haben (weißer Rand unten).
+- Die Styles in Firefox werden nun wieder korrekt dargestellt.
+
+## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Öffnungszeiten können jetzt für die Sprachen Deutsch und Englisch angegeben werden.
+
+### Geändert
+
+- Die Adressenauswahl wurde leicht überarbeitet, um für den Shop-Besucher noch deutlicher zu wirken.
+
+### Behoben
+
+- Das Mega-Menü zeigt jetzt alle Kategorien an, ohne sie abzuschneiden.
+- Durch einen Fehler wurden die Metadaten in Anführungszeichen ausgegeben. Dies wurde behoben.
+- Durch einen Fehler wurde die E-Mail-Adresse bei Gastbestellungen nicht validiert. Dies wurde behoben.
+- Durch einen Fehler wurde das Land in der Registrierung nicht korrekt vorausgewählt. Dies wurde behoben.
+- Durch einen Fehler wurde die Kategorieansicht nicht mehr angezeigt, wenn ein Artikel keine Bild hatte. Dies wurde behoben.
+- Durch einen Fehler hat das Such-Icon keine SCSS-Variablen für Farbcodes genutzt. Dies wurde behoben.
+
+## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Das Twig-Template `SingleItemWrapper` wurde hinzugefügt. Dieses Template ermöglicht die Nutzung von <a href="https://knowledge.plentymarkets.com/artikel/artikel-verwalten#720" target="_blank"><b>Artikelvorlagen</b></a> in Ceres.
+
+### Behoben
+
+- Die Grundpreise werden in der Einzelansicht eines Artikels wieder korrekt ausgegeben, wenn diese am Artikel konfiguriert wurden.
+- Durch einen Fehler wurden im **Checkout** die Warenkorbsummen auf der linken Seite angezeigt, wenn die Liste der Artikel länger war, als die der Zahlungsarten. Die Summen werden nun immer auf der rechten Seite dargestellt.
+- Durch einen Fehler konnte die Artikelansicht nicht angezeigt werden, wenn der Artikel nicht mit einem Hersteller verknüpft war. Dies wurde behoben.
+- Das Warenkorb-Overlay addiert die Timer nicht mehr, sondern es kann nach dem ersten Klick wieder geöffnet werden.
+- Der Header ist nun wieder voll responsive.
+- Durch einen Fehler wurden manche Bilder in den Artikellisten nicht ausgegeben. Dies wurde behoben.
+
 ## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
@@ -125,7 +397,7 @@
 
 ### Geändert
 
-- Der Text von Bestellmerkmalen wird in der Warenkorbvorschau nicht mehr ausgegeben. 
+- Der Text von Bestellmerkmalen wird in der Warenkorbvorschau nicht mehr ausgegeben.
 - Bestellmerkmale werden in der Einzelansicht eines Artikels oberhalb der Preise ausgegeben.
 - In der Einzelansicht eines Artikels wird der Artikelpreis nun live anhand der Merkmalaufpreise und Staffelpreise berechnet.
 - Im Overlay **Zum Warenkorb hinzufügen** wird der Artikelpreis nun korrekt anhand der Merkmalaufpreise und Staffelpreise berechnet.
@@ -316,7 +588,7 @@
 ### Hinzugefügt
 
 - Das Custom-Event `onVariationChanged` wurde hinzugefügt.
-- Bestellmerkmale vom Typ **Text** können nun mit Artikeln verknüpft werden. Diese werden in der Einzelansicht eines Artikels angezeigt (Hinweis: Zurzeit stehen für die Verwendung im Webshop **Ceres** nur Bestellmerkmale vom Typ **Text** zur Verfügung. Auch die Einordnung von Bestellmerkmalen in Merkmalgruppen ist bisher nicht möglich). Weitere Informationen zur Einrichtung von Bestellmerkmalen finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#340" target ="_blank">Handbuch</a> und im <a href="https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155" target="_blank">Forum</a>. 
+- Bestellmerkmale vom Typ **Text** können nun mit Artikeln verknüpft werden. Diese werden in der Einzelansicht eines Artikels angezeigt (Hinweis: Zurzeit stehen für die Verwendung im Webshop **Ceres** nur Bestellmerkmale vom Typ **Text** zur Verfügung. Auch die Einordnung von Bestellmerkmalen in Merkmalgruppen ist bisher nicht möglich). Weitere Informationen zur Einrichtung von Bestellmerkmalen finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#340" target ="_blank">Handbuch</a> und im <a href="https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155" target="_blank">Forum</a>.
 - Beim Anlegen/Editieren von Adressen werden die Felder nun rot markiert, wenn vom Server eine Fehlermeldung für diese Felder kommt. Außerdem werden die Fehler ausgegeben anstatt "Validation errors".
 
 ### Behoben
@@ -508,7 +780,7 @@
 
 ### Hinzugefügt
 
-- Die Artikelbilder werden nach ihrer im Backend [festgelegten Position](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#14-8) sortiert. 
+- Die Artikelbilder werden nach ihrer im Backend [festgelegten Position](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#14-8) sortiert.
 
 ### Behoben
 
@@ -607,7 +879,7 @@
 - Die Performance der Kategorien wurde verbessert.
 - Das Styling der Kategorien wurde überarbeitet.
 - Die Kategorien werden nun in der Kategorieansicht neu geladen ohne die Seite neuzuladen.
-- Die Paginierung wurde überarbeitet. In den Einstellungen im Tab **Pagination and sorting** kann man nun die Zeilen und die Reihen wählen der Kategorieansicht wählen. Die Anzeigewerte werden automatisch berechnet und angezeigt. 
+- Die Paginierung wurde überarbeitet. In den Einstellungen im Tab **Pagination and sorting** kann man nun die Zeilen und die Reihen wählen der Kategorieansicht wählen. Die Anzeigewerte werden automatisch berechnet und angezeigt.
 
 ## v1.0.5 (2017-04-07)
 

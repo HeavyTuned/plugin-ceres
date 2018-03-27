@@ -1,6 +1,6 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set gCapture   = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
+{% set gCapture = config("Ceres.global.google_recaptcha_api_key") %}
 
 <script type="x/template" id="vue-login">
     
@@ -10,15 +10,17 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="input-unit" data-validate="mail">
-                            <input type="email" name="email" id="txt_email" v-model="username">
-                            <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+                            {% set uid_mail = uid() %}
+                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
+                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-xs-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
-                            <input type="password" name="password" id="txt_password" v-model="password">
-                            <label for="txt_password">{{ trans("Ceres::Template.accPassword") }}*</label>
+                            {% set uid_pwd = uid() %}
+                            <input type="password" name="password" id="{{ uid_pwd }}" v-model="password">
+                            <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.accPassword") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.accEmptyPassword") }}</span>
                     </div>
@@ -31,7 +33,8 @@
                 </div>
                 <div :class="{'col-xs-5 col-sm-8 text-sm-right': !modalElement}">
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium">
-                        <i class="fa fa-user" v-waiting-animation="isDisabled"></i>{{ trans("Ceres::Template.accLogin") }}
+                        <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
+                        {{ trans("Ceres::Template.accLogin") }}
                     </button>
                 </div>
             </div>
@@ -46,8 +49,9 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="mail">
-                            <input type="email" name="email" id="txt_email" v-model="username">
-                            <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+                            {% set uid_mail = uid() %}
+                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
+                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                     </div>
@@ -58,12 +62,13 @@
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
 
                     <button type="button" @click.prevent="cancelResetPwd" class="btn btn-secondary btn-medium btn-m-r">
-                        {{ trans("Ceres::Template.generalBackToLogin") }}
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        {{ trans("Ceres::Template.generalBackToLogin") }}
                     </button>
 
                     <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'pull-right': !modalElement }">
-                        <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>{{ trans("Ceres::Template.generalSend") }}
+                        <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        {{ trans("Ceres::Template.generalSend") }}
                     </button>
                 </div>
             </div>

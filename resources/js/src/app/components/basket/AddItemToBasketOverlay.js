@@ -6,7 +6,6 @@ Vue.component("add-item-to-basket-overlay", {
 
     props: [
         "basketAddInformation",
-        "configItemName",
         "template"
     ],
 
@@ -31,9 +30,7 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const texts = this.latestBasketEntry.item.texts;
-
-                return this.$options.filters.itemName(texts, this.configItemName);
+                return this.$options.filters.itemName(this.latestBasketEntry.item);
             }
 
             return "";
@@ -45,7 +42,7 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 const img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
 
-                return img.url;
+                return img ? img.url : "";
             }
 
             return "";
@@ -69,10 +66,7 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 this.setPriceFromData();
 
-                if (this.timeToClose <= 0)
-                {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-                }
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
 
                 this.startCounter();
             }
@@ -80,7 +74,12 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 setTimeout(function()
                 {
-                    $("body").toggleClass("open-right");
+                    const vueApp = document.querySelector("#vue-app");
+
+                    if (vueApp)
+                    {
+                        vueApp.classList.add(App.config.basketOpenClass || "open-hover");
+                    }
                 }, 1);
             }
         }
@@ -90,13 +89,21 @@ Vue.component("add-item-to-basket-overlay", {
     {
         setPriceFromData()
         {
-            if (this.latestBasketEntry.item.calculatedPrices)
+            if (this.latestBasketEntry.item.prices)
             {
-                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
+                this.currency = this.latestBasketEntry.item.prices.default.currency;
                 const graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
                 this.price = graduatedPrice + propertySurcharge;
+            }
+        },
+
+        closeOverlay()
+        {
+            if (this.timerVar)
+            {
+                clearInterval(this.timerVar);
             }
         },
 

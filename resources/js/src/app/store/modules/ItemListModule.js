@@ -6,7 +6,7 @@ const state =
         facets: [],
         selectedFacets: [],
         page: null,
-        sorting: null,
+        sorting: "texts.name1_asc",
         isLoading: false,
         itemsPerPage: null,
         searchString: null,
@@ -18,7 +18,7 @@ const mutations =
     {
         setFacets(state, facets)
         {
-            state.facets = facets;
+            state.facets = facets || [];
         },
 
         setSelectedFacetsByIds(state, selectedFacetIds)
@@ -29,7 +29,12 @@ const mutations =
             {
                 for (const facet of state.facets)
                 {
-                    selectedFacets = selectedFacets.concat(facet.values.filter(facetValue => selectedFacetIds.includes(facetValue.id)));
+                    selectedFacets = selectedFacets.concat(
+                        facet.values.filter(facetValue =>
+                        {
+                            return selectedFacetIds.some(facetId => facetId === facetValue.id + "");
+                        })
+                    );
                 }
             }
 
@@ -138,8 +143,7 @@ const actions =
                         page                : state.page,
                         facets              : getters.selectedFacetIds.toString(),
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                        template            : "Ceres::ItemList.ItemListView",
-                        variationShowType   : App.config.variationShowType
+                        template            : "Ceres::ItemList.ItemListView"
                     };
                 const url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
@@ -149,8 +153,8 @@ const actions =
                 ApiService.get(url, searchParams)
                     .done(data =>
                     {
-                        commit("setItemListItems", data.documents);
-                        commit("setItemListTotalItems", data.total);
+                        commit("setItemListItems", data.itemList.documents);
+                        commit("setItemListTotalItems", data.itemList.total);
                         commit("setFacets", data.facets);
                         commit("setIsItemListLoading", false);
                         resolve(data);

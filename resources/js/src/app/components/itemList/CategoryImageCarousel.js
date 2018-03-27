@@ -6,8 +6,8 @@ Vue.component("category-image-carousel", {
         imageUrlsData  : {type: Array},
         itemUrl        : {type: String},
         altText        : {type: String},
-        showDots       : {type: String},
-        showNav        : {type: String},
+        showDots       : {type: Boolean},
+        showNav        : {type: Boolean},
         disableLazyLoad: {
             type   : Boolean,
             default: false
@@ -43,14 +43,14 @@ Vue.component("category-image-carousel", {
         }
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
         this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
 
-    mounted: function()
+    mounted()
     {
         this.$nextTick(() =>
         {
@@ -63,30 +63,60 @@ Vue.component("category-image-carousel", {
 
     methods:
     {
-        initializeCarousel: function()
+        initializeCarousel()
         {
             $("#owl-carousel-" + this._uid).owlCarousel({
-                dots     : (this.showDots === "true"),
+                dots     : !!this.showDots,
                 items    : 1,
                 mouseDrag: false,
                 loop     : this.imageUrls.length > 1,
                 lazyLoad : !this.disableLazyLoad,
                 margin   : 10,
-                nav      : (this.showNav === "true"),
+                nav      : !!this.showNav,
                 navText  : [
-
-                    "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                    "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+                    `<i id="owl-nav-text-left-${this._uid}" class='fa fa-chevron-left' aria-hidden='true'></i>`,
+                    `<i id="owl-nav-text-right-${this._uid}" class='fa fa-chevron-right' aria-hidden='true'></i>`
                 ],
-                onTranslated: function(event)
+                onTranslated(event)
                 {
-                    var target = $(event.currentTarget);
-
-                    var owlItem = $(target.find(".owl-item.active"));
+                    const target = $(event.currentTarget);
+                    const owlItem = $(target.find(".owl-item.active"));
 
                     owlItem.find(".img-fluid.lazy").show().lazyload({threshold : 100});
+                },
+                onInitialized: event =>
+                {
+                    if (this.showNav)
+                    {
+                        document.querySelector(`#owl-nav-text-left-${this._uid}`).parentElement.onclick = event => event.preventDefault();
+                        document.querySelector(`#owl-nav-text-right-${this._uid}`).parentElement.onclick = event => event.preventDefault();
+                    }
                 }
             });
+        },
+
+        getAltText(image)
+        {
+            const altText = image && image.alternate ? image.alternate : this.altText;
+
+            return altText;
+        },
+
+        loadFirstImage()
+        {
+            const itemLazyImage = this.$refs.itemLazyImage;
+
+            if (itemLazyImage)
+            {
+                if (itemLazyImage.loadImage)
+                {
+                    itemLazyImage.loadImage();
+                }
+                else if (itemLazyImage[0] && itemLazyImage[0].loadImage)
+                {
+                    itemLazyImage[0].loadImage();
+                }
+            }
         }
     }
 });
