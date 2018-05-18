@@ -1,5 +1,107 @@
 # Release Notes für Ceres
 
+## v2.8.1 (2018-05-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.0...2.8.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden die Einstellungen des Bilderkarussell-Widgets des Shop Builders nicht korrekt ausgegeben. Dies wurde behoben.
+- Durch einen Fehler konnte im Checkout nicht auf die Verlinkung zur Widerrufsbelehrung geklickt werden. Dies wurde behoben.
+
+## v2.8.0 (2018-05-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.7.0...2.8.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Plugins und Themes, die auf Übersetzungstexte in Ceres .properties Dateien zugreifen, müssen gegebenenfalls überarbeitet werden. Weitere Informationen unter: https://forum.plentymarkets.com/t/ankuendigung-anpassung-der-properties-dateien-in-ceres/340077
+- Wenn die Artikelsortierung nach Preis aktiv ist, muss sie in der Ceres Konfiguration unter "Paginating and Sorting » Enable item sorting by" neu ausgewählt und erneut gespeichert werden.
+
+### Hinzugefügt
+
+- Die Elemente der Startseite wurden in editierbare Elemente für den Shop Builder ausgelagert.
+- Es wurde ein Container hinzugefügt, um die Suchfilter zu überschreiben.
+- Es wurden Facetten vom Typ: Preis hinzugefügt.
+- Bei der Generierung von URLs wird nun die Einstellung zum Anhängen von Trailing-Slashes berücksichtigt.
+
+### Geändert
+
+- Die Konfiguration der Startseite wurde in den Shop Builder überführt.
+- Externe URLs werden nun über das Attribut rel="noopener" aufgerufen.
+- Ceres reagiert nun auf das Event "afterPaymentMethodChanged" und lädt bei Änderung der Zahlungsart die Daten vom Warenkorb erneut.
+- In einer Kategorie wird nun der Meta-Titel als Titel verwendet. Sollte dieser nicht vorhanden sein, wird der Name der Kategorie verwendet.
+- Die sprachabhängigen Texte in Ceres wurden neu sortiert und umbenannt, um sie auf die Veröffentlichung der Mehrsprachigkeitsfunktionen vorzubereiten.
+- Die Sortierung nach Preis nutzt nun den durchschnittlichen Preis einer Variante anstatt des minimalen und maximalen Werts.
+
+### Behoben
+
+- Es wurden Fehler behoben, die in Firefox bei schnellen Wechseln zwischen Kategorien zu Problemen geführt hatten.
+- Durch einen Fehler wurde das Event "afterPaymentMethodChanged" direkt nach dem Klick zum Wechsel der Zahlungsart ausgelöst. Nun wird das Event erst nach erfolgreicher Antwort vom Server ausgelöst.
+- Durch einen Fehler wurde das Event "afterShippingProfileChanged" direkt nach dem Klick zum Wechsel des Versandprofils ausgelöst. Nun wird das Event erst nach erfolgreicher Antwort vom Server ausgelöst.
+- Durch einen Fehler wurden Merkmale, welche nicht als Bestellmerkmale angelegt wurden, als solche in der Artikelansicht ausgegeben. Dies wurde behoben.
+- Daten aus dem GlobalContext von Ceres wurden nicht geladen, wenn man über eine Route aus einem anderen Plugin kam. Dies wurde behoben.
+- Bei der Benutzung von Ceres und IO auf einem weiteren Mandanten konnte es dazu kommen, dass Kategoriedetails vom Hauptmandanten geladen wurden. Dies wurde behoben.
+- Es wurde ein Fehler behoben wodurch Seitennavigation und Breadcrumbs auf Touch-Geräten nicht bedienbar waren.
+- Durch einen Fehler wurde die verlinkte Versandkostenkategorie nicht in der Artikelübersicht angezeigt. Dies wurde behoben.
+- Es wurden verschiedene CSS-Fehler im Bilderkarrussell behoben.
+- Wenn man zwischen Kategorien navigiert, ist der Browserverlauf nun normal bedienbar.
+
+## v2.7.0 (2018-04-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.6.0...2.7.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Bei Artikeln ohne Bilder wird jetzt das konfigurierte Platzhalter-Bild im Webshop dargestellt.
+- Der Tab "Design" und dessen zugehörige Einstellungen wurden zur Ceres Konfiguration hinzugefügt.
+- Bestellmerkmale vom Typ Datei können jetzt verarbeitet werden.
+- Eine Checkbox wurde zur Kontaktseite hinzugefügt, durch die der Nutzer das Lesen der Datenschutzerklärung bestätigen muss.
+- Es wurde ein neuer Wert in der Konfiguration hinzugefügt, mit der die Checkbox für das Zustimmen der Datenschutzerklärung aktiviert oder deaktiviert wird.
+- Auf der Kontaktseite wird dem Nutzer nun eine Fehlermeldung angezeigt, wenn dieser versucht das Formular abzuschicken, ohne dass alle Pflichtfelder ausgefüllt sind.
+
+### Geändert
+
+- Bilder in der Artikelbeschreibung verhalten sich jetzt responsive und brechen nicht mehr aus dem Layout der Seite aus.
+- Die Meldung "Vue.js konnte nicht initialisiert werden" wird nun als span-Element und nicht mehr als h1-Überschrift angezeigt.
+- In der Auswahl für Staaten und Bundesländer steht nun standardmäßig "Bitte wählen".
+- Die Kontaktdaten vom Kunden im System sind nun mit der ersten angelegten Rechnungsadresse synchronisiert.
+- Auf der Kontaktseite wurde ein Hinweis hinzufügt, dass Pflichtfelder durch "*" markiert sind.
+- Die Kontaktseite wurde überarbeitet und hat nun das selbe optische Erscheinungsbild wie die restlichen Seiten.
+
+### Behoben
+
+- Durch einen Fehler haben die Buttons der Mengeneingabe in der Artikeleinzelansicht die Anzahl nicht mehr hoch- und runtergerechnet wenn das Bestellintervall des Artikels 0 war. Dies wurde behoben.
+- Durch einen Fehler hat die Konfiguration für die Positionierung der Pagination nicht funktioniert. Dies wurde behoben.
+- In der Bestellbestätigung wurde die aktuelle Zahlungsart nicht initial im Overlay angezeigt. Dies wurde behoben.
+- Durch einen Fehler funktionierte die Touch-Navigation nicht richtig, wenn keine Unterkategorien vorhanden waren. Dies wurde behoben.
+- Durch einen Fehler wurde die Anrede nicht korrekt gespeichert. Dies wurde behoben.
+- Unter Umständen wurden bestimmte Script- und Style-Tags mehr als einmal gerendert. Dies wurde behoben.
+- Durch einen Fehler wurden Meta-Informationen für Shop-Aktionen in der Artikeleinzelansicht nicht korrekt ausgegeben. Dies wurde behoben.
+- Durch einen Fehler wurden Preisangaben in einigen Sprachen nicht korrekt formatiert. Dies wurde behoben.
+- Ein überflüssiges Umwandeln in das json-Format sorgte dafür, dass in Kategorien vom Typ **Content** die *Umlaute* in Meta-Informationen falsch dargestellt wurden. Dies wurde behoben.
+- Wenn ein Nutzer eine Adresse löscht oder editiert, wird die vom Server selektierte Adresse nun in der Benutzeroberfläche als ausgewählte Adresse angezeigt.
+- Die im System hinterlegten Kontaktdaten beinhalten nun das in der ersten Rechnungsadresse angegebene Geburtsdatum.
+
+
+## v2.6.0 (2018-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.2...2.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- IO kann jetzt auf die Generierung der Sitemap reagieren und seine eigenen Muster zur Erzeugung der URLs vorgeben.
+
+### Geändert
+
+- Im Warenkorb wird nun der Aufpreis von Bestellmerkmalen mit dem Vorwort "inkl." angezeigt.
+- Die Intervall-Bestellmenge eines Artikels wird jetzt bei der Mengeneingabe berücksichtigt.
+- Die Plugin-Konfiguration wird jetzt generisch an JavaScript übergeben und ist als globales Objekt verfügbar.
+- Ab sofort können auch dezimale Mengen von Artikeln gekauft werden.
+- Im Checkout wurde die Checkbox für die AGB, Widerrufsrecht und Datenschutzerklärung auf die linke Seite verschoben. Dadurch befindet sich der Kaufen-Button direkt unterhalb der Gesamtsumme.
+- Der Vorschautext eines Artikels in der Artikeleinzelansicht unterstützt nun HTML-Elemente.
+- In der Artikelansicht ist der Wert "Bitte wählen" in der Attributauswahl der Variante nun immer wählbar. Hierdurch wird verhindert, dass die Auswahl eines Attributs jegliche andere Auswahl in der Dropdown-Liste verhindert. Außerdem kann der Nutzer hierdurch die Hauptvariante auswählen, insofern sie aktiv und mit keinem Attribut verknüpft ist.
+- Im Warenkorb wird nun der Aufpreis eines Bestellmerkmals in den Gesamtpreis des Artikelpostens einkalkuliert.
+
+### Behoben
+
+- Unter gewissen Umständen wurde der Button zum Ändern der Zahlungsart auf der Auftragsbestätigungsseite nicht angezeigt.
+- Ein Fehler führte dazu, dass man nach einem Kauf mit Paypal auf eine 404 Seite anstatt auf die Auftragsbestätigungsseite geleitet wurde. Dies wurde behoben.
+- Im Warenkorb wird nun die Position der Artikelbilder berücksichtigt und das Bild mit der niedrigsten Position wird ausgegeben.
+- Bei Artikeln mit ausgefülltem Bestellmerkmal wurde bisher immer der Aufpreis des Merkmals angezeigt. Jetzt wird überprüft, ob es für den Artikel einen gesonderten Aufpreis gibt. Wenn ja, wird dieser angezeigt.
+
 ## v2.5.2 (2018-03-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.1...2.5.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

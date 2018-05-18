@@ -1,7 +1,13 @@
+import {floatLength}from "../../helper/number";
+import {defaultValue}from "../../helper/utils";
+
 Vue.directive("basket-item-quantity",
     {
         update(el, binding)
         {
-            el.innerHTML = binding.value;
+            const value     = defaultValue(binding.value, 0);
+            const decimals  = floatLength(value);
+
+            el.innerHTML = value.toFixed(decimals).replace(".", App.decimalSeparator);
         }
     });
