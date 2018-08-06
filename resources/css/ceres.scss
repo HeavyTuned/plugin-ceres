@@ -82,7 +82,7 @@ $gray-lighter:          #dcdbd8 !default;
 $gray-lighter2:         #f4f4f4 !default;
 $gray-lightest:         #f7f7f9 !default;
 
-$brand-primary:         #008ebd !default;
+$brand-primary:         #fc4513 !default;
 $brand-secondary:       #d4021d !default;
 
 $brand-success:         #7ED321 !default;
@@ -10681,12 +10681,12 @@ a:active {
 
 body {
 
-	background-color: $gray-lightest;
+	background-color: $white;
 
 	> #vue-app,
 	> #vue-error {
 
-		background-color: $gray-lightest;
+		background-color: $white;
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
@@ -19298,7 +19298,17 @@ nav.navbar.megamenu {
 
 
 .ht {
-    .logo {
-        top: 10px;
+    .logo-container {
+        margin-bottom: 20px;
+    }
+    .ht-logo {
+        img {
+            max-width: 150px;
+        }
+    }
+    .wrapper-main {
+        #page-body {
+            margin-top: 41px;
+        }
     }
 }
