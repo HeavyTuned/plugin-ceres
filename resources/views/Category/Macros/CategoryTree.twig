@@ -1,6 +1,8 @@
 {% macro get_children(category, currentScopeUrl, level) %}
     {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
     {% set maxitems = { "1": config('Ceres.header.megamenu_items_stage_1'), "2": config('Ceres.header.megamenu_items_stage_2') ,"3": config('Ceres.header.megamenu_items_stage_3')} %}
+    {% set megaMenuOpenLevel = not config('Ceres.header.open_megamenu_level') ? 1 : config('Ceres.header.open_megamenu_level') %}
+
     {% import _self as childlist %}
     {% set counter = 0 %}
     {% if level < megaMenuLevels %}
@@ -28,7 +30,15 @@
     {% import _self as navbar %}
     {% set counter = 0 %}
     {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
+    {% set megaMenuOpenLevel = not config('Ceres.header.open_megamenu_level') ? 1 : config('Ceres.header.open_megamenu_level') %}
+    
+    {% set currentLevel = megaMenuOpenLevel %}
 
+    {% if megaMenuOpenLevel > 1 %}
+        {%
+            categories = navbar.get_children(category, currentScopeUrl, megaMenuOpenLevel + 1)
+        %}
+    {% endif %}
     {% for category in categories %}
 
         {% if category.details | length > 0 %}
@@ -63,7 +73,7 @@
                                 {% endif %}
                             {% endfor %}
                         {% else %}
-                            {{ navbar.get_children(category, currentScopeUrl, 1) }}
+                            {{ navbar.get_children(category, currentScopeUrl, megaMenuOpenLevel) }}
                         {% endif %}
                     </ul>
                 </li>

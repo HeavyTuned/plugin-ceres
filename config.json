@@ -421,6 +421,14 @@
                         ]
                     }
                 },
+                "header.open_megamenu_level": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.headerOpenMegaMenuLevel",
+                    "options": {
+                        "defaultValue" : "1"
+                    }
+                },
                 "header.megamenu_items_stage_1": {
                     "type": "inputText",
                     "required": false,
