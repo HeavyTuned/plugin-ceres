@@ -7,6 +7,7 @@ const state =
     {
         data: {},
         items: [],
+        showNetPrices: false,
         latestEntry: {
             item: {},
             quantity: null
@@ -88,6 +89,11 @@ const mutations =
         setIsBasketInitiallyLoaded(state)
         {
             state.isBasketInitiallyLoaded = true;
+        },
+
+        setShowNetPrices(state, showNetPrices)
+        {
+            state.showNetPrices = showNetPrices;
         }
     };
 
@@ -95,37 +101,32 @@ const actions =
     {
         loadBasketData({commit, state})
         {
-            if (state.data.itemQuantity)
-            {
-                ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"})
-                    .done(basketItems =>
-                    {
-                        commit("setBasketItems", basketItems);
-                        commit("setIsBasketInitiallyLoaded");
+            const basketPromise = ApiService.get("/rest/io/basket/");
+            const basketItemsPromise = ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"});
 
-                        setTimeout(() =>
-                        {
-                            $(document.body).trigger("sticky_kit:recalc");
-                        }, 0);
-                    })
-                    .fail(error =>
+            Promise.all([basketPromise, basketItemsPromise]).then(
+                ([basket, basketItems]) =>
+                {
+                    commit("setBasket", basket);
+                    commit("setBasketItems", basketItems);
+                    commit("setIsBasketInitiallyLoaded");
+
+                    setTimeout(() =>
                     {
-                        if (error.data)
-                        {
-                            NotificationService.error(
-                                TranslationService.translate("Ceres::Template.basketOops")
-                            ).closeAfter(10000);
-                        }
-                    });
-            }
-            else
-            {
-                commit("setIsBasketInitiallyLoaded");
-            }
+                        $(document.body).trigger("sticky_kit:recalc");
+                    }, 0);
+                },
+                ([basketError, basketItemsError]) =>
+                {
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.basketOops")
+                    ).closeAfter(10000);
+                });
 
             ApiService.listen("AfterBasketChanged", data =>
             {
                 commit("setBasket", data.basket);
+                commit("setShowNetPrices", data.showNetPrices);
                 commit("setBasketItems", data.basketItems);
             });
         },
@@ -258,15 +259,15 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 ApiService.get("/rest/io/basket/")
-                        .done(basket =>
-                        {
-                            commit("setBasket", basket);
-                            resolve(basket);
-                        })
-                        .fail(error =>
-                        {
-                            reject(error);
-                        });
+                    .done(basket =>
+                    {
+                        commit("setBasket", basket);
+                        resolve(basket);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
             });
         }
     };

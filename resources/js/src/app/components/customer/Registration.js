@@ -29,7 +29,8 @@ Vue.component("registration", {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                addressSalutation: 0
+                addressSalutation: 0,
+                gender: "male"
             },
             isDisabled: false
         };
@@ -88,7 +89,7 @@ Vue.component("registration", {
 
                         if (this.backlink !== null && this.backlink)
                         {
-                            navigateTo(this.backlink);
+                            navigateTo(decodeURIComponent(this.backlink));
                         }
                         else
                         {

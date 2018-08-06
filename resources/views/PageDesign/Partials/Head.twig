@@ -3,7 +3,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% set lang = services.sessionStorage.getLang() %}
-{% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+
+{% if ceresConfig.global.favicon is empty %}
+    {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+{% else %}
+    {% set favicon = ceresConfig.global.favicon %}
+{% endif %}
+
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
 {% set canonicalUrl = services.url.getCanonicalURL() %}
@@ -18,6 +24,46 @@
         <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
     {% endfor %}
 {% endif %}
+
+<style data-font="Custom-Font">
+    {% set customFont =
+        {
+            regular: config('Ceres.custom-font-regular'),
+            bold: config('Ceres.custom-font-bold'),
+            italic: config('Ceres.custom-font-italic'),
+            boldItalic: config('Ceres.custom-font-bold-italic')
+        }
+    %}
+    
+    {% if customFont.regular %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.regular }}");
+        }
+    {% endif %}
+    {% if customFont.bold %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.bold }}");
+            font-weight: bold;
+        }
+    {% endif %}
+    {% if customFont.italic %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.italic }}");
+            font-style: italic;
+        }
+    {% endif %}
+    {% if customFont.boldItalic %}
+        @font-face {
+            font-family: "Custom-Font";
+            src: url("{{ customFont.boldItalic }}");
+            font-weight: bold;
+            font-style: italic;
+        }
+    {% endif %}
+</style>
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 

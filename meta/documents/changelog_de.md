@@ -1,5 +1,133 @@
 # Release Notes für Ceres
 
+## v2.13.0 (2018-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.12.0...2.13.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Falls nach dem Update auf Version 2.13 Artikellisten nicht auf der mit dem Shop Builder erstellten Startseite angezeigt werden, muss die Shop Builder Startseite erneut gespeichert werden.
+
+### Hinzugefügt
+
+- Es wurde ein neuer Layout-Container unterhalb der Bestelldetails auf der Bestellbestätigungsseite hinzugefügt.
+
+### Geändert
+
+- Der Grundpreis wurde für die Stückzahl 1 nicht ausgegeben. Dies wurde behoben. Die Anzeige des Grundpreises wird nun ausschließlich durch den an der Variante hinterlegten Wert bestimmt.
+- Bei einem Wechsel der Kategorie scrollt der Browser nun automatisch zurück nach oben.
+- Die Dropdown-Liste der Adressauswahl hat nun eine maximale Höhe. Hierdurch wird verhindert, dass bei einer großen Anzahl von Adressen eine Adressauswahl nicht mehr möglich ist.
+- Es wird nun zwischen Verkaufs- und Aktionsgutscheinen unterschieden. Die Anordnung der Gutscheine wurde entsprechend angepasst.
+
+### Behoben
+
+- In der Navigation wurden alle Kategorien ausgegeben. Dieses Verhalten wurde behoben, sodass jetzt unterschiedliche Navigationen abhängig von Kundenklassen ausgegeben werden können.
+- Es wurde ein Fehler behoben, durch den Ceres-Shops auf Microsoft Edge Browsern nicht richtig funktionierten.
+- Durch einen Fehler kam es zu Rundungsfehlern in der Artikeldetailansicht. Dieser wurde behoben.
+- Es wurde ein Fehler behoben durch welchen Artikelpakete unter bestimmten Umständen zu Vue.js-Fehlern im Webshop führen konnten.
+- Der Fehler "No 'Access-Control-Allow-Origin' header is present on the requested resource" tritt nun nicht mehr auf.
+- Durch einen Fehler wurde die Umsatzsteuer-ID auf der Registrierungsseite auch bei Nutzern validiert, die keine Firmenkunden sind. Dies wurde behoben.
+- Wenn die "Passwort zurücksetzen"-E-Mail mit einem E-Mail-Client geöffnet wurde, wurde der Link nicht erkannt. Dieser Fehler wurde behoben.
+- In der .twig-Datei der dritten Artikelliste wurden teilweise falsche IDs genutzt. Dieser Fehler wurde behoben.
+- Die CDN-URLs für Artikelbilder werden nun korrekt mandantenabhängig geladen.
+- Durch einen Fehler wurden keine Artikel zur **Zuletzt angesehen**-Liste hinzugefügt, wenn diese nicht auf der Artikelansicht verknüpft war. Dies wurde behoben.
+- Durch einen Fehler wurden bestimmte Artikel auf der Bestellbestätigungsseite nicht ausgegeben, wenn sie Teil eines Artikelpakets waren. Dies wurde behoben.
+
+## v2.12.0 (2018-07-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.11.0...2.12.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Artikelpakete können jetzt im Webshop dargestellt werden.
+- Es wurde ein neues Widget für den Shop Builder hinzugefügt, welches Freitext und HTML darstellt.
+
+### Geändert
+
+- Benutzerspezifische Daten wie Warenkorb, Anmeldeinformationen und Wunschliste werden jetzt nachträglich geladen.
+- Die Liste der zuletzt gesehenen Artikel wird jetzt nachträglich geladen.
+
+### Behoben
+
+- Diverse fehlerhafte Verlinkungen wurden behoben.
+- Durch einen Fehler wurde die Artikel-ID im Warenkorb nicht angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde unter Artikeln "inkl. Mwst." anstatt "zzgl. Mwst." angezeigt. Dies wurde behoben.
+- Der Name des Webshops wird nun für die Seiten Warenkorb, Content-Kategorien, Kategorieseiten, Artikelansicht und Artikelsuche korrekt aus den Übersetzungen geladen.
+- Wenn ein Kunde keinen Namen gespeichert hatte, wurde im Header manchmal eine falsche Begrüßung angezeigt. Dies wurde behoben.
+- Durch einen Fehler konnten Artikel mit einem bestimmten Intervall im Warenkorb nicht korrekt bearbeitet werden. Dies wurde behoben.
+- Der Wert für den Artikelnamen wird nun korrekt aus den Ceres-Dateien geladen.
+- Es wurden fehlende Farben für die Artikelverfügbarkeiten 6-10 hinzugefügt.
+
+## v2.11.0 (2018-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.10.0...2.11.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Wenn die Social Media Bibliothek **Shariff** in einem Plugin verwendet wurde, muss diese ab sofort in diesem Plugin selbst integriert werden.
+
+### Geändert
+
+- Die Social Media Bibliothek **Shariff** wurde aus Ceres entfernt, da sie nicht mehr benötigt wird, seitdem das Social Media Plugin nicht mehr nativ in Ceres integriert ist.
+
+### Behoben
+
+- Der Name des Webshops im Titellisten-Widget des Shop Builders wird nun korrekt aus den Übersetzungen der Mehrsprachigkeitsoberfläche geladen.
+- Der Alternativtext des Firmenlogos wird nun korrekt aus den Übersetzungen der Mehrsprachigkeitsoberfläche geladen.
+- Der Seitentitel wird nun korrekt aus den Übersetzungen der Mehrsprachigkeitsoberfläche geladen.
+- Für die Standardsprache wurde das Länderkürzel in der URL entfernt. Andere Sprachen werden mit Länderkürzeln in der URL erreicht.
+
+## v2.10.0 (2018-06-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.1...2.10.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Ceres-Konfiguration wurde ins Deutsche übersetzt.
+- Das Favicon kann nun direkt in der Ceres-Konfiguration über eine Dateiauswahl gewählt werden. Sollte hier kein Favicon gesetzt sein, greift das Favicon aus den alten Einstellungen im Menü **System » Mandant » Mandant wählen » Webshop » Einstellungen**.
+
+### Geändert
+
+- Die Konfiguration für das Shop- und Firmenlogo erfolgt nun über eine Dateiauswahl und nicht mehr über ein Textfeld.
+- Die Konfiguration für das PDF des Widerrufsformulars erfolgt nun über eine Dateiauswahl und nicht mehr über ein Textfeld.
+- Es ist nun möglich die Bestelldetails in der Auftragshistorie mit einem Theme zu überschreiben, da die Auftragshistorie-Komponente jetzt einen zweiten Parameter annimmt, welcher das Template für die Bestelldetails beinhaltet.
+- Der Link zum Forum auf der "Vue.js konnte nicht initialisiert werden"-Fehlerseite besitzt nun ein nofollow-Tag.
+- In der Kaufabwicklung wurden die Buttons zum Anlegen einer neuen Adresse für die mobile Ansicht optimiert und verdecken nun keine Elemente mehr.
+- Wenn ein Kundenkonto gesperrt ist, erhält der Kunde jetzt eine entsprechende Nachricht.
+- Auf der Bestellbestätigungsseite werden nun Netto- oder Bruttosummen hervorgehoben, abhängig von dem am Auftrag mitgegebenen Flag.
+- Auf der Bestellbestätigungsseite wird nun das Lieferland an den Adressen ausgegeben.
+
+### Behoben
+
+- Durch einen Fehler wurden Warnhinweise nicht dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurde die gegenwärtige Seite beim Klick auf einen Link neu geladen. Dies wurde behoben.
+- Durch einen Fehler wurde ein falsches Bild im Warenkorb-Overlay angezeigt. Dies wurde behoben.
+- Wenn es für einen Artikel einen gesonderten Aufpreis für ein Bestellmerkmal gibt, wird dieser nun korrekt in der Artikelansicht angezeigt.
+- Es gab einen Fehler im Zusammenhang von Bestellmerkmalen und normalen Merkmalen. Dieser wurde behoben.
+- Durch einen Fehler wechselten die Summen in der Kaufabwicklung und im Warenkorb bei Änderungen nicht unmittelbar zwischen Netto- und Bruttosummen. Dies wurde behoben.
+- Durch einen Fehler wechselte die Summenanzeige im Header nach Änderungen nicht direkt zwischen Brutto- und Nettosummen. Dies wurde behoben.
+
+## v2.9.1 (2018-06-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.9.0...2.9.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler konnten Plugins mit eigener Kaufabwicklung keine Aufträge mehr anlegen. Dies wurde behoben.
+- Durch einen Fehler wurden einstellige Nachkommastellen bei Preisen als zweistellige Nachkommastelle ausgegeben. Dies wurde behoben.
+
+## v2.9.0 (2018-05-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.1...2.9.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Das Event **afterBasketItemAdded** wurde hinzugefügt, welches ausgelöst wird, sobald ein neuer Artikel in den Warenkorb gelegt wurde.
+- Es wurde eine Checkbox hinzugefügt, mit der Kunden der Weitergabe ihrer Daten an Versanddienstleister zustimmen können.
+
+### Geändert
+
+- Sprachabhängige Konfigurationseinträge wurden aus der Ceres Konfiguration entfernt und in .properties Dateien ausgelagert, um über das Mehrsprachigkeits-Interface bearbeitet werden zu können.
+- Die Anzeige für Brutto- und Netto-Preise sorgt nun dafür, dass der entsprechende Preis als fett dargestellt wird.
+- Die Auswahl des Lieferlandes ist nun deaktiviert wenn der Shop-Besucher bereits eine Adresse gespeichert hat. In diesem Fall wird der Nutzer per Tooltip auf eine Änderung der Adresse hingewiesen.
+- Der Name auf dem Kontaktformular ist nun kein Pflichtfeld mehr.
+
+### Behoben
+
+- Es wurden Anpassungen vorgenommen, um Webseitenübergreifendes Scripting zu unterbinden.
+- Durch einen Fehler wurden die Trailing Slashes der Breadcrumb-Navigation und der Sprachauswahl nicht richtig gesetzt. Dies wurde behoben.
+- Durch einen Fehler wurde die Überschrift der Artikelliste in der Artikeleinzelansicht nicht angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurden die Buttons zum Löschen und Bearbeiten der Bankdaten nicht richtig angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde die Artikelansicht beim Auswählen der Suchvorschläge mit "Enter" nicht geöffnet. Dies wurde behoben.
+
 ## v2.8.1 (2018-05-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.8.0...2.8.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

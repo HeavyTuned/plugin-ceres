@@ -2,30 +2,22 @@ Vue.component("basket-totals", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "config",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String
+        }
+    },
 
     computed: Vuex.mapState({
         basket: state => state.basket.data,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        showNetPrices: state => state.basket.showNetPrices
     }),
 
     created()
     {
         this.$options.template = this.template;
-    },
-
-    methods: {
-        /**
-         * TODO
-         * @param name
-         * @returns {boolean}
-         */
-        showProperty(name)
-        {
-            return !this.config || this.config.indexOf(name) >= 0 || this.config.indexOf("all") >= 0;
-        }
     }
 });

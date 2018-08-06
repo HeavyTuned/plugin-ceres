@@ -6,6 +6,8 @@
 {% set numberOfFeatures = config('Ceres.footer.number_of_features') %}
 {% set topButtonPosition = config('Ceres.footer.to_top_button') %}
 
+{% set footerContainer = LayoutContainer.show("Ceres::Footer") | trim %}
+{% if footerContainer is empty %}
 <div class="footer">
 
     <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
@@ -22,7 +24,7 @@
                 {% for i in 1..numberOfFeatures %}
                     <div class="col-xs-12 col-sm-4 text-xs-center">
                         <i class="fa fa-check text-success" aria-hidden="true"></i>
-                        {{ config('Ceres.footer.store_feature_' ~ i) }}
+                        {{ trans('Ceres::Template.footerStoreFeature' ~ i) }}
                     </div>
                 {% endfor %}
             </div>
@@ -64,7 +66,7 @@
             {% for i in 1..numberOfCols %}
                 <div class="col-xs-6 col-sm-3 col-lg-2">
                     <nav class="footer-column m-b-2">
-                        <h2 class="h5">{{ config('Ceres.footer.col_' ~ i ~ '_title') }}</h2>
+                        <h2 class="h5">{{ trans('Ceres::Template.footerColumnTitle' ~ i) }}</h2>
                         <ul class="list-unstyled">
 
                             {% set footerCategories = config('Ceres.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
@@ -124,10 +126,13 @@
                 {% endautoescape %}
             </div>
             <a rel="nofollow" href="https://www.plentymarkets.eu">
-                <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg" rel="nofollow">
+                <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg" rel="nofollow" crossorigin="anonymous">
             </a>
             <br>
             <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
         </div>
     </div>
 </div>
+{% else %}
+    {{ footerContainer | raw }}
+{% endif %}
