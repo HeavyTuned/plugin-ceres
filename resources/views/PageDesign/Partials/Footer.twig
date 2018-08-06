@@ -125,7 +125,7 @@
                     {% endif %}
                 {% endautoescape %}
             </div>
-            <a  href="{{ homepageURL }}">
+            <a  href="{{ homepageURL }}" class="logo">
                 {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                     <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
                 {% else %}

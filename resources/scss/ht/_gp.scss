@@ -2,7 +2,7 @@
     .logo-container {
         margin-bottom: 0;
         position: relative;
-        margin-top: 106px;
+        margin-top: 58px;
     }
     .ht-logo {
         img {
@@ -18,7 +18,9 @@
     .footer { 
         .footer-content {
             .logo {
-                max-width: 92px;
+                img {
+                    max-width: 92px;
+                }
             }
         }
     }

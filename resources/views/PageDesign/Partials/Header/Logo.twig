@@ -1,3 +1,6 @@
+{% set companyLogo  = config("Ceres.header.company_logo") %}
+{% set companyName  = trans("Ceres::Template.headerCompanyName") %}
+{% set homepageURL = services.url.getHomepageURL() %}
 <div class="container logo-container">
     <a class="ht-logo" href="{{ homepageURL }}">
         {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
