@@ -36,7 +36,7 @@
 
     {% if megaMenuOpenLevel > 1 %}
         {%
-            categories = navbar.get_children(category, currentScopeUrl, megaMenuOpenLevel + 1)
+            set categories = navbar.get_children(category, currentScopeUrl, megaMenuOpenLevel + 1)
         %}
     {% endif %}
     {% for category in categories %}
