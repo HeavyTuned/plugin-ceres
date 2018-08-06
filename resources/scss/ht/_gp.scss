@@ -1,6 +1,8 @@
 .ht {
     .logo-container {
-        margin-bottom: 20px;
+        margin-bottom: 0;
+        position: relative;
+        margin-top: 106px;
     }
     .ht-logo {
         img {
@@ -9,7 +11,16 @@
     }
     .wrapper-main {
         #page-body {
-            margin-top: 41px;
+            margin-top: 21px;  
         }
     }
+
+    .footer { 
+        .footer-content {
+            .logo {
+                max-width: 92px;
+            }
+        }
+    }
+    
 }
