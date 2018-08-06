@@ -126,7 +126,11 @@
                 {% endautoescape %}
             </div>
             <a  href="{{ homepageURL }}">
-                 <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+                {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
+                    <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+                {% else %}
+                    <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+                {% endif %}
             </a>
             <br>
             <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
