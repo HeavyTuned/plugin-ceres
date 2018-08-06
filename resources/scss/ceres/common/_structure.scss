@@ -1,11 +1,11 @@
 body {
 
-	background-color: $gray-lightest;
+	background-color: $white;
 
 	> #vue-app,
 	> #vue-error {
 
-		background-color: $gray-lightest;
+		background-color: $white;
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;

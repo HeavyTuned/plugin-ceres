@@ -1,7 +1,9 @@
-<a class="navbar-brand pull-lg-left" href="{{ homepageURL }}">
-    {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
-        <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
-    {% else %}
-        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
-    {% endif %}
-</a>
+<div class="container logo-container">
+    <a class="ht-logo" href="{{ homepageURL }}">
+        {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
+            <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+        {% else %}
+            <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+        {% endif %}
+    </a>
+</div>

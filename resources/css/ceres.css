@@ -12405,12 +12405,12 @@ a:active {
 }
 
 body {
-  background-color: #f7f7f9;
+  background-color: #fff;
 }
 
 body > #vue-app,
 body > #vue-error {
-  background-color: #f7f7f9;
+  background-color: #fff;
 }
 
 body > #vue-app > .wrapper-top, body > #vue-app > .wrapper-left, body > #vue-app > .wrapper-right, body > #vue-app > .wrapper-bottom,
@@ -20503,6 +20503,18 @@ body.menu-is-visible {
 .widget-text.widget-inverse {
   color: #fff;
   background-color: #4D4F4D;
+}
+
+.ht .logo-container {
+  margin-bottom: 20px;
+}
+
+.ht .ht-logo img {
+  max-width: 150px;
+}
+
+.ht .wrapper-main #page-body {
+  margin-top: 41px;
 }
 
 /*# sourceMappingURL=ceres.css.map */
