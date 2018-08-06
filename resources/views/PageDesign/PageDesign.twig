@@ -53,6 +53,8 @@
         {% include getPartial('header') %}
 
         <div id="page-body" class="main">
+            {% include "Ceres::PageDesign.Partials.Logo" %}
+
             {% block PageBody %}
                 <!-- inject content of inherited templates here -->
             {% endblock %}
