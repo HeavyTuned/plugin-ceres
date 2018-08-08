@@ -4229,7 +4229,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #efefef;
+  background-color: white;
   border-radius: 0.1rem;
 }
 
@@ -12413,7 +12413,10 @@ body > #vue-error {
   background-color: #fff;
 }
 
-body > #vue-app > .wrapper-top, body > #vue-app > .wrapper-left, body > #vue-app > .wrapper-right, body > #vue-app > .wrapper-bottom,
+body > #vue-app > .wrapper-top,
+body > #vue-app > .wrapper-left,
+body > #vue-app > .wrapper-right,
+body > #vue-app > .wrapper-bottom,
 body > #vue-error > .wrapper-top,
 body > #vue-error > .wrapper-left,
 body > #vue-error > .wrapper-right,
@@ -14677,8 +14680,7 @@ Custom classes
 
 .wrapper-main .navbar {
   font-family: Custom-Font, Helvetica, Arial, sans-serif;
-  background: #f7f7f9;
-  border-bottom: 1px solid #efefef;
+  background: white;
 }
 
 .wrapper-main .navbar a {
@@ -14751,7 +14753,7 @@ Custom classes
 .navbar {
   padding: 0;
   z-index: 1050;
-  background-color: #f7f7f9;
+  background-color: white;
   border-bottom: 1px solid #dcdbd8;
 }
 
@@ -15646,7 +15648,7 @@ body.menu-is-visible {
     display: block;
     width: 100%;
     max-width: 100%;
-    background: #efefef;
+    background: white;
     top: 96px;
   }
   .wrapper-main .breadcrumb {
@@ -20508,7 +20510,7 @@ body.menu-is-visible {
 .ht .logo-container {
   margin-bottom: 0;
   position: relative;
-  margin-top: 106px;
+  margin-top: 58px;
 }
 
 .ht .ht-logo img {
@@ -20519,7 +20521,7 @@ body.menu-is-visible {
   margin-top: 21px;
 }
 
-.ht .footer .footer-content .logo {
+.ht .footer .footer-content .logo img {
   max-width: 92px;
 }
 
