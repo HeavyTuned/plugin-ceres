@@ -4,6 +4,24 @@
         position: relative;
         margin-top: 0;
     }
+    @include media-breakpoint-down(md) {
+        .logo-container {
+            padding: 0.5rem 0;
+        }
+        .single {
+            >.m-t-3 {
+                margin-top: 0rem!important;
+            }
+        }
+    }
+
+    .ht-scroll-div {
+        max-height: 390px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 0 15px;
+        background: #fff;
+    }
 
     .ht-avail {
 
@@ -24,13 +42,7 @@
         background-color: $white;
     }
 
-    .single {
-        .tab-content {
-            .active {
-                padding: 15px;
-            }
-        }
-    }
+    
     .footer {
         .footer-content {
             .logo {
@@ -44,6 +56,13 @@
     }
     
     @include media-breakpoint-up(lg){
+        .single {
+            .tab-content {
+                .active {
+                    padding: 15px;
+                }
+            }
+        }
         #mainNavbarCollapsable {
             .mainmenu  {
                 >li{

@@ -159,7 +159,7 @@
 
                         {% if 'item.technical_data' in itemData or 'all' in itemData %}
                             <div :class="{ 'active': !isDescriptionTabActive && isTechnicalDataTabActive }" class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel" v-if="isTechnicalDataTabActive">
-                                <div class="m-y-2" v-html="currentVariation.texts.technicalData">
+                                <div class="m-y-2 ht-scroll-div" v-html="currentVariation.texts.technicalData">
                                 </div>
                             </div>
                         {% endif %}
