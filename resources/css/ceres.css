@@ -20513,6 +20513,23 @@ body.menu-is-visible {
   margin-top: 0;
 }
 
+@media (max-width: 991px) {
+  .ht .logo-container {
+    padding: 0.5rem 0;
+  }
+  .ht .single > .m-t-3 {
+    margin-top: 0rem !important;
+  }
+}
+
+.ht .ht-scroll-div {
+  max-height: 390px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 0 15px;
+  background: #fff;
+}
+
 .ht .ht-logo img {
   max-width: 150px;
 }
@@ -20525,16 +20542,18 @@ body.menu-is-visible {
   background-color: #fff;
 }
 
-.ht .single .tab-content .active {
-  padding: 15px;
-}
-
 .ht .footer .footer-content .logo img {
   max-width: 118px;
   margin: 11px auto 0;
 }
 
 @media (min-width: 992px) {
+  .ht .single .tab-content .active {
+    padding: 15px;
+  }
+  .ht #mainNavbarCollapsable .mainmenu {
+    min-height: 67px;
+  }
   .ht #mainNavbarCollapsable .mainmenu > li a {
     padding: 2rem 1rem;
   }
