@@ -4,17 +4,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "gulp",
-            "task": "build:sass",
+            "command": "npm run bundleSass",
+            "label": "ceres-bundle",
+            "type" :"shell"
+        },
+        {
+            "command": "gulp build:sass ",
+            "label": "ceres-scss",
+            "type" :"shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        },
-        {
-            "type": "npm",
-            "script": "bundleSass",
-            "problemMatcher": []
+            },
+            "dependsOn": [
+                "ceres-bundle"
+            ]
         }
+
     ]
 }

@@ -20510,19 +20510,34 @@ body.menu-is-visible {
 .ht .logo-container {
   margin-bottom: 0;
   position: relative;
-  margin-top: 58px;
+  margin-top: 0;
 }
 
 .ht .ht-logo img {
   max-width: 150px;
 }
 
-.ht .wrapper-main #page-body {
-  margin-top: 21px;
+.ht .static-link-list {
+  margin-bottom: 0;
+}
+
+.ht .page-content {
+  background-color: #fff;
+}
+
+.ht .single .tab-content .active {
+  padding: 15px;
 }
 
 .ht .footer .footer-content .logo img {
-  max-width: 92px;
+  max-width: 118px;
+  margin: 11px auto 0;
+}
+
+@media (min-width: 992px) {
+  .ht #mainNavbarCollapsable .mainmenu > li a {
+    padding: 2rem 1rem;
+  }
 }
 
 /*# sourceMappingURL=ceres.css.map */

@@ -2,7 +2,11 @@
     .logo-container {
         margin-bottom: 0;
         position: relative;
-        margin-top: 58px;
+        margin-top: 0;
+    }
+
+    .ht-avail {
+
     }
     .ht-logo {
         img {
@@ -11,14 +15,41 @@
     }
     .wrapper-main {
         #page-body {
-            margin-top: 21px;
+        }
+    }
+    .static-link-list {
+        margin-bottom: 0;
+    }
+    .page-content {
+        background-color: $white;
+    }
+
+    .single {
+        .tab-content {
+            .active {
+                padding: 15px;
+            }
         }
     }
     .footer {
         .footer-content {
             .logo {
+
                 img {
-                    max-width: 92px;
+                    max-width: 118px;
+                    margin: 11px auto 0;
+                }
+            } 
+        }
+    }
+    
+    @include media-breakpoint-up(lg){
+        #mainNavbarCollapsable {
+            .mainmenu  {
+                >li{
+                    a {
+                        padding:2rem 1rem; 
+                    }
                 }
             }
         }
