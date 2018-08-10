@@ -31,5 +31,8 @@ class CeresHeaderConfig extends PluginConfig
         $this->megamenuItemsStage1  = $this->getIntegerValue( "header.megamenu_items_stage_1", 30 );
         $this->megamenuItemsStage2  = $this->getIntegerValue( "header.megamenu_items_stage_2", 3 );
         $this->megamenuItemsStage3  = $this->getIntegerValue( "header.megamenu_items_stage_3", 2 );
+
+        $this->headerOpenMegaMenuLevel    = $this->getIntegerValue( "header.open_megamenu_level", 1 );
+
     }
 }

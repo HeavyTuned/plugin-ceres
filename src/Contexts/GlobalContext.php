@@ -16,9 +16,12 @@ use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
 use IO\Services\BasketService;
 use IO\Services\CheckoutService;
+use Plenty\Plugin\Log\Loggable;
 
 class GlobalContext implements ContextInterface
 {
+    use Loggable;
+
     protected $params = [];
 
     /** @var CeresConfig $ceresConfig  */
@@ -92,7 +95,21 @@ class GlobalContext implements ContextInterface
             $itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
         }
 
-        $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());
+        $startLevel = $this->ceresConfig->header->headerOpenMegaMenuLevel;
+
+        $categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());
+
+        $this->getLogger(__FUNCTION__)->error('Ceres::Categories', jsoN_encode($categories));
+
+        $this->getLogger(__FUNCTION__)->error('Ceres::Categories', $categories);
+
+
+        if($startLevel > 1){
+
+        }else{
+            $this->categories = $categories;
+        }
+
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
 
         $this->basket = $basketService->getBasketForTemplate();
