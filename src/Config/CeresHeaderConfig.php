@@ -17,6 +17,7 @@ class CeresHeaderConfig extends PluginConfig
     public $megamenuItemsStage1;
     public $megamenuItemsStage2;
     public $megamenuItemsStage3;
+    public $headerOpenMegaMenuLevel;
 
     public function __construct(ConfigRepository $configRepository)
     {
