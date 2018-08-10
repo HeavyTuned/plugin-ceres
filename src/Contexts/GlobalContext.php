@@ -98,6 +98,7 @@ class GlobalContext implements ContextInterface
         $startLevel = $this->ceresConfig->header->headerOpenMegaMenuLevel;
 
         $categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());
+        $this->getLogger(__FUNCTION__)->error('Ceres::Categories', 1);
 
         $this->getLogger(__FUNCTION__)->error('Ceres::Categories', json_encode($categories));
 
