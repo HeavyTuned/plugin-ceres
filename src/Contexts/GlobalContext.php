@@ -105,6 +105,7 @@ class GlobalContext implements ContextInterface
         $this->getLogger(__FUNCTION__)->error('Ceres::Categories', $categories);
 
         if($startLevel > 1){
+            $this->categories = $categories[0];
 
         }else{
             $this->categories = $categories;
