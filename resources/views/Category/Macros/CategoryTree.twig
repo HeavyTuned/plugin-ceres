@@ -34,7 +34,7 @@
     
     {% set currentLevel = megaMenuOpenLevel %}
 
-    {% if megaMenuOpenLevel > 1 %}
+    {% if megaMenuOpenLevel >= 1 %}
         {%
             set categories = navbar.get_children(category, currentScopeUrl, megaMenuOpenLevel + 1)
         %}
