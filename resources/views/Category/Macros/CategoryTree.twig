@@ -1,3 +1,5 @@
+{% set currentLang = services.sessionStorage.getLang() %}
+
 {% macro get_children(category, currentScopeUrl, level) %}
     {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
     {% set maxitems = { "1": config('Ceres.header.megamenu_items_stage_1'), "2": config('Ceres.header.megamenu_items_stage_2') ,"3": config('Ceres.header.megamenu_items_stage_3')} %}
@@ -30,7 +32,13 @@
     {% import _self as navbar %}
     {% set counter = 0 %}
     {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
-    {% set megaMenuOpenLevel = not config('Ceres.header.open_megamenu_level') ? 1 : config('Ceres.header.open_megamenu_level') %}
+    {% set rootCategoryID = not config('Ceres.header.root_category_id') ? 1 : config('Ceres.header.root_category_id') %}
+
+    {% if rootCategoryID > 0 %}
+        {%
+            set categories = services.category.getChildren(rootCategoryID, currentLang) 
+        %}
+    {% endif %}
 
     {% for category in categories %}
 

@@ -421,10 +421,10 @@
                         ]
                     }
                 },
-                "header.open_megamenu_level": {
+                "header.root_category_id": {
                     "type": "inputText",
-                    "required": false,
-                    "label": "Config.headerOpenMegaMenuLevel",
+                    "required": true,
+                    "label": "Config.rootCategoryId",
                     "options": {
                         "defaultValue" : "1"
                     }

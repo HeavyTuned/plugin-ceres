@@ -11,7 +11,7 @@ class CeresHeaderConfig extends PluginConfig
     public $companyLogo;
     public $showNavBars;
     public $fixedNavBar;
-    public $showCategoryTypes;
+    public $showCategoryTypes; 
     public $basketValues;
     public $megamenuLevels;
     public $megamenuItemsStage1;
@@ -33,7 +33,7 @@ class CeresHeaderConfig extends PluginConfig
         $this->megamenuItemsStage2  = $this->getIntegerValue( "header.megamenu_items_stage_2", 3 );
         $this->megamenuItemsStage3  = $this->getIntegerValue( "header.megamenu_items_stage_3", 2 );
 
-        $this->headerOpenMegaMenuLevel    = $this->getIntegerValue( "header.open_megamenu_level", 1 );
+        $this->root_category_id    = $this->getIntegerValue( "header.root_category_id", 1 );
 
     }
 }

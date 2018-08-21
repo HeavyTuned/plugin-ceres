@@ -95,17 +95,10 @@ class GlobalContext implements ContextInterface
             $itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
         }
 
-        $startLevel = $this->ceresConfig->header->headerOpenMegaMenuLevel;
-
         $categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6, $customerService->getContactClassId());
 
-        if($startLevel > 1){
-            $this->categories = $categories;
-
-        }else{
-            $this->categories = $categories;
-        }
-
+        $this->categories = $categories;
+        
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
 
         $this->basket = $basketService->getBasketForTemplate();
