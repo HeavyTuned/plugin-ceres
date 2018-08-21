@@ -426,7 +426,7 @@
                     "required": true,
                     "label": "Config.rootCategoryId",
                     "options": {
-                        "defaultValue" : "1"
+                        "defaultValue" : "0"
                     }
                 },
                 "header.megamenu_items_stage_1": {

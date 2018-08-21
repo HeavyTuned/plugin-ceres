@@ -17,7 +17,7 @@ class CeresHeaderConfig extends PluginConfig
     public $megamenuItemsStage1;
     public $megamenuItemsStage2;
     public $megamenuItemsStage3;
-    public $headerOpenMegaMenuLevel;
+    public $root_category_id;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -33,7 +33,7 @@ class CeresHeaderConfig extends PluginConfig
         $this->megamenuItemsStage2  = $this->getIntegerValue( "header.megamenu_items_stage_2", 3 );
         $this->megamenuItemsStage3  = $this->getIntegerValue( "header.megamenu_items_stage_3", 2 );
 
-        $this->root_category_id    = $this->getIntegerValue( "header.root_category_id", 1 );
+        $this->root_category_id    = $this->getIntegerValue( "header.root_category_id", 0 );
 
     }
 }
