@@ -12404,6 +12404,10 @@ a:active {
   border-radius: 0;
 }
 
+.position-fixed {
+  position: fixed !important;
+}
+
 body {
   background-color: #fff;
 }
@@ -14458,7 +14462,7 @@ Custom classes
 }
 
 .top-bar {
-  position: fixed;
+  position: absolute;
   width: 100%;
   z-index: 1060;
   color: #fff;
@@ -14476,6 +14480,10 @@ Custom classes
   text-decoration: none;
   color: #fff;
   outline: none;
+}
+
+.top-bar.pos-f-t {
+  position: fixed;
 }
 
 .top-bar .controls-list {
@@ -16573,6 +16581,8 @@ body.menu-is-visible {
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container .item-name {
   font-weight: 700;
   font-size: 80%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .basket-item-container .basket-item .meta-container-wrapper .meta-container-wrapper-inner .meta-container .item-base-price {
