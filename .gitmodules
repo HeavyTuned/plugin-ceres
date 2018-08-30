@@ -1,0 +1,3 @@
+[submodule "resources/scss"]
+	path = resources/scss
+	url = https://github.com/HeavyTuned/plugin-ceres-scss
