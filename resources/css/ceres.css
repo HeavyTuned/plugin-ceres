@@ -20517,6 +20517,10 @@ body.menu-is-visible {
   background-color: #4D4F4D;
 }
 
+.ht .product-list .bg-info {
+  display: none;
+}
+
 .ht .logo-container {
   margin-bottom: 0;
   position: relative;
