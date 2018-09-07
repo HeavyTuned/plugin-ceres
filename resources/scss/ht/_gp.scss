@@ -1,0 +1,83 @@
+.ht {
+    .product-list  {
+        .bg-info {
+            display: none;
+        }
+    }
+    
+    .logo-container {
+        margin-bottom: 0;
+        position: relative;
+        margin-top: 0;
+    }
+    @include media-breakpoint-down(md) {
+        .logo-container {
+            padding: 0.5rem 0;
+        }
+        .single {
+            >.m-t-3 {
+                margin-top: 0rem!important;
+            }
+        }
+    }
+
+    .ht-scroll-div {
+        max-height: 390px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 0 15px;
+        background: #fff;
+    }
+
+    .ht-avail {
+
+    }
+    .ht-logo {
+        img {
+            max-width: 150px;
+        }
+    }
+    .wrapper-main {
+        #page-body {
+        }
+    }
+    .static-link-list {
+        margin-bottom: 0;
+    }
+    .page-content {
+        background-color: $white;
+    }
+
+    
+    .footer {
+        .footer-content {
+            .logo {
+
+                img {
+                    max-width: 118px;
+                    margin: 11px auto 0;
+                }
+            } 
+        }
+    }
+    
+    @include media-breakpoint-up(lg){
+        .single {
+            .tab-content {
+                .active {
+                    padding: 15px;
+                }
+            }
+        }
+        #mainNavbarCollapsable {
+            .mainmenu  {
+                min-height: 67px;
+                >li{
+                    a {
+                        padding:2rem 1rem; 
+                    }
+                }
+            }
+        }
+    }
+}
