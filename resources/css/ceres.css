@@ -20581,4 +20581,170 @@ body.menu-is-visible {
   }
 }
 
+.ht .footer-2017 {
+  background: #1d303c;
+  width: 100%;
+  min-height: 100px;
+  color: #fff;
+}
+
+.ht .footer-2017 * {
+  padding: 0;
+  margin: 0;
+}
+
+.ht .footer-2017 .inner-footer-wrapper {
+  width: 1050px;
+  overflow: auto;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-left {
+  float: left;
+  width: 49%;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-left p {
+  color: #d3d3d3;
+  line-height: 24px;
+  font-size: 17px;
+  margin-bottom: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-left ul li {
+  list-style-type: none;
+  padding-left: 42px;
+  line-height: 45px;
+  font-family: 'Open Sans', sans-serif;
+  background: url(https://static.heavytuned.de/online/res/layout/lucx2017b/images/footer-2017-icons.png) no-repeat center left;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-left ul .footer-2017-hotline {
+  background-position-y: 11px;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-left ul .footer-2017-mail {
+  background-position-y: -37px;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-left ul .footer-2017-address {
+  background-position-y: -94px;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right li {
+  line-height: 34px;
+  font-size: 17px;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right {
+  float: right;
+  width: 49%;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right .left-footer-2017-nav {
+  float: left;
+  width: 49%;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right .left-footer-2017-nav li {
+  list-style-type: none;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right .left-footer-2017-nav li a {
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right .right-footer-2017-nav {
+  float: right;
+  width: 49%;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right .right-footer-2017-nav li {
+  list-style-type: none;
+}
+
+.ht .footer-2017 .footer-2017-container .footer-2017-container-right .right-footer-2017-nav li a {
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+}
+
+.ht .footer-2017 .footer-2017-social-row {
+  background: #1d3e50;
+  height: 73px;
+  overflow: auto;
+}
+
+.ht .footer-2017 .footer-2017-social-row .inner-footer-wrapper {
+  padding-top: 0;
+}
+
+.ht .footer-2017 .footer-2017-social-row .follow-facebook {
+  background: url(https://static.heavytuned.de/online/res/layout/lucx2017b/images/footer-2017-icons.png) no-repeat center left;
+  padding-left: 42px;
+  background-position-y: -133px;
+  width: 50%;
+  float: left;
+  line-height: 46px;
+  height: 40px;
+  margin-top: 14px;
+}
+
+.ht .footer-2017 .footer-2017-social-row .follow-facebook a {
+  color: #fff;
+}
+
+.ht .footer-2017 .footer-2017-social-row span {
+  float: right;
+  line-height: 23px;
+  margin-top: 17px;
+  width: 48%;
+  color: #d3d3d3;
+}
+
+.ht .ht-mobile .inner-footer-wrapper {
+  width: 100%;
+}
+
+.ht .ht-mobile .footer-2017-container .footer-2017-container-left, .ht .ht-mobile .footer-2017-container .footer-2017-container-right {
+  width: 100%;
+  clear: both;
+}
+
+.ht .ht-mobile .footer-2017-container .footer-2017-container-right .left-footer-2017-nav, .ht .ht-mobile .footer-2017-container .footer-2017-container-right .right-footer-2017-nav {
+  width: 100%;
+  text-align: center;
+}
+
+.ht .ht-mobile .footer-2017-social-row {
+  height: auto;
+}
+
+.ht .ht-mobile .footer-2017-social-row .inner-footer-wrapper .follow-facebook {
+  width: 100%;
+  clear: both;
+}
+
+.ht .ht-mobile .footer-2017-social-row .inner-footer-wrapper span {
+  width: 100%;
+  clear: both;
+}
+
+.ht .addToCartModal .modal-dialog .modal-content {
+  overflow: auto;
+}
+
+.ht .addToCartModal .modal-dialog .modal-content p {
+  padding: 10px;
+}
+
+.ht .addToCartModal .modal-dialog .modal-content .ht-btn {
+  width: 48%;
+  float: left;
+  margin: 5px;
+  text-align: center;
+}
+
 /*# sourceMappingURL=ceres.css.map */
