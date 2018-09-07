@@ -10686,7 +10686,7 @@ body {
     background-color: $white;
     >#vue-app,
     >#vue-error {
-        background-color: $white;
+        background: url(https://static.heavytuned.de/online/res/layout/lucx2017b/images/2017start/Hintergrund.jpg) top center no-repeat;
         &>.wrapper-top,
         &>.wrapper-left,
         &>.wrapper-right,
@@ -14099,10 +14099,10 @@ nav.navbar.megamenu {
 	}
 
 	display: block;
-	background-color: $footer-bg;
+	background-color: $brand-secondary;
 	
 	a{
-		color: $footer-color;
+		color: $white;
 	}
 
 	.svg.plenty-brand {
@@ -14115,7 +14115,7 @@ nav.navbar.megamenu {
 	.footer-features{
 		border-top: 1px solid transparent;
 		background-color: $footer-features-bg;
-		color: $footer-features-color;
+		color:$white;
 		i {
 			color:$footer-features-color !important;
 		}
@@ -14123,7 +14123,12 @@ nav.navbar.megamenu {
 
 	.footer-content{
 
-	}
+    }
+    .static-link-list {
+        a {
+            color: $white;
+        }
+    }
 
 	.footer-services{
 		display: -webkit-box;
@@ -14178,7 +14183,8 @@ nav.navbar.megamenu {
 
 		h2{
 			font-weight: 700;
-		}
+        }
+        color: $white;
 	}
 
 	.newsletter{

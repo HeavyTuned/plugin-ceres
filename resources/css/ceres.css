@@ -12414,7 +12414,7 @@ body {
 
 body > #vue-app,
 body > #vue-error {
-  background-color: #fff;
+  background: url(https://static.heavytuned.de/online/res/layout/lucx2017b/images/2017start/Hintergrund.jpg) top center no-repeat;
 }
 
 body > #vue-app > .wrapper-top,
@@ -15766,7 +15766,7 @@ body.menu-is-visible {
 
 .footer {
   display: block;
-  background-color: #f7f7f9;
+  background-color: #d4021d;
 }
 
 @media print {
@@ -15776,7 +15776,7 @@ body.menu-is-visible {
 }
 
 .footer a {
-  color: #008ebd;
+  color: #fff;
 }
 
 .footer .svg.plenty-brand {
@@ -15790,11 +15790,15 @@ body.menu-is-visible {
 .footer .footer-features {
   border-top: 1px solid transparent;
   background-color: #dadae3;
-  color: #008ebd;
+  color: #fff;
 }
 
 .footer .footer-features i {
   color: #008ebd !important;
+}
+
+.footer .static-link-list a {
+  color: #fff;
 }
 
 .footer .footer-services {
@@ -15835,6 +15839,10 @@ body.menu-is-visible {
 
 .footer .footer-services img {
   max-height: 4rem;
+}
+
+.footer .footer-column {
+  color: #fff;
 }
 
 .footer .footer-column h2 {
