@@ -19320,4 +19320,188 @@ nav.navbar.megamenu {
             }
         }
     }
+
+    .footer-2017 {
+        background: #1d303c;
+        width: 100%;
+        min-height: 100px;
+        color: #fff;
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .inner-footer-wrapper {
+            width: 1050px;
+            overflow: auto;
+            margin:  0 auto;
+            padding: 15px;
+        }
+        .footer-2017-container {
+      
+            .footer-2017-container-left {
+                float:left;
+                width: 49%;
+                p {
+                    color: #d3d3d3;
+                    line-height: 24px;
+                    font-size: 17px;
+                    margin-bottom: 16px;
+                    font-family: 'Open Sans', sans-serif;
+                }
+    
+                ul {
+                    li {
+                        list-style-type: none;
+                        padding-left: 42px;
+                        line-height: 45px;
+                        font-family: 'Open Sans', sans-serif;
+                        background: url(https://static.heavytuned.de/online/res/layout/lucx2017b/images/footer-2017-icons.png) no-repeat center left;
+                        
+                    }
+                    .footer-2017-hotline {
+                        background-position-y: 11px;
+                    }
+                    .footer-2017-mail {
+                        background-position-y: -37px;
+                    }
+    
+                    
+                    
+                    .footer-2017-address {
+                        background-position-y: -94px;
+                    }  
+                }
+            }
+            .footer-2017-container-right {
+                li {
+                    line-height: 34px;
+                    font-size: 17px;
+                }
+            }
+            .footer-2017-container-right {
+                float: right;
+                width: 49%;
+                .left-footer-2017-nav {
+                    float: left;
+                    width: 49%;
+                    li {
+                        list-style-type: none;
+    
+                        a {
+                            font-family: 'Raleway', sans-serif;                        
+                            color: #fff;
+                        }
+                    }
+                }
+    
+                .right-footer-2017-nav {
+                    float: right;
+                    width: 49%;
+                    li {
+                        list-style-type: none;
+                        a {
+                            font-family: 'Raleway', sans-serif; 
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    
+        .footer-2017-social-row {
+            background: #1d3e50;
+            height: 73px;
+            .inner-footer-wrapper {
+                padding-top: 0;
+            }
+            overflow: auto;
+            .follow-facebook {
+                background: url(https://static.heavytuned.de/online/res/layout/lucx2017b/images/footer-2017-icons.png) no-repeat center left;
+                padding-left: 42px;
+                background-position-y: -133px;
+                width: 50%;
+                float: left;
+                line-height: 46px;
+                height: 40px;
+                margin-top: 14px;     
+                a {
+                    color: #fff;
+                }
+            }
+            span {
+                float: right;
+                line-height: 23px;
+                margin-top: 17px;
+                width: 48%;
+                color: #d3d3d3;
+            }
+        }
+    }
+    .ht-mobile {
+        .inner-footer-wrapper {
+            width: 100%;
+            
+        }
+        .footer-2017-container {
+            .footer-2017-container-left, .footer-2017-container-right {
+                width: 100%;
+                clear: both;
+            }
+            .footer-2017-container-right {
+                .left-footer-2017-nav, .right-footer-2017-nav {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+        }
+        .footer-2017-social-row { 
+            height: auto;
+    
+            .inner-footer-wrapper { 
+        
+                .follow-facebook { 
+                    width: 100%;
+                    clear: both;
+                    a { 
+        
+                    }
+                }
+        
+                span { 
+                    width: 100%;
+                    clear: both;
+                    strong { 
+        
+                    }
+                }
+            }
+        }
+    
+    }
+    .addToCartModal { 
+    
+        .modal-dialog { 
+    
+            .modal-content { 
+                overflow: auto;
+                .modal-header { 
+    
+                    .modal-title { 
+                    }
+                }
+    
+                p { 
+                    padding: 10px;
+                }
+    
+                .ht-btn { 
+                    width: 48%;
+                    float: left;
+                    margin: 5px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
 }
