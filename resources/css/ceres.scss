@@ -75,7 +75,7 @@ $grid-gutter-width: 30px !default;
 //## Gray and brand colors for use across Bootstrap.
 
 $gray-darker:           #282d2f !default;
-$gray-dark:             #4D4F4D !default;
+$gray-dark:             $brand-primary !default;
 $gray:                  #7a7f7f !default;
 $gray-light:            #b2b1a7 !default;
 $gray-lighter:          #dcdbd8 !default;

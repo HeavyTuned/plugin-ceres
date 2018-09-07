@@ -319,7 +319,7 @@ body {
   font-family: Custom-Font, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: white;
 }
 
@@ -729,7 +729,7 @@ pre {
   margin-top: 0;
   margin-bottom: 1rem;
   font-size: 90%;
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 pre code {
@@ -1811,7 +1811,7 @@ pre code {
 
 .thead-inverse th {
   color: #fff;
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .thead-default th {
@@ -1821,7 +1821,7 @@ pre code {
 
 .table-inverse {
   color: #dcdbd8;
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .table-inverse th,
@@ -2314,26 +2314,26 @@ fieldset[disabled] a.btn {
 }
 
 .btn-secondary {
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: #fff;
   border-color: #ccc;
 }
 
 .btn-secondary:hover {
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: #e6e6e6;
   border-color: #adadad;
 }
 
 .btn-secondary:focus, .btn-secondary.focus {
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: #e6e6e6;
   border-color: #adadad;
 }
 
 .btn-secondary:active, .btn-secondary.active,
 .open > .btn-secondary.dropdown-toggle {
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: #e6e6e6;
   border-color: #adadad;
   background-image: none;
@@ -2343,7 +2343,7 @@ fieldset[disabled] a.btn {
 .open > .btn-secondary.dropdown-toggle:hover,
 .open > .btn-secondary.dropdown-toggle:focus,
 .open > .btn-secondary.dropdown-toggle.focus {
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: #d4d4d4;
   border-color: #8c8c8c;
 }
@@ -2915,7 +2915,7 @@ input[type="button"].btn-block {
   padding: 5px 0;
   margin: 2px 0 0;
   font-size: 1rem;
-  color: #4D4F4D;
+  color: #008ebd;
   text-align: left;
   list-style: none;
   background-color: #fff;
@@ -2937,7 +2937,7 @@ input[type="button"].btn-block {
   padding: 3px 20px;
   clear: both;
   font-weight: normal;
-  color: #4D4F4D;
+  color: #008ebd;
   text-align: inherit;
   white-space: nowrap;
   background: none;
@@ -2945,7 +2945,7 @@ input[type="button"].btn-block {
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
-  color: #404240;
+  color: #007ba4;
   text-decoration: none;
   background-color: #f5f5f5;
 }
@@ -5655,7 +5655,7 @@ button.close {
 }
 
 .bg-inverse {
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .bg-faded {
@@ -12330,7 +12330,7 @@ a:active {
 }
 
 .border-left {
-  border-left: 1px solid #4D4F4D;
+  border-left: 1px solid #008ebd;
 }
 
 .carousel-control-next, .carousel-control-prev {
@@ -12389,7 +12389,7 @@ a:active {
 }
 
 .text-gray-dark {
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .cursor-pointer {
@@ -13382,7 +13382,7 @@ Custom classes
 }
 
 .owl-carousel .owl-single-item-control {
-  color: #4D4F4D;
+  color: #008ebd;
   text-shadow: none;
   font-size: 3rem;
 }
@@ -13976,7 +13976,7 @@ Custom classes
   bottom: 0;
   right: 0;
   margin: auto;
-  background: #4D4F4D;
+  background: #008ebd;
   border: 1px solid #fff;
   transform-origin: 50% 50%;
 }
@@ -14207,7 +14207,7 @@ Custom classes
 .input-unit input:not([type="checkbox"]),
 .input-unit input:not([type="radio"]),
 .input-unit .input-unit-preview {
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: white;
   border: none;
   box-shadow: none;
@@ -14230,7 +14230,7 @@ Custom classes
 .input-unit input:not([type="radio"]).filled,
 .input-unit .input-unit-preview:focus,
 .input-unit .input-unit-preview.filled {
-  color: #4D4F4D;
+  color: #008ebd;
   background-color: white;
   border-color: #b2b1a7;
 }
@@ -14394,7 +14394,7 @@ Custom classes
   height: 18px;
   font-weight: 300;
   background-color: #dcdbd8;
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .file-input.success .input-unit-btn,
@@ -14466,7 +14466,7 @@ Custom classes
   width: 100%;
   z-index: 1060;
   color: #fff;
-  background-color: #4D4F4D;
+  background-color: #008ebd;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -14692,7 +14692,7 @@ Custom classes
 }
 
 .wrapper-main .navbar a {
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .wrapper-main .navbar a:hover {
@@ -15087,7 +15087,7 @@ Custom classes
 
 .cmp-country-settings ul li a.is-disabled:hover,
 .cmp-currency-select ul li a.is-disabled:hover {
-  background: #4D4F4D;
+  background: #008ebd;
 }
 
 .cmp-country-settings ul li.active a,
@@ -15097,7 +15097,7 @@ Custom classes
 
 .cmp-country-settings ul li.active a.is-disabled,
 .cmp-currency-select ul li.active a.is-disabled {
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 @media (min-width: 768px) {
@@ -15682,7 +15682,7 @@ body.menu-is-visible {
 
 .to-top {
   display: block;
-  background-color: #4D4F4D;
+  background-color: #008ebd;
   text-align: center;
   padding: .5rem .5rem;
   text-decoration: none !important;
@@ -15749,7 +15749,7 @@ body.menu-is-visible {
   opacity: 0.5;
   transition: opacity 300ms;
   border: 1px solid #282d2f;
-  background: #4D4F4D;
+  background: #008ebd;
   border-radius: 0.1rem;
   cursor: pointer;
   text-align: center;
@@ -15776,7 +15776,7 @@ body.menu-is-visible {
 }
 
 .footer a {
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .footer .svg.plenty-brand {
@@ -15784,17 +15784,17 @@ body.menu-is-visible {
 }
 
 .footer .svg.plenty-brand path {
-  fill: #4D4F4D;
+  fill: #008ebd;
 }
 
 .footer .footer-features {
   border-top: 1px solid transparent;
   background-color: #dadae3;
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .footer .footer-features i {
-  color: #4D4F4D !important;
+  color: #008ebd !important;
 }
 
 .footer .footer-services {
@@ -16760,7 +16760,7 @@ body.menu-is-visible {
   background: #fff;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   padding: .75rem;
-  color: #4D4F4D;
+  color: #008ebd;
   font-size: 1rem;
   -ms-flex-flow: column;
       flex-flow: column;
@@ -17385,7 +17385,7 @@ body.menu-is-visible {
 }
 
 .cmp-contact .contact-card p a {
-  color: #4D4F4D;
+  color: #008ebd;
   text-decoration: none;
   cursor: pointer;
 }
@@ -17571,7 +17571,7 @@ body.menu-is-visible {
 .cmp-hero .hero-category {
   position: relative;
   display: block;
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .cmp-hero .hero-category .hero-image {
@@ -18318,7 +18318,7 @@ body.menu-is-visible {
       align-self: center;
   font-size: 1em;
   font-weight: 600;
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 @media (min-width: 544px) {
@@ -18344,7 +18344,7 @@ body.menu-is-visible {
 }
 
 .wish-list-item > div.row > .wish-list-container > .wish-list-remove:hover {
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .wish-list-no-items-transition-enter-active, .wish-list-no-items-transition-leave-active {
@@ -18646,7 +18646,7 @@ body.menu-is-visible {
   border-bottom: 1px solid #b2b1a7;
   padding-bottom: .5rem;
   font-weight: bold;
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .list-controls #filterCollapse .page-content .card .form-check .form-check-input:checked + label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-input:checked + label {
@@ -18664,14 +18664,14 @@ body.menu-is-visible {
 .list-controls #filterCollapse .page-content .card .form-check .form-check-label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-label {
   padding: .5rem 0;
   padding-left: 0;
-  color: #4D4F4D;
+  color: #008ebd;
   display: block;
   transition: all .1s ease;
 }
 
 .list-controls #filterCollapse .page-content .card .form-check .form-check-label:hover, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-label:hover, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-label:hover {
   background: #f7f7f9;
-  color: #4D4F4D;
+  color: #008ebd;
   transition: all .1s ease;
   padding-left: .5rem;
 }
@@ -18745,7 +18745,7 @@ body.menu-is-visible {
 
 .sidebar-categories ul li a {
   display: block;
-  color: #4D4F4D;
+  color: #008ebd;
   padding: .75rem 15px;
   font-size: 1rem;
   cursor: pointer;
@@ -19352,7 +19352,7 @@ body.menu-is-visible {
 
 .availability_9,
 .availability_10 {
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .rating .tag {
@@ -20080,12 +20080,12 @@ body.menu-is-visible {
 
 .widget-image-box.widget-inverse .widget-caption {
   color: #fff;
-  background-color: rgba(77, 79, 77, 0.8);
+  background-color: rgba(0, 142, 189, 0.8);
 }
 
 .widget-image-box.widget-inverse a[href].widget-inner:hover .widget-caption {
   color: #fff;
-  background-color: rgba(77, 79, 77, 0.9);
+  background-color: rgba(0, 142, 189, 0.9);
 }
 
 .widget-image-carousel .widget-inner {
@@ -20333,25 +20333,25 @@ body.menu-is-visible {
 .widget-image-carousel.widget-inverse .widget-caption h2,
 .widget-image-carousel.widget-inverse .widget-caption .h2 {
   color: #fff;
-  background-color: rgba(77, 79, 77, 0.8);
+  background-color: rgba(0, 142, 189, 0.8);
 }
 
 .widget-image-carousel.widget-inverse:hover .widget-caption h2,
 .widget-image-carousel.widget-inverse:hover .widget-caption .h2 {
   color: #fff;
-  background-color: rgba(77, 79, 77, 0.9);
+  background-color: rgba(0, 142, 189, 0.9);
 }
 
 .widget-image-carousel.widget-inverse .carousel-indicators li {
-  border-color: #4D4F4D;
+  border-color: #008ebd;
 }
 
 .widget-image-carousel.widget-inverse .carousel-indicators li.active {
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .widget-image-carousel.widget-inverse .carousel-control .fa {
-  color: #4D4F4D;
+  color: #008ebd;
 }
 
 .widget-item-list .widget-caption {
@@ -20411,7 +20411,7 @@ body.menu-is-visible {
 
 .widget-item-list.widget-inverse .widget-caption {
   color: #fff;
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .widget-title-bar .widget-inner {
@@ -20458,7 +20458,7 @@ body.menu-is-visible {
 
 .widget-title-bar.widget-inverse {
   color: #fff;
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .widget-text .widget-inner {
@@ -20514,7 +20514,7 @@ body.menu-is-visible {
 
 .widget-text.widget-inverse {
   color: #fff;
-  background-color: #4D4F4D;
+  background-color: #008ebd;
 }
 
 .ht .product-list .bg-info {
