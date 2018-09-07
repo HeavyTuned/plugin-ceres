@@ -30,23 +30,10 @@
 
             <div class="footer-2017-container-right">
                 <ul class="left-footer-2017-nav">
-                    {% set footerCategories = config('Ceres.footer.col_0_categories') | find("[0-9]+") %}
-                    {% for catID in footerCategories %}
-
-                        {% set cat = services.category.get(catID, lang) %}
-
-      
-
-                    {% endfor %}
+              
                 </ul>
                 <ul class="right-footer-2017-nav">
-                    {% set footerCategories = config('Ceres.footer.col_1_categories') | find("[0-9]+") %}
-                    {% for catID in footerCategories %}
-
-                        {% set cat = services.category.get(catID, lang) %}
-
-
-                    {% endfor %}
+                   
                 </ul>
             </div>
         </div>
