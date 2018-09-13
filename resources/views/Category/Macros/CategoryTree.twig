@@ -81,11 +81,8 @@
                                 {% endif %}
                             {% endfor %}
                         {% else %}
-<<<<<<< HEAD
-                            {{ navbar.get_children(category, currentScopeUrl, megaMenuOpenLevel) }}
-=======
                             {{ navbar.get_children(category, currentScopeUrl, 1, megaMenuLevels, maxItemsPerStage) }}
->>>>>>> 819068ceef4855daf0aaa15e2615602cde877495
+
                         {% endif %}
                     </ul>
                 </li>
