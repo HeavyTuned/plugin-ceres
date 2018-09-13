@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 {% set currentLang = services.sessionStorage.getLang() %}
 
-{% macro get_children(category, currentScopeUrl, level) %}
-    {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
-    {% set maxitems = { "1": config('Ceres.header.megamenu_items_stage_1'), "2": config('Ceres.header.megamenu_items_stage_2') ,"3": config('Ceres.header.megamenu_items_stage_3')} %}
-    {% set megaMenuOpenLevel = not config('Ceres.header.open_megamenu_level') ? 1 : config('Ceres.header.open_megamenu_level') %}
-
-=======
 {% macro get_children(category, currentScopeUrl, level, megaMenuLevels, maxItems) %}
     {% set megaMenuLevels = megaMenuLevels | default(1) %}
     {% set maxItems = maxItems | default({"1": 30, "2": 3, "3": 2}) %}
->>>>>>> 819068ceef4855daf0aaa15e2615602cde877495
+
     {% import _self as childlist %}
     {% set counter = 0 %}
     <!-- {{ megaMenuLevels | json_encode }} -->
@@ -121,4 +114,4 @@
 
     {% endfor %}
 
-{% endmacro %}
+{% endmacro %}  
