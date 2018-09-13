@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% set currentLang = services.sessionStorage.getLang() %}
 
 {% macro get_children(category, currentScopeUrl, level) %}
@@ -5,22 +6,29 @@
     {% set maxitems = { "1": config('Ceres.header.megamenu_items_stage_1'), "2": config('Ceres.header.megamenu_items_stage_2') ,"3": config('Ceres.header.megamenu_items_stage_3')} %}
     {% set megaMenuOpenLevel = not config('Ceres.header.open_megamenu_level') ? 1 : config('Ceres.header.open_megamenu_level') %}
 
+=======
+{% macro get_children(category, currentScopeUrl, level, megaMenuLevels, maxItems) %}
+    {% set megaMenuLevels = megaMenuLevels | default(1) %}
+    {% set maxItems = maxItems | default({"1": 30, "2": 3, "3": 2}) %}
+>>>>>>> 819068ceef4855daf0aaa15e2615602cde877495
     {% import _self as childlist %}
     {% set counter = 0 %}
+    <!-- {{ megaMenuLevels | json_encode }} -->
+    <!-- {{ maxItems | json_encode }} -->
     {% if level < megaMenuLevels %}
-        {% for child in category.children if counter < maxitems[level] %}
+        {% for child in category.children if counter < maxItems[level] %}
             {% if (child.details | length > 0) %}
                 <li class="level{{ level }}">
                     {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
                     <a href="{{ newScope }}{{ urls.trailingSlashSuffix }}" v-render-category="{ id: {{ child.id }}, type: '{{ child.type }}', scrollToTop: 600 }">{{ child.details[0].name }}</a>
                     {% if child.children %}
                         {% if level == 1 %}<ul>{% endif %}
-                        {{ childlist.get_children(child, newScope, level + 1) }}
+                        {{ childlist.get_children(child, newScope, level + 1, megaMenuLevels, maxItems) }}
                         {% if level == 1 %}</ul>{% endif %}
                     {% endif %}
                 </li>
                 {% set counter = counter + 1 %}
-                {% if counter == maxitems[level]%}
+                {% if counter == maxItems[level]%}
                     <li class="level{{ level }} bt-more"><a href="{{ currentScopeUrl }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', scrollToTop: 600 }">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
                 {% endif %}
             {% endif %}
@@ -28,10 +36,10 @@
     {% endif %}
 {% endmacro %}
 
-{% macro get_nav_bar(categories, currentScopeUrl) %}
+{% macro get_nav_bar(categories, currentScopeUrl, megaMenuLevels, maxItemsPerStage) %}
     {% import _self as navbar %}
     {% set counter = 0 %}
-    {% set megaMenuLevels = not config('Ceres.header.megamenu_levels') ? 1 : config('Ceres.header.megamenu_levels') %}
+    {% set megaMenuLevels = megaMenuLevels | default(1) %}
     {% set rootCategoryID = not config('Ceres.header.root_category_id') ? 1 : config('Ceres.header.root_category_id') %}
 
     {% if rootCategoryID > 0 %}
@@ -39,7 +47,6 @@
             set categories = services.category.getChildren(rootCategoryID, currentLang) 
         %}
     {% endif %}
-
     {% for category in categories %}
 
         {% if category.details | length > 0 %}
@@ -65,7 +72,7 @@
 
                     <ul data-level="1" id="navDropdown{{ counter }}" class="collapse">
                         {% set counter = counter + 1 %}
-                        {% if megaMenuLevels == "1" %}
+                        {% if megaMenuLevels == 1 %}
                             {% for child in category.children %}
                                 {% if child.details | length > 0 %}
                                     <li>
@@ -74,7 +81,11 @@
                                 {% endif %}
                             {% endfor %}
                         {% else %}
+<<<<<<< HEAD
                             {{ navbar.get_children(category, currentScopeUrl, megaMenuOpenLevel) }}
+=======
+                            {{ navbar.get_children(category, currentScopeUrl, 1, megaMenuLevels, maxItemsPerStage) }}
+>>>>>>> 819068ceef4855daf0aaa15e2615602cde877495
                         {% endif %}
                     </ul>
                 </li>
