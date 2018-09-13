@@ -57,7 +57,7 @@ function parseUserAgent(userAgentString) {
     detected = detected || {};
     detected.bot = true;
   }
-  
+
   return detected;
 }
 
@@ -68,6 +68,7 @@ function getBrowserRules() {
     [ 'yandexbrowser', /YaBrowser\/([0-9\._]+)/ ],
     [ 'vivaldi', /Vivaldi\/([0-9\.]+)/ ],
     [ 'kakaotalk', /KAKAOTALK\s([0-9\.]+)/ ],
+    [ 'samsung', /SamsungBrowser\/([0-9\.]+)/ ],
     [ 'chrome', /(?!Chrom.*OPR)Chrom(?:e|ium)\/([0-9\.]+)(:?\s|$)/ ],
     [ 'phantomjs', /PhantomJS\/([0-9\.]+)(:?\s|$)/ ],
     [ 'crios', /CriOS\/([0-9\.]+)(:?\s|$)/ ],
@@ -83,7 +84,8 @@ function getBrowserRules() {
     [ 'ios', /Version\/([0-9\._]+).*Mobile.*Safari.*/ ],
     [ 'safari', /Version\/([0-9\._]+).*Safari/ ],
     [ 'facebook', /FBAV\/([0-9\.]+)/],
-    [ 'instagram', /Instagram\ ([0-9\.]+)/]
+    [ 'instagram', /Instagram\ ([0-9\.]+)/],
+    [ 'ios-webview', /AppleWebKit\/([0-9\.]+).*Mobile/]
   ]);
 }
 
@@ -135,7 +137,32 @@ module.exports = {
 
 }).call(this,require('_process'))
 
-},{"_process":5,"os":3}],2:[function(require,module,exports){
+},{"_process":6,"os":4}],2:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -10501,7 +10528,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -10552,11 +10579,11 @@ exports.homedir = function () {
 	return '/'
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.3
+ * @version 1.14.4
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -10899,10 +10926,10 @@ function getBordersSize(styles, axis) {
 }
 
 function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
 }
 
-function getWindowSizes() {
+function getWindowSizes(document) {
   var body = document.body;
   var html = document.documentElement;
   var computedStyle = isIE(10) && getComputedStyle(html);
@@ -11019,7 +11046,7 @@ function getBoundingClientRect(element) {
   };
 
   // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
+  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
   var width = sizes.width || element.clientWidth || result.right - result.left;
   var height = sizes.height || element.clientHeight || result.bottom - result.top;
 
@@ -11054,7 +11081,7 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-  if (fixedPosition && parent.nodeName === 'HTML') {
+  if (fixedPosition && isHTML) {
     parentRect.top = Math.max(parentRect.top, 0);
     parentRect.left = Math.max(parentRect.left, 0);
   }
@@ -11192,7 +11219,7 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
 
     // In case of HTML, we need a different computation
     if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(),
+      var _getWindowSizes = getWindowSizes(popper.ownerDocument),
           height = _getWindowSizes.height,
           width = _getWindowSizes.width;
 
@@ -11207,10 +11234,12 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
   }
 
   // Add paddings
-  boundaries.left += padding;
-  boundaries.top += padding;
-  boundaries.right -= padding;
-  boundaries.bottom -= padding;
+  padding = padding || 0;
+  var isPaddingNumber = typeof padding === 'number';
+  boundaries.left += isPaddingNumber ? padding : padding.left || 0;
+  boundaries.top += isPaddingNumber ? padding : padding.top || 0;
+  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
+  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
 
   return boundaries;
 }
@@ -11535,7 +11564,7 @@ function getSupportedPropertyName(property) {
 }
 
 /**
- * Destroy the popper
+ * Destroys the popper.
  * @method
  * @memberof Popper
  */
@@ -11642,7 +11671,7 @@ function removeEventListeners(reference, state) {
 
 /**
  * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger onUpdate callback anymore,
+ * when they are triggered. It also won't trigger `onUpdate` callback anymore,
  * unless you call `update` method manually.
  * @method
  * @memberof Popper
@@ -11819,12 +11848,22 @@ function computeStyle(data, options) {
   var left = void 0,
       top = void 0;
   if (sideA === 'bottom') {
-    top = -offsetParentRect.height + offsets.bottom;
+    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
+    // and not the bottom of the html element
+    if (offsetParent.nodeName === 'HTML') {
+      top = -offsetParent.clientHeight + offsets.bottom;
+    } else {
+      top = -offsetParentRect.height + offsets.bottom;
+    }
   } else {
     top = offsets.top;
   }
   if (sideB === 'right') {
-    left = -offsetParentRect.width + offsets.right;
+    if (offsetParent.nodeName === 'HTML') {
+      left = -offsetParent.clientWidth + offsets.right;
+    } else {
+      left = -offsetParentRect.width + offsets.right;
+    }
   } else {
     left = offsets.left;
   }
@@ -11933,7 +11972,7 @@ function arrow(data, options) {
 
   //
   // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjuction
+  // reference have enough pixels in conjunction
   //
 
   // top/left side
@@ -12003,7 +12042,7 @@ function getOppositeVariation(variation) {
  * - `top-end` (on top of reference, right aligned)
  * - `right-start` (on right of reference, top aligned)
  * - `bottom` (on bottom, centered)
- * - `auto-right` (on the side with more space available, alignment depends by placement)
+ * - `auto-end` (on the side with more space available, alignment depends by placement)
  *
  * @static
  * @type {Array}
@@ -12545,7 +12584,7 @@ var modifiers = {
    * The `offset` modifier can shift your popper on both its axis.
    *
    * It accepts the following units:
-   * - `px` or unitless, interpreted as pixels
+   * - `px` or unit-less, interpreted as pixels
    * - `%` or `%r`, percentage relative to the length of the reference element
    * - `%p`, percentage relative to the length of the popper element
    * - `vw`, CSS viewport width unit
@@ -12553,7 +12592,7 @@ var modifiers = {
    *
    * For length is intended the main axis relative to the placement of the popper.<br />
    * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the height.
+   * `width`. In case of `left` or `right`, it will be the `height`.
    *
    * You can provide a single value (as `Number` or `String`), or a pair of values
    * as `String` divided by a comma or one (or more) white spaces.<br />
@@ -12574,7 +12613,7 @@ var modifiers = {
    * ```
    * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
    * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
+   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
    *
    * @memberof modifiers
    * @inner
@@ -12595,7 +12634,7 @@ var modifiers = {
   /**
    * Modifier used to prevent the popper from being positioned outside the boundary.
    *
-   * An scenario exists where the reference itself is not within the boundaries.<br />
+   * A scenario exists where the reference itself is not within the boundaries.<br />
    * We can say it has "escaped the boundaries" — or just "escaped".<br />
    * In this case we need to decide whether the popper should either:
    *
@@ -12625,23 +12664,23 @@ var modifiers = {
     /**
      * @prop {number} padding=5
      * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper this makes sure the popper has always a little padding
+     * and the popper. This makes sure the popper always has a little padding
      * between the edges of its container
      */
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier, can be `scrollParent`, `window`,
+     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
      * `viewport` or any DOM element.
      */
     boundariesElement: 'scrollParent'
   },
 
   /**
-   * Modifier used to make sure the reference and its popper stay near eachothers
-   * without leaving any gap between the two. Expecially useful when the arrow is
-   * enabled and you want to assure it to point to its reference element.
-   * It cares only about the first axis, you can still have poppers with margin
+   * Modifier used to make sure the reference and its popper stay near each other
+   * without leaving any gap between the two. Especially useful when the arrow is
+   * enabled and you want to ensure that it points to its reference element.
+   * It cares only about the first axis. You can still have poppers with margin
    * between the popper and its reference element.
    * @memberof modifiers
    * @inner
@@ -12659,7 +12698,7 @@ var modifiers = {
    * This modifier is used to move the `arrowElement` of the popper to make
    * sure it is positioned between the reference element and its popper element.
    * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjuction are needed.
+   * pixels of conjunction are needed.
    *
    * It has no effect if no `arrowElement` is provided.
    * @memberof modifiers
@@ -12698,7 +12737,7 @@ var modifiers = {
      * @prop {String|Array} behavior='flip'
      * The behavior used to change the popper's placement. It can be one of
      * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations).
+     * placements (with optional variations)
      */
     behavior: 'flip',
     /**
@@ -12708,9 +12747,9 @@ var modifiers = {
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position,
-     * the popper will never be placed outside of the defined boundaries
-     * (except if keepTogether is enabled)
+     * The element which will define the boundaries of the popper position.
+     * The popper will never be placed outside of the defined boundaries
+     * (except if `keepTogether` is enabled)
      */
     boundariesElement: 'viewport'
   },
@@ -12774,8 +12813,8 @@ var modifiers = {
     fn: computeStyle,
     /**
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: true,
     /**
@@ -12802,7 +12841,7 @@ var modifiers = {
    * Note that if you disable this modifier, you must make sure the popper element
    * has its position set to `absolute` before Popper.js can do its work!
    *
-   * Just disable this modifier and define you own to achieve the desired effect.
+   * Just disable this modifier and define your own to achieve the desired effect.
    *
    * @memberof modifiers
    * @inner
@@ -12819,27 +12858,27 @@ var modifiers = {
     /**
      * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: undefined
   }
 };
 
 /**
- * The `dataObject` is an object containing all the informations used by Popper.js
- * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
+ * The `dataObject` is an object containing all the information used by Popper.js.
+ * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
  * @name dataObject
  * @property {Object} data.instance The Popper.js instance
  * @property {String} data.placement Placement applied to popper
  * @property {String} data.originalPlacement Placement originally defined on init
  * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
+ * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
  * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
  * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
+ * @property {Object} data.offsets The measurements of popper, reference and arrow elements
  * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
@@ -12847,9 +12886,9 @@ var modifiers = {
 
 /**
  * Default options provided to Popper.js constructor.<br />
- * These can be overriden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass as 3rd argument an object with the same
- * structure of this object, example:
+ * These can be overridden using the `options` argument of Popper.js.<br />
+ * To override an option, simply pass an object with the same
+ * structure of the `options` object, as the 3rd argument. For example:
  * ```
  * new Popper(ref, pop, {
  *   modifiers: {
@@ -12863,7 +12902,7 @@ var modifiers = {
  */
 var Defaults = {
   /**
-   * Popper's placement
+   * Popper's placement.
    * @prop {Popper.placements} placement='bottom'
    */
   placement: 'bottom',
@@ -12875,7 +12914,7 @@ var Defaults = {
   positionFixed: false,
 
   /**
-   * Whether events (resize, scroll) are initially enabled
+   * Whether events (resize, scroll) are initially enabled.
    * @prop {Boolean} eventsEnabled=true
    */
   eventsEnabled: true,
@@ -12889,17 +12928,17 @@ var Defaults = {
 
   /**
    * Callback called when the popper is created.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onCreate}
    */
   onCreate: function onCreate() {},
 
   /**
-   * Callback called when the popper is updated, this callback is not called
+   * Callback called when the popper is updated. This callback is not called
    * on the initialization/creation of the popper, but only on subsequent
    * updates.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onUpdate}
    */
@@ -12907,7 +12946,7 @@ var Defaults = {
 
   /**
    * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js
+   * They provide most of the functionalities of Popper.js.
    * @prop {modifiers}
    */
   modifiers: modifiers
@@ -12927,10 +12966,10 @@ var Defaults = {
 // Methods
 var Popper = function () {
   /**
-   * Create a new Popper.js instance
+   * Creates a new Popper.js instance.
    * @class Popper
    * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as popper.
+   * @param {HTMLElement} popper - The HTML element used as the popper
    * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
    * @return {Object} instance - The generated Popper.js instance
    */
@@ -13026,7 +13065,7 @@ var Popper = function () {
     }
 
     /**
-     * Schedule an update, it will run on the next UI update available
+     * Schedules an update. It will run on the next UI update available.
      * @method scheduleUpdate
      * @memberof Popper
      */
@@ -13063,7 +13102,7 @@ var Popper = function () {
  * new Popper(referenceObject, popperNode);
  * ```
  *
- * NB: This feature isn't supported in Internet Explorer 10
+ * NB: This feature isn't supported in Internet Explorer 10.
  * @name referenceObject
  * @property {Function} data.getBoundingClientRect
  * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
@@ -13085,7 +13124,7 @@ return Popper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -13270,31 +13309,6 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 process.umask = function() { return 0; };
-
-},{}],6:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
 
 },{}],7:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
@@ -13894,25 +13908,24 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":7,"_process":5,"inherits":6}],9:[function(require,module,exports){
+},{"./support/isBuffer":7,"_process":6,"inherits":2}],9:[function(require,module,exports){
 /*!
-  * vue-script2 v2.0.1
-  * (c) 2016-2017 Greg Slepak
+  * vue-script2 v2.0.3
+  * (c) 2016-2018 Greg Slepak
   * @license MIT License
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global.VueScript2 = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   var Script2 = {
     installed: false,
     p: Promise.resolve(),
-    version: '2.0.1', // grunt will overwrite to match package.json
+    version: '2.0.3', // grunt will overwrite to match package.json
     loaded: {}, // keys are the scripts that have been loaded
     install: function install(Vue) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
       if (Script2.installed) return;
       var customAttrs = ['unload'];
@@ -13924,9 +13937,11 @@ function hasOwnProperty(obj, prop) {
       Vue.component('script2', {
         props: props,
         // <slot> is important, see: http://vuejs.org/guide/components.html#Named-Slots
-        template: '<div style="display:none"><slot></slot></div>',
-        // NOTE: I tried doing this with Vue 2's new render() function.
-        //       It was a nightmare and I never got it to work.
+        // template: '<div style="display:none"><slot></slot></div>',
+        // NOTE: Instead of using `template` we can use the `render` function like so:
+        render: function render(h) {
+          return h('div', { style: 'display:none' }, this.$slots.default);
+        },
         mounted: function mounted() {
           var _this = this;
 
@@ -13934,8 +13949,10 @@ function hasOwnProperty(obj, prop) {
           if (!this.src) {
             Script2.p = Script2.p.then(function () {
               var s = document.createElement('script');
+              var h = _this.$el.innerHTML;
+              h = h.replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&amp;/gi, '&');
               s.type = 'text/javascript';
-              s.appendChild(document.createTextNode(_this.$el.innerHTML));
+              s.appendChild(document.createTextNode(h));
               parent.appendChild(s);
             });
           } else {
@@ -13951,7 +13968,9 @@ function hasOwnProperty(obj, prop) {
           // see: https://vuejs.org/v2/guide/migration.html#ready-replaced
           this.$nextTick(function () {
             // code that assumes this.$el is in-document
-            _this.$el.remove(); // remove dummy template <div>
+            // NOTE: we could've done this.$el.remove(), but IE sucks, see:
+            //       https://github.com/taoeffect/vue-script2/pull/17
+            _this.$el.parentElement.removeChild(_this.$el); // remove dummy template <div>
           });
         },
         destroyed: function destroyed() {
@@ -13964,7 +13983,7 @@ function hasOwnProperty(obj, prop) {
       Script2.installed = true;
     },
     load: function load(src) {
-      var opts = arguments.length <= 1 || arguments[1] === undefined ? { parent: document.head } : arguments[1];
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { parent: document.head };
 
       return Script2.loaded[src] ? Promise.resolve(src) : new Promise(function (resolve, reject) {
         var s = document.createElement('script');
@@ -14003,7 +14022,7 @@ function hasOwnProperty(obj, prop) {
     pick: function pick(o, props) {
       var x = {};
       props.forEach(function (k) {
-        return x[k] = o[k];
+        x[k] = o[k];
       });
       return x;
     },
@@ -14038,7 +14057,8 @@ function hasOwnProperty(obj, prop) {
 
   return Script2;
 
-}));
+})));
+
 },{}],10:[function(require,module,exports){
 "use strict";
 
@@ -17490,6 +17510,1285 @@ Vue.component("user-login-handler", {
 },{"../../../helper/utils":123,"services/ApiService":126,"services/ValidationService":134}],43:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("add-to-wish-list", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-add-to-wish-list"
+        },
+        variationId: Number
+    },
+
+    data: function data() {
+        return {
+            isLoading: false
+        };
+    },
+
+
+    computed: _extends({
+        isVariationInWishList: function isVariationInWishList() {
+            return this.wishListIds.includes(this.variationId);
+        }
+    }, Vuex.mapState({
+        wishListIds: function wishListIds(state) {
+            return state.wishList.wishListIds;
+        }
+    })),
+
+    watch: {
+        isVariationInWishList: function isVariationInWishList() {
+            this.changeTooltipText();
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        switchState: function switchState() {
+            if (this.isVariationInWishList) {
+                this.removeFromWishList();
+            } else {
+                this.addToWishList();
+            }
+        },
+        addToWishList: function addToWishList() {
+            var _this = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
+                    _this.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
+                }, function (error) {
+                    _this.isLoading = false;
+                });
+            }
+        },
+        removeFromWishList: function removeFromWishList() {
+            var _this2 = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
+                    _this2.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
+                }, function (error) {
+                    _this2.isLoading = false;
+                });
+            }
+        },
+        changeTooltipText: function changeTooltipText() {
+            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+
+            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
+        }
+    }
+});
+
+},{"services/NotificationService":131,"services/TranslationService":132}],44:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+Vue.component("graduated-prices", {
+    props: ["template"],
+
+    computed: _extends({
+        graduatedPrices: function graduatedPrices() {
+            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
+            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
+
+            prices = prices.filter(function (price) {
+                return price.minimumOrderQuantity > minQuantity;
+            });
+
+            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
+            });
+        },
+        activeGraduationIndex: function activeGraduationIndex() {
+            var _this = this;
+
+            var prices = this.graduatedPrices.filter(function (price) {
+                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
+            });
+
+            if (!prices.length) {
+                return -1;
+            }
+
+            var price = prices.reduce(function (prev, current) {
+                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
+            });
+
+            return this.graduatedPrices.indexOf(price);
+        }
+    }, Vuex.mapState({
+        variationOrderQuantity: function variationOrderQuantity(state) {
+            return state.item.variationOrderQuantity;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],45:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-bundle", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-bundle"
+        },
+        bundleType: String,
+        bundleComponents: Array
+    },
+
+    data: function data() {
+        return {
+            bundleSetting: null,
+            showItemBundleItems: true
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (_this.$refs.bundleSetting) {
+                _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
+            }
+        });
+    },
+
+
+    methods: {
+        getBundleInnerText: function getBundleInnerText(item) {
+            item.variation.bundleType = null;
+
+            return item;
+        }
+    }
+});
+
+},{}],46:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-image-carousel", {
+
+    delimiters: ["${", "}"],
+
+    props: ["imageUrlAccessor", "template"],
+
+    data: function data() {
+        return {
+            currentItem: 0
+        };
+    },
+
+
+    computed: _extends({
+        carouselImages: function carouselImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+        },
+        singleImages: function singleImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+        }
+    }, Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    })),
+
+    watch: {
+        currentVariation: {
+            handler: function handler(val, oldVal) {
+                var _this = this;
+
+                if (val !== oldVal) {
+                    setTimeout(function () {
+                        _this.reInitialize();
+                    }, 1);
+                }
+            },
+
+            deep: true
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        this.$nextTick(function () {
+            _this2.initCarousel();
+            _this2.initThumbCarousel();
+        });
+    },
+
+
+    methods: {
+        getImageCount: function getImageCount() {
+            return this.carouselImages.length;
+        },
+        reInitialize: function reInitialize() {
+            var $owl = $(this.$refs.single);
+
+            $owl.trigger("destroy.owl.carousel");
+            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $owl.find(".owl-item").remove();
+
+            var $thumbs = $(this.$refs.thumbs);
+
+            $thumbs.trigger("destroy.owl.carousel");
+            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $thumbs.find(".owl-item").remove();
+
+            this.initCarousel();
+            this.initThumbCarousel();
+        },
+        initCarousel: function initCarousel() {
+            var _this3 = this;
+
+            var imageCount = this.getImageCount();
+
+            $(this.$refs.single).owlCarousel({
+                autoHeight: true,
+                dots: true,
+                items: 1,
+                lazyLoad: true,
+                loop: true,
+                margin: 10,
+                mouseDrag: imageCount > 1,
+                nav: imageCount > 1,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350,
+                onChanged: function onChanged(event) {
+                    var $thumb = $(_this3.$refs.thumbs);
+
+                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+                }
+            });
+
+            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
+                window.lightbox.option({
+                    wrapAround: true
+                });
+                window.lightbox.imageCountLabel = function (current, total) {
+                    if ((0, _utils.isNullOrUndefined)(imageCount) || imageCount <= 1) {
+                        return "";
+                    }
+                    current -= (total - imageCount) / 2;
+                    while (current <= 0) {
+                        current += imageCount;
+                    }
+                    while (current > imageCount) {
+                        current -= imageCount;
+                    }
+                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
+                };
+
+                var originalFn = window.lightbox.changeImage;
+
+                window.lightbox.changeImage = function (imageNumber) {
+                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
+                        imageNumber--;
+                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
+                        imageNumber++;
+                    }
+                    return originalFn.call(window.lightbox, imageNumber);
+                };
+            }
+
+            $(this.$refs.single).on("changed.owl.carousel", function (event) {
+                _this3.currentItem = event.page.index;
+            });
+        },
+        initThumbCarousel: function initThumbCarousel() {
+            $(this.$refs.thumbs).owlCarousel({
+                autoHeight: true,
+                dots: false,
+                items: 5,
+                lazyLoad: true,
+                loop: false,
+                margin: 10,
+                mouseDrag: false,
+                center: false,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350
+            });
+        },
+        goTo: function goTo(index) {
+            var $owl = $(this.$refs.single);
+
+            $owl.trigger("to.owl.carousel", [index, 350]);
+        },
+        orderByPosition: function orderByPosition(list) {
+            return list.sort(function (entryA, entryB) {
+                if (entryA.position > entryB.position) {
+                    return 1;
+                }
+                if (entryA.position < entryB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+
+            return altText;
+        },
+        getItemName: function getItemName() {
+            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
+        }
+    }
+});
+
+},{"../../helper/utils":123,"services/TranslationService":132}],47:[function(require,module,exports){
+"use strict";
+
+Vue.component("order-properties", {
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        properties: function properties(state) {
+            return state.item.variation.documents[0].data.properties;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: Vuex.mapMutations(["setVariationOrderProperty"])
+});
+
+},{}],48:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+Vue.component("order-property-list", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list"
+        }
+    },
+
+    data: function data() {
+        return {
+            activeSlide: 0,
+            touchedSlides: { 0: true }
+        };
+    },
+
+    computed: _extends({
+        sortedGroupedProperties: function sortedGroupedProperties() {
+            var groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var group = _step.value;
+
+                    this.sortGroupProperties(group);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return this.getSortedGroups(groupedProperties);
+        },
+        missingPropertyGroupIds: function missingPropertyGroupIds() {
+            if (this.variationMarkInvalidProperties) {
+                return [].concat(_toConsumableArray(new Set(this.variationMissingProperties.map(function (property) {
+                    return property.group && property.group.id;
+                }))));
+            }
+
+            return [];
+        }
+    }, Vuex.mapState({
+        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
+            return state.item.variationMarkInvalidProperties;
+        }
+    }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        sortGroupProperties: function sortGroupProperties(group) {
+            return group.properties.sort(function (prev, current) {
+                if (prev.position > current.position) {
+                    return 1;
+                }
+                if (prev.position < current.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        getSortedGroups: function getSortedGroups(groups) {
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var group = _step2.value;
+
+                    var lowestPosition = group.properties.reduce(function (prev, current) {
+                        return prev.position < current.position ? prev : current;
+                    });
+
+                    group.lowestPosition = lowestPosition.position;
+
+                    var groupId = group.group ? group.group.id : null;
+
+                    if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId)) {
+                        group.hasError = true;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return groups.sort(function (prev, current) {
+                if (prev.lowestPosition > current.lowestPosition) {
+                    return 1;
+                }
+                if (prev.lowestPosition < current.lowestPosition) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        slideTo: function slideTo(position) {
+            if (position >= 0 && position < this.sortedGroupedProperties.length) {
+                this.activeSlide = position;
+                this.touchedSlides[this.activeSlide] = true;
+            }
+        }
+    }
+});
+
+},{}],49:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("order-property-list-group", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list-group"
+        },
+        propertyGroup: Object
+    },
+
+    computed: {
+        isShownOnItemPageCount: function isShownOnItemPageCount() {
+            var properties = this.propertyGroup.properties.filter(function (property) {
+                return property.isShownOnItemPage;
+            });
+
+            return properties.length;
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: _extends({
+        unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
+            var _this = this;
+
+            var propertiesToUnselect = this.propertyGroup.properties.filter(function (property) {
+                return property.id !== propertyId && _this.isPropertyTypeRadio(property);
+            });
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = propertiesToUnselect[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+                    this.setVariationOrderProperty({ propertyId: property.id, value: null });
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        isPropertyTypeRadio: function isPropertyTypeRadio(property) {
+            var orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
+            var valueType = property.valueType;
+
+            if (valueType === "empty" && orderPropertyGroupingType === "single") {
+                return true;
+            }
+
+            return false;
+        }
+    }, Vuex.mapMutations(["setVariationOrderProperty"]))
+});
+
+},{}],50:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("order-property-list-item", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list-item"
+        },
+        group: Object,
+        property: Object
+    },
+
+    data: function data() {
+        return {
+            inputValue: "",
+            selectedFile: null,
+            waiting: false
+        };
+    },
+
+
+    computed: _extends({
+        inputType: function inputType() {
+            var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
+            var valueType = this.property.valueType;
+
+            if (valueType === "empty") {
+                if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
+                    return "checkbox";
+                }
+
+                return "radio";
+            }
+
+            return valueType;
+        },
+        selectedFileName: function selectedFileName() {
+            if (this.selectedFile) {
+                return this.selectedFile.name;
+            }
+
+            return "";
+        },
+        hasError: function hasError() {
+            var _this = this;
+
+            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
+                return this.variationMissingProperties.find(function (property) {
+                    return property.property.id === _this.property.id;
+                });
+            }
+
+            return this.variationMarkInvalidProperties && !this.property.value;
+        },
+        surcharge: function surcharge() {
+            return this.property.itemSurcharge || this.property.surcharge;
+        }
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        },
+        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
+            return state.item.variationMarkInvalidProperties;
+        }
+    }), Vuex.mapGetters(["variationMissingProperties"])),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: _extends({
+        onInputValueChanged: function onInputValueChanged(value) {
+            if (this.inputType === "int") {
+                value = this.validateInt(value);
+            } else if (this.inputType === "float") {
+                value = this.validateFloat(value);
+            } else if (this.inputType === "checkbox") {
+                if (!value) {
+                    value = null;
+                }
+            } else if (this.inputType === "radio") {
+                this.$emit("radio-change", this.property.id);
+            }
+
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
+        },
+        validateInt: function validateInt(value) {
+            value = parseInt(value);
+
+            if (isNaN(value)) {
+                value = null;
+            }
+
+            this.inputValue = value;
+
+            return value;
+        },
+        validateFloat: function validateFloat(value) {
+            value = parseFloat(value.replace(App.decimalSeparator, "."));
+
+            if (isNaN(value)) {
+                value = null;
+            } else {
+                value = value.toString().replace(".", App.decimalSeparator);
+            }
+
+            this.inputValue = value;
+
+            return value;
+        }
+    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
+        setPropertyFile: function setPropertyFile(event) {
+            if (event.target && event.target.files && event.target.files.length > 0) {
+                this.selectedFile = event.target.files[0];
+                this.uploadPropertyFile(this.selectedFile);
+            }
+        },
+        uploadPropertyFile: function uploadPropertyFile(file) {
+            var _this2 = this;
+
+            this.setIsBasketLoading(true);
+            this.waiting = true;
+
+            var fileData = new FormData();
+
+            fileData.append("fileData", file);
+
+            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
+                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
+            }).fail(function (error) {
+                _this2.clearSelectedFile();
+                _this2._handleValidationErrors(error);
+            }).always(function (response) {
+                _this2.setIsBasketLoading(false);
+                _this2.waiting = false;
+            });
+        },
+        clearSelectedFile: function clearSelectedFile() {
+            this.selectedFile = null;
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
+        },
+        _handleValidationErrors: function _handleValidationErrors(error) {
+            if (error.hasOwnProperty("validation_errors")) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var err = _step.value;
+
+                        NotificationService.error(err[0]);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        }
+    })
+});
+
+},{"services/ApiService":126,"services/NotificationService":131}],51:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _number = require("../../helper/number");
+
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("../../services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _debounce = require("../../helper/debounce");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("quantity-input", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        value: {
+            type: Number,
+            required: true
+        },
+        timeout: {
+            type: Number,
+            required: false,
+            default: 500
+        },
+        min: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        max: {
+            type: Number,
+            required: false
+        },
+        interval: {
+            type: Number,
+            required: false,
+            default: 1
+        },
+        template: {
+            type: String,
+            required: true
+        },
+        waiting: {
+            type: Boolean,
+            required: false
+        },
+        variationId: {
+            type: Number,
+            required: false
+        }
+    },
+
+    data: function data() {
+        return {
+            compValue: this.value,
+            compMin: this.min,
+            compMax: this.max,
+            compInterval: this.interval,
+            compDecimals: 0,
+            onValueChanged: null
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+
+        this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
+        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
+
+        this.compDecimals = (0, _number.floatLength)(this.compInterval);
+
+        this.onValueChanged = (0, _debounce.debounce)(function () {
+            _this.$emit("quantity-change", _this.compValue);
+        }, (0, _utils.defaultValue)(this.timeout, 500));
+
+        if (!(0, _utils.isNullOrUndefined)(this.variationId)) {
+            this.fetchQuantityFromBasket();
+        }
+    },
+
+
+    computed: _extends({
+        variationBasketQuantity: function variationBasketQuantity() {
+            var _this2 = this;
+
+            if ((0, _utils.isNullOrUndefined)(this.variationId)) {
+                return 0;
+            }
+            var basketObject = this.$store.state.basket.items.find(function (variations) {
+                return variations.variationId === _this2.variationId;
+            });
+
+            return basketObject ? basketObject.quantity : 0;
+        },
+        isMinimum: function isMinimum() {
+            return (0, _utils.isDefined)(this.compMin) && this.compValue - this.compInterval < this.compMin;
+        },
+        isMaximum: function isMaximum() {
+            return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
+        },
+        minimumHint: function minimumHint() {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMin", {
+                min: this.min
+            });
+        },
+        maximumHint: function maximumHint() {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMax", {
+                max: this.max
+            });
+        },
+        displayValue: function displayValue() {
+            return this.$options.filters.numberFormat(this.compValue);
+        }
+    }, Vuex.mapState({
+        basketItems: function basketItems(state) {
+            return state.basket.items;
+        }
+    })),
+
+    watch: {
+        basketItems: {
+            handler: function handler(newValue, oldValue) {
+                if ((0, _utils.isDefined)(this.variationId) && (0, _utils.isDefined)(oldValue) && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+                    this.fetchQuantityFromBasket();
+                }
+            },
+
+            deep: true
+        },
+
+        value: function value(newValue, oldValue) {
+            if (newValue !== oldValue) {
+                this.setValue(newValue);
+            }
+        }
+    },
+
+    methods: {
+        increaseValue: function increaseValue() {
+            var newValue = (0, _number.formatFloat)(this.compValue + this.compInterval, this.compDecimals);
+
+            if (((0, _utils.isNullOrUndefined)(this.compMax) || newValue <= this.compMax) && !this.waiting) {
+                this.setValue(newValue);
+            }
+        },
+        decreaseValue: function decreaseValue() {
+            var newValue = (0, _number.formatFloat)(this.compValue - this.compInterval, this.compDecimals);
+
+            if (((0, _utils.isNullOrUndefined)(this.compMin) || newValue >= this.compMin) && !this.waiting) {
+                this.setValue(newValue);
+            }
+        },
+        setValue: function setValue(value) {
+            // consider the configured decimal seperator (if the input is typed in the input field)
+            if (typeof value === "string") {
+                value = value.replace(App.decimalSeparator || ",", ".");
+            }
+
+            value = parseFloat(value);
+            if (isNaN(value)) {
+                value = (0, _utils.defaultValue)(this.compMin, 1);
+            }
+
+            // limit new value to min/ max value
+            value = (0, _number.limit)(value, this.compMin, this.compMax);
+
+            // make sure, new value is an even multiple of interval
+            var diff = (0, _number.formatFloat)(value % this.compInterval, this.compDecimals, true);
+
+            if (diff > 0 && diff !== this.compInterval) {
+                if (diff < this.compInterval / 2) {
+                    value -= diff;
+                } else {
+                    value += this.compInterval - diff;
+                }
+                value = (0, _number.limit)(value, this.compMin, this.compMax);
+            }
+
+            // cut fraction
+            value = (0, _number.formatFloat)(value, this.compDecimals);
+
+            if (value !== this.compValue) {
+                this.compValue = value;
+                this.onValueChanged();
+            }
+        },
+        fetchQuantityFromBasket: function fetchQuantityFromBasket() {
+            if (!(0, _utils.isNullOrUndefined)(this.min) && this.variationBasketQuantity >= this.min) {
+                // minimum quantity already in basket
+                this.compMin = this.compInterval;
+            }
+
+            if (!(0, _utils.isNullOrUndefined)(this.max)) {
+                // decrease maximum quantity by quantity of variations already in basket
+                this.compMax = this.max - this.variationBasketQuantity;
+
+                if (this.variationBasketQuantity + this.compInterval > this.max) {
+                    this.compMin = 0;
+                    this.compMax = 0;
+                    this.$emit("out-of-stock", true);
+                } else {
+                    this.$emit("out-of-stock", false);
+                }
+            }
+
+            this.setValue(this.compMin);
+        }
+    }
+});
+
+},{"../../helper/debounce":118,"../../helper/number":120,"../../helper/utils":123,"../../services/TranslationService":132}],52:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("single-item", {
+
+    props: ["template", "itemData", "variationListData", "attributeNameMap"],
+
+    data: function data() {
+        return {
+            isVariationSelected: true
+        };
+    },
+
+
+    computed: _extends({
+        isDescriptionTabActive: function isDescriptionTabActive() {
+            return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
+        },
+        isTechnicalDataTabActive: function isTechnicalDataTabActive() {
+            return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
+        }
+    }, Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation.documents[0].data;
+        },
+        variations: function variations(state) {
+            return state.item.variationList;
+        }
+    }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
+
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+        this.$store.commit("setVariation", this.itemData);
+        this.$store.commit("setVariationList", this.variationListData);
+        this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+
+        this.$store.watch(function () {
+            return _this.$store.getters.variationTotalPrice;
+        }, function () {
+            $(_this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+        });
+    }
+});
+
+},{}],53:[function(require,module,exports){
+"use strict";
+
+var _util = require("util");
+
+var _dom = require("../../helper/dom");
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var ApiService = require("services/ApiService");
+
+// cache loaded variation data for reuse
+var VariationData = {};
+
+Vue.component("variation-select", {
+
+    delimiters: ["${", "}"],
+
+    props: ["attributes", "variations", "preselect", "template"],
+
+    data: function data() {
+        return {
+            // Collection of currently selected variation attributes.
+            selectedAttributes: {}
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            // initialize selected attributes to be tracked by change detection
+            var attributes = {};
+
+            for (var attributeId in _this.attributes) {
+                attributes[attributeId] = null;
+            }
+            _this.selectedAttributes = attributes;
+
+            // set attributes of preselected variation if exists
+            if (_this.preselect) {
+                // find variation by id
+                var preselectedVariation = _this.variations.filter(function (variation) {
+                    // eslint-disable-next-line eqeqeq
+                    return variation.variationId == _this.preselect;
+                });
+
+                if (!!preselectedVariation && preselectedVariation.length === 1) {
+                    // set attributes of preselected variation
+                    _this.setAttributes(preselectedVariation[0]);
+                }
+            }
+        });
+    },
+
+
+    methods: {
+
+        /**
+         * Finds all variations matching a given set of attributes.
+         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
+         * @returns {array}                    A list of matching variations.
+         */
+        filterVariations: function filterVariations(attributes) {
+            attributes = attributes || this.selectedAttributes;
+            return this.variations.filter(function (variation) {
+                for (var i = 0; i < variation.attributes.length; i++) {
+                    var id = variation.attributes[i].attributeId;
+                    var val = variation.attributes[i].attributeValueId;
+
+                    if (!!attributes[id] && attributes[id] != val) {
+                        return false;
+                    }
+                }
+
+                return variation.attributes.length > 0;
+            });
+        },
+
+
+        /**
+         * Tests if a given attribute value is not available depending on the current selection.
+         * @param {int}     attributeId         The id of the attribute
+         * @param {int}     attributeValueId    The valueId of the attribute
+         * @returns {boolean}                   True if the value can be combined with the current selection.
+         */
+        isEnabled: function isEnabled(attributeId, attributeValueId) {
+            // clone selectedAttributes to avoid touching objects bound to UI
+            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            attributes[attributeId] = attributeValueId;
+            return this.filterVariations(attributes).length > 0;
+        },
+
+
+        /**
+         * Set selected attributes by a given variation.
+         * @param {*}           variation   The variation to set as selected
+         * @returns {boolean}               true if at least one attribute has been changed
+         */
+        setAttributes: function setAttributes(variation) {
+            var hasChanges = false;
+
+            for (var i = 0; i < variation.attributes.length; i++) {
+                var id = variation.attributes[i].attributeId;
+                var val = variation.attributes[i].attributeValueId;
+
+                if (this.selectedAttributes[id] !== val) {
+                    this.selectedAttributes[id] = val;
+                    hasChanges = true;
+                }
+            }
+
+            return hasChanges;
+        },
+        isTextCut: function isTextCut(name) {
+            if (this.$refs.labelBoxRef) {
+                return (0, _dom.textWidth)(name, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.labelBoxRef[0].clientWidth;
+            }
+
+            return false;
+        },
+        onSelectionChange: function onSelectionChange(event) {
+            this.$emit("is-valid-change", false);
+
+            if ((0, _util.isNull)(event)) {
+                var values = Object.values(this.selectedAttributes);
+                var uniqueValues = [].concat(_toConsumableArray(new Set(values)));
+
+                if (uniqueValues.length === 1 && (0, _util.isNull)(uniqueValues[0])) {
+                    var mainVariation = this.variations.find(function (variation) {
+                        return !variation.attributes.length;
+                    });
+
+                    if (mainVariation) {
+                        this.setVariation(mainVariation.variationId);
+                    }
+                }
+            } else {
+                // search variations matching current selection
+                var possibleVariations = this.filterVariations();
+
+                if (possibleVariations.length === 1) {
+                    // only 1 matching variation remaining:
+                    // set remaining attributes if not set already. Will trigger this method again.
+                    if (!this.setAttributes(possibleVariations[0])) {
+                        // all attributes are set => load variation data
+                        this.setVariation(possibleVariations[0].variationId);
+                    } else {
+                        this.onSelectionChange();
+                    }
+                }
+            }
+        },
+        setVariation: function setVariation(variationId) {
+            var _this2 = this;
+
+            if (VariationData[variationId]) {
+                // reuse cached variation data
+                this.$store.commit("setVariation", VariationData[variationId]);
+
+                document.dispatchEvent(new CustomEvent("onVariationChanged", {
+                    detail: {
+                        attributes: VariationData[variationId].attributes,
+                        documents: VariationData[variationId].documents
+                    }
+                }));
+
+                this.$emit("is-valid-change", true);
+            } else {
+                // get variation data from remote
+                ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
+                    // store received variation data for later reuse
+                    VariationData[variationId] = response;
+
+                    _this2.$store.commit("setVariation", response);
+
+                    document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
+
+                    _this2.$emit("is-valid-change", true);
+                });
+            }
+        }
+    },
+
+    watch: {
+        currentVariation: {
+            handler: function handler(newVariation, oldVariation) {
+                if (oldVariation) {
+                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                    var title = document.getElementsByTagName("title")[0].innerHTML;
+
+                    window.history.replaceState({}, title, url);
+                }
+            },
+
+            deep: true
+        }
+    }
+});
+
+},{"../../helper/dom":119,"services/ApiService":126,"util":8}],54:[function(require,module,exports){
+"use strict";
+
 Vue.component("category-image-carousel", {
 
     delimiters: ["${", "}"],
@@ -17598,7 +18897,7 @@ Vue.component("category-image-carousel", {
     }
 });
 
-},{}],44:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -17660,7 +18959,7 @@ Vue.component("category-item", {
 
 });
 
-},{}],45:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-lazy-img", {
@@ -17690,7 +18989,7 @@ Vue.component("item-lazy-img", {
     }
 });
 
-},{}],46:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-list", {
@@ -17722,7 +19021,7 @@ Vue.component("item-list", {
     }
 });
 
-},{}],47:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -17775,7 +19074,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/UrlService":133}],48:[function(require,module,exports){
+},{"services/UrlService":133}],59:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
@@ -18016,7 +19315,7 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/ApiService":126,"services/TranslationService":132,"services/UrlService":133}],49:[function(require,module,exports){
+},{"services/ApiService":126,"services/TranslationService":132,"services/UrlService":133}],60:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -18081,7 +19380,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{"../../helper/utils":123}],50:[function(require,module,exports){
+},{"../../helper/utils":123}],61:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -18131,7 +19430,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/UrlService":133}],51:[function(require,module,exports){
+},{"services/UrlService":133}],62:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18205,7 +19504,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/UrlService":133}],52:[function(require,module,exports){
+},{"services/UrlService":133}],63:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18268,7 +19567,7 @@ Vue.component("item-filter", {
     }
 });
 
-},{"services/TranslationService":132}],53:[function(require,module,exports){
+},{"services/TranslationService":132}],64:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -18344,7 +19643,7 @@ Vue.component("item-filter-list", {
     }
 });
 
-},{"services/UrlService":133}],54:[function(require,module,exports){
+},{"services/UrlService":133}],65:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18405,7 +19704,7 @@ Vue.component("item-filter-price", {
     }
 });
 
-},{"services/UrlService":133}],55:[function(require,module,exports){
+},{"services/UrlService":133}],66:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-filter-tag-list", {
@@ -18432,1286 +19731,7 @@ Vue.component("item-filter-tag-list", {
     }
 });
 
-},{}],56:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("add-to-wish-list", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-add-to-wish-list"
-        },
-        variationId: Number
-    },
-
-    data: function data() {
-        return {
-            isLoading: false
-        };
-    },
-
-
-    computed: _extends({
-        isVariationInWishList: function isVariationInWishList() {
-            return this.wishListIds.includes(this.variationId);
-        }
-    }, Vuex.mapState({
-        wishListIds: function wishListIds(state) {
-            return state.wishList.wishListIds;
-        }
-    })),
-
-    watch: {
-        isVariationInWishList: function isVariationInWishList() {
-            this.changeTooltipText();
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        switchState: function switchState() {
-            if (this.isVariationInWishList) {
-                this.removeFromWishList();
-            } else {
-                this.addToWishList();
-            }
-        },
-        addToWishList: function addToWishList() {
-            var _this = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
-                    _this.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
-                }, function (error) {
-                    _this.isLoading = false;
-                });
-            }
-        },
-        removeFromWishList: function removeFromWishList() {
-            var _this2 = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
-                    _this2.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
-                }, function (error) {
-                    _this2.isLoading = false;
-                });
-            }
-        },
-        changeTooltipText: function changeTooltipText() {
-            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
-
-            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
-        }
-    }
-});
-
-},{"services/NotificationService":131,"services/TranslationService":132}],57:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-Vue.component("graduated-prices", {
-    props: ["template"],
-
-    computed: _extends({
-        graduatedPrices: function graduatedPrices() {
-            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
-            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
-
-            prices = prices.filter(function (price) {
-                return price.minimumOrderQuantity > minQuantity;
-            });
-
-            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
-                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
-            });
-        },
-        activeGraduationIndex: function activeGraduationIndex() {
-            var _this = this;
-
-            var prices = this.graduatedPrices.filter(function (price) {
-                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
-            });
-
-            if (!prices.length) {
-                return -1;
-            }
-
-            var price = prices.reduce(function (prev, current) {
-                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
-            });
-
-            return this.graduatedPrices.indexOf(price);
-        }
-    }, Vuex.mapState({
-        variationOrderQuantity: function variationOrderQuantity(state) {
-            return state.item.variationOrderQuantity;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],58:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-bundle", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-item-bundle"
-        },
-        bundleType: String,
-        bundleComponents: Array
-    },
-
-    data: function data() {
-        return {
-            bundleSetting: null,
-            showItemBundleItems: true
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.$refs.bundleSetting) {
-                _this.bundleSetting = _this.$refs.bundleSetting.innerText;
-                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
-            }
-        });
-    },
-
-
-    methods: {
-        getBundleInnerText: function getBundleInnerText(item) {
-            item.variation.bundleType = null;
-
-            return item;
-        }
-    }
-});
-
-},{}],59:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _utils = require("../../helper/utils");
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-image-carousel", {
-
-    delimiters: ["${", "}"],
-
-    props: ["imageUrlAccessor", "template"],
-
-    data: function data() {
-        return {
-            currentItem: 0
-        };
-    },
-
-
-    computed: _extends({
-        carouselImages: function carouselImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
-        },
-        singleImages: function singleImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
-        }
-    }, Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation;
-        }
-    })),
-
-    watch: {
-        currentVariation: {
-            handler: function handler(val, oldVal) {
-                var _this = this;
-
-                if (val !== oldVal) {
-                    setTimeout(function () {
-                        _this.reInitialize();
-                    }, 1);
-                }
-            },
-
-            deep: true
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this2 = this;
-
-        this.$nextTick(function () {
-            _this2.initCarousel();
-            _this2.initThumbCarousel();
-        });
-    },
-
-
-    methods: {
-        getImageCount: function getImageCount() {
-            return this.carouselImages.length;
-        },
-        reInitialize: function reInitialize() {
-            var $owl = $(this.$refs.single);
-
-            $owl.trigger("destroy.owl.carousel");
-            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $owl.find(".owl-item").remove();
-
-            var $thumbs = $(this.$refs.thumbs);
-
-            $thumbs.trigger("destroy.owl.carousel");
-            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $thumbs.find(".owl-item").remove();
-
-            this.initCarousel();
-            this.initThumbCarousel();
-        },
-        initCarousel: function initCarousel() {
-            var _this3 = this;
-
-            var imageCount = this.getImageCount();
-
-            $(this.$refs.single).owlCarousel({
-                autoHeight: true,
-                dots: true,
-                items: 1,
-                lazyLoad: true,
-                loop: true,
-                margin: 10,
-                mouseDrag: imageCount > 1,
-                nav: imageCount > 1,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350,
-                onChanged: function onChanged(event) {
-                    var $thumb = $(_this3.$refs.thumbs);
-
-                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
-                }
-            });
-
-            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
-                window.lightbox.option({
-                    wrapAround: true
-                });
-                window.lightbox.imageCountLabel = function (current, total) {
-                    if ((0, _utils.isNullOrUndefined)(imageCount) || imageCount <= 1) {
-                        return "";
-                    }
-                    current -= (total - imageCount) / 2;
-                    while (current <= 0) {
-                        current += imageCount;
-                    }
-                    while (current > imageCount) {
-                        current -= imageCount;
-                    }
-                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
-                };
-
-                var originalFn = window.lightbox.changeImage;
-
-                window.lightbox.changeImage = function (imageNumber) {
-                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
-                        imageNumber--;
-                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
-                        imageNumber++;
-                    }
-                    return originalFn.call(window.lightbox, imageNumber);
-                };
-            }
-
-            $(this.$refs.single).on("changed.owl.carousel", function (event) {
-                _this3.currentItem = event.page.index;
-            });
-        },
-        initThumbCarousel: function initThumbCarousel() {
-            $(this.$refs.thumbs).owlCarousel({
-                autoHeight: true,
-                dots: false,
-                items: 5,
-                lazyLoad: true,
-                loop: false,
-                margin: 10,
-                mouseDrag: false,
-                center: false,
-                nav: true,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
-            });
-        },
-        goTo: function goTo(index) {
-            var $owl = $(this.$refs.single);
-
-            $owl.trigger("to.owl.carousel", [index, 350]);
-        },
-        orderByPosition: function orderByPosition(list) {
-            return list.sort(function (entryA, entryB) {
-                if (entryA.position > entryB.position) {
-                    return 1;
-                }
-                if (entryA.position < entryB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        getAltText: function getAltText(image) {
-            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
-
-            return altText;
-        },
-        getItemName: function getItemName() {
-            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
-        }
-    }
-});
-
-},{"../../helper/utils":123,"services/TranslationService":132}],60:[function(require,module,exports){
-"use strict";
-
-Vue.component("order-properties", {
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        properties: function properties(state) {
-            return state.item.variation.documents[0].data.properties;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: Vuex.mapMutations(["setVariationOrderProperty"])
-});
-
-},{}],61:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-Vue.component("order-property-list", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list"
-        }
-    },
-
-    data: function data() {
-        return {
-            activeSlide: 0,
-            touchedSlides: { 0: true }
-        };
-    },
-
-    computed: _extends({
-        sortedGroupedProperties: function sortedGroupedProperties() {
-            var groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var group = _step.value;
-
-                    this.sortGroupProperties(group);
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return this.getSortedGroups(groupedProperties);
-        },
-        missingPropertyGroupIds: function missingPropertyGroupIds() {
-            if (this.variationMarkInvalidProperties) {
-                return [].concat(_toConsumableArray(new Set(this.variationMissingProperties.map(function (property) {
-                    return property.group && property.group.id;
-                }))));
-            }
-
-            return [];
-        }
-    }, Vuex.mapState({
-        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
-            return state.item.variationMarkInvalidProperties;
-        }
-    }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        sortGroupProperties: function sortGroupProperties(group) {
-            return group.properties.sort(function (prev, current) {
-                if (prev.position > current.position) {
-                    return 1;
-                }
-                if (prev.position < current.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        getSortedGroups: function getSortedGroups(groups) {
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-                for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var group = _step2.value;
-
-                    var lowestPosition = group.properties.reduce(function (prev, current) {
-                        return prev.position < current.position ? prev : current;
-                    });
-
-                    group.lowestPosition = lowestPosition.position;
-
-                    var groupId = group.group ? group.group.id : null;
-
-                    if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId)) {
-                        group.hasError = true;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
-                    }
-                } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
-                    }
-                }
-            }
-
-            return groups.sort(function (prev, current) {
-                if (prev.lowestPosition > current.lowestPosition) {
-                    return 1;
-                }
-                if (prev.lowestPosition < current.lowestPosition) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        slideTo: function slideTo(position) {
-            if (position >= 0 && position < this.sortedGroupedProperties.length) {
-                this.activeSlide = position;
-                this.touchedSlides[this.activeSlide] = true;
-            }
-        }
-    }
-});
-
-},{}],62:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("order-property-list-group", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list-group"
-        },
-        propertyGroup: Object
-    },
-
-    computed: {
-        isShownOnItemPageCount: function isShownOnItemPageCount() {
-            var properties = this.propertyGroup.properties.filter(function (property) {
-                return property.isShownOnItemPage;
-            });
-
-            return properties.length;
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: _extends({
-        unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
-            var _this = this;
-
-            var propertiesToUnselect = this.propertyGroup.properties.filter(function (property) {
-                return property.id !== propertyId && _this.isPropertyTypeRadio(property);
-            });
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = propertiesToUnselect[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var property = _step.value;
-
-                    this.setVariationOrderProperty({ propertyId: property.id, value: null });
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-        },
-        isPropertyTypeRadio: function isPropertyTypeRadio(property) {
-            var orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
-            var valueType = property.valueType;
-
-            if (valueType === "empty" && orderPropertyGroupingType === "single") {
-                return true;
-            }
-
-            return false;
-        }
-    }, Vuex.mapMutations(["setVariationOrderProperty"]))
-});
-
-},{}],63:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("order-property-list-item", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list-item"
-        },
-        group: Object,
-        property: Object
-    },
-
-    data: function data() {
-        return {
-            inputValue: "",
-            selectedFile: null,
-            waiting: false
-        };
-    },
-
-
-    computed: _extends({
-        inputType: function inputType() {
-            var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
-            var valueType = this.property.valueType;
-
-            if (valueType === "empty") {
-                if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
-                    return "checkbox";
-                }
-
-                return "radio";
-            }
-
-            return valueType;
-        },
-        selectedFileName: function selectedFileName() {
-            if (this.selectedFile) {
-                return this.selectedFile.name;
-            }
-
-            return "";
-        },
-        hasError: function hasError() {
-            var _this = this;
-
-            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
-                return this.variationMissingProperties.find(function (property) {
-                    return property.property.id === _this.property.id;
-                });
-            }
-
-            return this.variationMarkInvalidProperties && !this.property.value;
-        },
-        surcharge: function surcharge() {
-            return this.property.itemSurcharge || this.property.surcharge;
-        }
-    }, Vuex.mapState({
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        },
-        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
-            return state.item.variationMarkInvalidProperties;
-        }
-    }), Vuex.mapGetters(["variationMissingProperties"])),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: _extends({
-        onInputValueChanged: function onInputValueChanged(value) {
-            if (this.inputType === "int") {
-                value = this.validateInt(value);
-            } else if (this.inputType === "float") {
-                value = this.validateFloat(value);
-            } else if (this.inputType === "checkbox") {
-                if (!value) {
-                    value = null;
-                }
-            } else if (this.inputType === "radio") {
-                this.$emit("radio-change", this.property.id);
-            }
-
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
-        },
-        validateInt: function validateInt(value) {
-            value = parseInt(value);
-
-            if (isNaN(value)) {
-                value = null;
-            }
-
-            this.inputValue = value;
-
-            return value;
-        },
-        validateFloat: function validateFloat(value) {
-            value = parseFloat(value.replace(App.decimalSeparator, "."));
-
-            if (isNaN(value)) {
-                value = null;
-            } else {
-                value = value.toString().replace(".", App.decimalSeparator);
-            }
-
-            this.inputValue = value;
-
-            return value;
-        }
-    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
-        setPropertyFile: function setPropertyFile(event) {
-            if (event.target && event.target.files && event.target.files.length > 0) {
-                this.selectedFile = event.target.files[0];
-                this.uploadPropertyFile(this.selectedFile);
-            }
-        },
-        uploadPropertyFile: function uploadPropertyFile(file) {
-            var _this2 = this;
-
-            this.setIsBasketLoading(true);
-            this.waiting = true;
-
-            var fileData = new FormData();
-
-            fileData.append("fileData", file);
-
-            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
-                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
-            }).fail(function (error) {
-                _this2.clearSelectedFile();
-                _this2._handleValidationErrors(error);
-            }).always(function (response) {
-                _this2.setIsBasketLoading(false);
-                _this2.waiting = false;
-            });
-        },
-        clearSelectedFile: function clearSelectedFile() {
-            this.selectedFile = null;
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
-        },
-        _handleValidationErrors: function _handleValidationErrors(error) {
-            if (error.hasOwnProperty("validation_errors")) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var err = _step.value;
-
-                        NotificationService.error(err[0]);
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }
-        }
-    })
-});
-
-},{"services/ApiService":126,"services/NotificationService":131}],64:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _number = require("../../helper/number");
-
-var _utils = require("../../helper/utils");
-
-var _TranslationService = require("../../services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _debounce = require("../../helper/debounce");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("quantity-input", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        value: {
-            type: Number,
-            required: true
-        },
-        timeout: {
-            type: Number,
-            required: false,
-            default: 500
-        },
-        min: {
-            type: Number,
-            required: false,
-            default: 0
-        },
-        max: {
-            type: Number,
-            required: false
-        },
-        interval: {
-            type: Number,
-            required: false,
-            default: 1
-        },
-        template: {
-            type: String,
-            required: true
-        },
-        waiting: {
-            type: Boolean,
-            required: false
-        },
-        variationId: {
-            type: Number,
-            required: false
-        }
-    },
-
-    data: function data() {
-        return {
-            compValue: this.value,
-            compMin: this.min,
-            compMax: this.max,
-            compInterval: this.interval,
-            compDecimals: 0,
-            onValueChanged: null
-        };
-    },
-    created: function created() {
-        var _this = this;
-
-        this.$options.template = this.template;
-
-        this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
-        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
-
-        this.compDecimals = (0, _number.floatLength)(this.compInterval);
-
-        this.onValueChanged = (0, _debounce.debounce)(function () {
-            _this.$emit("quantity-change", _this.compValue);
-        }, (0, _utils.defaultValue)(this.timeout, 500));
-
-        if (!(0, _utils.isNullOrUndefined)(this.variationId)) {
-            this.fetchQuantityFromBasket();
-        }
-    },
-
-
-    computed: _extends({
-        variationBasketQuantity: function variationBasketQuantity() {
-            var _this2 = this;
-
-            if ((0, _utils.isNullOrUndefined)(this.variationId)) {
-                return 0;
-            }
-            var basketObject = this.$store.state.basket.items.find(function (variations) {
-                return variations.variationId === _this2.variationId;
-            });
-
-            return basketObject ? basketObject.quantity : 0;
-        },
-        isMinimum: function isMinimum() {
-            return (0, _utils.isDefined)(this.compMin) && this.compValue - this.compInterval < this.compMin;
-        },
-        isMaximum: function isMaximum() {
-            return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
-        },
-        minimumHint: function minimumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMin", {
-                min: this.min
-            });
-        },
-        maximumHint: function maximumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMax", {
-                max: this.max
-            });
-        },
-        displayValue: function displayValue() {
-            return this.$options.filters.numberFormat(this.compValue);
-        }
-    }, Vuex.mapState({
-        basketItems: function basketItems(state) {
-            return state.basket.items;
-        }
-    })),
-
-    watch: {
-        basketItems: {
-            handler: function handler(newValue, oldValue) {
-                if ((0, _utils.isDefined)(this.variationId) && (0, _utils.isDefined)(oldValue) && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-                    this.fetchQuantityFromBasket();
-                }
-            },
-
-            deep: true
-        },
-
-        value: function value(newValue, oldValue) {
-            if (newValue !== oldValue) {
-                this.setValue(newValue);
-            }
-        }
-    },
-
-    methods: {
-        increaseValue: function increaseValue() {
-            var newValue = (0, _number.formatFloat)(this.compValue + this.compInterval, this.compDecimals);
-
-            if (((0, _utils.isNullOrUndefined)(this.compMax) || newValue <= this.compMax) && !this.waiting) {
-                this.setValue(newValue);
-            }
-        },
-        decreaseValue: function decreaseValue() {
-            var newValue = (0, _number.formatFloat)(this.compValue - this.compInterval, this.compDecimals);
-
-            if (((0, _utils.isNullOrUndefined)(this.compMin) || newValue >= this.compMin) && !this.waiting) {
-                this.setValue(newValue);
-            }
-        },
-        setValue: function setValue(value) {
-            // consider the configured decimal seperator (if the input is typed in the input field)
-            if (typeof value === "string") {
-                value = value.replace(App.decimalSeparator || ",", ".");
-            }
-
-            value = parseFloat(value);
-            if (isNaN(value)) {
-                value = (0, _utils.defaultValue)(this.compMin, 1);
-            }
-
-            // limit new value to min/ max value
-            value = (0, _number.limit)(value, this.compMin, this.compMax);
-
-            // make sure, new value is an even multiple of interval
-            var diff = (0, _number.formatFloat)(value % this.compInterval, this.compDecimals, true);
-
-            if (diff > 0 && diff !== this.compInterval) {
-                if (diff < this.compInterval / 2) {
-                    value -= diff;
-                } else {
-                    value += this.compInterval - diff;
-                }
-                value = (0, _number.limit)(value, this.compMin, this.compMax);
-            }
-
-            // cut fraction
-            value = (0, _number.formatFloat)(value, this.compDecimals);
-
-            if (value !== this.compValue) {
-                this.compValue = value;
-                this.onValueChanged();
-            }
-        },
-        fetchQuantityFromBasket: function fetchQuantityFromBasket() {
-            if (!(0, _utils.isNullOrUndefined)(this.min) && this.variationBasketQuantity >= this.min) {
-                // minimum quantity already in basket
-                this.compMin = this.compInterval;
-            }
-
-            if (!(0, _utils.isNullOrUndefined)(this.max)) {
-                // decrease maximum quantity by quantity of variations already in basket
-                this.compMax = this.max - this.variationBasketQuantity;
-
-                if (this.variationBasketQuantity + this.compInterval > this.max) {
-                    this.compMin = 0;
-                    this.compMax = 0;
-                    this.$emit("out-of-stock", true);
-                } else {
-                    this.$emit("out-of-stock", false);
-                }
-            }
-
-            this.setValue(this.compMin);
-        }
-    }
-});
-
-},{"../../helper/debounce":118,"../../helper/number":120,"../../helper/utils":123,"../../services/TranslationService":132}],65:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("single-item", {
-
-    props: ["template", "itemData", "variationListData", "attributeNameMap"],
-
-    data: function data() {
-        return {
-            isVariationSelected: true
-        };
-    },
-
-
-    computed: _extends({
-        isDescriptionTabActive: function isDescriptionTabActive() {
-            return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
-        },
-        isTechnicalDataTabActive: function isTechnicalDataTabActive() {
-            return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
-        }
-    }, Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation.documents[0].data;
-        },
-        variations: function variations(state) {
-            return state.item.variationList;
-        }
-    }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
-
-    created: function created() {
-        var _this = this;
-
-        this.$options.template = this.template;
-        this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setVariationList", this.variationListData);
-        this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
-
-        this.$store.watch(function () {
-            return _this.$store.getters.variationTotalPrice;
-        }, function () {
-            $(_this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
-        });
-    }
-});
-
-},{}],66:[function(require,module,exports){
-"use strict";
-
-var _util = require("util");
-
-var _dom = require("../../helper/dom");
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var ApiService = require("services/ApiService");
-
-// cache loaded variation data for reuse
-var VariationData = {};
-
-Vue.component("variation-select", {
-
-    delimiters: ["${", "}"],
-
-    props: ["attributes", "variations", "preselect", "template"],
-
-    data: function data() {
-        return {
-            // Collection of currently selected variation attributes.
-            selectedAttributes: {}
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            // initialize selected attributes to be tracked by change detection
-            var attributes = {};
-
-            for (var attributeId in _this.attributes) {
-                attributes[attributeId] = null;
-            }
-            _this.selectedAttributes = attributes;
-
-            // set attributes of preselected variation if exists
-            if (_this.preselect) {
-                // find variation by id
-                var preselectedVariation = _this.variations.filter(function (variation) {
-                    // eslint-disable-next-line eqeqeq
-                    return variation.variationId == _this.preselect;
-                });
-
-                if (!!preselectedVariation && preselectedVariation.length === 1) {
-                    // set attributes of preselected variation
-                    _this.setAttributes(preselectedVariation[0]);
-                }
-            }
-        });
-    },
-
-
-    methods: {
-
-        /**
-         * Finds all variations matching a given set of attributes.
-         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
-         * @returns {array}                    A list of matching variations.
-         */
-        filterVariations: function filterVariations(attributes) {
-            attributes = attributes || this.selectedAttributes;
-            return this.variations.filter(function (variation) {
-                for (var i = 0; i < variation.attributes.length; i++) {
-                    var id = variation.attributes[i].attributeId;
-                    var val = variation.attributes[i].attributeValueId;
-
-                    if (!!attributes[id] && attributes[id] != val) {
-                        return false;
-                    }
-                }
-
-                return variation.attributes.length > 0;
-            });
-        },
-
-
-        /**
-         * Tests if a given attribute value is not available depending on the current selection.
-         * @param {int}     attributeId         The id of the attribute
-         * @param {int}     attributeValueId    The valueId of the attribute
-         * @returns {boolean}                   True if the value can be combined with the current selection.
-         */
-        isEnabled: function isEnabled(attributeId, attributeValueId) {
-            // clone selectedAttributes to avoid touching objects bound to UI
-            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
-
-            attributes[attributeId] = attributeValueId;
-            return this.filterVariations(attributes).length > 0;
-        },
-
-
-        /**
-         * Set selected attributes by a given variation.
-         * @param {*}           variation   The variation to set as selected
-         * @returns {boolean}               true if at least one attribute has been changed
-         */
-        setAttributes: function setAttributes(variation) {
-            var hasChanges = false;
-
-            for (var i = 0; i < variation.attributes.length; i++) {
-                var id = variation.attributes[i].attributeId;
-                var val = variation.attributes[i].attributeValueId;
-
-                if (this.selectedAttributes[id] !== val) {
-                    this.selectedAttributes[id] = val;
-                    hasChanges = true;
-                }
-            }
-
-            return hasChanges;
-        },
-        isTextCut: function isTextCut(name) {
-            if (this.$refs.labelBoxRef) {
-                return (0, _dom.textWidth)(name, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.labelBoxRef[0].clientWidth;
-            }
-
-            return false;
-        },
-        onSelectionChange: function onSelectionChange(event) {
-            this.$emit("is-valid-change", false);
-
-            if ((0, _util.isNull)(event)) {
-                var values = Object.values(this.selectedAttributes);
-                var uniqueValues = [].concat(_toConsumableArray(new Set(values)));
-
-                if (uniqueValues.length === 1 && (0, _util.isNull)(uniqueValues[0])) {
-                    var mainVariation = this.variations.find(function (variation) {
-                        return !variation.attributes.length;
-                    });
-
-                    if (mainVariation) {
-                        this.setVariation(mainVariation.variationId);
-                    }
-                }
-            } else {
-                // search variations matching current selection
-                var possibleVariations = this.filterVariations();
-
-                if (possibleVariations.length === 1) {
-                    // only 1 matching variation remaining:
-                    // set remaining attributes if not set already. Will trigger this method again.
-                    if (!this.setAttributes(possibleVariations[0])) {
-                        // all attributes are set => load variation data
-                        this.setVariation(possibleVariations[0].variationId);
-                    } else {
-                        this.onSelectionChange();
-                    }
-                }
-            }
-        },
-        setVariation: function setVariation(variationId) {
-            var _this2 = this;
-
-            if (VariationData[variationId]) {
-                // reuse cached variation data
-                this.$store.commit("setVariation", VariationData[variationId]);
-
-                document.dispatchEvent(new CustomEvent("onVariationChanged", {
-                    detail: {
-                        attributes: VariationData[variationId].attributes,
-                        documents: VariationData[variationId].documents
-                    }
-                }));
-
-                this.$emit("is-valid-change", true);
-            } else {
-                // get variation data from remote
-                ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
-                    // store received variation data for later reuse
-                    VariationData[variationId] = response;
-
-                    _this2.$store.commit("setVariation", response);
-
-                    document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
-
-                    _this2.$emit("is-valid-change", true);
-                });
-            }
-        }
-    },
-
-    watch: {
-        currentVariation: {
-            handler: function handler(newVariation, oldVariation) {
-                if (oldVariation) {
-                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-                    var title = document.getElementsByTagName("title")[0].innerHTML;
-
-                    window.history.replaceState({}, title, url);
-                }
-            },
-
-            deep: true
-        }
-    }
-});
-
-},{"../../helper/dom":119,"services/ApiService":126,"util":8}],67:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -20862,7 +20882,7 @@ Vue.component("popper", {
     }
 });
 
-},{"../../helper/dom":119,"../../helper/utils":123,"popper.js":4,"services/ModalService":130}],79:[function(require,module,exports){
+},{"../../helper/dom":119,"../../helper/utils":123,"popper.js":5,"services/ModalService":130}],79:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -23539,7 +23559,7 @@ function switchUrl(url, title) {
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo, switchUrl: switchUrl };
 
-},{"../helper/url":122,"../helper/utils":123,"jquery":2}],134:[function(require,module,exports){
+},{"../helper/url":122,"../helper/utils":123,"jquery":3}],134:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23774,7 +23794,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":2}],135:[function(require,module,exports){
+},{"jquery":3}],135:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -25967,7 +25987,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":126}]},{},[124,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,56,57,58,59,60,61,62,63,64,65,66,43,44,52,53,54,55,45,46,47,48,50,49,51,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,118,119,117,120,121,122,123,136,137,138,139,140,141,142,143,144,145,146,147])
+},{"services/ApiService":126}]},{},[124,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,43,44,45,46,47,48,49,50,51,52,53,54,55,63,64,65,66,56,57,58,59,61,60,62,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,118,119,117,120,121,122,123,136,137,138,139,140,141,142,143,144,145,146,147])
 
 
 //# sourceMappingURL=ceres-app.js.map
