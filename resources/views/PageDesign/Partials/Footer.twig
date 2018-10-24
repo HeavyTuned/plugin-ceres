@@ -8,7 +8,6 @@
 {% set topButtonPosition = config('Ceres.footer.to_top_button') %}
 
 {% set footerContainer = LayoutContainer.show("Ceres::Footer") | trim %}
-{% if footerContainer is empty %}
 
 <div class="footer">
 
@@ -20,59 +19,51 @@
         <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </div>
 
-<div class="footer-2017">
-    <div class="footer-2017-container">
-        <div class="inner-footer-wrapper">
-            <div class="footer-2017-container-left">
-                <p>{{ trans("Ceres::Template.footerAboutUs") }}</p>
-                <ul>
-                    <li class="footer-2017-hotline">
-                            {{ trans("Ceres::Template.footerHotline") }}<br>
-                        <small>{{ trans("Ceres::Template.footerHotlinePrice") }}</small>
-                    </li>
-                    <li class="footer-2017-mail">
-                        {{ trans("Ceres::Template.footerEmail") }}
-                    </li>
-                    <li class="footer-2017-address">
-                        {{ trans("Ceres::Template.footerAddress") }}
-                    </li>
-                </ul>
-            </div>
+    <div class="footer-2017">
+        <div class="footer-2017-container">
+            <div class="inner-footer-wrapper">
+                <div class="footer-2017-container-left">
+                    <p>{{ trans("Ceres::Template.footerAboutUs") }}</p>
+                    <ul>
+                        <li class="footer-2017-hotline">
+                                {{ trans("Ceres::Template.footerHotline") }}<br>
+                            <small>{{ trans("Ceres::Template.footerHotlinePrice") }}</small>
+                        </li>
+                        <li class="footer-2017-mail">
+                            {{ trans("Ceres::Template.footerEmail") }}
+                        </li>
+                        <li class="footer-2017-address">
+                            {{ trans("Ceres::Template.footerAddress") }}
+                        </li>
+                    </ul>
+                </div>
 
-            <div class="footer-2017-container-right">
-                <ul class="left-footer-2017-nav">
-              
-                </ul>
-                <ul class="right-footer-2017-nav">
-                   
-                </ul>
+                <div class="footer-2017-container-right">
+                    <ul class="left-footer-2017-nav">
+                
+                    </ul>
+                    <ul class="right-footer-2017-nav">
+                    
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="footer-2017-social-row">
-        <div class="inner-footer-wrapper">
-            <div class="follow-facebook">
-                <a target="_blank" href="{{ trans("Ceres::Template.footerFollowFacebookURL") }}">
-                    {{ trans("Ceres::Template.footerFollowFacebook") }}
-                </a>
+        <div class="footer-2017-social-row">
+            <div class="inner-footer-wrapper">
+                <div class="follow-facebook">
+                    <a target="_blank" href="{{ trans("Ceres::Template.footerFollowFacebookURL") }}">
+                        {{ trans("Ceres::Template.footerFollowFacebook") }}
+                    </a>
+                </div>
+                <span>
+                    &copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}
+                    <br>
+                    <small>
+                        {{ trans("Ceres::Template.footerNotePriceShipping") }}
+                    </small>
+                
+                </span>
             </div>
-            <span>
-                &copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}
-                <br>
-                <small>
-                      {{ trans("Ceres::Template.footerNotePriceShipping") }}
-                </small>
-            
-            </span>
         </div>
     </div>
 </div>
-{% else %}
-    <div class="footer container-max">
-        <div class="row">
-            <div class="col clearfix">
-                {{ footerContainer | raw }}
-            </div>
-        </div>
-    </div>
-{% endif %}
