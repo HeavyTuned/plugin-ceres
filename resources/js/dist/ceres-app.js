@@ -135,36 +135,7 @@ module.exports = {
 
 }).call(this,require('_process'))
 
-<<<<<<< HEAD
-},{"_process":5,"os":3}],2:[function(require,module,exports){
-=======
-},{"_process":114,"os":112}],2:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],3:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"_process":113,"os":111}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -10530,10 +10501,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-<<<<<<< HEAD
 },{}],3:[function(require,module,exports){
-=======
-},{}],4:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -10542,7 +10510,7 @@ var DataView = getNative(root, 'DataView');
 
 module.exports = DataView;
 
-},{"./_getNative":53,"./_root":88}],5:[function(require,module,exports){
+},{"./_getNative":52,"./_root":87}],4:[function(require,module,exports){
 var hashClear = require('./_hashClear'),
     hashDelete = require('./_hashDelete'),
     hashGet = require('./_hashGet'),
@@ -10576,7 +10544,7 @@ Hash.prototype.set = hashSet;
 
 module.exports = Hash;
 
-},{"./_hashClear":60,"./_hashDelete":61,"./_hashGet":62,"./_hashHas":63,"./_hashSet":64}],6:[function(require,module,exports){
+},{"./_hashClear":59,"./_hashDelete":60,"./_hashGet":61,"./_hashHas":62,"./_hashSet":63}],5:[function(require,module,exports){
 var listCacheClear = require('./_listCacheClear'),
     listCacheDelete = require('./_listCacheDelete'),
     listCacheGet = require('./_listCacheGet'),
@@ -10610,7 +10578,7 @@ ListCache.prototype.set = listCacheSet;
 
 module.exports = ListCache;
 
-},{"./_listCacheClear":72,"./_listCacheDelete":73,"./_listCacheGet":74,"./_listCacheHas":75,"./_listCacheSet":76}],7:[function(require,module,exports){
+},{"./_listCacheClear":71,"./_listCacheDelete":72,"./_listCacheGet":73,"./_listCacheHas":74,"./_listCacheSet":75}],6:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -10619,7 +10587,7 @@ var Map = getNative(root, 'Map');
 
 module.exports = Map;
 
-},{"./_getNative":53,"./_root":88}],8:[function(require,module,exports){
+},{"./_getNative":52,"./_root":87}],7:[function(require,module,exports){
 var mapCacheClear = require('./_mapCacheClear'),
     mapCacheDelete = require('./_mapCacheDelete'),
     mapCacheGet = require('./_mapCacheGet'),
@@ -10653,7 +10621,7 @@ MapCache.prototype.set = mapCacheSet;
 
 module.exports = MapCache;
 
-},{"./_mapCacheClear":77,"./_mapCacheDelete":78,"./_mapCacheGet":79,"./_mapCacheHas":80,"./_mapCacheSet":81}],9:[function(require,module,exports){
+},{"./_mapCacheClear":76,"./_mapCacheDelete":77,"./_mapCacheGet":78,"./_mapCacheHas":79,"./_mapCacheSet":80}],8:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -10662,7 +10630,7 @@ var Promise = getNative(root, 'Promise');
 
 module.exports = Promise;
 
-},{"./_getNative":53,"./_root":88}],10:[function(require,module,exports){
+},{"./_getNative":52,"./_root":87}],9:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -10671,7 +10639,7 @@ var Set = getNative(root, 'Set');
 
 module.exports = Set;
 
-},{"./_getNative":53,"./_root":88}],11:[function(require,module,exports){
+},{"./_getNative":52,"./_root":87}],10:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     stackClear = require('./_stackClear'),
     stackDelete = require('./_stackDelete'),
@@ -10700,7 +10668,7 @@ Stack.prototype.set = stackSet;
 
 module.exports = Stack;
 
-},{"./_ListCache":6,"./_stackClear":89,"./_stackDelete":90,"./_stackGet":91,"./_stackHas":92,"./_stackSet":93}],12:[function(require,module,exports){
+},{"./_ListCache":5,"./_stackClear":88,"./_stackDelete":89,"./_stackGet":90,"./_stackHas":91,"./_stackSet":92}],11:[function(require,module,exports){
 var root = require('./_root');
 
 /** Built-in value references. */
@@ -10708,7 +10676,7 @@ var Symbol = root.Symbol;
 
 module.exports = Symbol;
 
-},{"./_root":88}],13:[function(require,module,exports){
+},{"./_root":87}],12:[function(require,module,exports){
 var root = require('./_root');
 
 /** Built-in value references. */
@@ -10716,7 +10684,7 @@ var Uint8Array = root.Uint8Array;
 
 module.exports = Uint8Array;
 
-},{"./_root":88}],14:[function(require,module,exports){
+},{"./_root":87}],13:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -10725,7 +10693,7 @@ var WeakMap = getNative(root, 'WeakMap');
 
 module.exports = WeakMap;
 
-},{"./_getNative":53,"./_root":88}],15:[function(require,module,exports){
+},{"./_getNative":52,"./_root":87}],14:[function(require,module,exports){
 /**
  * A specialized version of `_.forEach` for arrays without support for
  * iteratee shorthands.
@@ -10749,7 +10717,7 @@ function arrayEach(array, iteratee) {
 
 module.exports = arrayEach;
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /**
  * A specialized version of `_.filter` for arrays without support for
  * iteratee shorthands.
@@ -10776,7 +10744,7 @@ function arrayFilter(array, predicate) {
 
 module.exports = arrayFilter;
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var baseTimes = require('./_baseTimes'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
@@ -10827,7 +10795,7 @@ function arrayLikeKeys(value, inherited) {
 
 module.exports = arrayLikeKeys;
 
-},{"./_baseTimes":35,"./_isIndex":68,"./isArguments":97,"./isArray":98,"./isBuffer":100,"./isTypedArray":107}],18:[function(require,module,exports){
+},{"./_baseTimes":34,"./_isIndex":67,"./isArguments":96,"./isArray":97,"./isBuffer":99,"./isTypedArray":106}],17:[function(require,module,exports){
 /**
  * Appends the elements of `values` to `array`.
  *
@@ -10849,7 +10817,7 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var baseAssignValue = require('./_baseAssignValue'),
     eq = require('./eq');
 
@@ -10879,7 +10847,7 @@ function assignValue(object, key, value) {
 
 module.exports = assignValue;
 
-},{"./_baseAssignValue":23,"./eq":96}],20:[function(require,module,exports){
+},{"./_baseAssignValue":22,"./eq":95}],19:[function(require,module,exports){
 var eq = require('./eq');
 
 /**
@@ -10902,7 +10870,7 @@ function assocIndexOf(array, key) {
 
 module.exports = assocIndexOf;
 
-},{"./eq":96}],21:[function(require,module,exports){
+},{"./eq":95}],20:[function(require,module,exports){
 var copyObject = require('./_copyObject'),
     keys = require('./keys');
 
@@ -10921,7 +10889,7 @@ function baseAssign(object, source) {
 
 module.exports = baseAssign;
 
-},{"./_copyObject":44,"./keys":108}],22:[function(require,module,exports){
+},{"./_copyObject":43,"./keys":107}],21:[function(require,module,exports){
 var copyObject = require('./_copyObject'),
     keysIn = require('./keysIn');
 
@@ -10940,7 +10908,7 @@ function baseAssignIn(object, source) {
 
 module.exports = baseAssignIn;
 
-},{"./_copyObject":44,"./keysIn":109}],23:[function(require,module,exports){
+},{"./_copyObject":43,"./keysIn":108}],22:[function(require,module,exports){
 var defineProperty = require('./_defineProperty');
 
 /**
@@ -10967,7 +10935,7 @@ function baseAssignValue(object, key, value) {
 
 module.exports = baseAssignValue;
 
-},{"./_defineProperty":48}],24:[function(require,module,exports){
+},{"./_defineProperty":47}],23:[function(require,module,exports){
 var Stack = require('./_Stack'),
     arrayEach = require('./_arrayEach'),
     assignValue = require('./_assignValue'),
@@ -11140,7 +11108,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
 
 module.exports = baseClone;
 
-},{"./_Stack":11,"./_arrayEach":15,"./_assignValue":19,"./_baseAssign":21,"./_baseAssignIn":22,"./_cloneBuffer":38,"./_copyArray":43,"./_copySymbols":45,"./_copySymbolsIn":46,"./_getAllKeys":50,"./_getAllKeysIn":51,"./_getTag":58,"./_initCloneArray":65,"./_initCloneByTag":66,"./_initCloneObject":67,"./isArray":98,"./isBuffer":100,"./isMap":103,"./isObject":104,"./isSet":106,"./keys":108}],25:[function(require,module,exports){
+},{"./_Stack":10,"./_arrayEach":14,"./_assignValue":18,"./_baseAssign":20,"./_baseAssignIn":21,"./_cloneBuffer":37,"./_copyArray":42,"./_copySymbols":44,"./_copySymbolsIn":45,"./_getAllKeys":49,"./_getAllKeysIn":50,"./_getTag":57,"./_initCloneArray":64,"./_initCloneByTag":65,"./_initCloneObject":66,"./isArray":97,"./isBuffer":99,"./isMap":102,"./isObject":103,"./isSet":105,"./keys":107}],24:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** Built-in value references. */
@@ -11172,7 +11140,7 @@ var baseCreate = (function() {
 
 module.exports = baseCreate;
 
-},{"./isObject":104}],26:[function(require,module,exports){
+},{"./isObject":103}],25:[function(require,module,exports){
 var arrayPush = require('./_arrayPush'),
     isArray = require('./isArray');
 
@@ -11194,7 +11162,7 @@ function baseGetAllKeys(object, keysFunc, symbolsFunc) {
 
 module.exports = baseGetAllKeys;
 
-},{"./_arrayPush":18,"./isArray":98}],27:[function(require,module,exports){
+},{"./_arrayPush":17,"./isArray":97}],26:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     getRawTag = require('./_getRawTag'),
     objectToString = require('./_objectToString');
@@ -11224,7 +11192,7 @@ function baseGetTag(value) {
 
 module.exports = baseGetTag;
 
-},{"./_Symbol":12,"./_getRawTag":55,"./_objectToString":86}],28:[function(require,module,exports){
+},{"./_Symbol":11,"./_getRawTag":54,"./_objectToString":85}],27:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -11244,7 +11212,7 @@ function baseIsArguments(value) {
 
 module.exports = baseIsArguments;
 
-},{"./_baseGetTag":27,"./isObjectLike":105}],29:[function(require,module,exports){
+},{"./_baseGetTag":26,"./isObjectLike":104}],28:[function(require,module,exports){
 var getTag = require('./_getTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -11264,7 +11232,7 @@ function baseIsMap(value) {
 
 module.exports = baseIsMap;
 
-},{"./_getTag":58,"./isObjectLike":105}],30:[function(require,module,exports){
+},{"./_getTag":57,"./isObjectLike":104}],29:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isMasked = require('./_isMasked'),
     isObject = require('./isObject'),
@@ -11313,7 +11281,7 @@ function baseIsNative(value) {
 
 module.exports = baseIsNative;
 
-},{"./_isMasked":70,"./_toSource":94,"./isFunction":101,"./isObject":104}],31:[function(require,module,exports){
+},{"./_isMasked":69,"./_toSource":93,"./isFunction":100,"./isObject":103}],30:[function(require,module,exports){
 var getTag = require('./_getTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -11333,7 +11301,7 @@ function baseIsSet(value) {
 
 module.exports = baseIsSet;
 
-},{"./_getTag":58,"./isObjectLike":105}],32:[function(require,module,exports){
+},{"./_getTag":57,"./isObjectLike":104}],31:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isLength = require('./isLength'),
     isObjectLike = require('./isObjectLike');
@@ -11395,7 +11363,7 @@ function baseIsTypedArray(value) {
 
 module.exports = baseIsTypedArray;
 
-},{"./_baseGetTag":27,"./isLength":102,"./isObjectLike":105}],33:[function(require,module,exports){
+},{"./_baseGetTag":26,"./isLength":101,"./isObjectLike":104}],32:[function(require,module,exports){
 var isPrototype = require('./_isPrototype'),
     nativeKeys = require('./_nativeKeys');
 
@@ -11427,7 +11395,7 @@ function baseKeys(object) {
 
 module.exports = baseKeys;
 
-},{"./_isPrototype":71,"./_nativeKeys":83}],34:[function(require,module,exports){
+},{"./_isPrototype":70,"./_nativeKeys":82}],33:[function(require,module,exports){
 var isObject = require('./isObject'),
     isPrototype = require('./_isPrototype'),
     nativeKeysIn = require('./_nativeKeysIn');
@@ -11462,7 +11430,7 @@ function baseKeysIn(object) {
 
 module.exports = baseKeysIn;
 
-},{"./_isPrototype":71,"./_nativeKeysIn":84,"./isObject":104}],35:[function(require,module,exports){
+},{"./_isPrototype":70,"./_nativeKeysIn":83,"./isObject":103}],34:[function(require,module,exports){
 /**
  * The base implementation of `_.times` without support for iteratee shorthands
  * or max array length checks.
@@ -11484,7 +11452,7 @@ function baseTimes(n, iteratee) {
 
 module.exports = baseTimes;
 
-},{}],36:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /**
  * The base implementation of `_.unary` without support for storing metadata.
  *
@@ -11500,7 +11468,7 @@ function baseUnary(func) {
 
 module.exports = baseUnary;
 
-},{}],37:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var Uint8Array = require('./_Uint8Array');
 
 /**
@@ -11518,7 +11486,7 @@ function cloneArrayBuffer(arrayBuffer) {
 
 module.exports = cloneArrayBuffer;
 
-},{"./_Uint8Array":13}],38:[function(require,module,exports){
+},{"./_Uint8Array":12}],37:[function(require,module,exports){
 var root = require('./_root');
 
 /** Detect free variable `exports`. */
@@ -11555,7 +11523,7 @@ function cloneBuffer(buffer, isDeep) {
 
 module.exports = cloneBuffer;
 
-},{"./_root":88}],39:[function(require,module,exports){
+},{"./_root":87}],38:[function(require,module,exports){
 var cloneArrayBuffer = require('./_cloneArrayBuffer');
 
 /**
@@ -11573,7 +11541,7 @@ function cloneDataView(dataView, isDeep) {
 
 module.exports = cloneDataView;
 
-},{"./_cloneArrayBuffer":37}],40:[function(require,module,exports){
+},{"./_cloneArrayBuffer":36}],39:[function(require,module,exports){
 /** Used to match `RegExp` flags from their coerced string values. */
 var reFlags = /\w*$/;
 
@@ -11592,7 +11560,7 @@ function cloneRegExp(regexp) {
 
 module.exports = cloneRegExp;
 
-},{}],41:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var Symbol = require('./_Symbol');
 
 /** Used to convert symbols to primitives and strings. */
@@ -11612,7 +11580,7 @@ function cloneSymbol(symbol) {
 
 module.exports = cloneSymbol;
 
-},{"./_Symbol":12}],42:[function(require,module,exports){
+},{"./_Symbol":11}],41:[function(require,module,exports){
 var cloneArrayBuffer = require('./_cloneArrayBuffer');
 
 /**
@@ -11630,7 +11598,7 @@ function cloneTypedArray(typedArray, isDeep) {
 
 module.exports = cloneTypedArray;
 
-},{"./_cloneArrayBuffer":37}],43:[function(require,module,exports){
+},{"./_cloneArrayBuffer":36}],42:[function(require,module,exports){
 /**
  * Copies the values of `source` to `array`.
  *
@@ -11652,7 +11620,7 @@ function copyArray(source, array) {
 
 module.exports = copyArray;
 
-},{}],44:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var assignValue = require('./_assignValue'),
     baseAssignValue = require('./_baseAssignValue');
 
@@ -11694,7 +11662,7 @@ function copyObject(source, props, object, customizer) {
 
 module.exports = copyObject;
 
-},{"./_assignValue":19,"./_baseAssignValue":23}],45:[function(require,module,exports){
+},{"./_assignValue":18,"./_baseAssignValue":22}],44:[function(require,module,exports){
 var copyObject = require('./_copyObject'),
     getSymbols = require('./_getSymbols');
 
@@ -11712,7 +11680,7 @@ function copySymbols(source, object) {
 
 module.exports = copySymbols;
 
-},{"./_copyObject":44,"./_getSymbols":56}],46:[function(require,module,exports){
+},{"./_copyObject":43,"./_getSymbols":55}],45:[function(require,module,exports){
 var copyObject = require('./_copyObject'),
     getSymbolsIn = require('./_getSymbolsIn');
 
@@ -11730,7 +11698,7 @@ function copySymbolsIn(source, object) {
 
 module.exports = copySymbolsIn;
 
-},{"./_copyObject":44,"./_getSymbolsIn":57}],47:[function(require,module,exports){
+},{"./_copyObject":43,"./_getSymbolsIn":56}],46:[function(require,module,exports){
 var root = require('./_root');
 
 /** Used to detect overreaching core-js shims. */
@@ -11738,7 +11706,7 @@ var coreJsData = root['__core-js_shared__'];
 
 module.exports = coreJsData;
 
-},{"./_root":88}],48:[function(require,module,exports){
+},{"./_root":87}],47:[function(require,module,exports){
 var getNative = require('./_getNative');
 
 var defineProperty = (function() {
@@ -11751,7 +11719,7 @@ var defineProperty = (function() {
 
 module.exports = defineProperty;
 
-},{"./_getNative":53}],49:[function(require,module,exports){
+},{"./_getNative":52}],48:[function(require,module,exports){
 (function (global){
 /** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
@@ -11760,7 +11728,7 @@ module.exports = freeGlobal;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],50:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var baseGetAllKeys = require('./_baseGetAllKeys'),
     getSymbols = require('./_getSymbols'),
     keys = require('./keys');
@@ -11778,7 +11746,7 @@ function getAllKeys(object) {
 
 module.exports = getAllKeys;
 
-},{"./_baseGetAllKeys":26,"./_getSymbols":56,"./keys":108}],51:[function(require,module,exports){
+},{"./_baseGetAllKeys":25,"./_getSymbols":55,"./keys":107}],50:[function(require,module,exports){
 var baseGetAllKeys = require('./_baseGetAllKeys'),
     getSymbolsIn = require('./_getSymbolsIn'),
     keysIn = require('./keysIn');
@@ -11797,7 +11765,7 @@ function getAllKeysIn(object) {
 
 module.exports = getAllKeysIn;
 
-},{"./_baseGetAllKeys":26,"./_getSymbolsIn":57,"./keysIn":109}],52:[function(require,module,exports){
+},{"./_baseGetAllKeys":25,"./_getSymbolsIn":56,"./keysIn":108}],51:[function(require,module,exports){
 var isKeyable = require('./_isKeyable');
 
 /**
@@ -11817,7 +11785,7 @@ function getMapData(map, key) {
 
 module.exports = getMapData;
 
-},{"./_isKeyable":69}],53:[function(require,module,exports){
+},{"./_isKeyable":68}],52:[function(require,module,exports){
 var baseIsNative = require('./_baseIsNative'),
     getValue = require('./_getValue');
 
@@ -11836,7 +11804,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"./_baseIsNative":30,"./_getValue":59}],54:[function(require,module,exports){
+},{"./_baseIsNative":29,"./_getValue":58}],53:[function(require,module,exports){
 var overArg = require('./_overArg');
 
 /** Built-in value references. */
@@ -11844,7 +11812,7 @@ var getPrototype = overArg(Object.getPrototypeOf, Object);
 
 module.exports = getPrototype;
 
-},{"./_overArg":87}],55:[function(require,module,exports){
+},{"./_overArg":86}],54:[function(require,module,exports){
 var Symbol = require('./_Symbol');
 
 /** Used for built-in method references. */
@@ -11892,7 +11860,7 @@ function getRawTag(value) {
 
 module.exports = getRawTag;
 
-},{"./_Symbol":12}],56:[function(require,module,exports){
+},{"./_Symbol":11}],55:[function(require,module,exports){
 var arrayFilter = require('./_arrayFilter'),
     stubArray = require('./stubArray');
 
@@ -11924,7 +11892,7 @@ var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
 
 module.exports = getSymbols;
 
-},{"./_arrayFilter":16,"./stubArray":110}],57:[function(require,module,exports){
+},{"./_arrayFilter":15,"./stubArray":109}],56:[function(require,module,exports){
 var arrayPush = require('./_arrayPush'),
     getPrototype = require('./_getPrototype'),
     getSymbols = require('./_getSymbols'),
@@ -11951,7 +11919,7 @@ var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
 
 module.exports = getSymbolsIn;
 
-},{"./_arrayPush":18,"./_getPrototype":54,"./_getSymbols":56,"./stubArray":110}],58:[function(require,module,exports){
+},{"./_arrayPush":17,"./_getPrototype":53,"./_getSymbols":55,"./stubArray":109}],57:[function(require,module,exports){
 var DataView = require('./_DataView'),
     Map = require('./_Map'),
     Promise = require('./_Promise'),
@@ -12011,7 +11979,7 @@ if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
 
 module.exports = getTag;
 
-},{"./_DataView":4,"./_Map":7,"./_Promise":9,"./_Set":10,"./_WeakMap":14,"./_baseGetTag":27,"./_toSource":94}],59:[function(require,module,exports){
+},{"./_DataView":3,"./_Map":6,"./_Promise":8,"./_Set":9,"./_WeakMap":13,"./_baseGetTag":26,"./_toSource":93}],58:[function(require,module,exports){
 /**
  * Gets the value at `key` of `object`.
  *
@@ -12026,7 +11994,7 @@ function getValue(object, key) {
 
 module.exports = getValue;
 
-},{}],60:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /**
@@ -12043,7 +12011,7 @@ function hashClear() {
 
 module.exports = hashClear;
 
-},{"./_nativeCreate":82}],61:[function(require,module,exports){
+},{"./_nativeCreate":81}],60:[function(require,module,exports){
 /**
  * Removes `key` and its value from the hash.
  *
@@ -12062,7 +12030,7 @@ function hashDelete(key) {
 
 module.exports = hashDelete;
 
-},{}],62:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /** Used to stand-in for `undefined` hash values. */
@@ -12094,7 +12062,7 @@ function hashGet(key) {
 
 module.exports = hashGet;
 
-},{"./_nativeCreate":82}],63:[function(require,module,exports){
+},{"./_nativeCreate":81}],62:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /** Used for built-in method references. */
@@ -12119,7 +12087,7 @@ function hashHas(key) {
 
 module.exports = hashHas;
 
-},{"./_nativeCreate":82}],64:[function(require,module,exports){
+},{"./_nativeCreate":81}],63:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 /** Used to stand-in for `undefined` hash values. */
@@ -12144,7 +12112,7 @@ function hashSet(key, value) {
 
 module.exports = hashSet;
 
-},{"./_nativeCreate":82}],65:[function(require,module,exports){
+},{"./_nativeCreate":81}],64:[function(require,module,exports){
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
 
@@ -12172,7 +12140,7 @@ function initCloneArray(array) {
 
 module.exports = initCloneArray;
 
-},{}],66:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 var cloneArrayBuffer = require('./_cloneArrayBuffer'),
     cloneDataView = require('./_cloneDataView'),
     cloneRegExp = require('./_cloneRegExp'),
@@ -12251,7 +12219,7 @@ function initCloneByTag(object, tag, isDeep) {
 
 module.exports = initCloneByTag;
 
-},{"./_cloneArrayBuffer":37,"./_cloneDataView":39,"./_cloneRegExp":40,"./_cloneSymbol":41,"./_cloneTypedArray":42}],67:[function(require,module,exports){
+},{"./_cloneArrayBuffer":36,"./_cloneDataView":38,"./_cloneRegExp":39,"./_cloneSymbol":40,"./_cloneTypedArray":41}],66:[function(require,module,exports){
 var baseCreate = require('./_baseCreate'),
     getPrototype = require('./_getPrototype'),
     isPrototype = require('./_isPrototype');
@@ -12271,7 +12239,7 @@ function initCloneObject(object) {
 
 module.exports = initCloneObject;
 
-},{"./_baseCreate":25,"./_getPrototype":54,"./_isPrototype":71}],68:[function(require,module,exports){
+},{"./_baseCreate":24,"./_getPrototype":53,"./_isPrototype":70}],67:[function(require,module,exports){
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -12298,7 +12266,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],69:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 /**
  * Checks if `value` is suitable for use as unique object key.
  *
@@ -12315,7 +12283,7 @@ function isKeyable(value) {
 
 module.exports = isKeyable;
 
-},{}],70:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 var coreJsData = require('./_coreJsData');
 
 /** Used to detect methods masquerading as native. */
@@ -12337,7 +12305,7 @@ function isMasked(func) {
 
 module.exports = isMasked;
 
-},{"./_coreJsData":47}],71:[function(require,module,exports){
+},{"./_coreJsData":46}],70:[function(require,module,exports){
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
 
@@ -12357,7 +12325,7 @@ function isPrototype(value) {
 
 module.exports = isPrototype;
 
-},{}],72:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 /**
  * Removes all key-value entries from the list cache.
  *
@@ -12372,7 +12340,7 @@ function listCacheClear() {
 
 module.exports = listCacheClear;
 
-},{}],73:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /** Used for built-in method references. */
@@ -12409,7 +12377,7 @@ function listCacheDelete(key) {
 
 module.exports = listCacheDelete;
 
-},{"./_assocIndexOf":20}],74:[function(require,module,exports){
+},{"./_assocIndexOf":19}],73:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /**
@@ -12430,7 +12398,7 @@ function listCacheGet(key) {
 
 module.exports = listCacheGet;
 
-},{"./_assocIndexOf":20}],75:[function(require,module,exports){
+},{"./_assocIndexOf":19}],74:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /**
@@ -12448,7 +12416,7 @@ function listCacheHas(key) {
 
 module.exports = listCacheHas;
 
-},{"./_assocIndexOf":20}],76:[function(require,module,exports){
+},{"./_assocIndexOf":19}],75:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 /**
@@ -12476,7 +12444,7 @@ function listCacheSet(key, value) {
 
 module.exports = listCacheSet;
 
-},{"./_assocIndexOf":20}],77:[function(require,module,exports){
+},{"./_assocIndexOf":19}],76:[function(require,module,exports){
 var Hash = require('./_Hash'),
     ListCache = require('./_ListCache'),
     Map = require('./_Map');
@@ -12499,7 +12467,7 @@ function mapCacheClear() {
 
 module.exports = mapCacheClear;
 
-},{"./_Hash":5,"./_ListCache":6,"./_Map":7}],78:[function(require,module,exports){
+},{"./_Hash":4,"./_ListCache":5,"./_Map":6}],77:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -12519,7 +12487,7 @@ function mapCacheDelete(key) {
 
 module.exports = mapCacheDelete;
 
-},{"./_getMapData":52}],79:[function(require,module,exports){
+},{"./_getMapData":51}],78:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -12537,7 +12505,7 @@ function mapCacheGet(key) {
 
 module.exports = mapCacheGet;
 
-},{"./_getMapData":52}],80:[function(require,module,exports){
+},{"./_getMapData":51}],79:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -12555,7 +12523,7 @@ function mapCacheHas(key) {
 
 module.exports = mapCacheHas;
 
-},{"./_getMapData":52}],81:[function(require,module,exports){
+},{"./_getMapData":51}],80:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 /**
@@ -12579,7 +12547,7 @@ function mapCacheSet(key, value) {
 
 module.exports = mapCacheSet;
 
-},{"./_getMapData":52}],82:[function(require,module,exports){
+},{"./_getMapData":51}],81:[function(require,module,exports){
 var getNative = require('./_getNative');
 
 /* Built-in method references that are verified to be native. */
@@ -12587,7 +12555,7 @@ var nativeCreate = getNative(Object, 'create');
 
 module.exports = nativeCreate;
 
-},{"./_getNative":53}],83:[function(require,module,exports){
+},{"./_getNative":52}],82:[function(require,module,exports){
 var overArg = require('./_overArg');
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
@@ -12595,7 +12563,7 @@ var nativeKeys = overArg(Object.keys, Object);
 
 module.exports = nativeKeys;
 
-},{"./_overArg":87}],84:[function(require,module,exports){
+},{"./_overArg":86}],83:[function(require,module,exports){
 /**
  * This function is like
  * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
@@ -12617,7 +12585,7 @@ function nativeKeysIn(object) {
 
 module.exports = nativeKeysIn;
 
-},{}],85:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
 /** Detect free variable `exports`. */
@@ -12649,7 +12617,7 @@ var nodeUtil = (function() {
 
 module.exports = nodeUtil;
 
-},{"./_freeGlobal":49}],86:[function(require,module,exports){
+},{"./_freeGlobal":48}],85:[function(require,module,exports){
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
 
@@ -12673,7 +12641,7 @@ function objectToString(value) {
 
 module.exports = objectToString;
 
-},{}],87:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 /**
  * Creates a unary function that invokes `func` with its argument transformed.
  *
@@ -12690,7 +12658,7 @@ function overArg(func, transform) {
 
 module.exports = overArg;
 
-},{}],88:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
 /** Detect free variable `self`. */
@@ -12701,7 +12669,7 @@ var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
 
-},{"./_freeGlobal":49}],89:[function(require,module,exports){
+},{"./_freeGlobal":48}],88:[function(require,module,exports){
 var ListCache = require('./_ListCache');
 
 /**
@@ -12718,7 +12686,7 @@ function stackClear() {
 
 module.exports = stackClear;
 
-},{"./_ListCache":6}],90:[function(require,module,exports){
+},{"./_ListCache":5}],89:[function(require,module,exports){
 /**
  * Removes `key` and its value from the stack.
  *
@@ -12738,7 +12706,7 @@ function stackDelete(key) {
 
 module.exports = stackDelete;
 
-},{}],91:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 /**
  * Gets the stack value for `key`.
  *
@@ -12754,7 +12722,7 @@ function stackGet(key) {
 
 module.exports = stackGet;
 
-},{}],92:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 /**
  * Checks if a stack value for `key` exists.
  *
@@ -12770,7 +12738,7 @@ function stackHas(key) {
 
 module.exports = stackHas;
 
-},{}],93:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     Map = require('./_Map'),
     MapCache = require('./_MapCache');
@@ -12806,7 +12774,7 @@ function stackSet(key, value) {
 
 module.exports = stackSet;
 
-},{"./_ListCache":6,"./_Map":7,"./_MapCache":8}],94:[function(require,module,exports){
+},{"./_ListCache":5,"./_Map":6,"./_MapCache":7}],93:[function(require,module,exports){
 /** Used for built-in method references. */
 var funcProto = Function.prototype;
 
@@ -12834,7 +12802,7 @@ function toSource(func) {
 
 module.exports = toSource;
 
-},{}],95:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 var baseClone = require('./_baseClone');
 
 /** Used to compose bitmasks for cloning. */
@@ -12865,7 +12833,7 @@ function cloneDeep(value) {
 
 module.exports = cloneDeep;
 
-},{"./_baseClone":24}],96:[function(require,module,exports){
+},{"./_baseClone":23}],95:[function(require,module,exports){
 /**
  * Performs a
  * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
@@ -12904,7 +12872,7 @@ function eq(value, other) {
 
 module.exports = eq;
 
-},{}],97:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 var baseIsArguments = require('./_baseIsArguments'),
     isObjectLike = require('./isObjectLike');
 
@@ -12942,7 +12910,7 @@ var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsAr
 
 module.exports = isArguments;
 
-},{"./_baseIsArguments":28,"./isObjectLike":105}],98:[function(require,module,exports){
+},{"./_baseIsArguments":27,"./isObjectLike":104}],97:[function(require,module,exports){
 /**
  * Checks if `value` is classified as an `Array` object.
  *
@@ -12970,7 +12938,7 @@ var isArray = Array.isArray;
 
 module.exports = isArray;
 
-},{}],99:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isLength = require('./isLength');
 
@@ -13005,7 +12973,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./isFunction":101,"./isLength":102}],100:[function(require,module,exports){
+},{"./isFunction":100,"./isLength":101}],99:[function(require,module,exports){
 var root = require('./_root'),
     stubFalse = require('./stubFalse');
 
@@ -13045,7 +13013,7 @@ var isBuffer = nativeIsBuffer || stubFalse;
 
 module.exports = isBuffer;
 
-},{"./_root":88,"./stubFalse":111}],101:[function(require,module,exports){
+},{"./_root":87,"./stubFalse":110}],100:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObject = require('./isObject');
 
@@ -13084,7 +13052,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./_baseGetTag":27,"./isObject":104}],102:[function(require,module,exports){
+},{"./_baseGetTag":26,"./isObject":103}],101:[function(require,module,exports){
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -13121,7 +13089,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],103:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 var baseIsMap = require('./_baseIsMap'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
@@ -13150,7 +13118,7 @@ var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
 
 module.exports = isMap;
 
-},{"./_baseIsMap":29,"./_baseUnary":36,"./_nodeUtil":85}],104:[function(require,module,exports){
+},{"./_baseIsMap":28,"./_baseUnary":35,"./_nodeUtil":84}],103:[function(require,module,exports){
 /**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
@@ -13183,7 +13151,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],105:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -13214,7 +13182,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],106:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 var baseIsSet = require('./_baseIsSet'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
@@ -13243,7 +13211,7 @@ var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 
 module.exports = isSet;
 
-},{"./_baseIsSet":31,"./_baseUnary":36,"./_nodeUtil":85}],107:[function(require,module,exports){
+},{"./_baseIsSet":30,"./_baseUnary":35,"./_nodeUtil":84}],106:[function(require,module,exports){
 var baseIsTypedArray = require('./_baseIsTypedArray'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
@@ -13272,7 +13240,7 @@ var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedA
 
 module.exports = isTypedArray;
 
-},{"./_baseIsTypedArray":32,"./_baseUnary":36,"./_nodeUtil":85}],108:[function(require,module,exports){
+},{"./_baseIsTypedArray":31,"./_baseUnary":35,"./_nodeUtil":84}],107:[function(require,module,exports){
 var arrayLikeKeys = require('./_arrayLikeKeys'),
     baseKeys = require('./_baseKeys'),
     isArrayLike = require('./isArrayLike');
@@ -13311,7 +13279,7 @@ function keys(object) {
 
 module.exports = keys;
 
-},{"./_arrayLikeKeys":17,"./_baseKeys":33,"./isArrayLike":99}],109:[function(require,module,exports){
+},{"./_arrayLikeKeys":16,"./_baseKeys":32,"./isArrayLike":98}],108:[function(require,module,exports){
 var arrayLikeKeys = require('./_arrayLikeKeys'),
     baseKeysIn = require('./_baseKeysIn'),
     isArrayLike = require('./isArrayLike');
@@ -13345,7 +13313,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"./_arrayLikeKeys":17,"./_baseKeysIn":34,"./isArrayLike":99}],110:[function(require,module,exports){
+},{"./_arrayLikeKeys":16,"./_baseKeysIn":33,"./isArrayLike":98}],109:[function(require,module,exports){
 /**
  * This method returns a new empty array.
  *
@@ -13370,7 +13338,7 @@ function stubArray() {
 
 module.exports = stubArray;
 
-},{}],111:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 /**
  * This method returns `false`.
  *
@@ -13390,8 +13358,7 @@ function stubFalse() {
 
 module.exports = stubFalse;
 
-},{}],112:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{}],111:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -13442,11 +13409,7 @@ exports.homedir = function () {
 	return '/'
 };
 
-<<<<<<< HEAD
-},{}],4:[function(require,module,exports){
-=======
-},{}],113:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{}],112:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -15979,11 +15942,7 @@ return Popper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< HEAD
-},{}],5:[function(require,module,exports){
-=======
-},{}],114:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{}],113:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -16169,8 +16128,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-<<<<<<< HEAD
-},{}],6:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -16195,10 +16153,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],7:[function(require,module,exports){
-=======
 },{}],115:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
@@ -16796,11 +16751,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< HEAD
-},{"./support/isBuffer":7,"_process":5,"inherits":6}],9:[function(require,module,exports){
-=======
-},{"./support/isBuffer":115,"_process":114,"inherits":2}],117:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"./support/isBuffer":115,"_process":113,"inherits":114}],117:[function(require,module,exports){
 /*!
   * vue-script2 v2.0.1
   * (c) 2016-2017 Greg Slepak
@@ -16944,14 +16895,8 @@ function hasOwnProperty(obj, prop) {
 
   return Script2;
 
-<<<<<<< HEAD
 }));
-},{}],10:[function(require,module,exports){
-=======
-})));
-
 },{}],118:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20518,24 +20463,11 @@ Vue.component("user-login-handler", {
 },{"../../../helper/utils":233,"services/ApiService":236,"services/ValidationService":244}],152:[function(require,module,exports){
 "use strict";
 
-<<<<<<< HEAD
 Vue.component("category-image-carousel", {
-=======
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
     delimiters: ["${", "}"],
 
     props: {
-<<<<<<< HEAD
         imageUrlsData: { type: Array },
         itemUrl: { type: String },
         altText: { type: String },
@@ -20548,27 +20480,15 @@ var NotificationService = require("services/NotificationService");
         },
         enableCarousel: { type: Boolean },
         template: { type: String }
-=======
-        template: {
-            type: String,
-            default: "#vue-add-to-wish-list"
-        },
-        variationId: Number
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
     },
 
     data: function data() {
         return {
-<<<<<<< HEAD
             $_enableCarousel: false
-=======
-            isLoading: false
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
         };
     },
 
 
-<<<<<<< HEAD
     computed: {
         imageUrls: function imageUrls() {
             return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
@@ -20588,39 +20508,19 @@ var NotificationService = require("services/NotificationService");
         this.$options.template = this.template;
 
         this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
-=======
-    computed: _extends({
-        isVariationInWishList: function isVariationInWishList() {
-            return this.wishListIds.includes(this.variationId);
-        }
-    }, Vuex.mapState({
-        wishListIds: function wishListIds(state) {
-            return state.wishList.wishListIds;
-        }
-    })),
-
-    watch: {
-        isVariationInWishList: function isVariationInWishList() {
-            this.changeTooltipText();
-        }
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
     },
+    mounted: function mounted() {
+        var _this = this;
 
-<<<<<<< HEAD
         this.$nextTick(function () {
             if (_this.$_enableCarousel) {
                 _this.initializeCarousel();
             }
         });
-=======
-    created: function created() {
-        this.$options.template = this.template;
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
     },
 
 
     methods: {
-<<<<<<< HEAD
         initializeCarousel: function initializeCarousel() {
             var _this2 = this;
 
@@ -20659,45 +20559,6 @@ var NotificationService = require("services/NotificationService");
         },
         loadFirstImage: function loadFirstImage() {
             var itemLazyImage = this.$refs.itemLazyImage;
-=======
-        switchState: function switchState() {
-            if (this.isVariationInWishList) {
-                this.removeFromWishList();
-            } else {
-                this.addToWishList();
-            }
-        },
-        addToWishList: function addToWishList() {
-            var _this = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
-                    _this.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
-                }, function (error) {
-                    _this.isLoading = false;
-                });
-            }
-        },
-        removeFromWishList: function removeFromWishList() {
-            var _this2 = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
-                    _this2.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
-                }, function (error) {
-                    _this2.isLoading = false;
-                });
-            }
-        },
-        changeTooltipText: function changeTooltipText() {
-            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
             if (itemLazyImage) {
                 if (itemLazyImage.loadImage) {
@@ -20710,11 +20571,7 @@ var NotificationService = require("services/NotificationService");
     }
 });
 
-<<<<<<< HEAD
-},{}],44:[function(require,module,exports){
-=======
-},{"services/NotificationService":241,"services/TranslationService":242}],153:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{}],153:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20838,7 +20695,7 @@ Vue.component("item-list", {
     }
 });
 
-},{}],47:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -20891,1670 +20748,27 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/UrlService":133}],48:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-search", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            currentSearchString: "",
-            preventSearch: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        searchString: function searchString(state) {
-            return state.itemList.searchString;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.initAutocomplete();
-
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-            _this.$store.commit("setItemListSearchString", urlParams.query);
-            _this.currentSearchString = urlParams.query;
-        });
-    },
-
-
-    methods: {
-        search: function search() {
-            if (this.currentSearchString.length && !this.preventSearch) {
-                if (document.location.pathname === "/search") {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
-                } else {
-                    var searchBaseURL = "/search?query=";
-
-                    if (App.defaultLanguage != App.language) {
-                        searchBaseURL = "/" + App.language + "/search?query=";
-                    }
-
-                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
-                }
-            } else {
-                this.preventSearch = false;
-            }
-        },
-        openItem: function openItem(suggestion) {
-            this.preventSearch = true;
-            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
-        },
-        updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
-        },
-        initAutocomplete: function initAutocomplete() {
-            var _this2 = this;
-
-            $(".search-input").autocomplete({
-                serviceUrl: "/rest/io/item/search/autocomplete",
-                paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch" },
-                width: $(".search-box-shadow-frame").width(),
-                zIndex: 1070,
-                maxHeight: 310,
-                minChars: 2,
-                preventBadQueries: false,
-                onSelect: function onSelect(suggestion) {
-                    _this2.$store.commit("setItemListSearchString", suggestion.value);
-                    _this2.currentSearchString = suggestion.value;
-
-                    if (App.config.search.forwardToSingleItem) {
-                        _this2.openItem(suggestion);
-                    } else {
-                        _this2.search();
-                    }
-                },
-                beforeRender: function beforeRender() {
-                    $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-                },
-
-                transformResult: function transformResult(response) {
-                    return _this2.transformSuggestionResult(response);
-                }
-            });
-
-            $(window).resize(function () {
-                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-            });
-        },
-        transformSuggestionResult: function transformSuggestionResult(result) {
-            var _this3 = this;
-
-            result = JSON.parse(result);
-            var suggestions = {
-                suggestions: $.map(result.data.documents, function (dataItem) {
-                    var value = _this3.$options.filters.itemName(dataItem.data);
-
-                    return {
-                        value: value,
-                        data: dataItem.data
-                    };
-                })
-            };
-
-            return suggestions;
-        }
-    }
-});
-
-},{"services/TranslationService":132,"services/UrlService":133}],49:[function(require,module,exports){
-"use strict";
-
-var _utils = require("../../helper/utils");
-
-Vue.component("item-store-special", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-item-store-special",
-
-    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount", "bundleType"],
-
-    data: function data() {
-        return {
-            tagClass: "",
-            label: "",
-            tagClasses: {
-                1: "bg-danger",
-                2: "bg-primary",
-                default: "bg-success"
-            }
-        };
-    },
-    created: function created() {
-
-        if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
-        } else {
-            this.tagClass = this.tagClasses.default;
-        }
-
-        this.label = this.getLabel();
-    },
-
-
-    methods: {
-        getLabel: function getLabel() {
-            if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-                if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
-                    var percent = this.getPercentageSale();
-
-                    if (parseInt(percent) < 0) {
-                        return percent + "%";
-                    }
-                }
-
-                return this.storeSpecial.names.name;
-            }
-
-            return "";
-        },
-        getPercentageSale: function getPercentageSale() {
-            // eslint-disable-next-line
-            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
-
-            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{"../../helper/utils":123}],50:[function(require,module,exports){
-=======
-},{"../../helper/utils":233,"services/TranslationService":242}],156:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("items-per-page", {
-
-    delimiters: ["${", "}"],
-
-    props: ["paginationValues", "template"],
-
-    data: function data() {
-        return {
-            selectedValue: null
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.setSelectedValueByUrl();
-    },
-
-
-    methods: {
-        itemsPerPageChanged: function itemsPerPageChanged() {
-            this.$store.dispatch("selectItemsPerPage", this.selectedValue);
-        },
-        setSelectedValueByUrl: function setSelectedValueByUrl() {
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-            var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
-
-            if (urlParams.items) {
-                if (this.paginationValues.includes(parseInt(urlParams.items))) {
-                    this.selectedValue = urlParams.items;
-                } else {
-                    this.selectedValue = defaultItemsPerPage;
-                }
-            } else {
-                this.selectedValue = defaultItemsPerPage;
-            }
-
-            this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{"services/UrlService":133}],51:[function(require,module,exports){
-=======
-},{}],157:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("pagination", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            lastPageMax: 0
-        };
-    },
-
-
-    computed: _extends({
-        pageMax: function pageMax() {
-            if (this.isLoading) {
-                return this.lastPageMax;
-            }
-
-            var pageMax = this.totalItems / parseInt(this.itemsPerPage);
-
-            if (this.totalItems % parseInt(this.itemsPerPage) > 0) {
-                pageMax += 1;
-            }
-
-            this.lastPageMax = parseInt(pageMax) || 1;
-
-            return parseInt(pageMax) || 1;
-        }
-    }, Vuex.mapState({
-        page: function page(state) {
-            return state.itemList.page || 1;
-        },
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        },
-        itemsPerPage: function itemsPerPage(state) {
-            return state.itemList.itemsPerPage;
-        },
-        totalItems: function totalItems(state) {
-            return state.itemList.totalItems;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-        var page = urlParams.page || 1;
-
-        this.$store.commit("setItemListPage", parseInt(page));
-    },
-
-
-    methods: {
-        setPage: function setPage(page) {
-            this.$store.dispatch("selectItemListPage", page);
-
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-    }
-});
-
-},{"services/UrlService":133}],52:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-filter", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "facet"],
-
-    computed: _extends({
-        facets: function facets() {
-            return this.facet.values.sort(function (facetA, facetB) {
-                if (facetA.position > facetB.position) {
-                    return 1;
-                }
-                if (facetA.position < facetB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        facetName: function facetName() {
-            if (this.facet.translationKey && this.facet.translationKey.length > 0) {
-                return _TranslationService2.default.translate("Ceres::Template." + this.facet.translationKey);
-            }
-
-            return this.facet.name;
-        }
-    }, Vuex.mapState({
-        selectedFacets: function selectedFacets(state) {
-            return state.itemList.selectedFacets;
-        },
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter";
-    },
-
-
-    methods: {
-        updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacet", facetValue);
-        },
-        isSelected: function isSelected(facetValueId) {
-            return this.selectedFacets.findIndex(function (selectedFacet) {
-                return selectedFacet.id === facetValueId;
-            }) > -1;
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{"services/TranslationService":132}],53:[function(require,module,exports){
-=======
-},{}],158:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-filter-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "facetData"],
-
-    data: function data() {
-        return {
-            isActive: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        facets: function facets(state) {
-            return state.itemList.facets.sort(function (facetA, facetB) {
-                if (facetA.position > facetB.position) {
-                    return 1;
-                }
-                if (facetA.position < facetB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        }
-    }),
-
-    created: function created() {
-        this.$store.commit("setFacets", this.facetData);
-
-        this.$options.template = this.template || "#vue-item-filter-list";
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        var selectedFacets = [];
-
-        if (urlParams.facets) {
-            selectedFacets = urlParams.facets.split(",");
-        }
-
-        if (urlParams.priceMin || urlParams.priceMax) {
-            var priceMin = urlParams.priceMin || "";
-            var priceMax = urlParams.priceMax || "";
-
-            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
-
-            selectedFacets.push("price");
-        }
-
-        if (selectedFacets.length > 0) {
-            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
-        }
-    },
-
-
-    methods: {
-        toggleOpeningState: function toggleOpeningState() {
-            var _this = this;
-
-            window.setTimeout(function () {
-                _this.isActive = !_this.isActive;
-            }, 300);
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{"services/UrlService":133}],54:[function(require,module,exports){
-=======
-},{}],159:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-filter-price", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-item-filter-price"
-        }
-    },
-
-    data: function data() {
-        return {
-            priceMin: "",
-            priceMax: "",
-            currency: App.activeCurrency
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-price";
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        this.priceMin = urlParams.priceMin || "";
-        this.priceMax = urlParams.priceMax || "";
-    },
-
-
-    computed: _extends({
-        isDisabled: function isDisabled() {
-            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
-        }
-    }, Vuex.mapState({
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        }
-    })),
-
-    methods: {
-        selectAll: function selectAll(event) {
-            event.target.select();
-        },
-        triggerFilter: function triggerFilter() {
-            if (!this.isDisabled) {
-                this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
-            }
-        }
-    }
-});
-
-},{"services/UrlService":133}],55:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-filter-tag-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        tagList: function tagList(state) {
-            return state.itemList.selectedFacets;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
-    },
-
-
-    methods: {
-        removeTag: function removeTag(tag) {
-            this.$store.dispatch("selectFacet", tag);
-        }
-    }
-});
-
-},{}],56:[function(require,module,exports){
-"use strict";
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("add-to-wish-list", {
-
-    props: ["isActive", "variationId", "template"],
-
-    data: function data() {
-        return {
-            wishListCount: 0,
-            _isActive: this.isActive,
-            isLoading: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.changeTooltipText();
-        });
-    },
-
-
-    methods: {
-        switchState: function switchState() {
-            if (this.$data._isActive) {
-                this.removeFromWishList();
-            } else {
-                this.addToWishList();
-            }
-        },
-        addToWishList: function addToWishList() {
-            var _this2 = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$data._isActive = true;
-                this.changeTooltipText();
-
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
-                    _this2.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
-                }, function (error) {
-                    _this2.isLoading = false;
-                    _this2.$data._isActive = false;
-                    _this2.changeTooltipText();
-                });
-            }
-        },
-        removeFromWishList: function removeFromWishList() {
-            var _this3 = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$data._isActive = false;
-                this.changeTooltipText();
-
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
-                    _this3.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
-                }, function (error) {
-                    _this3.isLoading = false;
-                    _this3.$data._isActive = true;
-                    _this3.changeTooltipText();
-                });
-            }
-        },
-        changeTooltipText: function changeTooltipText() {
-            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.$data._isActive ? "singleItemWishListRemove" : "singleItemWishListAdd"));
-
-            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{"services/NotificationService":131,"services/TranslationService":132}],57:[function(require,module,exports){
-=======
-},{"services/ApiService":236,"services/NotificationService":241}],160:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-Vue.component("graduated-prices", {
-    props: ["template"],
-
-    computed: _extends({
-        graduatedPrices: function graduatedPrices() {
-            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
-            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
-
-            prices = prices.filter(function (price) {
-                return price.minimumOrderQuantity > minQuantity;
-            });
-
-            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
-                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
-            });
-        },
-        activeGraduationIndex: function activeGraduationIndex() {
-            var _this = this;
-
-            var prices = this.graduatedPrices.filter(function (price) {
-                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
-            });
-
-            if (!prices.length) {
-                return -1;
-            }
-
-            var price = prices.reduce(function (prev, current) {
-                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
-            });
-
-            return this.graduatedPrices.indexOf(price);
-        }
-    }, Vuex.mapState({
-        variationOrderQuantity: function variationOrderQuantity(state) {
-            return state.item.variationOrderQuantity;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],58:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-bundle", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-item-bundle"
-        },
-        bundleType: String,
-        bundleComponents: Array
-    },
-
-    data: function data() {
-        return {
-            bundleSetting: null,
-            showItemBundleItems: true
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.$refs.bundleSetting) {
-                _this.bundleSetting = _this.$refs.bundleSetting.innerText;
-                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
-            }
-        });
-    },
-
-
-    methods: {
-        getBundleInnerText: function getBundleInnerText(item) {
-            item.variation.bundleType = null;
-
-            return item;
-        }
-    }
-});
-
-},{}],59:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _utils = require("../../helper/utils");
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-image-carousel", {
-
-    delimiters: ["${", "}"],
-
-    props: ["imageUrlAccessor", "template"],
-
-    data: function data() {
-        return {
-            currentItem: 0
-        };
-    },
-
-
-    computed: _extends({
-        carouselImages: function carouselImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
-        },
-        singleImages: function singleImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
-        }
-    }, Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation;
-        }
-    })),
-
-    watch: {
-        currentVariation: {
-            handler: function handler(val, oldVal) {
-                var _this = this;
-
-                if (val !== oldVal) {
-                    setTimeout(function () {
-                        _this.reInitialize();
-                    }, 1);
-                }
-            },
-
-            deep: true
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this2 = this;
-
-        this.$nextTick(function () {
-            _this2.initCarousel();
-            _this2.initThumbCarousel();
-        });
-    },
-
-
-    methods: {
-        getImageCount: function getImageCount() {
-            return this.carouselImages.length;
-        },
-        reInitialize: function reInitialize() {
-            var $owl = $(this.$refs.single);
-
-            $owl.trigger("destroy.owl.carousel");
-            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $owl.find(".owl-item").remove();
-
-            var $thumbs = $(this.$refs.thumbs);
-
-            $thumbs.trigger("destroy.owl.carousel");
-            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $thumbs.find(".owl-item").remove();
-
-            this.initCarousel();
-            this.initThumbCarousel();
-        },
-        initCarousel: function initCarousel() {
-            var _this3 = this;
-
-            var imageCount = this.getImageCount();
-
-            $(this.$refs.single).owlCarousel({
-                autoHeight: true,
-                dots: true,
-                items: 1,
-                lazyLoad: true,
-                loop: true,
-                margin: 10,
-                mouseDrag: imageCount > 1,
-                nav: imageCount > 1,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350,
-                onChanged: function onChanged(event) {
-                    var $thumb = $(_this3.$refs.thumbs);
-
-                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
-                }
-            });
-
-<<<<<<< HEAD
-            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
-                window.lightbox.option({
-                    wrapAround: true
-                });
-                window.lightbox.imageCountLabel = function (current, total) {
-                    if ((0, _utils.isNullOrUndefined)(imageCount) || imageCount <= 1) {
-                        return "";
-                    }
-                    current -= (total - imageCount) / 2;
-                    while (current <= 0) {
-                        current += imageCount;
-                    }
-                    while (current > imageCount) {
-                        current -= imageCount;
-                    }
-                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
-                };
-=======
-},{"../../helper/debounce":228,"../../helper/number":230,"../../helper/utils":233,"../../services/TranslationService":242}],161:[function(require,module,exports){
-"use strict";
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-                var originalFn = window.lightbox.changeImage;
-
-                window.lightbox.changeImage = function (imageNumber) {
-                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
-                        imageNumber--;
-                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
-                        imageNumber++;
-                    }
-                    return originalFn.call(window.lightbox, imageNumber);
-                };
-            }
-
-<<<<<<< HEAD
-            $(this.$refs.single).on("changed.owl.carousel", function (event) {
-                _this3.currentItem = event.page.index;
-            });
-        },
-        initThumbCarousel: function initThumbCarousel() {
-            $(this.$refs.thumbs).owlCarousel({
-                autoHeight: true,
-                dots: false,
-                items: 5,
-                lazyLoad: true,
-                loop: false,
-                margin: 10,
-                mouseDrag: false,
-                center: false,
-                nav: true,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
-            });
-        },
-        goTo: function goTo(index) {
-            var $owl = $(this.$refs.single);
-=======
-    delimiters: ["${", "}"],
-
-    props: ["template", "itemData", "variationListData", "attributeNameMap", "variationUnits"],
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-            $owl.trigger("to.owl.carousel", [index, 350]);
-        },
-        orderByPosition: function orderByPosition(list) {
-            return list.sort(function (entryA, entryB) {
-                if (entryA.position > entryB.position) {
-                    return 1;
-                }
-                if (entryA.position < entryB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        getAltText: function getAltText(image) {
-            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
-
-            return altText;
-        },
-        getItemName: function getItemName() {
-            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
-        }
-<<<<<<< HEAD
-    }
-});
-
-},{"../../helper/utils":123,"services/TranslationService":132}],60:[function(require,module,exports){
-"use strict";
-
-Vue.component("order-properties", {
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        properties: function properties(state) {
-            return state.item.variation.documents[0].data.properties;
-=======
-    }, Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation.documents[0].data;
-        },
-        variations: function variations(state) {
-            return state.item.variationList;
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: Vuex.mapMutations(["setVariationOrderProperty"])
-});
-
-<<<<<<< HEAD
-},{}],61:[function(require,module,exports){
-=======
-},{}],162:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-Vue.component("order-property-list", {
-
-<<<<<<< HEAD
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list"
-        }
-    },
-
-    data: function data() {
-        return {
-            activeSlide: 0,
-            touchedSlides: { 0: true }
-=======
-    props: ["attributes", "variations", "variationUnits", "preselect", "unitPreselect", "template"],
-
-    data: function data() {
-        return {
-            // Collection of currently selected variation attributes.
-            selectedAttributes: {},
-            possibleUnitIds: [],
-            selectedUnitId: 0
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-        };
-    },
-
-    computed: _extends({
-        sortedGroupedProperties: function sortedGroupedProperties() {
-            var groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var group = _step.value;
-
-                    this.sortGroupProperties(group);
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return this.getSortedGroups(groupedProperties);
-        },
-        missingPropertyGroupIds: function missingPropertyGroupIds() {
-            if (this.variationMarkInvalidProperties) {
-                return [].concat(_toConsumableArray(new Set(this.variationMissingProperties.map(function (property) {
-                    return property.group && property.group.id;
-                }))));
-            }
-
-            return [];
-        }
-    }, Vuex.mapState({
-        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
-            return state.item.variationMarkInvalidProperties;
-        }
-    }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
-
-<<<<<<< HEAD
-    created: function created() {
-        this.$options.template = this.template;
-=======
-                if (!!preselectedVariation && preselectedVariation.length === 1) {
-                    // set attributes of preselected variation
-                    _this.setAttributes(preselectedVariation[0]);
-
-                    if (_this.unitPreselect > 0) {
-                        var possibleVariations = _this.filterVariations(_this.selectedAttributes);
-
-                        if (possibleVariations.length > 1) {
-                            _this.setUnits(possibleVariations);
-                            _this.selectedUnitId = _this.unitPreselect;
-                        } else if (_this.variations.length > 1 && _this.attributes.length === 0) {
-                            _this.setUnits(_this.variations);
-                            _this.selectedUnitId = _this.unitPreselect;
-                        }
-                    }
-                }
-            }
-        });
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-    },
-
-
-    methods: {
-<<<<<<< HEAD
-        sortGroupProperties: function sortGroupProperties(group) {
-            return group.properties.sort(function (prev, current) {
-                if (prev.position > current.position) {
-                    return 1;
-                }
-                if (prev.position < current.position) {
-                    return -1;
-                }
-
-                return 0;
-=======
-
-        /**
-         * Finds all variations matching a given set of attributes.
-         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
-         * @returns {array}                    A list of matching variations.
-         */
-        filterVariations: function filterVariations(attributes) {
-            var _this2 = this;
-
-            attributes = attributes || this.selectedAttributes;
-            return this.variations.filter(function (variation) {
-                for (var i = 0; i < variation.attributes.length; i++) {
-                    var id = variation.attributes[i].attributeId;
-                    var val = variation.attributes[i].attributeValueId;
-
-                    if (!!attributes[id] && attributes[id] != val) {
-                        return false;
-                    }
-                }
-
-                return variation.attributes.length > 0 || _this2.possibleUnitIds.length > 0;
-            }).filter(function (variation) {
-                return _this2.selectedUnitId === 0 || _this2.selectedUnitId === variation.unitCombinationId;
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-            });
-        },
-        getSortedGroups: function getSortedGroups(groups) {
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-                for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var group = _step2.value;
-
-                    var lowestPosition = group.properties.reduce(function (prev, current) {
-                        return prev.position < current.position ? prev : current;
-                    });
-
-                    group.lowestPosition = lowestPosition.position;
-
-                    var groupId = group.group ? group.group.id : null;
-
-                    if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId)) {
-                        group.hasError = true;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
-                    }
-                } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
-                    }
-                }
-            }
-
-            return groups.sort(function (prev, current) {
-                if (prev.lowestPosition > current.lowestPosition) {
-                    return 1;
-                }
-                if (prev.lowestPosition < current.lowestPosition) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        slideTo: function slideTo(position) {
-            if (position >= 0 && position < this.sortedGroupedProperties.length) {
-                this.activeSlide = position;
-                this.touchedSlides[this.activeSlide] = true;
-            }
-        }
-    }
-});
-
-},{}],62:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("order-property-list-group", {
-
-<<<<<<< HEAD
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list-group"
-        },
-        propertyGroup: Object
-    },
-=======
-                if (possibleVariations.length === 1) {
-                    if (!this.selectedUnitId > 0) {
-                        this.possibleUnitIds = [];
-                    }
-
-                    // only 1 matching variation remaining:
-                    // set remaining attributes if not set already. Will trigger this method again.
-                    if (!this.setAttributes(possibleVariations[0])) {
-                        // all attributes are set => load variation data
-                        this.setVariation(possibleVariations[0].variationId);
-                    } else {
-                        this.onSelectionChange();
-                    }
-                } else if (possibleVariations.length > 1) {
-                    this.setUnits(possibleVariations);
-                } else {
-                    this.setUnits([]);
-                }
-            }
-        },
-        setVariation: function setVariation(variationId) {
-            var _this3 = this;
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-    computed: {
-        isShownOnItemPageCount: function isShownOnItemPageCount() {
-            var properties = this.propertyGroup.properties.filter(function (property) {
-                return property.isShownOnItemPage;
-            });
-
-            return properties.length;
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-<<<<<<< HEAD
-=======
-                    _this3.$store.commit("setVariation", response);
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-    methods: _extends({
-        unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
-            var _this = this;
-
-<<<<<<< HEAD
-            var propertiesToUnselect = this.propertyGroup.properties.filter(function (property) {
-                return property.id !== propertyId && _this.isPropertyTypeRadio(property);
-            });
-=======
-                    _this3.$emit("is-valid-change", true);
-                });
-            }
-        },
-        setUnits: function setUnits(possibleVariations) {
-            var possibleUnitIds = [];
-
-            if (possibleVariations.length > 0) {
-                possibleUnitIds = possibleVariations.map(function (variation) {
-                    return variation.unitCombinationId;
-                });
-            }
-
-            if (possibleUnitIds.length > 1) {
-                this.possibleUnitIds = possibleUnitIds;
-            } else {
-                this.selectedUnitId = 0;
-            }
-        }
-    },
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-<<<<<<< HEAD
-            try {
-                for (var _iterator = propertiesToUnselect[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var property = _step.value;
-
-                    this.setVariationOrderProperty({ propertyId: property.id, value: null });
-=======
-                    window.history.replaceState({}, title, url);
-                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url: url } }));
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-        },
-        isPropertyTypeRadio: function isPropertyTypeRadio(property) {
-            var orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
-            var valueType = property.valueType;
-
-            if (valueType === "empty" && orderPropertyGroupingType === "single") {
-                return true;
-            }
-
-            return false;
-        }
-    }, Vuex.mapMutations(["setVariationOrderProperty"]))
-});
-
-<<<<<<< HEAD
-},{}],63:[function(require,module,exports){
-=======
-},{"../../helper/dom":229,"services/ApiService":236,"util":116}],163:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("order-property-list-item", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-order-property-list-item"
-        },
-        group: Object,
-        property: Object
-    },
-
-    data: function data() {
-        return {
-            inputValue: "",
-            selectedFile: null,
-            waiting: false
-        };
-    },
-
-
-    computed: _extends({
-        inputType: function inputType() {
-            var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
-            var valueType = this.property.valueType;
-
-            if (valueType === "empty") {
-                if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
-                    return "checkbox";
-                }
-
-                return "radio";
-            }
-
-            return valueType;
-        },
-        selectedFileName: function selectedFileName() {
-            if (this.selectedFile) {
-                return this.selectedFile.name;
-            }
-
-            return "";
-        },
-        hasError: function hasError() {
-            var _this = this;
-
-            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
-                return this.variationMissingProperties.find(function (property) {
-                    return property.property.id === _this.property.id;
-                });
-            }
-<<<<<<< HEAD
-=======
-        }
-    }
-});
-
-},{}],164:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("category-item", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-category-item",
-
-    props: ["decimalCount", "itemData", "imageUrlAccessor"],
-
-    data: function data() {
-        return {
-            recommendedRetailPrice: 0,
-            variationRetailPrice: 0
-        };
-    },
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-            return this.variationMarkInvalidProperties && !this.property.value;
-        },
-        surcharge: function surcharge() {
-            return this.property.itemSurcharge || this.property.surcharge;
-        }
-    }, Vuex.mapState({
-        isBasketLoading: function isBasketLoading(state) {
-            return state.basket.isBasketLoading;
-        },
-        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
-            return state.item.variationMarkInvalidProperties;
-        }
-    }), Vuex.mapGetters(["variationMissingProperties"])),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: _extends({
-        onInputValueChanged: function onInputValueChanged(value) {
-            if (this.inputType === "int") {
-                value = this.validateInt(value);
-            } else if (this.inputType === "float") {
-                value = this.validateFloat(value);
-            } else if (this.inputType === "checkbox") {
-                if (!value) {
-                    value = null;
-                }
-            } else if (this.inputType === "radio") {
-                this.$emit("radio-change", this.property.id);
-            }
-
-<<<<<<< HEAD
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
-        },
-        validateInt: function validateInt(value) {
-            value = parseInt(value);
-=======
-});
-
-},{}],165:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-lazy-img", {
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-            if (isNaN(value)) {
-                value = null;
-            }
-
-            this.inputValue = value;
-
-            return value;
-        },
-        validateFloat: function validateFloat(value) {
-            value = parseFloat(value.replace(App.decimalSeparator, "."));
-
-            if (isNaN(value)) {
-                value = null;
-            } else {
-                value = value.toString().replace(".", App.decimalSeparator);
-            }
-
-            this.inputValue = value;
-
-            return value;
-        }
-<<<<<<< HEAD
-    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
-        setPropertyFile: function setPropertyFile(event) {
-            if (event.target && event.target.files && event.target.files.length > 0) {
-                this.selectedFile = event.target.files[0];
-                this.uploadPropertyFile(this.selectedFile);
-            }
-        },
-        uploadPropertyFile: function uploadPropertyFile(file) {
-            var _this2 = this;
-=======
-    }
-});
-
-},{}],166:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-list", {
-
-    delimiters: ["${", "}"],
-
-    props: ["categoryId", "template", "itemData", "totalItemsData"],
-
-    data: function data() {
-        return {
-            filterListState: false
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        },
-        items: function items(state) {
-            return state.itemList.items;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-        this.$store.commit("setItemListItems", this.itemData);
-        this.$store.commit("setItemListTotalItems", this.totalItemsData);
-    }
-});
-
-},{}],167:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-list-sorting", {
-
-    delimiters: ["${", "}"],
-
-    props: ["sortingList", "defaultSorting", "template"],
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
-
-            this.setIsBasketLoading(true);
-            this.waiting = true;
-
-            var fileData = new FormData();
-
-            fileData.append("fileData", file);
-
-            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
-                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
-            }).fail(function (error) {
-                _this2.clearSelectedFile();
-                _this2._handleValidationErrors(error);
-            }).always(function (response) {
-                _this2.setIsBasketLoading(false);
-                _this2.waiting = false;
-            });
-        },
-        clearSelectedFile: function clearSelectedFile() {
-            this.selectedFile = null;
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
-        },
-        _handleValidationErrors: function _handleValidationErrors(error) {
-            if (error.hasOwnProperty("validation_errors")) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var err = _step.value;
-
-                        NotificationService.error(err[0]);
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }
-        }
-    })
-});
-
-<<<<<<< HEAD
-},{"services/ApiService":126,"services/NotificationService":131}],64:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _number = require("../../helper/number");
-=======
-},{"services/UrlService":243}],168:[function(require,module,exports){
+},{"services/UrlService":243}],157:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
-var _utils = require("../../helper/utils");
-
-var _TranslationService = require("../../services/TranslationService");
+var _TranslationService = require("services/TranslationService");
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
-<<<<<<< HEAD
-var _debounce = require("../../helper/debounce");
-=======
 var _UrlService = require("services/UrlService");
 
 var _UrlService2 = _interopRequireDefault(_UrlService);
 
 var _utils = require("../../helper/utils");
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-Vue.component("quantity-input", {
+Vue.component("item-search", {
 
-<<<<<<< HEAD
-    delimiters: ["${", "}"],
-
-    props: {
-        value: {
-            type: Number,
-            required: true
-        },
-        timeout: {
-            type: Number,
-            required: false,
-            default: 500
-        },
-        min: {
-            type: Number,
-            required: false,
-            default: 0
-        },
-        max: {
-            type: Number,
-            required: false
-        },
-        interval: {
-            type: Number,
-            required: false,
-            default: 1
-        },
-        template: {
-            type: String,
-            required: true
-        },
-        waiting: {
-            type: Boolean,
-            required: false
-        },
-        variationId: {
-            type: Number,
-            required: false
-=======
     props: {
         template: {
             type: String,
@@ -22567,22 +20781,11 @@ Vue.component("quantity-input", {
         forwardToSingleItem: {
             type: Boolean,
             default: App.config.search.forwardToSingleItem
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
         }
     },
 
     data: function data() {
         return {
-<<<<<<< HEAD
-            compValue: this.value,
-            compMin: this.min,
-            compMax: this.max,
-            compInterval: this.interval,
-            compDecimals: 0,
-            onValueChanged: null
-        };
-    },
-=======
             currentSearchString: "",
             promiseCount: 0,
             autocompleteResult: [],
@@ -22604,33 +20807,21 @@ Vue.component("quantity-input", {
         }
     },
 
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
     created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
         var _this = this;
 
-<<<<<<< HEAD
-        this.$options.template = this.template;
-
-        this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
-        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
-=======
         this.$nextTick(function () {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
-        this.compDecimals = (0, _number.floatLength)(this.compInterval);
-
-        this.onValueChanged = (0, _debounce.debounce)(function () {
-            _this.$emit("quantity-change", _this.compValue);
-        }, (0, _utils.defaultValue)(this.timeout, 500));
-
-<<<<<<< HEAD
-        if (!(0, _utils.isNullOrUndefined)(this.variationId)) {
-            this.fetchQuantityFromBasket();
-        }
+            _this.$store.commit("setItemListSearchString", urlParams.query);
+            _this.currentSearchString = urlParams.query;
+        });
     },
 
-=======
+
     methods: {
         prepareSearch: function prepareSearch() {
             if (this.selectedAutocompleteItem) {
@@ -22662,45 +20853,13 @@ Vue.component("quantity-input", {
                     if (App.defaultLanguage !== App.language) {
                         searchBaseURL = "/" + App.language + "/search?query=";
                     }
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
-    computed: _extends({
-        variationBasketQuantity: function variationBasketQuantity() {
-            var _this2 = this;
-
-            if ((0, _utils.isNullOrUndefined)(this.variationId)) {
-                return 0;
+                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
+                }
+            } else {
+                this.preventSearch = false;
             }
-            var basketObject = this.$store.state.basket.items.find(function (variations) {
-                return variations.variationId === _this2.variationId;
-            });
-
-            return basketObject ? basketObject.quantity : 0;
         },
-<<<<<<< HEAD
-        isMinimum: function isMinimum() {
-            return (0, _utils.isDefined)(this.compMin) && this.compValue - this.compInterval < this.compMin;
-        },
-        isMaximum: function isMaximum() {
-            return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
-        },
-        minimumHint: function minimumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMin", {
-                min: this.min
-            });
-        },
-        maximumHint: function maximumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMax", {
-                max: this.max
-            });
-        },
-        displayValue: function displayValue() {
-            return this.$options.filters.numberFormat(this.compValue);
-        }
-    }, Vuex.mapState({
-        basketItems: function basketItems(state) {
-            return state.basket.items;
-=======
         updateTitle: function updateTitle(searchString) {
             var searchPageTitle = document.querySelector("#searchPageTitle");
             var title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
@@ -22839,7 +20998,7 @@ Vue.component("quantity-input", {
     }
 });
 
-},{"../../helper/utils":233,"services/ApiService":236,"services/TranslationService":242,"services/UrlService":243}],169:[function(require,module,exports){
+},{"../../helper/utils":233,"services/ApiService":236,"services/TranslationService":242,"services/UrlService":243}],158:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -22869,17 +21028,8 @@ Vue.component("item-store-special", {
             this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
         } else {
             this.tagClass = this.tagClasses.default;
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
         }
-    })),
 
-<<<<<<< HEAD
-    watch: {
-        basketItems: {
-            handler: function handler(newValue, oldValue) {
-                if ((0, _utils.isDefined)(this.variationId) && (0, _utils.isDefined)(oldValue) && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-                    this.fetchQuantityFromBasket();
-=======
         this.label = this.getLabel();
     },
 
@@ -22889,13 +21039,8 @@ Vue.component("item-store-special", {
             if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
                 if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
                     return "";
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
                 }
-            },
 
-<<<<<<< HEAD
-            deep: true
-=======
                 return this.getPercentageSale();
             }
 
@@ -22904,17 +21049,11 @@ Vue.component("item-store-special", {
             }
 
             return this.storeSpecial.names.name;
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
         },
+        getPercentageSale: function getPercentageSale() {
+            // eslint-disable-next-line
+            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
 
-<<<<<<< HEAD
-        value: function value(newValue, oldValue) {
-            if (newValue !== oldValue) {
-                this.setValue(newValue);
-            }
-        }
-    },
-=======
             if (percent < 0) {
                 return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
             }
@@ -22924,11 +21063,1303 @@ Vue.component("item-store-special", {
     }
 });
 
-},{"../../helper/utils":233}],170:[function(require,module,exports){
+},{"../../helper/utils":233}],159:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("items-per-page", {
+
+    delimiters: ["${", "}"],
+
+    props: ["paginationValues", "template"],
+
+    data: function data() {
+        return {
+            selectedValue: null
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.setSelectedValueByUrl();
+    },
+
+
+    methods: {
+        itemsPerPageChanged: function itemsPerPageChanged() {
+            this.$store.dispatch("selectItemsPerPage", this.selectedValue);
+        },
+        setSelectedValueByUrl: function setSelectedValueByUrl() {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+            var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
+
+            if (urlParams.items) {
+                if (this.paginationValues.includes(parseInt(urlParams.items))) {
+                    this.selectedValue = urlParams.items;
+                } else {
+                    this.selectedValue = defaultItemsPerPage;
+                }
+            } else {
+                this.selectedValue = defaultItemsPerPage;
+            }
+
+            this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
+        }
+    }
+});
+
+},{"services/UrlService":243}],160:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("pagination", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            lastPageMax: 0
+        };
+    },
+
+
+    computed: _extends({
+        pageMax: function pageMax() {
+            if (this.isLoading) {
+                return this.lastPageMax;
+            }
+
+            var pageMax = this.totalItems / parseInt(this.itemsPerPage);
+
+            if (this.totalItems % parseInt(this.itemsPerPage) > 0) {
+                pageMax += 1;
+            }
+
+            this.lastPageMax = parseInt(pageMax) || 1;
+
+            return parseInt(pageMax) || 1;
+        }
+    }, Vuex.mapState({
+        page: function page(state) {
+            return state.itemList.page || 1;
+        },
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        },
+        itemsPerPage: function itemsPerPage(state) {
+            return state.itemList.itemsPerPage;
+        },
+        totalItems: function totalItems(state) {
+            return state.itemList.totalItems;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+        var page = urlParams.page || 1;
+
+        this.$store.commit("setItemListPage", parseInt(page));
+    },
+
+
+    methods: {
+        setPage: function setPage(page) {
+            this.$store.dispatch("selectItemListPage", page);
+
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+    }
+});
+
+},{"services/UrlService":243}],161:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "facet"],
+
+    computed: _extends({
+        facets: function facets() {
+            return this.facet.values.sort(function (facetA, facetB) {
+                if (facetA.position > facetB.position) {
+                    return 1;
+                }
+                if (facetA.position < facetB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        facetName: function facetName() {
+            if (this.facet.translationKey && this.facet.translationKey.length > 0) {
+                return _TranslationService2.default.translate("Ceres::Template." + this.facet.translationKey);
+            }
+
+            return this.facet.name;
+        }
+    }, Vuex.mapState({
+        selectedFacets: function selectedFacets(state) {
+            return state.itemList.selectedFacets;
+        },
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter";
+    },
+
+
+    methods: {
+        updateFacet: function updateFacet(facetValue) {
+            this.$store.dispatch("selectFacet", facetValue);
+        },
+        isSelected: function isSelected(facetValueId) {
+            return this.selectedFacets.findIndex(function (selectedFacet) {
+                return selectedFacet.id === facetValueId;
+            }) > -1;
+        }
+    }
+});
+
+},{"services/TranslationService":242}],162:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "facetData"],
+
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        facets: function facets(state) {
+            return state.itemList.facets.sort(function (facetA, facetB) {
+                if (facetA.position > facetB.position) {
+                    return 1;
+                }
+                if (facetA.position < facetB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    }),
+
+    created: function created() {
+        this.$store.commit("setFacets", this.facetData);
+
+        this.$options.template = this.template || "#vue-item-filter-list";
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        var selectedFacets = [];
+
+        if (urlParams.facets) {
+            selectedFacets = urlParams.facets.split(",");
+        }
+
+        if (urlParams.priceMin || urlParams.priceMax) {
+            var priceMin = urlParams.priceMin || "";
+            var priceMax = urlParams.priceMax || "";
+
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+
+            selectedFacets.push("price");
+        }
+
+        if (selectedFacets.length > 0) {
+            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
+        }
+    },
+
+
+    methods: {
+        toggleOpeningState: function toggleOpeningState() {
+            var _this = this;
+
+            window.setTimeout(function () {
+                _this.isActive = !_this.isActive;
+            }, 300);
+        }
+    }
+});
+
+},{"services/UrlService":243}],163:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter-price", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-price"
+        }
+    },
+
+    data: function data() {
+        return {
+            priceMin: "",
+            priceMax: "",
+            currency: App.activeCurrency
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter-price";
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        this.priceMin = urlParams.priceMin || "";
+        this.priceMax = urlParams.priceMax || "";
+    },
+
+
+    computed: _extends({
+        isDisabled: function isDisabled() {
+            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
+        }
+    }, Vuex.mapState({
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        }
+    })),
+
+    methods: {
+        selectAll: function selectAll(event) {
+            event.target.select();
+        },
+        triggerFilter: function triggerFilter() {
+            if (!this.isDisabled) {
+                this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
+            }
+        }
+    }
+});
+
+},{"services/UrlService":243}],164:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-filter-tag-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        tagList: function tagList(state) {
+            return state.itemList.selectedFacets;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter-tag-list";
+    },
+
+
+    methods: {
+        removeTag: function removeTag(tag) {
+            this.$store.dispatch("selectFacet", tag);
+        }
+    }
+});
+
+},{}],165:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("add-to-wish-list", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-add-to-wish-list"
+        },
+        variationId: Number
+    },
+
+    data: function data() {
+        return {
+            isLoading: false
+        };
+    },
+
+
+    computed: _extends({
+        isVariationInWishList: function isVariationInWishList() {
+            return this.wishListIds.includes(this.variationId);
+        }
+    }, Vuex.mapState({
+        wishListIds: function wishListIds(state) {
+            return state.wishList.wishListIds;
+        }
+    })),
+
+    watch: {
+        isVariationInWishList: function isVariationInWishList() {
+            this.changeTooltipText();
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        switchState: function switchState() {
+            if (this.isVariationInWishList) {
+                this.removeFromWishList();
+            } else {
+                this.addToWishList();
+            }
+        },
+        addToWishList: function addToWishList() {
+            var _this = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
+                    _this.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
+                }, function (error) {
+                    _this.isLoading = false;
+                });
+            }
+        },
+        removeFromWishList: function removeFromWishList() {
+            var _this2 = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
+                    _this2.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
+                }, function (error) {
+                    _this2.isLoading = false;
+                });
+            }
+        },
+        changeTooltipText: function changeTooltipText() {
+            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+
+            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
+        }
+    }
+});
+
+},{"services/NotificationService":241,"services/TranslationService":242}],166:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+Vue.component("graduated-prices", {
+    props: ["template"],
+
+    computed: _extends({
+        graduatedPrices: function graduatedPrices() {
+            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
+            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
+
+            prices = prices.filter(function (price) {
+                return price.minimumOrderQuantity > minQuantity;
+            });
+
+            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
+            });
+        },
+        activeGraduationIndex: function activeGraduationIndex() {
+            var _this = this;
+
+            var prices = this.graduatedPrices.filter(function (price) {
+                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
+            });
+
+            if (!prices.length) {
+                return -1;
+            }
+
+            var price = prices.reduce(function (prev, current) {
+                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
+            });
+
+            return this.graduatedPrices.indexOf(price);
+        }
+    }, Vuex.mapState({
+        variationOrderQuantity: function variationOrderQuantity(state) {
+            return state.item.variationOrderQuantity;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],167:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-bundle", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-bundle"
+        },
+        bundleType: String,
+        bundleComponents: Array
+    },
+
+    data: function data() {
+        return {
+            bundleSetting: null,
+            showItemBundleItems: true
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (_this.$refs.bundleSetting) {
+                _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
+            }
+        });
+    },
+
+
+    methods: {
+        getBundleInnerText: function getBundleInnerText(item) {
+            item.variation.bundleType = null;
+
+            return item;
+        }
+    }
+});
+
+},{}],168:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-image-carousel", {
+
+    delimiters: ["${", "}"],
+
+    props: ["imageUrlAccessor", "template"],
+
+    data: function data() {
+        return {
+            currentItem: 0
+        };
+    },
+
+
+    computed: _extends({
+        carouselImages: function carouselImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+        },
+        singleImages: function singleImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+        }
+    }, Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    })),
+
+    watch: {
+        currentVariation: {
+            handler: function handler(val, oldVal) {
+                var _this = this;
+
+                if (val !== oldVal) {
+                    setTimeout(function () {
+                        _this.reInitialize();
+                    }, 1);
+                }
+            },
+
+            deep: true
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        this.$nextTick(function () {
+            _this2.initCarousel();
+            _this2.initThumbCarousel();
+        });
+    },
+
+
+    methods: {
+        getImageCount: function getImageCount() {
+            return this.carouselImages.length;
+        },
+        reInitialize: function reInitialize() {
+            var $owl = $(this.$refs.single);
+
+            $owl.trigger("destroy.owl.carousel");
+            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $owl.find(".owl-item").remove();
+
+            var $thumbs = $(this.$refs.thumbs);
+
+            $thumbs.trigger("destroy.owl.carousel");
+            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $thumbs.find(".owl-item").remove();
+
+            this.initCarousel();
+            this.initThumbCarousel();
+        },
+        initCarousel: function initCarousel() {
+            var _this3 = this;
+
+            var imageCount = this.getImageCount();
+
+            $(this.$refs.single).owlCarousel({
+                autoHeight: true,
+                dots: true,
+                items: 1,
+                lazyLoad: true,
+                loop: true,
+                margin: 10,
+                mouseDrag: imageCount > 1,
+                nav: imageCount > 1,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350,
+                onChanged: function onChanged(event) {
+                    var $thumb = $(_this3.$refs.thumbs);
+
+                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+                }
+            });
+
+            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
+                window.lightbox.option({
+                    wrapAround: true
+                });
+                window.lightbox.imageCountLabel = function (current, total) {
+                    if ((0, _utils.isNullOrUndefined)(imageCount) || imageCount <= 1) {
+                        return "";
+                    }
+                    current -= (total - imageCount) / 2;
+                    while (current <= 0) {
+                        current += imageCount;
+                    }
+                    while (current > imageCount) {
+                        current -= imageCount;
+                    }
+                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
+                };
+
+                var originalFn = window.lightbox.changeImage;
+
+                window.lightbox.changeImage = function (imageNumber) {
+                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
+                        imageNumber--;
+                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
+                        imageNumber++;
+                    }
+                    return originalFn.call(window.lightbox, imageNumber);
+                };
+            }
+
+            $(this.$refs.single).on("changed.owl.carousel", function (event) {
+                _this3.currentItem = event.page.index;
+            });
+        },
+        initThumbCarousel: function initThumbCarousel() {
+            $(this.$refs.thumbs).owlCarousel({
+                autoHeight: true,
+                dots: false,
+                items: 5,
+                lazyLoad: true,
+                loop: false,
+                margin: 10,
+                mouseDrag: false,
+                center: false,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350
+            });
+        },
+        goTo: function goTo(index) {
+            var $owl = $(this.$refs.single);
+
+            $owl.trigger("to.owl.carousel", [index, 350]);
+        },
+        orderByPosition: function orderByPosition(list) {
+            return list.sort(function (entryA, entryB) {
+                if (entryA.position > entryB.position) {
+                    return 1;
+                }
+                if (entryA.position < entryB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+
+            return altText;
+        },
+        getItemName: function getItemName() {
+            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
+        }
+    }
+});
+
+},{"../../helper/utils":233,"services/TranslationService":242}],169:[function(require,module,exports){
+"use strict";
+
+Vue.component("order-properties", {
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        properties: function properties(state) {
+            return state.item.variation.documents[0].data.properties;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: Vuex.mapMutations(["setVariationOrderProperty"])
+});
+
+},{}],170:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+Vue.component("order-property-list", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list"
+        }
+    },
+
+    data: function data() {
+        return {
+            activeSlide: 0,
+            touchedSlides: { 0: true }
+        };
+    },
+
+    computed: _extends({
+        sortedGroupedProperties: function sortedGroupedProperties() {
+            var groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var group = _step.value;
+
+                    this.sortGroupProperties(group);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return this.getSortedGroups(groupedProperties);
+        },
+        missingPropertyGroupIds: function missingPropertyGroupIds() {
+            if (this.variationMarkInvalidProperties) {
+                return [].concat(_toConsumableArray(new Set(this.variationMissingProperties.map(function (property) {
+                    return property.group && property.group.id;
+                }))));
+            }
+
+            return [];
+        }
+    }, Vuex.mapState({
+        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
+            return state.item.variationMarkInvalidProperties;
+        }
+    }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        sortGroupProperties: function sortGroupProperties(group) {
+            return group.properties.sort(function (prev, current) {
+                if (prev.position > current.position) {
+                    return 1;
+                }
+                if (prev.position < current.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        getSortedGroups: function getSortedGroups(groups) {
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var group = _step2.value;
+
+                    var lowestPosition = group.properties.reduce(function (prev, current) {
+                        return prev.position < current.position ? prev : current;
+                    });
+
+                    group.lowestPosition = lowestPosition.position;
+
+                    var groupId = group.group ? group.group.id : null;
+
+                    if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId)) {
+                        group.hasError = true;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return groups.sort(function (prev, current) {
+                if (prev.lowestPosition > current.lowestPosition) {
+                    return 1;
+                }
+                if (prev.lowestPosition < current.lowestPosition) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        slideTo: function slideTo(position) {
+            if (position >= 0 && position < this.sortedGroupedProperties.length) {
+                this.activeSlide = position;
+                this.touchedSlides[this.activeSlide] = true;
+            }
+        }
+    }
+});
+
+},{}],171:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("order-property-list-group", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list-group"
+        },
+        propertyGroup: Object
+    },
+
+    computed: {
+        isShownOnItemPageCount: function isShownOnItemPageCount() {
+            var properties = this.propertyGroup.properties.filter(function (property) {
+                return property.isShownOnItemPage;
+            });
+
+            return properties.length;
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: _extends({
+        unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
+            var _this = this;
+
+            var propertiesToUnselect = this.propertyGroup.properties.filter(function (property) {
+                return property.id !== propertyId && _this.isPropertyTypeRadio(property);
+            });
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = propertiesToUnselect[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+                    this.setVariationOrderProperty({ propertyId: property.id, value: null });
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        },
+        isPropertyTypeRadio: function isPropertyTypeRadio(property) {
+            var orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
+            var valueType = property.valueType;
+
+            if (valueType === "empty" && orderPropertyGroupingType === "single") {
+                return true;
+            }
+
+            return false;
+        }
+    }, Vuex.mapMutations(["setVariationOrderProperty"]))
+});
+
+},{}],172:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("order-property-list-item", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-order-property-list-item"
+        },
+        group: Object,
+        property: Object
+    },
+
+    data: function data() {
+        return {
+            inputValue: "",
+            selectedFile: null,
+            waiting: false
+        };
+    },
+
+
+    computed: _extends({
+        inputType: function inputType() {
+            var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
+            var valueType = this.property.valueType;
+
+            if (valueType === "empty") {
+                if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
+                    return "checkbox";
+                }
+
+                return "radio";
+            }
+
+            return valueType;
+        },
+        selectedFileName: function selectedFileName() {
+            if (this.selectedFile) {
+                return this.selectedFile.name;
+            }
+
+            return "";
+        },
+        hasError: function hasError() {
+            var _this = this;
+
+            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
+                return this.variationMissingProperties.find(function (property) {
+                    return property.property.id === _this.property.id;
+                });
+            }
+
+            return this.variationMarkInvalidProperties && !this.property.value;
+        },
+        surcharge: function surcharge() {
+            return this.property.itemSurcharge || this.property.surcharge;
+        }
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        },
+        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
+            return state.item.variationMarkInvalidProperties;
+        }
+    }), Vuex.mapGetters(["variationMissingProperties"])),
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: _extends({
+        onInputValueChanged: function onInputValueChanged(value) {
+            if (this.inputType === "int") {
+                value = this.validateInt(value);
+            } else if (this.inputType === "float") {
+                value = this.validateFloat(value);
+            } else if (this.inputType === "checkbox") {
+                if (!value) {
+                    value = null;
+                }
+            } else if (this.inputType === "radio") {
+                this.$emit("radio-change", this.property.id);
+            }
+
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
+        },
+        validateInt: function validateInt(value) {
+            value = parseInt(value);
+
+            if (isNaN(value)) {
+                value = null;
+            }
+
+            this.inputValue = value;
+
+            return value;
+        },
+        validateFloat: function validateFloat(value) {
+            value = parseFloat(value.replace(App.decimalSeparator, "."));
+
+            if (isNaN(value)) {
+                value = null;
+            } else {
+                value = value.toString().replace(".", App.decimalSeparator);
+            }
+
+            this.inputValue = value;
+
+            return value;
+        }
+    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
+        setPropertyFile: function setPropertyFile(event) {
+            if (event.target && event.target.files && event.target.files.length > 0) {
+                this.selectedFile = event.target.files[0];
+                this.uploadPropertyFile(this.selectedFile);
+            }
+        },
+        uploadPropertyFile: function uploadPropertyFile(file) {
+            var _this2 = this;
+
+            this.setIsBasketLoading(true);
+            this.waiting = true;
+
+            var fileData = new FormData();
+
+            fileData.append("fileData", file);
+
+            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
+                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
+            }).fail(function (error) {
+                _this2.clearSelectedFile();
+                _this2._handleValidationErrors(error);
+            }).always(function (response) {
+                _this2.setIsBasketLoading(false);
+                _this2.waiting = false;
+            });
+        },
+        clearSelectedFile: function clearSelectedFile() {
+            this.selectedFile = null;
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
+        },
+        _handleValidationErrors: function _handleValidationErrors(error) {
+            if (error.hasOwnProperty("validation_errors")) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var err = _step.value;
+
+                        NotificationService.error(err[0]);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        }
+    })
+});
+
+},{"services/ApiService":236,"services/NotificationService":241}],173:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _number = require("../../helper/number");
+
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("../../services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _debounce = require("../../helper/debounce");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("quantity-input", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        value: {
+            type: Number,
+            required: true
+        },
+        timeout: {
+            type: Number,
+            required: false,
+            default: 500
+        },
+        min: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        max: {
+            type: Number,
+            required: false
+        },
+        interval: {
+            type: Number,
+            required: false,
+            default: 1
+        },
+        template: {
+            type: String,
+            required: true
+        },
+        waiting: {
+            type: Boolean,
+            required: false
+        },
+        variationId: {
+            type: Number,
+            required: false
+        }
+    },
+
+    data: function data() {
+        return {
+            compValue: this.value,
+            compMin: this.min,
+            compMax: this.max,
+            compInterval: this.interval,
+            compDecimals: 0,
+            onValueChanged: null
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+
+        this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
+        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
+
+        this.compDecimals = (0, _number.floatLength)(this.compInterval);
+
+        this.onValueChanged = (0, _debounce.debounce)(function () {
+            _this.$emit("quantity-change", _this.compValue);
+        }, (0, _utils.defaultValue)(this.timeout, 500));
+
+        if (!(0, _utils.isNullOrUndefined)(this.variationId)) {
+            this.fetchQuantityFromBasket();
+        }
+    },
+
+
+    computed: _extends({
+        variationBasketQuantity: function variationBasketQuantity() {
+            var _this2 = this;
+
+            if ((0, _utils.isNullOrUndefined)(this.variationId)) {
+                return 0;
+            }
+            var basketObject = this.$store.state.basket.items.find(function (variations) {
+                return variations.variationId === _this2.variationId;
+            });
+
+            return basketObject ? basketObject.quantity : 0;
+        },
+        isMinimum: function isMinimum() {
+            return (0, _utils.isDefined)(this.compMin) && this.compValue - this.compInterval < this.compMin;
+        },
+        isMaximum: function isMaximum() {
+            return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
+        },
+        minimumHint: function minimumHint() {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMin", {
+                min: this.min
+            });
+        },
+        maximumHint: function maximumHint() {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMax", {
+                max: this.max
+            });
+        },
+        displayValue: function displayValue() {
+            return this.$options.filters.numberFormat(this.compValue);
+        }
+    }, Vuex.mapState({
+        basketItems: function basketItems(state) {
+            return state.basket.items;
+        }
+    })),
+
+    watch: {
+        basketItems: {
+            handler: function handler(newValue, oldValue) {
+                if ((0, _utils.isDefined)(this.variationId) && (0, _utils.isDefined)(oldValue) && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+                    this.fetchQuantityFromBasket();
+                }
+            },
+
+            deep: true
+        },
+
+        value: function value(newValue, oldValue) {
+            if (newValue !== oldValue) {
+                this.setValue(newValue);
+            }
+        }
+    },
 
     methods: {
         increaseValue: function increaseValue() {
@@ -23003,18 +22434,16 @@ var _UrlService = require("services/UrlService");
     }
 });
 
-<<<<<<< HEAD
-},{"../../helper/debounce":118,"../../helper/number":120,"../../helper/utils":123,"../../services/TranslationService":132}],65:[function(require,module,exports){
-=======
-},{"services/UrlService":243}],171:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"../../helper/debounce":228,"../../helper/number":230,"../../helper/utils":233,"../../services/TranslationService":242}],174:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 Vue.component("single-item", {
 
-    props: ["template", "itemData", "variationListData", "attributeNameMap"],
+    delimiters: ["${", "}"],
+
+    props: ["template", "itemData", "variationListData", "attributeNameMap", "variationUnits"],
 
     data: function data() {
         return {
@@ -23036,9 +22465,6 @@ Vue.component("single-item", {
         },
         variations: function variations(state) {
             return state.item.variationList;
-        },
-        isInWishList: function isInWishList(state) {
-            return state.item.variation.documents[0].isInWishListVariation;
         }
     }), Vuex.mapGetters(["variationTotalPrice", "variationMissingProperties", "variationGroupedProperties", "variationGraduatedPrice"])),
 
@@ -23058,21 +22484,12 @@ Vue.component("single-item", {
     }
 });
 
-<<<<<<< HEAD
-},{}],66:[function(require,module,exports){
-=======
-},{"services/UrlService":243}],172:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{}],175:[function(require,module,exports){
 "use strict";
 
 var _util = require("util");
 
-<<<<<<< HEAD
 var _dom = require("../../helper/dom");
-=======
-},{"services/TranslationService":242}],173:[function(require,module,exports){
-"use strict";
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -23085,12 +22502,14 @@ Vue.component("variation-select", {
 
     delimiters: ["${", "}"],
 
-    props: ["attributes", "variations", "preselect", "template"],
+    props: ["attributes", "variations", "variationUnits", "preselect", "unitPreselect", "template"],
 
     data: function data() {
         return {
             // Collection of currently selected variation attributes.
-            selectedAttributes: {}
+            selectedAttributes: {},
+            possibleUnitIds: [],
+            selectedUnitId: 0
         };
     },
 
@@ -23127,6 +22546,18 @@ Vue.component("variation-select", {
                 if (!!preselectedVariation && preselectedVariation.length === 1) {
                     // set attributes of preselected variation
                     _this.setAttributes(preselectedVariation[0]);
+
+                    if (_this.unitPreselect > 0) {
+                        var possibleVariations = _this.filterVariations(_this.selectedAttributes);
+
+                        if (possibleVariations.length > 1) {
+                            _this.setUnits(possibleVariations);
+                            _this.selectedUnitId = _this.unitPreselect;
+                        } else if (_this.variations.length > 1 && _this.attributes.length === 0) {
+                            _this.setUnits(_this.variations);
+                            _this.selectedUnitId = _this.unitPreselect;
+                        }
+                    }
                 }
             }
         });
@@ -23141,23 +22572,22 @@ Vue.component("variation-select", {
          * @returns {array}                    A list of matching variations.
          */
         filterVariations: function filterVariations(attributes) {
+            var _this2 = this;
+
             attributes = attributes || this.selectedAttributes;
             return this.variations.filter(function (variation) {
                 for (var i = 0; i < variation.attributes.length; i++) {
                     var id = variation.attributes[i].attributeId;
                     var val = variation.attributes[i].attributeValueId;
 
-<<<<<<< HEAD
                     if (!!attributes[id] && attributes[id] != val) {
                         return false;
                     }
                 }
-=======
-},{"services/UrlService":243}],174:[function(require,module,exports){
-"use strict";
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
-                return variation.attributes.length > 0;
+                return variation.attributes.length > 0 || _this2.possibleUnitIds.length > 0;
+            }).filter(function (variation) {
+                return _this2.selectedUnitId === 0 || _this2.selectedUnitId === variation.unitCombinationId;
             });
         },
 
@@ -23225,6 +22655,10 @@ Vue.component("variation-select", {
                 var possibleVariations = this.filterVariations();
 
                 if (possibleVariations.length === 1) {
+                    if (!this.selectedUnitId > 0) {
+                        this.possibleUnitIds = [];
+                    }
+
                     // only 1 matching variation remaining:
                     // set remaining attributes if not set already. Will trigger this method again.
                     if (!this.setAttributes(possibleVariations[0])) {
@@ -23233,20 +22667,19 @@ Vue.component("variation-select", {
                     } else {
                         this.onSelectionChange();
                     }
+                } else if (possibleVariations.length > 1) {
+                    this.setUnits(possibleVariations);
+                } else {
+                    this.setUnits([]);
                 }
             }
         },
         setVariation: function setVariation(variationId) {
-            var _this2 = this;
+            var _this3 = this;
 
-<<<<<<< HEAD
             if (VariationData[variationId]) {
                 // reuse cached variation data
                 this.$store.commit("setVariation", VariationData[variationId]);
-=======
-},{"services/UrlService":243}],175:[function(require,module,exports){
-"use strict";
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
 
                 document.dispatchEvent(new CustomEvent("onVariationChanged", {
                     detail: {
@@ -23262,12 +22695,27 @@ Vue.component("variation-select", {
                     // store received variation data for later reuse
                     VariationData[variationId] = response;
 
-                    _this2.$store.commit("setVariation", response);
+                    _this3.$store.commit("setVariation", response);
 
                     document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
 
-                    _this2.$emit("is-valid-change", true);
+                    _this3.$emit("is-valid-change", true);
                 });
+            }
+        },
+        setUnits: function setUnits(possibleVariations) {
+            var possibleUnitIds = [];
+
+            if (possibleVariations.length > 0) {
+                possibleUnitIds = possibleVariations.map(function (variation) {
+                    return variation.unitCombinationId;
+                });
+            }
+
+            if (possibleUnitIds.length > 1) {
+                this.possibleUnitIds = possibleUnitIds;
+            } else {
+                this.selectedUnitId = 0;
             }
         }
     },
@@ -23280,6 +22728,7 @@ Vue.component("variation-select", {
                     var title = document.getElementsByTagName("title")[0].innerHTML;
 
                     window.history.replaceState({}, title, url);
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url: url } }));
                 }
             },
 
@@ -23288,11 +22737,7 @@ Vue.component("variation-select", {
     }
 });
 
-<<<<<<< HEAD
-},{"../../helper/dom":119,"services/ApiService":126,"util":8}],67:[function(require,module,exports){
-=======
-},{}],176:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"../../helper/dom":229,"services/ApiService":236,"util":116}],176:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -24540,11 +23985,7 @@ Vue.component("popper", {
     }
 });
 
-<<<<<<< HEAD
-},{"../../helper/dom":119,"../../helper/utils":123,"popper.js":4,"services/ModalService":130}],79:[function(require,module,exports){
-=======
-},{"../../helper/dom":229,"../../helper/utils":233,"popper.js":113,"services/ModalService":240}],189:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"../../helper/dom":229,"../../helper/utils":233,"popper.js":112,"services/ModalService":240}],189:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -27289,11 +26730,7 @@ function navigateTo(url) {
 
 exports.default = { setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo };
 
-<<<<<<< HEAD
-},{"../helper/url":122,"../helper/utils":123,"jquery":2}],134:[function(require,module,exports){
-=======
-},{"../helper/url":232,"../helper/utils":233,"../store/index":246,"jquery":3}],244:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"../helper/url":232,"../helper/utils":233,"../store/index":246,"jquery":2}],244:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27528,11 +26965,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-<<<<<<< HEAD
-},{"jquery":2}],135:[function(require,module,exports){
-=======
-},{"jquery":3}],245:[function(require,module,exports){
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"jquery":2}],245:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -29725,9 +29158,6 @@ exports.default = {
     getters: getters
 };
 
-<<<<<<< HEAD
-},{"services/ApiService":126}]},{},[124,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,56,57,58,59,60,61,62,63,64,65,66,43,44,52,53,54,55,45,46,47,48,50,49,51,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,118,119,117,120,121,122,123,136,137,138,139,140,141,142,143,144,145,146,147])
-=======
 },{"services/ApiService":236}],258:[function(require,module,exports){
 "use strict";
 
@@ -29754,8 +29184,7 @@ exports.default = function (store) {
 var NotificationService = require("services/NotificationService");
 var cloneDeep = require("lodash/cloneDeep");
 
-},{"lodash/cloneDeep":95,"services/NotificationService":241}]},{},[234,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,147,148,149,150,151,144,145,146,152,153,154,155,156,157,158,159,160,161,162,163,164,172,173,174,175,165,166,167,168,170,169,171,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,228,229,227,230,231,232,233,246,247,248,249,250,251,252,253,254,255,256,257,258])
->>>>>>> 150d9404a161b3414932a65f553c2db775368449
+},{"lodash/cloneDeep":94,"services/NotificationService":241}]},{},[234,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,147,148,149,150,151,144,145,146,165,166,167,168,169,170,171,172,173,174,175,152,153,161,162,163,164,154,155,156,157,159,158,160,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,228,229,227,230,231,232,233,246,247,248,249,250,251,252,253,254,255,256,257,258])
 
 
 //# sourceMappingURL=ceres-app.js.map
