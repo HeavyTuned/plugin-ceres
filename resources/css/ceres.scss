@@ -4167,6 +4167,11 @@ pre {
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
+  &:-ms-input-placeholder {
+    color: $input-color-placeholder;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
   &::-ms-input-placeholder {
     color: $input-color-placeholder;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
@@ -10710,55 +10715,47 @@ body {
 			position 	: absolute;
 			z-index 	: $zIndex-8;
 
-.hidden {
-    display: none;
-}
+			.wrapper-inner{
+				
+			}
+		} 
 
-.page-content{
-    @extend .p-t-1;
-    background-color: $gray-lightest;
-    &.basket,
-    &.checkout,
-    &.contact,
-    &.myaccount {
-        &:not(.checkout):not(.basket) {
-            background-color: $white;
-        }
-        color: $gray-darker;
-        margin-top: 30px;
-        padding-bottom: 30px;
-    }
-}
-.container-max{
-    @extend .container-fluid;
-    max-width: 1200px;
-    z-index: auto;
+		.wrapper-main{
+			position: relative;
+			//z-index: $zIndex-1;
+		}
+		
+		.wrapper-top {
+			top 		: 0;
+			right 		: 0;  
+			left 		: 0;
+		}
+		
+		.wrapper-right {
+			position	:fixed;
+			top 	 	: 0;
+			bottom 		: 0;
+			left 		: 100%;
+			width 		: 0;
 
-    &.login {
-        margin-top: 2rem;
-    }
-}
+			overflow 	: hidden;
+			
+			background-color : white;
+			-webkit-transform: translateX(0);
+			        transform: translateX(0);
 
-.page-not-found {
-    i.fa-search {
-        font-size: 10em;
-    }
-    .default-not-found {
-        background-color: rgb(247, 247, 249);
-    }
-    .not-found-text {
-        font-size: 115px;
-        text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
-    }
-}
+			-webkit-transition: width 310ms 0ms,
+						-webkit-transform 300ms ease-in-out;
 
-.rating{
-    line-height: 1;
+			transition: width 310ms 0ms,
+						-webkit-transform 300ms ease-in-out;
 
-    .tag{
-        padding-right: 0;
-        overflow: hidden;
-        cursor: pointer;
+			transition: width 310ms 0ms,
+						transform 300ms ease-in-out;
+
+			transition: width 310ms 0ms,
+						transform 300ms ease-in-out,
+						-webkit-transform 300ms ease-in-out;
 
 			.wrapper-inner{
 				width: 100%;
@@ -10799,19 +10796,15 @@ body {
 				bottom 	: 0;
 				left 	: 0;
 
-dt {
-    font-weight: 400;
-}
+				z-index: $zIndex-7;
 
-a:hover,
-a:focus,
-a:active {
-    text-decoration: none;
-}
+				background-color: rgba(0, 0, 0, .5);
+			}
+		}
+		
 
-.border-left {
-    border-left: 1px solid $gray-dark;
-}
+		&.open-right{
+			overflow: hidden;
 
 			@include media-breakpoint-down(sm) {
 				position: fixed;
@@ -10826,55 +10819,14 @@ a:active {
 				
 				        transform: translateX(-100%);
 
-.carousel-control-next, .carousel-control-prev {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    width: 15%;
-    color: #fff;
-    text-align: center;
-    opacity: .5;
-}
-.carousel-control-prev {
-    left: 0;
-}
-.carousel-control-next {
-    right: 0;
-}
-.carousel-control-next-icon, .carousel-control-prev-icon {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: transparent no-repeat center center;
-    background-size: 100% 100%;
-}
+				-webkit-transition: width 0ms,
+							-webkit-transform 300ms 10ms ease-in-out;
 
-.pagination > li {
-    cursor: pointer;
-}
+				transition: width 0ms,
+							-webkit-transform 300ms 10ms ease-in-out;
 
-@include media-breakpoint-up(xl){
-    .page-content{
-        padding-left: 0;
-        padding-right: 0;
-        &.basket,
-        &.checkout,
-        &.contact,
-        &.myaccount {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    }
-}
+				transition: width 0ms,
+							transform 300ms 10ms ease-in-out;
 
 				transition: width 0ms,
 							transform 300ms 10ms ease-in-out,
@@ -10886,13 +10838,17 @@ a:active {
 			}
 		}
 
-.bg-white {
-    background-color: $white !important;
-}
+		&.open-hover {
+			@include media-breakpoint-down(xs) {
+				position: fixed;
+			}
 
-.text-gray-dark {
-    color: $gray-dark;
-}
+			.basket-preview-hover-wrapper {
+				display: block;
+				-webkit-transform: translateX(0%);
+				        transform: translateX(0%);
+			}
+		}
 
 		@include media-breakpoint-up(sm){
 		}
@@ -10905,108 +10861,10 @@ a:active {
 			}
 		}
 
-.position-fixed {
-    position: fixed !important;
-}
-body {
-    background-color: $white;
-    >#vue-app,
-    >#vue-error {
-        background: url(https://static.heavytuned.de/online/res/layout/lucx2017b/images/2017start/Hintergrund.jpg) top center no-repeat;
-        &>.wrapper-top,
-        &>.wrapper-left,
-        &>.wrapper-right,
-        &>.wrapper-bottom {
-            position: absolute;
-            z-index: $zIndex-8;
-            .wrapper-inner {}
-        }
-        .wrapper-main {
-            position: relative; //z-index: $zIndex-1;
-        }
-        .wrapper-top {
-            top: 0;
-            right: 0;
-            left: 0;
-        }
-        .wrapper-right {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 100%;
-            width: 0;
-            overflow: hidden;
-            background-color: white;
-            -webkit-transform: translateX(0);
-                    transform: translateX(0);
-            -webkit-transition: width 310ms 0ms, -webkit-transform 300ms ease-in-out;
-            transition: width 310ms 0ms, -webkit-transform 300ms ease-in-out;
-            transition: width 310ms 0ms, transform 300ms ease-in-out;
-            transition: width 310ms 0ms, transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
-            .wrapper-inner {
-                width: 100%;
-                height: 100%;
-            }
-        }
-        .wrapper-bottom {
-            z-index: 2000;
-        }
-        .wrapper-left {
-            top: 0;
-            bottom: 0;
-            left: 0;
-            -webkit-transform: translateX(-100%);
-                    transform: translateX(-100%);
-        } // body state modifiers
-        &.overlay,
-        &.open-right,
-        &.open-left,
-        &.open-top,
-        &.open-bottom {
-            // dark overlay on body
-            &::after {
-                content: "";
-                position: fixed;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                z-index: $zIndex-7;
-                background-color: rgba(0, 0, 0, .5);
-            }
-        }
-        &.open-right {
-            overflow: hidden;
-            .wrapper-right {
-                width: 100vw;
-                -webkit-transform: translateX(-100%);
-                        transform: translateX(-100%);
-                -webkit-transition: width 0ms, -webkit-transform 300ms 10ms ease-in-out;
-                transition: width 0ms, -webkit-transform 300ms 10ms ease-in-out;
-                transition: width 0ms, transform 300ms 10ms ease-in-out;
-                transition: width 0ms, transform 300ms 10ms ease-in-out, -webkit-transform 300ms 10ms ease-in-out;
-            }
-        }
-        &.open-hover {
-            @include media-breakpoint-down(xs) {
-                position: fixed;
-            }
-            .basket-preview-hover-wrapper {
-                display: block;
-                -webkit-transform: translateX(0%);
-                        transform: translateX(0%);
-            }
-        }
-        @include media-breakpoint-up(sm) {
-            &.open-right {
-                .wrapper-right {
-                    width: $aside-columns-width;
-                }
-            }
-        }
-        @include media-breakpoint-up(md) {}
-        @include media-breakpoint-up(lg) {}
-    }
+		@include media-breakpoint-up(lg){
+			
+		}
+	}
 }
 
 //TODO's
