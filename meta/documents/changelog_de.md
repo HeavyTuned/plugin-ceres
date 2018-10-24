@@ -1,5 +1,90 @@
 # Release Notes für Ceres
 
+## v2.16.0 (2018-10-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.15.0...2.16.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Das Newsletter-Widget für den ShopBuilder wurde zu Ceres hinzugefügt.
+- Es wurden 2 neue Layout-Container in der Artikelliste im Warenkorb hinzugefügt.
+- Es wurde ein neuer Layout-Container hinzugefügt, der es ermöglicht das Bilderkarussell auf der Artikeleinzelansicht auszutauschen.
+- Bei Formularen in Ceres wird nun initial immer das erste Feld fokussiert.
+- Es wurde ein EventListener hinzugefügt, über welchen man Benachrichtigungen in Ceres ausgeben kann.
+- Dem Breadcrumb-Widget des ShopBuilders wurde die Option "Auf Content-Kategorien anzeigen" hinzugefügt, über welche man die Breadcrumbs auf Content-Kategorien ein- und ausblenden kann.
+- Alle Vuex-Mutationen werden nun als JavaScript CustomEvent realisiert, damit andere Plugins/Themes besser auf Änderungen im Webshop reagieren können.
+
+### Geändert
+
+- Die Warenkorbvorschau wurde überarbeitet, um auf mobilen Endgeräten besser zu funktionieren. Eine neue Landscape-Ansicht wurde hinzugefügt.
+- Bevor der Titel einer Kategorie beim Wechseln aktualisiert wird, wird das Element auf seine Existenz hin geprüft. Hierdurch werden eventuelle Fehler auf Content-Kategorien ausgeschlossen.
+- Der Login-Bereich in Ceres wurde leicht angepasst, um sich der gesamtheitlichen Gestaltung von Ceres anzupassen.
+- Die Felder für die maximale Kategorieanzahl des Navigations-Widgets werden nun auf Standardwerte gesetzt, falls diese unausgefüllt sind. Hierdurch soll verhindert werden, dass Kategorien in der Navigation fehlen.
+- Die Datenstrukturen für die Kategorie-Navigation wurden minimiert, um die Ladezeit zu verbessern.
+- Breadcrumbs werden nun auf Content-Kategorien ausgegeben, auch wenn diese nicht in der Navigation angezeigt werden.
+- Die Darstellung von Rabatten wurde angepasst.
+- Es wurden neue JavaScript-Events hinzugefügt, um Änderungen am Browserverlauf, die Benutzerregistrierung und das Senden eines Kontaktformulares registrieren zu können. Wir bedanken uns bei @felixries für die Hilfe.
+- Änderungen der Filter, der Sortierung oder der Seite werden nun als Eintrag im Browserverlauf hinzugefügt. Wir bedanken uns bei @felixries für die Hilfe.
+- In IO ist es nun möglich, während eines REST-Aufrufs das derzeitige Template auszulesen.
+
+### Behoben
+
+- Durch einen Fehler wurden Suchbegriffe auf der Suchseite nicht richtig dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurde die Einwilligung zur Datenübermittlung bei bestimmten Versandprofilen nicht angezeigt. Dies wurde behoben.
+- Im Bereich der Rich Snippets kam es zu einem fehlerhaften Aufruf. Dieses Verhalten wurde behoben. Wir bedanken uns bei @Lauflust für die Hilfe.
+- Durch einen Fehler konnten bestimmte Kategorie-Seiten vom Typ **Content** nicht aufgerufen werden. Dies wurde behoben.
+- Auf der Login-Seite kam es zu Konsolenfehlern. Diese wurden behoben.
+- Durch einen Fehler ließ sich die PayPal PLUS-Wall auf mobilen Endgeräten nicht richtig bedienen. Dies wurde behoben.
+- Die Hintergrundfarbe des Such-Icons in der Top-Bar nutzt nun die korrekte SCSS-Variable.
+- Durch einen Fehler wurden die Felder **Straße** und **Hausnummer** in der Adresseingabe bei einem Wechsel des Landes zurückgesetzt. Dies wurde behoben.
+- Durch einen Fehler wurden keine Artikel auf der Retourenseite dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurden Icons von Zahlungsanbietern in der Bestellbestätigung nicht angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde der Seitentitel auf Contentseiten nicht korrekt gefüllt. Dies wurde behoben.
+- Durch einen Fehler wurde die Beschreibung einer Merkmalgruppe nicht komplett angezeigt. Dies wurde behoben.
+- Beim Navigieren im Kategoriebaum wurde der alte Konfigurationswert für den Seitentitel ausgelesen und nicht der Wert aus der Mehrsprachigkeits-UI. Dieses Verhalten wurde behoben.
+- Beim Aufrufen der Retourenübersicht kam es zu JavaScript-Fehlern. Dieses Verhalten wurde behoben.
+- Bei der Validierung von Gutscheinen wurde anstatt des konkreten Fehlercodes der allgemeine Fehlercode ausgegeben. Dieses Verhalten wurde behoben.
+- Es wurden verschiedene SEO-relevante Anpassungen durchgeführt.
+- Durch einen Fehler wurden nicht alle Artikel in die **Zuletzt gesehen**-Artikelliste aufgenommen. Dies wurde behoben.
+- Durch einen Fehler wurde die Auswahl einer Rechnungsadresse nicht korrekt gespeichert. Dies wurde behoben.
+- Bei mehreren Bestellmerkmalen vom Typ Text wurden nicht alle Werte in den Warenkorb übernommen. Dieses Verhalten wurde behoben.
+- Durch einen Fehler funktionierte der Wechsel zwischen Content-Kategorien auf Touch-Geräten nicht richtig. Dies wurde behoben.
+- Durch einen Fehler verdeckte der Header einen Teil des Webshops. Dies wurde behoben.
+- Es wurde ein Fehler behoben, durch den die Auswahl einer Variante in der Einzelansicht nicht möglich war, wenn mindestens 2 Varianten aus derselben Attributkombination bestanden oder keine Attribute hatten. In solchen Fällen kann die Auswahl nun über die Dropdown-Liste Inhalt getroffen werden.
+- Durch einen Fehler wurden die Kategoriefilter bei einem Wechsel der Kategorien ausgegeben. Dies wurde behoben.
+- Es wurde ein Fehler behoben, durch welchen bei Merkmalen, die als Checkbox im Shop angezeigt wurden, der Wert "True" im Warenkorb angezeigt wurde.
+- Durch einen Fehler verhinderte das ShopBuilder Widget **Rechtliche Informationen** das Scrollen im Firefox Browser. Dies wurde behoben. Das Widget muss gegebenenfalls erneut im ShopBuilder gespeichert werden.
+- Durch einen Fehler im Zusammenhang mit Kategoriebildern wurde die Scrollfunktion des Safari-Browsers beeinträchtigt. Dies wurde behoben.
+
+## v2.15.0 (2018-09-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.14.0...2.15.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Im Zuge eines Bugfixes für das Bilderkarussell des Shop Builders wurde die Struktur der Einstellungen angepasst. Bilderkarussells, die vor der Version 2.15 erstellt wurden, funktionieren weiterhin, können jedoch nicht mehr bearbeitet werden. Sollten Sie Änderungen an diesem Widget vornehmen wollen, erstellen Sie bitte ein neues Bilderkarussell.
+
+### Hinzugefügt
+
+- Dem SEO-Tab der Ceres-Konfiguration wurde ein Mapping hinzugefügt, durch welches Schema.org Verfügbarkeiten auf plentymarkets Verfügbarkeiten übertragen werden können.
+- Die folgenden Shop Builder Widgets wurden hinzugefügt: Top-Bar (Header), Kategorie-Navigation (Header), Breadcrumb-Navigation (Header), Rechtliche Informationen (Footer), Liste, Linkliste, Trennlinie.
+- Die Slides des Shop Builder Bilderkarussels können nun durch zusätzliche Slides erweitert werden.
+- Die Bildüberschriften von Slides im Bilderkarussell des Shop Builders können jetzt bearbeitet und ausgeblendet werden.
+- Der Titel der Shop Builder Bilderbox kann jetzt bearbeitet werden.
+- Die Überschrift von Artikellisten im Shop Builder kann nun bearbeitet und ausgeblendet werden.
+- Es wurden Vorlagen für Header, Footer und Startseite hinzugefügt, welche im Shop Builder verwendet werden können.
+
+### Geändert
+
+- In der Kaufabwicklung wurden Events hinzugefügt, die auf Änderungen an der ausgewählten Adresse hinweisen.
+- Die Fehlermeldungen auf der Kontaktseite werden jetzt analog zu Fehlermeldungen auf anderen Seiten dargestellt.
+- Die Fehlermeldungen der Kaufabwicklung wurden dahingehend verbessert, dass ungültige Eingabefelder hervorgehoben werden.
+- Die Fehlermeldungen der Adresseingabe wurden dahingehend verbessert, dass ungültige Eingabefelder hervorgehoben werden.
+- Die Anzahl der sichtbaren Artikel einer Artikelliste ist nun wählbar.
+
+### Behoben
+
+- Die am Kunden hinterlegte Login-URL funktioniert nun auch für Ceres.
+- Durch einen Fehler wurde das Hinzufügen zur Wunschliste durch Klick auf den Wunschlisten-Button nicht immer registriert. Dies wurde behoben.
+- Die Höhe von Widgets in einem Shop Builder Strukturelement mit vier Spalten wird nun korrekt berechnet.
+- Die maximale Anzahl der Artikel wird nun in der "Zuletzt angesehen"-Artikelliste des Shop Builders beachtet.
+
 ## v2.14.0 (2018-08-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.13.0...2.14.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt

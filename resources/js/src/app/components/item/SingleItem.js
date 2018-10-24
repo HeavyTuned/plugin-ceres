@@ -1,10 +1,13 @@
 Vue.component("single-item", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "itemData",
         "variationListData",
-        "attributeNameMap"
+        "attributeNameMap",
+        "variationUnits"
     ],
 
     data()
@@ -28,8 +31,7 @@ Vue.component("single-item", {
 
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
-            variations: state => state.item.variationList,
-            isInWishList: state => state.item.variation.documents[0].isInWishListVariation
+            variations: state => state.item.variationList
         }),
 
         ...Vuex.mapGetters([

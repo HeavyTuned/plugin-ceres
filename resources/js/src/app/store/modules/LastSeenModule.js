@@ -30,7 +30,7 @@ const actions =
                 {
                     commit("setIsLastSeenItemsLoading", true);
 
-                    ApiService.put("/rest/io/item/last_seen/" + variationId)
+                    ApiService.put("/rest/io/item/last_seen/" + variationId + "?items=" + App.config.itemLists.lastSeenNumber || 4)
                         .done(response =>
                         {
                             commit("setLastSeenItems", response.documents);
@@ -48,13 +48,13 @@ const actions =
             return null;
         },
 
-        getLastSeenItems({commit})
+        getLastSeenItems({commit}, maxItems)
         {
             if (!state.isLastSeenItemsLoading)
             {
                 return new Promise((resolve, reject) =>
                 {
-                    const params = {items: App.config.itemLists.lastSeenNumber};
+                    const params = {items: maxItems || App.config.itemLists.lastSeenNumber};
 
                     commit("setIsLastSeenItemsLoading", true);
 
