@@ -19730,6 +19730,7 @@ nav.navbar.megamenu {
         position: relative;
         margin-top: 0;
     }
+
     @include media-breakpoint-down(md) {
         .logo-container {
             padding: 0.5rem 0;
@@ -19795,6 +19796,72 @@ nav.navbar.megamenu {
                 >li{
                     a {
                         padding:2rem 1rem; 
+                    }
+                }
+            }
+        }
+    }
+
+    .footer { 
+
+        .row { 
+    
+            .col { 
+    
+                .m-y-2 { 
+    
+                }
+    
+                .widget { 
+    
+                    .widget-inner {  
+    
+                        .widget { 
+    
+                            .widget-inner { 
+    
+                                nav { 
+    
+                                    .h5 { 
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                .widget-legal-information { 
+    
+                    div { 
+    
+                        a { 
+                            color: #fff;
+                        }
+                    }
+                }
+                .widget { 
+
+                    .widget-inner { 
+                
+                        .copyright { 
+                
+                            a { 
+                
+                                .svg { 
+                
+                                }
+                            }
+                
+                            br { 
+                
+                            }
+                
+                            small { 
+                                color: #fff;
+
+                            }
+                        }
                     }
                 }
             }

@@ -20954,6 +20954,18 @@ body.menu-is-visible {
   }
 }
 
+.ht .footer .row .col .widget .widget-inner .widget .widget-inner nav .h5 {
+  color: #fff;
+}
+
+.ht .footer .row .col .widget-legal-information div a {
+  color: #fff;
+}
+
+.ht .footer .row .col .widget .widget-inner .copyright small {
+  color: #fff;
+}
+
 .ht .footer-2017 {
   background: #1d303c;
   width: 100%;
