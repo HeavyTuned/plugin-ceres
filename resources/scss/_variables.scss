@@ -273,8 +273,8 @@ $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 $brand-primary !default;
 $btn-primary-border:             $btn-primary-bg !default;
 
-$btn-secondary-color:            $gray-dark !default;
-$btn-secondary-bg:               #fff !default;
+$btn-secondary-color:            $white !default;
+$btn-secondary-bg:               $brand-secondary !default;
 $btn-secondary-border:           #ccc !default;
 
 $btn-info-color:                 #fff !default;
@@ -820,3 +820,8 @@ $pre-scrollable-max-height:   340px !default;
 // Category
 
 $category-text-color:         #fff !default;
+
+// Liveshopping
+
+$live-shopping-padding-x: .8rem;
+$live-shopping-padding-y: 1rem;

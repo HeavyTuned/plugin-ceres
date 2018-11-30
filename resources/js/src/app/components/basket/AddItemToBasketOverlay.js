@@ -1,13 +1,22 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 const ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "basketAddInformation",
-        "template"
-    ],
+    props: {
+        basketAddInformation: String,
+        template: {
+            type: String,
+            default: "#vue-add-item-to-basket-overlay"
+        },
+        defaultTimeToClose: {
+            type: Number,
+            default: 15
+        }
+    },
 
     data()
     {
@@ -108,7 +117,7 @@ Vue.component("add-item-to-basket-overlay", {
                 const graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
-                this.price = graduatedPrice + propertySurcharge;
+                this.price = this.$options.filters.specialOffer(graduatedPrice, this.latestBasketEntry.item.prices, "price", "value") + propertySurcharge;
             }
         },
 
@@ -127,7 +136,7 @@ Vue.component("add-item-to-basket-overlay", {
                 clearInterval(this.timerVar);
             }
 
-            this.timeToClose = 10;
+            this.timeToClose = this.defaultTimeToClose;
 
             this.timerVar = setInterval(() =>
             {
@@ -140,6 +149,23 @@ Vue.component("add-item-to-basket-overlay", {
                     clearInterval(this.timerVar);
                 }
             }, 1000);
+        },
+
+        orderParamValue(propertyId)
+        {
+            const orderParams = this.latestBasketEntry.orderParams;
+
+            if (isNullOrUndefined(orderParams))
+            {
+                return "";
+            }
+
+            const orderParam = orderParams.find(param =>
+            {
+                return parseInt(param.property.id) === parseInt(propertyId);
+            });
+
+            return orderParam.property.value;
         }
     }
 });

@@ -4,10 +4,6 @@
     "previewImageURL": "/images/widgets/text.svg",
     "type": "default",
     "position": 800,
-    "allowedNestingTypes": [
-        "default",
-        "structure"
-    ],
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
         "appearance": {
@@ -15,7 +11,7 @@
             "required": true,
             "label": "Widget.widgetAppearanceLabel",
             "options": {
-                "tooltip": "Widget.widgetAppearanceTooltip",
+                "tooltipText": "Widget.widgetAppearanceTooltip",
                 "defaultValue": "none",
                 "selectBoxValues": [
                     {
@@ -58,8 +54,9 @@
         },
         "text": {
             "type": "codeEditor",
-            "label": "Widget.textCodeEditorLabel",
-            "options": {}
+            "options": {
+                "name": "Widget.textCodeEditorLabel"
+            }
         }
     }
 }

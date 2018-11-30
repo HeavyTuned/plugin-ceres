@@ -7,9 +7,17 @@
 {{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
+{{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
+{{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
+
+{# TODO: remove if shop builder pages can be rebuild by migrations #}
+{{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
-{{ component( "Ceres::Category.Components.CategoryBreadcrumbs" ) }}
+
+{% if request.get('isContentBuilder') == 1 %}
+    {% include "Ceres::Widgets.WidgetComponents" %}
+{% endif %}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
@@ -126,8 +134,12 @@
         <!-- ./REGISTRATION MODAL -->
 
         <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
+        <add-item-to-basket-overlay :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
+
+        <!-- PASSWORD RESET MODAL -->
+        <forgot-password-modal></forgot-password-modal>
+        <!-- ./PASSWORD RESET MODAL -->
 
         <!-- SHIPPINGCOSTS MODAL -->
         <div id="shippingscosts-modal-wrapper">
@@ -161,6 +173,7 @@
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
         isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
+        templateEvent: "{{templateEvent}}",
         language: "{{ lang }}",
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
@@ -193,8 +206,6 @@
     var rootElement = document.getElementById("vue-app");
     var errorElement = document.getElementById("vue-error");
 
-    Vue.options.delimiters = ['${', '}'];
-
     var vueEventHub = new Vue();
 
     var vueApp = new Vue({
@@ -214,6 +225,7 @@
     }
 
     (function($) {
+        
         var header = document.getElementById('page-header');
         var unfixedElements = [];
 
@@ -221,15 +233,18 @@
         {
             function calculateBodyOffset()
             {
-                if ( header.classList.contains('pos-f-t') )
+                if ( header.classList.contains('pos-f-t'))
                 {
                     var bodyOffset = 0;
-                    var children = header.children;
+                    // Get current header with children
+                    var children = document.getElementById('page-header').children;
                     for( var i = 0; i < children.length; i++ )
                     {
                         bodyOffset += children[i].getBoundingClientRect().height;
                     }
+
                     document.getElementById('vue-app').style.marginTop = bodyOffset + 'px';
+                    document.getElementById('vue-app').style.minHeight = "calc(100vh - " + bodyOffset + "px)";
                 }
             }
 
@@ -267,9 +282,8 @@
                 });
             }
 
-            calculateBodyOffset();
             getUnfixedElements();
-
+            
             $(window).scroll(scrollUnfixedElements);
 
             $(document).on('shopbuilder.after.ready', function()
@@ -285,6 +299,21 @@
             {
                 calculateBodyOffset();
             });
+
+            var headerImages = header.querySelectorAll("img");
+
+            if(headerImages.length)
+            {
+                for (var img in headerImages)
+                {
+                    headerImages[img].onload = function()
+                    {
+                        calculateBodyOffset();
+                    }
+                }
+            }
+
+            calculateBodyOffset();
         }
 
         $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
@@ -307,6 +336,6 @@
     })(jQuery);
 </script>
 
-{{ get_shop_builder_scripts() }}
+{{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
 </body>
 </html>
