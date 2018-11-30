@@ -57,7 +57,7 @@ function parseUserAgent(userAgentString) {
     detected = detected || {};
     detected.bot = true;
   }
-  
+
   return detected;
 }
 
@@ -68,6 +68,7 @@ function getBrowserRules() {
     [ 'yandexbrowser', /YaBrowser\/([0-9\._]+)/ ],
     [ 'vivaldi', /Vivaldi\/([0-9\.]+)/ ],
     [ 'kakaotalk', /KAKAOTALK\s([0-9\.]+)/ ],
+    [ 'samsung', /SamsungBrowser\/([0-9\.]+)/ ],
     [ 'chrome', /(?!Chrom.*OPR)Chrom(?:e|ium)\/([0-9\.]+)(:?\s|$)/ ],
     [ 'phantomjs', /PhantomJS\/([0-9\.]+)(:?\s|$)/ ],
     [ 'crios', /CriOS\/([0-9\.]+)(:?\s|$)/ ],
@@ -83,7 +84,8 @@ function getBrowserRules() {
     [ 'ios', /Version\/([0-9\._]+).*Mobile.*Safari.*/ ],
     [ 'safari', /Version\/([0-9\._]+).*Safari/ ],
     [ 'facebook', /FBAV\/([0-9\.]+)/],
-    [ 'instagram', /Instagram\ ([0-9\.]+)/]
+    [ 'instagram', /Instagram\ ([0-9\.]+)/],
+    [ 'ios-webview', /AppleWebKit\/([0-9\.]+).*Mobile/]
   ]);
 }
 
@@ -136,9 +138,13 @@ module.exports = {
 }).call(this,require('_process'))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"_process":5,"os":3}],2:[function(require,module,exports){
 =======
 },{"_process":129,"os":127}],2:[function(require,module,exports){
+=======
+},{"_process":6,"os":4}],2:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -164,7 +170,10 @@ if (typeof Object.create === 'function') {
 }
 
 },{}],3:[function(require,module,exports){
+<<<<<<< HEAD
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -10404,11 +10413,16 @@ return jQuery;
 } );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{}],3:[function(require,module,exports){
 =======
 },{}],4:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
+=======
+},{}],4:[function(require,module,exports){
+exports.endianness = function () { return 'LE' };
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
 /* Built-in method references that are verified to be native. */
 var DataView = getNative(root, 'DataView');
@@ -10499,8 +10513,18 @@ var mapCacheClear = require('./_mapCacheClear'),
     mapCacheHas = require('./_mapCacheHas'),
     mapCacheSet = require('./_mapCacheSet');
 
+<<<<<<< HEAD
 /**
  * Creates a map cache object to store key-value pairs.
+=======
+},{}],5:[function(require,module,exports){
+(function (global){
+/**!
+ * @fileOverview Kickass library to create and place poppers near their reference elements.
+ * @version 1.14.4
+ * @license
+ * Copyright (c) 2016 Federico Zivolo and contributors
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
  *
  * @private
  * @constructor
@@ -14043,10 +14067,10 @@ function getBordersSize(styles, axis) {
 }
 
 function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
 }
 
-function getWindowSizes() {
+function getWindowSizes(document) {
   var body = document.body;
   var html = document.documentElement;
   var computedStyle = isIE(10) && getComputedStyle(html);
@@ -14159,7 +14183,7 @@ function getBoundingClientRect(element) {
   };
 
   // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
+  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
   var width = sizes.width || element.clientWidth || result.right - result.left;
   var height = sizes.height || element.clientHeight || result.bottom - result.top;
 
@@ -14194,7 +14218,7 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-  if (fixedPosition && parent.nodeName === 'HTML') {
+  if (fixedPosition && isHTML) {
     parentRect.top = Math.max(parentRect.top, 0);
     parentRect.left = Math.max(parentRect.left, 0);
   }
@@ -14332,7 +14356,7 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
 
     // In case of HTML, we need a different computation
     if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(),
+      var _getWindowSizes = getWindowSizes(popper.ownerDocument),
           height = _getWindowSizes.height,
           width = _getWindowSizes.width;
 
@@ -14347,10 +14371,12 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
   }
 
   // Add paddings
-  boundaries.left += padding;
-  boundaries.top += padding;
-  boundaries.right -= padding;
-  boundaries.bottom -= padding;
+  padding = padding || 0;
+  var isPaddingNumber = typeof padding === 'number';
+  boundaries.left += isPaddingNumber ? padding : padding.left || 0;
+  boundaries.top += isPaddingNumber ? padding : padding.top || 0;
+  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
+  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
 
   return boundaries;
 }
@@ -14676,7 +14702,7 @@ function getSupportedPropertyName(property) {
 }
 
 /**
- * Destroy the popper
+ * Destroys the popper.
  * @method
  * @memberof Popper
  */
@@ -14783,7 +14809,7 @@ function removeEventListeners(reference, state) {
 
 /**
  * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger onUpdate callback anymore,
+ * when they are triggered. It also won't trigger `onUpdate` callback anymore,
  * unless you call `update` method manually.
  * @method
  * @memberof Popper
@@ -14960,12 +14986,22 @@ function computeStyle(data, options) {
   var left = void 0,
       top = void 0;
   if (sideA === 'bottom') {
-    top = -offsetParentRect.height + offsets.bottom;
+    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
+    // and not the bottom of the html element
+    if (offsetParent.nodeName === 'HTML') {
+      top = -offsetParent.clientHeight + offsets.bottom;
+    } else {
+      top = -offsetParentRect.height + offsets.bottom;
+    }
   } else {
     top = offsets.top;
   }
   if (sideB === 'right') {
-    left = -offsetParentRect.width + offsets.right;
+    if (offsetParent.nodeName === 'HTML') {
+      left = -offsetParent.clientWidth + offsets.right;
+    } else {
+      left = -offsetParentRect.width + offsets.right;
+    }
   } else {
     left = offsets.left;
   }
@@ -15074,7 +15110,7 @@ function arrow(data, options) {
 
   //
   // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjuction
+  // reference have enough pixels in conjunction
   //
 
   // top/left side
@@ -15144,7 +15180,7 @@ function getOppositeVariation(variation) {
  * - `top-end` (on top of reference, right aligned)
  * - `right-start` (on right of reference, top aligned)
  * - `bottom` (on bottom, centered)
- * - `auto-right` (on the side with more space available, alignment depends by placement)
+ * - `auto-end` (on the side with more space available, alignment depends by placement)
  *
  * @static
  * @type {Array}
@@ -15686,7 +15722,7 @@ var modifiers = {
    * The `offset` modifier can shift your popper on both its axis.
    *
    * It accepts the following units:
-   * - `px` or unitless, interpreted as pixels
+   * - `px` or unit-less, interpreted as pixels
    * - `%` or `%r`, percentage relative to the length of the reference element
    * - `%p`, percentage relative to the length of the popper element
    * - `vw`, CSS viewport width unit
@@ -15694,7 +15730,7 @@ var modifiers = {
    *
    * For length is intended the main axis relative to the placement of the popper.<br />
    * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the height.
+   * `width`. In case of `left` or `right`, it will be the `height`.
    *
    * You can provide a single value (as `Number` or `String`), or a pair of values
    * as `String` divided by a comma or one (or more) white spaces.<br />
@@ -15715,7 +15751,7 @@ var modifiers = {
    * ```
    * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
    * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
+   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
    *
    * @memberof modifiers
    * @inner
@@ -15736,7 +15772,7 @@ var modifiers = {
   /**
    * Modifier used to prevent the popper from being positioned outside the boundary.
    *
-   * An scenario exists where the reference itself is not within the boundaries.<br />
+   * A scenario exists where the reference itself is not within the boundaries.<br />
    * We can say it has "escaped the boundaries" — or just "escaped".<br />
    * In this case we need to decide whether the popper should either:
    *
@@ -15766,23 +15802,23 @@ var modifiers = {
     /**
      * @prop {number} padding=5
      * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper this makes sure the popper has always a little padding
+     * and the popper. This makes sure the popper always has a little padding
      * between the edges of its container
      */
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier, can be `scrollParent`, `window`,
+     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
      * `viewport` or any DOM element.
      */
     boundariesElement: 'scrollParent'
   },
 
   /**
-   * Modifier used to make sure the reference and its popper stay near eachothers
-   * without leaving any gap between the two. Expecially useful when the arrow is
-   * enabled and you want to assure it to point to its reference element.
-   * It cares only about the first axis, you can still have poppers with margin
+   * Modifier used to make sure the reference and its popper stay near each other
+   * without leaving any gap between the two. Especially useful when the arrow is
+   * enabled and you want to ensure that it points to its reference element.
+   * It cares only about the first axis. You can still have poppers with margin
    * between the popper and its reference element.
    * @memberof modifiers
    * @inner
@@ -15800,7 +15836,7 @@ var modifiers = {
    * This modifier is used to move the `arrowElement` of the popper to make
    * sure it is positioned between the reference element and its popper element.
    * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjuction are needed.
+   * pixels of conjunction are needed.
    *
    * It has no effect if no `arrowElement` is provided.
    * @memberof modifiers
@@ -15839,7 +15875,7 @@ var modifiers = {
      * @prop {String|Array} behavior='flip'
      * The behavior used to change the popper's placement. It can be one of
      * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations).
+     * placements (with optional variations)
      */
     behavior: 'flip',
     /**
@@ -15849,9 +15885,9 @@ var modifiers = {
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position,
-     * the popper will never be placed outside of the defined boundaries
-     * (except if keepTogether is enabled)
+     * The element which will define the boundaries of the popper position.
+     * The popper will never be placed outside of the defined boundaries
+     * (except if `keepTogether` is enabled)
      */
     boundariesElement: 'viewport'
   },
@@ -15915,8 +15951,8 @@ var modifiers = {
     fn: computeStyle,
     /**
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: true,
     /**
@@ -15943,7 +15979,7 @@ var modifiers = {
    * Note that if you disable this modifier, you must make sure the popper element
    * has its position set to `absolute` before Popper.js can do its work!
    *
-   * Just disable this modifier and define you own to achieve the desired effect.
+   * Just disable this modifier and define your own to achieve the desired effect.
    *
    * @memberof modifiers
    * @inner
@@ -15960,27 +15996,27 @@ var modifiers = {
     /**
      * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: undefined
   }
 };
 
 /**
- * The `dataObject` is an object containing all the informations used by Popper.js
- * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
+ * The `dataObject` is an object containing all the information used by Popper.js.
+ * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
  * @name dataObject
  * @property {Object} data.instance The Popper.js instance
  * @property {String} data.placement Placement applied to popper
  * @property {String} data.originalPlacement Placement originally defined on init
  * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
+ * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
  * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
  * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
+ * @property {Object} data.offsets The measurements of popper, reference and arrow elements
  * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
@@ -15988,9 +16024,9 @@ var modifiers = {
 
 /**
  * Default options provided to Popper.js constructor.<br />
- * These can be overriden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass as 3rd argument an object with the same
- * structure of this object, example:
+ * These can be overridden using the `options` argument of Popper.js.<br />
+ * To override an option, simply pass an object with the same
+ * structure of the `options` object, as the 3rd argument. For example:
  * ```
  * new Popper(ref, pop, {
  *   modifiers: {
@@ -16004,7 +16040,7 @@ var modifiers = {
  */
 var Defaults = {
   /**
-   * Popper's placement
+   * Popper's placement.
    * @prop {Popper.placements} placement='bottom'
    */
   placement: 'bottom',
@@ -16016,7 +16052,7 @@ var Defaults = {
   positionFixed: false,
 
   /**
-   * Whether events (resize, scroll) are initially enabled
+   * Whether events (resize, scroll) are initially enabled.
    * @prop {Boolean} eventsEnabled=true
    */
   eventsEnabled: true,
@@ -16030,17 +16066,17 @@ var Defaults = {
 
   /**
    * Callback called when the popper is created.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onCreate}
    */
   onCreate: function onCreate() {},
 
   /**
-   * Callback called when the popper is updated, this callback is not called
+   * Callback called when the popper is updated. This callback is not called
    * on the initialization/creation of the popper, but only on subsequent
    * updates.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onUpdate}
    */
@@ -16048,7 +16084,7 @@ var Defaults = {
 
   /**
    * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js
+   * They provide most of the functionalities of Popper.js.
    * @prop {modifiers}
    */
   modifiers: modifiers
@@ -16068,10 +16104,10 @@ var Defaults = {
 // Methods
 var Popper = function () {
   /**
-   * Create a new Popper.js instance
+   * Creates a new Popper.js instance.
    * @class Popper
    * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as popper.
+   * @param {HTMLElement} popper - The HTML element used as the popper
    * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
    * @return {Object} instance - The generated Popper.js instance
    */
@@ -16166,7 +16202,7 @@ var Popper = function () {
     }
 
     /**
-     * Schedule an update, it will run on the next UI update available
+     * Schedules an update. It will run on the next UI update available.
      * @method scheduleUpdate
      * @memberof Popper
      */
@@ -16202,7 +16238,7 @@ var Popper = function () {
  * new Popper(referenceObject, popperNode);
  * ```
  *
- * NB: This feature isn't supported in Internet Explorer 10
+ * NB: This feature isn't supported in Internet Explorer 10.
  * @name referenceObject
  * @property {Function} data.getBoundingClientRect
  * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
@@ -16223,10 +16259,14 @@ return Popper;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{}],5:[function(require,module,exports){
 =======
 },{}],129:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{}],6:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -16410,6 +16450,7 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{}],6:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
@@ -16435,6 +16476,8 @@ if (typeof Object.create === 'function') {
   }
 }
 
+=======
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 },{}],7:[function(require,module,exports){
 =======
 },{}],130:[function(require,module,exports){
@@ -17019,28 +17062,31 @@ function hasOwnProperty(obj, prop) {
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"./support/isBuffer":7,"_process":5,"inherits":6}],9:[function(require,module,exports){
 =======
 },{"./support/isBuffer":130,"_process":129,"inherits":2}],132:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"./support/isBuffer":7,"_process":6,"inherits":2}],9:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 /*!
-  * vue-script2 v2.0.1
-  * (c) 2016-2017 Greg Slepak
+  * vue-script2 v2.0.3
+  * (c) 2016-2018 Greg Slepak
   * @license MIT License
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global.VueScript2 = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   var Script2 = {
     installed: false,
     p: Promise.resolve(),
-    version: '2.0.1', // grunt will overwrite to match package.json
+    version: '2.0.3', // grunt will overwrite to match package.json
     loaded: {}, // keys are the scripts that have been loaded
     install: function install(Vue) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
       if (Script2.installed) return;
       var customAttrs = ['unload'];
@@ -17052,9 +17098,11 @@ function hasOwnProperty(obj, prop) {
       Vue.component('script2', {
         props: props,
         // <slot> is important, see: http://vuejs.org/guide/components.html#Named-Slots
-        template: '<div style="display:none"><slot></slot></div>',
-        // NOTE: I tried doing this with Vue 2's new render() function.
-        //       It was a nightmare and I never got it to work.
+        // template: '<div style="display:none"><slot></slot></div>',
+        // NOTE: Instead of using `template` we can use the `render` function like so:
+        render: function render(h) {
+          return h('div', { style: 'display:none' }, this.$slots.default);
+        },
         mounted: function mounted() {
           var _this = this;
 
@@ -17062,8 +17110,10 @@ function hasOwnProperty(obj, prop) {
           if (!this.src) {
             Script2.p = Script2.p.then(function () {
               var s = document.createElement('script');
+              var h = _this.$el.innerHTML;
+              h = h.replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&amp;/gi, '&');
               s.type = 'text/javascript';
-              s.appendChild(document.createTextNode(_this.$el.innerHTML));
+              s.appendChild(document.createTextNode(h));
               parent.appendChild(s);
             });
           } else {
@@ -17079,7 +17129,9 @@ function hasOwnProperty(obj, prop) {
           // see: https://vuejs.org/v2/guide/migration.html#ready-replaced
           this.$nextTick(function () {
             // code that assumes this.$el is in-document
-            _this.$el.remove(); // remove dummy template <div>
+            // NOTE: we could've done this.$el.remove(), but IE sucks, see:
+            //       https://github.com/taoeffect/vue-script2/pull/17
+            _this.$el.parentElement.removeChild(_this.$el); // remove dummy template <div>
           });
         },
         destroyed: function destroyed() {
@@ -17092,7 +17144,7 @@ function hasOwnProperty(obj, prop) {
       Script2.installed = true;
     },
     load: function load(src) {
-      var opts = arguments.length <= 1 || arguments[1] === undefined ? { parent: document.head } : arguments[1];
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { parent: document.head };
 
       return Script2.loaded[src] ? Promise.resolve(src) : new Promise(function (resolve, reject) {
         var s = document.createElement('script');
@@ -17131,7 +17183,7 @@ function hasOwnProperty(obj, prop) {
     pick: function pick(o, props) {
       var x = {};
       props.forEach(function (k) {
-        return x[k] = o[k];
+        x[k] = o[k];
       });
       return x;
     },
@@ -17167,7 +17219,12 @@ function hasOwnProperty(obj, prop) {
   return Script2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }));
+=======
+})));
+
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 },{}],10:[function(require,module,exports){
 =======
 })));
@@ -20700,31 +20757,33 @@ Vue.component("user-login-handler", {
 },{"../../../helper/utils":251,"services/ApiService":254,"services/ValidationService":262}],167:[function(require,module,exports){
 "use strict";
 
-Vue.component("category-image-carousel", {
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-    delimiters: ["${", "}"],
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("add-to-wish-list", {
 
     props: {
-        imageUrlsData: { type: Array },
-        itemUrl: { type: String },
-        altText: { type: String },
-        titleText: { type: String },
-        showDots: { type: Boolean },
-        showNav: { type: Boolean },
-        disableLazyLoad: {
-            type: Boolean,
-            default: false
+        template: {
+            type: String,
+            default: "#vue-add-to-wish-list"
         },
-        enableCarousel: { type: Boolean },
-        template: { type: String }
+        variationId: Number
     },
 
     data: function data() {
         return {
-            $_enableCarousel: false
+            isLoading: false
         };
     },
 
+<<<<<<< HEAD
     computed: {
         imageUrls: function imageUrls() {
             return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
@@ -20734,102 +20793,108 @@ Vue.component("category-image-carousel", {
                 if (imageUrlA.position < imageUrlB.position) {
                     return -1;
                 }
+=======
 
-                return 0;
-            });
+    computed: _extends({
+        isVariationInWishList: function isVariationInWishList() {
+            return this.wishListIds.includes(this.variationId);
+        }
+    }, Vuex.mapState({
+        wishListIds: function wishListIds(state) {
+            return state.wishList.wishListIds;
+        }
+    })),
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+    watch: {
+        isVariationInWishList: function isVariationInWishList() {
+            this.changeTooltipText();
         }
     },
 
     created: function created() {
         this.$options.template = this.template;
-
-        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.$_enableCarousel) {
-                _this.initializeCarousel();
-            }
-        });
     },
 
     methods: {
-        initializeCarousel: function initializeCarousel() {
+        switchState: function switchState() {
+            if (this.isVariationInWishList) {
+                this.removeFromWishList();
+            } else {
+                this.addToWishList();
+            }
+        },
+        addToWishList: function addToWishList() {
+            var _this = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
+                    _this.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
+                }, function (error) {
+                    _this.isLoading = false;
+                });
+            }
+        },
+        removeFromWishList: function removeFromWishList() {
             var _this2 = this;
 
-            $("#owl-carousel-" + this._uid).owlCarousel({
-                dots: !!this.showDots,
-                items: 1,
-                mouseDrag: false,
-                loop: this.imageUrls.length > 1,
-                lazyLoad: !this.disableLazyLoad,
-                margin: 10,
-                nav: !!this.showNav,
-                navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
-                onTranslated: function onTranslated(event) {
-                    var target = $(event.currentTarget);
-                    var owlItem = $(target.find(".owl-item.active"));
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
+                    _this2.isLoading = false;
 
-                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
-                },
-
-                onInitialized: function onInitialized(event) {
-                    if (_this2.showNav) {
-                        document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
-                            return event.preventDefault();
-                        };
-                        document.querySelector("#owl-nav-text-right-" + _this2._uid).parentElement.onclick = function (event) {
-                            return event.preventDefault();
-                        };
-                    }
-                }
-            });
-        },
-        getAltText: function getAltText(image) {
-            var altText = image && image.alternate ? image.alternate : this.altText;
-
-            return altText;
-        },
-        loadFirstImage: function loadFirstImage() {
-            var itemLazyImage = this.$refs.itemLazyImage;
-
-            if (itemLazyImage) {
-                if (itemLazyImage.loadImage) {
-                    itemLazyImage.loadImage();
-                } else if (itemLazyImage[0] && itemLazyImage[0].loadImage) {
-                    itemLazyImage[0].loadImage();
-                }
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
+                }, function (error) {
+                    _this2.isLoading = false;
+                });
             }
+        },
+        changeTooltipText: function changeTooltipText() {
+            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+
+            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
         }
     }
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{}],44:[function(require,module,exports){
 =======
 },{"services/NotificationService":259,"services/TranslationService":260}],168:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"services/NotificationService":131,"services/TranslationService":132}],44:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-Vue.component("category-item", {
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-    delimiters: ["${", "}"],
+Vue.component("graduated-prices", {
+    props: ["template"],
 
-    template: "#vue-category-item",
+    computed: _extends({
+        graduatedPrices: function graduatedPrices() {
+            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
+            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
 
-    props: ["decimalCount", "itemData", "imageUrlAccessor"],
+            prices = prices.filter(function (price) {
+                return price.minimumOrderQuantity > minQuantity;
+            });
 
-    data: function data() {
-        return {
-            recommendedRetailPrice: 0,
-            variationRetailPrice: 0
-        };
-    },
+            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
+            });
+        },
+        activeGraduationIndex: function activeGraduationIndex() {
+            var _this = this;
 
+<<<<<<< HEAD
     computed: _extends({
         /**
          * returns itemData.item.storeSpecial
@@ -20843,14 +20908,30 @@ Vue.component("category-item", {
          */
         texts: function texts() {
             return this.itemData.texts;
+=======
+            var prices = this.graduatedPrices.filter(function (price) {
+                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
+            });
+
+            if (!prices.length) {
+                return -1;
+            }
+
+            var price = prices.reduce(function (prev, current) {
+                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
+            });
+
+            return this.graduatedPrices.indexOf(price);
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         }
     }, Vuex.mapState({
-        showNetPrices: function showNetPrices(state) {
-            return state.basket.showNetPrices;
+        variationOrderQuantity: function variationOrderQuantity(state) {
+            return state.item.variationOrderQuantity;
         }
     })),
 
     created: function created() {
+<<<<<<< HEAD
         if (this.itemData.prices.rrp) {
             this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
         }
@@ -20865,19 +20946,32 @@ Vue.component("category-item", {
                 categoryImageCarousel.loadFirstImage();
             }
         }
+=======
+        this.$options.template = this.template;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
     }
-
 });
 
 },{}],169:[function(require,module,exports){
 "use strict";
 
-Vue.component("item-lazy-img", {
+Vue.component("item-bundle", {
 
-    delimiters: ["${", "}"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-bundle"
+        },
+        bundleType: String,
+        bundleComponents: Array
+    },
 
-    props: ["imageUrl", "template"],
-
+    data: function data() {
+        return {
+            bundleSetting: null,
+            showItemBundleItems: true
+        };
+    },
     created: function created() {
         this.$options.template = this.template;
     },
@@ -20885,15 +20979,18 @@ Vue.component("item-lazy-img", {
         var _this = this;
 
         this.$nextTick(function () {
-            setTimeout(function () {
-                $(_this.$refs.lazyImg).show().lazyload({ threshold: 100 });
-            }, 1);
+            if (_this.$refs.bundleSetting) {
+                _this.bundleSetting = _this.$refs.bundleSetting.innerText;
+                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
+            }
         });
     },
 
     methods: {
-        loadImage: function loadImage() {
-            $(this.$refs.lazyImg).trigger("appear");
+        getBundleInnerText: function getBundleInnerText(item) {
+            item.variation.bundleType = null;
+
+            return item;
         }
     }
 });
@@ -20901,6 +20998,7 @@ Vue.component("item-lazy-img", {
 },{}],170:[function(require,module,exports){
 "use strict";
 
+<<<<<<< HEAD
 Vue.component("item-list", {
 
     delimiters: ["${", "}"],
@@ -20928,33 +21026,31 @@ Vue.component("item-list", {
         this.$store.commit("setItemListTotalItems", this.totalItemsData);
     }
 });
+=======
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
-},{}],47:[function(require,module,exports){
-"use strict";
+var _utils = require("../../helper/utils");
 
-var _UrlService = require("services/UrlService");
+var _TranslationService = require("services/TranslationService");
 
-var _UrlService2 = _interopRequireDefault(_UrlService);
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-Vue.component("item-list-sorting", {
+Vue.component("item-image-carousel", {
 
     delimiters: ["${", "}"],
 
-    props: ["sortingList", "defaultSorting", "template"],
+    props: ["imageUrlAccessor", "template"],
 
     data: function data() {
         return {
-            selectedSorting: {}
+            currentItem: 0
         };
     },
-    created: function created() {
-        this.$options.template = this.template;
 
-        this.setSelectedValue();
-    },
-
+<<<<<<< HEAD
     methods: {
         /**
          * Set the selected sorting in the vuex storage and trigger the item search.
@@ -20976,42 +21072,21 @@ Vue.component("item-list-sorting", {
             }
 
             this.$store.commit("setItemListSorting", this.selectedSorting);
-        }
-    }
-});
+=======
 
-},{"services/UrlService":133}],48:[function(require,module,exports){
-"use strict";
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-search", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-item-search"
+    computed: _extends({
+        carouselImages: function carouselImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
         },
-        showItemImages: {
-            type: Boolean,
-            default: false
-        },
-        forwardToSingleItem: {
-            type: Boolean,
-            default: App.config.search.forwardToSingleItem
+        singleImages: function singleImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         }
+    }, Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+<<<<<<< HEAD
     },
 
     data: function data() {
@@ -21027,12 +21102,23 @@ Vue.component("item-search", {
     computed: {
         selectedAutocompleteItem: function selectedAutocompleteItem() {
             var selectedAutocompleteItem = this.autocompleteResult[this.selectedAutocompleteIndex];
+=======
+    })),
 
-            if (this.selectedAutocompleteIndex < 0 || !selectedAutocompleteItem) {
-                return null;
-            }
+    watch: {
+        currentVariation: {
+            handler: function handler(val, oldVal) {
+                var _this = this;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
-            return selectedAutocompleteItem;
+                if (val !== oldVal) {
+                    setTimeout(function () {
+                        _this.reInitialize();
+                    }, 1);
+                }
+            },
+
+            deep: true
         }
     },
 
@@ -21040,68 +21126,40 @@ Vue.component("item-search", {
         this.$options.template = this.template;
     },
     mounted: function mounted() {
-        var _this = this;
+        var _this2 = this;
 
         this.$nextTick(function () {
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-            _this.$store.commit("setItemListSearchString", urlParams.query);
-            _this.currentSearchString = urlParams.query;
+            _this2.initCarousel();
+            _this2.initThumbCarousel();
         });
     },
 
     methods: {
-        prepareSearch: function prepareSearch() {
-            if (this.selectedAutocompleteItem) {
-                if (this.forwardToSingleItem) {
-                    window.open(this.selectedAutocompleteItem.url, "_self", false);
-                } else {
-                    this.currentSearchString = this.selectedAutocompleteItem.name;
-                    this.$store.commit("setItemListSearchString", this.currentSearchString);
-
-                    this.search();
-                }
-            } else {
-                this.search();
-            }
-
-            $("#searchBox").collapse("hide");
+        getImageCount: function getImageCount() {
+            return this.carouselImages.length;
         },
-        search: function search() {
-            if (this.currentSearchString.length) {
-                if (document.location.pathname === "/search") {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
+        reInitialize: function reInitialize() {
+            var $owl = $(this.$refs.single);
 
-                    this.selectedAutocompleteIndex = -1;
-                    this.autocompleteResult = [];
-                } else {
-                    var searchBaseURL = "/search?query=";
+            $owl.trigger("destroy.owl.carousel");
+            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $owl.find(".owl-item").remove();
 
-                    if (App.defaultLanguage !== App.language) {
-                        searchBaseURL = "/" + App.language + "/search?query=";
-                    }
+            var $thumbs = $(this.$refs.thumbs);
 
-                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
-                }
-            } else {
-                this.preventSearch = false;
-            }
+            $thumbs.trigger("destroy.owl.carousel");
+            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $thumbs.find(".owl-item").remove();
+
+            this.initCarousel();
+            this.initThumbCarousel();
         },
-        updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
-            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
-        },
-        autocomplete: function autocomplete(searchString) {
-            var _this2 = this;
+        initCarousel: function initCarousel() {
+            var _this3 = this;
 
-            if (searchString.length >= 2) {
-                if (this.promiseCount >= Number.MAX_SAFE_INTEGER) {
-                    this.promiseCount = 0;
-                }
+            var imageCount = this.getImageCount();
 
-                var promiseCount = ++this.promiseCount;
-
+<<<<<<< HEAD
                 _ApiService2.default.get("/rest/io/item/search/autocomplete", { template: "Ceres::ItemList.Components.ItemSearch", query: searchString }).done(function (response) {
                     if (_this2.promiseCount === promiseCount) {
                         _this2.transformAutocomplete(response, searchString);
@@ -21132,79 +21190,85 @@ Vue.component("item-search", {
                         var name = this.$options.filters.itemName(item.data);
 
                         var displayName = name;
+=======
+            $(this.$refs.single).owlCarousel({
+                autoHeight: true,
+                dots: true,
+                items: 1,
+                lazyLoad: true,
+                loop: true,
+                margin: 10,
+                mouseDrag: imageCount > 1,
+                nav: imageCount > 1,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350,
+                onChanged: function onChanged(event) {
+                    var $thumb = $(_this3.$refs.thumbs);
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
-                        var _iteratorNormalCompletion2 = true;
-                        var _didIteratorError2 = false;
-                        var _iteratorError2 = undefined;
-
-                        try {
-                            for (var _iterator2 = searchString.split(" ")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                                var split = _step2.value;
-
-                                displayName = displayName.replace(split, "<strong>" + split + "</strong>");
-                            }
-                        } catch (err) {
-                            _didIteratorError2 = true;
-                            _iteratorError2 = err;
-                        } finally {
-                            try {
-                                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                    _iterator2.return();
-                                }
-                            } finally {
-                                if (_didIteratorError2) {
-                                    throw _iteratorError2;
-                                }
-                            }
-                        }
-
-                        this.autocompleteResult.push({
-                            img: img,
-                            url: url,
-                            name: name,
-                            displayName: displayName
-                        });
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
+                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
                 }
-            }
-        },
-        selectAutocompleteItem: function selectAutocompleteItem(item) {
-            if (this.forwardToSingleItem) {
-                window.open(item.url, "_self", false);
-            } else {
-                this.currentSearchString = item.name;
-                this.$store.commit("setItemListSearchString", this.currentSearchString);
+            });
 
-                this.search();
-            }
-        },
-        keyup: function keyup() {
-            this.selectedAutocompleteIndex--;
+            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
+                window.lightbox.option({
+                    wrapAround: true
+                });
+                window.lightbox.imageCountLabel = function (current, total) {
+                    if ((0, _utils.isNullOrUndefined)(imageCount) || imageCount <= 1) {
+                        return "";
+                    }
+                    current -= (total - imageCount) / 2;
+                    while (current <= 0) {
+                        current += imageCount;
+                    }
+                    while (current > imageCount) {
+                        current -= imageCount;
+                    }
+                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
+                };
 
-            if (this.selectedAutocompleteIndex < 0) {
-                this.selectedAutocompleteIndex = 0;
-            }
-        },
-        keydown: function keydown() {
-            this.selectedAutocompleteIndex++;
+                var originalFn = window.lightbox.changeImage;
 
-            if (this.selectedAutocompleteIndex > this.autocompleteResult.length - 1) {
-                this.selectedAutocompleteIndex = this.autocompleteResult.length - 1;
+                window.lightbox.changeImage = function (imageNumber) {
+                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
+                        imageNumber--;
+                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
+                        imageNumber++;
+                    }
+                    return originalFn.call(window.lightbox, imageNumber);
+                };
             }
+
+            $(this.$refs.single).on("changed.owl.carousel", function (event) {
+                _this3.currentItem = event.page.index;
+            });
         },
+        initThumbCarousel: function initThumbCarousel() {
+            $(this.$refs.thumbs).owlCarousel({
+                autoHeight: true,
+                dots: false,
+                items: 5,
+                lazyLoad: true,
+                loop: false,
+                margin: 10,
+                mouseDrag: false,
+                center: false,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350
+            });
+        },
+        goTo: function goTo(index) {
+            var $owl = $(this.$refs.single);
+
+            $owl.trigger("to.owl.carousel", [index, 350]);
+        },
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         getItemName: function getItemName() {
@@ -21272,56 +21336,49 @@ Vue.component("item-store-special", {
             if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
                 if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
                     return "";
+=======
+        orderByPosition: function orderByPosition(list) {
+            return list.sort(function (entryA, entryB) {
+                if (entryA.position > entryB.position) {
+                    return 1;
+                }
+                if (entryA.position < entryB.position) {
+                    return -1;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
                 }
 
-                return this.getPercentageSale();
-            }
-
-            if (this.storeSpecial.id === 1 && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
-                return this.getPercentageSale();
-            }
-
-            return this.storeSpecial.names.name;
+                return 0;
+            });
         },
-        getPercentageSale: function getPercentageSale() {
-            // eslint-disable-next-line
-            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
 
-            if (percent < 0) {
-                return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
-            }
-
-            return "";
+            return altText;
+        },
+        getItemName: function getItemName() {
+            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
         }
     }
 });
 
-},{"../../helper/utils":123}],50:[function(require,module,exports){
+},{"../../helper/utils":123,"services/TranslationService":132}],47:[function(require,module,exports){
 "use strict";
 
-var _UrlService = require("services/UrlService");
+Vue.component("order-properties", {
 
-var _UrlService2 = _interopRequireDefault(_UrlService);
+    props: ["template"],
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+    computed: Vuex.mapState({
+        properties: function properties(state) {
+            return state.item.variation.documents[0].data.properties;
+        }
+    }),
 
-Vue.component("items-per-page", {
-
-    delimiters: ["${", "}"],
-
-    props: ["paginationValues", "template"],
-
-    data: function data() {
-        return {
-            selectedValue: null
-        };
-    },
     created: function created() {
         this.$options.template = this.template;
-
-        this.setSelectedValueByUrl();
     },
 
+<<<<<<< HEAD
     methods: {
         itemsPerPageChanged: function itemsPerPageChanged() {
             this.$store.dispatch("selectItemsPerPage", this.selectedValue);
@@ -21350,921 +21407,13 @@ Vue.component("items-per-page", {
 =======
 },{}],173:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("pagination", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            lastPageMax: 0
-        };
-    },
-
-    computed: _extends({
-        pageMax: function pageMax() {
-            if (this.isLoading) {
-                return this.lastPageMax;
-            }
-
-            var pageMax = this.totalItems / parseInt(this.itemsPerPage);
-
-            if (this.totalItems % parseInt(this.itemsPerPage) > 0) {
-                pageMax += 1;
-            }
-
-            this.lastPageMax = parseInt(pageMax) || 1;
-
-            return parseInt(pageMax) || 1;
-        }
-    }, Vuex.mapState({
-        page: function page(state) {
-            return state.itemList.page || 1;
-        },
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        },
-        itemsPerPage: function itemsPerPage(state) {
-            return state.itemList.itemsPerPage;
-        },
-        totalItems: function totalItems(state) {
-            return state.itemList.totalItems;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-        var page = urlParams.page || 1;
-
-        this.$store.commit("setItemListPage", parseInt(page));
-    },
-
-    methods: {
-        setPage: function setPage(page) {
-            this.$store.dispatch("selectItemListPage", page);
-
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{"services/UrlService":133}],52:[function(require,module,exports){
 =======
-},{}],174:[function(require,module,exports){
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-<<<<<<< HEAD
-Vue.component("item-filter", {
-
-    delimiters: ["${", "}"],
-=======
-    data: function data() {
-        return {
-            inputValue: "",
-            selectedFile: null,
-            waiting: false
-        };
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        document.addEventListener("onVariationChanged", function () {
-            if (_this.property.valueType !== "file") {
-                _this.inputValue = "";
-            } else {
-                _this.clearSelectedFile();
-            }
-            _this.setVariationOrderProperty({ propertyId: _this.property.id, value: null });
-        });
-    },
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-    props: ["template", "facet"],
-
-    computed: _extends({
-        facets: function facets() {
-            return this.facet.values.sort(function (facetA, facetB) {
-                if (facetA.position > facetB.position) {
-                    return 1;
-                }
-                if (facetA.position < facetB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-<<<<<<< HEAD
-        facetName: function facetName() {
-            if (this.facet.translationKey && this.facet.translationKey.length > 0) {
-                return _TranslationService2.default.translate("Ceres::Template." + this.facet.translationKey);
-=======
-        hasError: function hasError() {
-            var _this2 = this;
-
-            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
-                return this.variationMissingProperties.find(function (property) {
-                    return property.property.id === _this2.property.id;
-                });
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-            }
-
-            return this.facet.name;
-        }
-    }, Vuex.mapState({
-        selectedFacets: function selectedFacets(state) {
-            return state.itemList.selectedFacets;
-        },
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter";
-    },
-
-    methods: {
-        updateFacet: function updateFacet(facetValue) {
-            this.$store.dispatch("selectFacet", facetValue);
-        },
-        isSelected: function isSelected(facetValueId) {
-            return this.selectedFacets.findIndex(function (selectedFacet) {
-                return selectedFacet.id === facetValueId;
-            }) > -1;
-        }
-    }
-});
-
-},{"services/TranslationService":132}],53:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-filter-list", {
-
-<<<<<<< HEAD
-    delimiters: ["${", "}"],
-=======
-            return value;
-        }
-    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
-        setPropertyFile: function setPropertyFile(event) {
-            if (event.target && event.target.files && event.target.files.length > 0) {
-                this.selectedFile = event.target.files[0];
-                this.uploadPropertyFile(this.selectedFile);
-            }
-        },
-        uploadPropertyFile: function uploadPropertyFile(file) {
-            var _this3 = this;
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-    props: ["template", "facetData"],
-
-    data: function data() {
-        return {
-            isActive: false
-        };
-    },
-
-<<<<<<< HEAD
-    computed: Vuex.mapState({
-        facets: function facets(state) {
-            return state.itemList.facets.sort(function (facetA, facetB) {
-                if (facetA.position > facetB.position) {
-                    return 1;
-                }
-                if (facetA.position < facetB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        }
-    }),
-=======
-            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
-                _this3.setVariationOrderProperty({ propertyId: _this3.property.id, value: response });
-            }).fail(function (error) {
-                _this3.clearSelectedFile();
-                _this3._handleValidationErrors(error);
-            }).always(function (response) {
-                _this3.setIsBasketLoading(false);
-                _this3.waiting = false;
-            });
-        },
-        clearSelectedFile: function clearSelectedFile() {
-            this.selectedFile = null;
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
-            this.$refs.fileInput.value = "";
-        },
-        _handleValidationErrors: function _handleValidationErrors(error) {
-            if (error.hasOwnProperty("validation_errors")) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-    created: function created() {
-        this.$store.commit("setFacets", this.facetData);
-
-        this.$options.template = this.template || "#vue-item-filter-list";
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        var selectedFacets = [];
-
-        if (urlParams.facets) {
-            selectedFacets = urlParams.facets.split(",");
-        }
-
-<<<<<<< HEAD
-        if (urlParams.priceMin || urlParams.priceMax) {
-            var priceMin = urlParams.priceMin || "";
-            var priceMax = urlParams.priceMax || "";
-=======
-},{"services/ApiService":254,"services/NotificationService":259}],175:[function(require,module,exports){
-"use strict";
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
-
-            selectedFacets.push("price");
-        }
-
-        if (selectedFacets.length > 0) {
-            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
-        }
-    },
-
-    methods: {
-        toggleOpeningState: function toggleOpeningState() {
-            var _this = this;
-
-            window.setTimeout(function () {
-                _this.isActive = !_this.isActive;
-            }, 300);
-        }
-    }
-});
-
-},{"services/UrlService":133}],54:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-filter-price", {
-
-    delimiters: ["${", "}"],
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-item-filter-price"
-        }
-    },
-
-    data: function data() {
-        return {
-            priceMin: "",
-            priceMax: "",
-            currency: App.activeCurrency
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-price";
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        this.priceMin = urlParams.priceMin || "";
-        this.priceMax = urlParams.priceMax || "";
-    },
-
-    computed: _extends({
-        isDisabled: function isDisabled() {
-            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
-        }
-    }, Vuex.mapState({
-        isLoading: function isLoading(state) {
-            return state.itemList.isLoading;
-        }
-    })),
-
-    methods: {
-        selectAll: function selectAll(event) {
-            event.target.select();
-        },
-        triggerFilter: function triggerFilter() {
-            if (!this.isDisabled) {
-                this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
-            }
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{"services/UrlService":133}],55:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-filter-tag-list", {
-=======
-},{"../../helper/debounce":246,"../../helper/number":248,"../../helper/utils":251,"../../services/TranslationService":260}],176:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Vue.component("single-item", {
-
-    delimiters: ["${", "}"],
-
-    props: ["template", "itemData", "variationListData", "attributeNameMap", "variationUnits"],
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-    delimiters: ["${", "}"],
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        tagList: function tagList(state) {
-            return state.itemList.selectedFacets;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
-    },
-
-    methods: {
-        removeTag: function removeTag(tag) {
-            this.$store.dispatch("selectFacet", tag);
-        }
-    }
-});
-
-<<<<<<< HEAD
-},{}],56:[function(require,module,exports){
-=======
-},{}],177:[function(require,module,exports){
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-<<<<<<< HEAD
-var _TranslationService = require("services/TranslationService");
-=======
-var _uniq = require("lodash/uniq");
-
-var _uniq2 = _interopRequireDefault(_uniq);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("add-to-wish-list", {
-
-<<<<<<< HEAD
-    props: {
-        template: {
-            type: String,
-            default: "#vue-add-to-wish-list"
-        },
-        variationId: Number
-    },
-
-    data: function data() {
-        return {
-            isLoading: false
-=======
-    props: ["attributes", "variations", "variationUnits", "preselect", "unitPreselect", "template"],
-
-    data: function data() {
-        return {
-            // Collection of currently selected variation attributes.
-            selectedAttributes: {},
-            possibleUnitIds: [],
-            selectedUnitId: 0
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-        };
-    },
-
-    computed: _extends({
-        isVariationInWishList: function isVariationInWishList() {
-            return this.wishListIds.includes(this.variationId);
-        }
-    }, Vuex.mapState({
-        wishListIds: function wishListIds(state) {
-            return state.wishList.wishListIds;
-        }
-    })),
-
-    watch: {
-        isVariationInWishList: function isVariationInWishList() {
-            this.changeTooltipText();
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    methods: {
-        switchState: function switchState() {
-            if (this.isVariationInWishList) {
-                this.removeFromWishList();
-            } else {
-                this.addToWishList();
-            }
-        },
-        addToWishList: function addToWishList() {
-            var _this = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
-                    _this.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
-                }, function (error) {
-                    _this.isLoading = false;
-                });
-            }
-        },
-        removeFromWishList: function removeFromWishList() {
-            var _this2 = this;
-
-<<<<<<< HEAD
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
-                    _this2.isLoading = false;
-
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
-                }, function (error) {
-                    _this2.isLoading = false;
-                });
-=======
-                if (!!preselectedVariation && preselectedVariation.length === 1) {
-                    var _attributes = _this.attributes;
-
-                    // set attributes of preselected variation
-                    _this.setAttributes(preselectedVariation[0]);
-
-                    if (preselectedVariation[0].attributes.length > 0 && _this.unitPreselect > 0 || _attributes.length === 0) {
-                        var possibleVariations = _this.filterVariations(_this.selectedAttributes);
-
-                        if (possibleVariations.length > 1) {
-                            _this.setUnits(possibleVariations);
-                            _this.selectedUnitId = _this.unitPreselect;
-                        } else if (_this.variations.length > 1 && _this.attributes.length === 0) {
-                            _this.setUnits(_this.variations);
-                            _this.selectedUnitId = _this.unitPreselect;
-                        }
-                    }
-                }
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-            }
-        },
-        changeTooltipText: function changeTooltipText() {
-            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
-
-            $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
-        }
-    }
-});
-
-},{"services/NotificationService":131,"services/TranslationService":132}],57:[function(require,module,exports){
-"use strict";
-
-<<<<<<< HEAD
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-=======
-        /**
-         * Finds all variations matching a given set of attributes.
-         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
-         * @returns {array}                    A list of matching variations.
-         */
-        filterVariations: function filterVariations(attributes) {
-            var _this2 = this;
-
-            attributes = attributes || this.selectedAttributes;
-            return this.variations.filter(function (variation) {
-                for (var i = 0; i < variation.attributes.length; i++) {
-                    var id = variation.attributes[i].attributeId;
-                    var val = variation.attributes[i].attributeValueId;
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-<<<<<<< HEAD
-Vue.component("graduated-prices", {
-    props: ["template"],
-
-    computed: _extends({
-        graduatedPrices: function graduatedPrices() {
-            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
-            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
-
-            prices = prices.filter(function (price) {
-                return price.minimumOrderQuantity > minQuantity;
-            });
-
-            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
-                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
-=======
-                return variation.attributes.length > 0 || _this2.possibleUnitIds.length > 0;
-            }).filter(function (variation) {
-                return _this2.selectedUnitId === 0 || _this2.selectedUnitId === variation.unitCombinationId;
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-            });
-        },
-        activeGraduationIndex: function activeGraduationIndex() {
-            var _this = this;
-
-            var prices = this.graduatedPrices.filter(function (price) {
-                return _this.variationOrderQuantity >= price.minimumOrderQuantity;
-            });
-
-            if (!prices.length) {
-                return -1;
-            }
-
-            var price = prices.reduce(function (prev, current) {
-                return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
-            });
-
-            return this.graduatedPrices.indexOf(price);
-        }
-    }, Vuex.mapState({
-        variationOrderQuantity: function variationOrderQuantity(state) {
-            return state.item.variationOrderQuantity;
-        }
-    })),
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],58:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-bundle", {
-
-    props: {
-        template: {
-            type: String,
-            default: "#vue-item-bundle"
-        },
-        bundleType: String,
-        bundleComponents: Array
-    },
-
-    data: function data() {
-        return {
-            bundleSetting: null,
-            showItemBundleItems: true
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.$refs.bundleSetting) {
-                _this.bundleSetting = _this.$refs.bundleSetting.innerText;
-                _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
-            }
-        });
-    },
-
-    methods: {
-        getBundleInnerText: function getBundleInnerText(item) {
-            item.variation.bundleType = null;
-
-            return item;
-        }
-    }
-});
-
-},{}],59:[function(require,module,exports){
-"use strict";
-
-<<<<<<< HEAD
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-=======
-                if (possibleVariations.length === 1) {
-                    if (!this.selectedUnitId > 0) {
-                        this.possibleUnitIds = [];
-                    }
-
-                    // only 1 matching variation remaining:
-                    // set remaining attributes if not set already. Will trigger this method again.
-                    if (!this.setAttributes(possibleVariations[0])) {
-                        // all attributes are set => load variation data
-                        this.setVariation(possibleVariations[0].variationId);
-                    } else {
-                        this.onSelectionChange();
-                    }
-                } else if (possibleVariations.length > 1) {
-                    this.setUnits(possibleVariations);
-                } else {
-                    this.setUnits([]);
-                }
-            }
-        },
-        setVariation: function setVariation(variationId) {
-            var _this3 = this;
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-var _utils = require("../../helper/utils");
-
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
-<<<<<<< HEAD
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-=======
-                    _this3.$store.commit("setVariation", response);
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-Vue.component("item-image-carousel", {
-
-<<<<<<< HEAD
-    delimiters: ["${", "}"],
-
-    props: ["imageUrlAccessor", "template"],
-
-    data: function data() {
-        return {
-            currentItem: 0
-        };
-=======
-                    _this3.$emit("is-valid-change", true);
-                });
-            }
-        },
-        setUnits: function setUnits(possibleVariations) {
-            var possibleUnitIds = [];
-
-            if (possibleVariations.length > 0) {
-                possibleUnitIds = (0, _uniq2.default)(possibleVariations.map(function (variation) {
-                    return variation.unitCombinationId;
-                }));
-            }
-
-            if (possibleUnitIds.length > 1) {
-                this.possibleUnitIds = possibleUnitIds;
-            } else {
-                this.selectedUnitId = 0;
-            }
-        }
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-    },
-
-    computed: _extends({
-        carouselImages: function carouselImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
-        },
-        singleImages: function singleImages() {
-            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
-        }
-    }, Vuex.mapState({
-        currentVariation: function currentVariation(state) {
-            return state.item.variation;
-        }
-    })),
-
-    watch: {
-        currentVariation: {
-            handler: function handler(val, oldVal) {
-                var _this = this;
-
-<<<<<<< HEAD
-                if (val !== oldVal) {
-                    setTimeout(function () {
-                        _this.reInitialize();
-                    }, 1);
-=======
-                    window.history.replaceState({}, title, url);
-                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url: url } }));
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-                }
-            },
-
-            deep: true
-        }
-    },
-
-<<<<<<< HEAD
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    mounted: function mounted() {
-        var _this2 = this;
-=======
-},{"../../helper/dom":247,"lodash/uniq":126,"services/ApiService":254,"util":131}],178:[function(require,module,exports){
-"use strict";
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
-        this.$nextTick(function () {
-            _this2.initCarousel();
-            _this2.initThumbCarousel();
-        });
-    },
-
-    methods: {
-        getImageCount: function getImageCount() {
-            return this.carouselImages.length;
-        },
-        reInitialize: function reInitialize() {
-            var $owl = $(this.$refs.single);
-
-            $owl.trigger("destroy.owl.carousel");
-            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $owl.find(".owl-item").remove();
-
-            var $thumbs = $(this.$refs.thumbs);
-
-            $thumbs.trigger("destroy.owl.carousel");
-            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $thumbs.find(".owl-item").remove();
-
-            this.initCarousel();
-            this.initThumbCarousel();
-        },
-        initCarousel: function initCarousel() {
-            var _this3 = this;
-
-            var imageCount = this.getImageCount();
-
-            $(this.$refs.single).owlCarousel({
-                autoHeight: true,
-                dots: true,
-                items: 1,
-                lazyLoad: true,
-                loop: true,
-                margin: 10,
-                mouseDrag: imageCount > 1,
-                nav: imageCount > 1,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350,
-                onChanged: function onChanged(event) {
-                    var $thumb = $(_this3.$refs.thumbs);
-
-                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
-                }
-            });
-
-            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
-                window.lightbox.option({
-                    wrapAround: true
-                });
-                window.lightbox.imageCountLabel = function (current, total) {
-                    if ((0, _utils.isNullOrUndefined)(imageCount) || imageCount <= 1) {
-                        return "";
-                    }
-                    current -= (total - imageCount) / 2;
-                    while (current <= 0) {
-                        current += imageCount;
-                    }
-                    while (current > imageCount) {
-                        current -= imageCount;
-                    }
-                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
-                };
-
-                var originalFn = window.lightbox.changeImage;
-
-                window.lightbox.changeImage = function (imageNumber) {
-                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
-                        imageNumber--;
-                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
-                        imageNumber++;
-                    }
-                    return originalFn.call(window.lightbox, imageNumber);
-                };
-            }
-
-            $(this.$refs.single).on("changed.owl.carousel", function (event) {
-                _this3.currentItem = event.page.index;
-            });
-        },
-        initThumbCarousel: function initThumbCarousel() {
-            $(this.$refs.thumbs).owlCarousel({
-                autoHeight: true,
-                dots: false,
-                items: 5,
-                lazyLoad: true,
-                loop: false,
-                margin: 10,
-                mouseDrag: false,
-                center: false,
-                nav: true,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
-            });
-        },
-        goTo: function goTo(index) {
-            var $owl = $(this.$refs.single);
-
-            $owl.trigger("to.owl.carousel", [index, 350]);
-        },
-        orderByPosition: function orderByPosition(list) {
-            return list.sort(function (entryA, entryB) {
-                if (entryA.position > entryB.position) {
-                    return 1;
-                }
-                if (entryA.position < entryB.position) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-        getAltText: function getAltText(image) {
-            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
-
-            return altText;
-        },
-        getItemName: function getItemName() {
-            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
-        }
-    }
-});
-
-},{"../../helper/utils":123,"services/TranslationService":132}],60:[function(require,module,exports){
-"use strict";
-
-Vue.component("order-properties", {
-
-    props: ["template"],
-
-    computed: Vuex.mapState({
-        properties: function properties(state) {
-            return state.item.variation.documents[0].data.properties;
-        }
-    }),
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
 
     methods: Vuex.mapMutations(["setVariationOrderProperty"])
 });
 
-<<<<<<< HEAD
-},{}],61:[function(require,module,exports){
-=======
-},{}],179:[function(require,module,exports){
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+},{}],48:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -22295,7 +21444,6 @@ Vue.component("order-property-list", {
             var _didIteratorError = false;
             var _iteratorError = undefined;
 
-<<<<<<< HEAD
             try {
                 for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var group = _step.value;
@@ -22327,13 +21475,6 @@ Vue.component("order-property-list", {
             }
 
             return [];
-=======
-        /**
-         * returns itemData.texts
-         */
-        texts: function texts() {
-            return this.itemData.texts;
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
         }
     }, Vuex.mapState({
         variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
@@ -22346,6 +21487,24 @@ Vue.component("order-property-list", {
     },
 
     methods: {
+<<<<<<< HEAD
+        setPage: function setPage(page) {
+            this.$store.dispatch("selectItemListPage", page);
+
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+    }
+});
+
+<<<<<<< HEAD
+},{"services/UrlService":133}],52:[function(require,module,exports){
+=======
+},{}],174:[function(require,module,exports){
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+=======
         sortGroupProperties: function sortGroupProperties(group) {
             return group.properties.sort(function (prev, current) {
                 if (prev.position > current.position) {
@@ -22354,8 +21513,8 @@ Vue.component("order-property-list", {
                 if (prev.position < current.position) {
                     return -1;
                 }
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
-<<<<<<< HEAD
                 return 0;
             });
         },
@@ -22363,10 +21522,6 @@ Vue.component("order-property-list", {
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
             var _iteratorError2 = undefined;
-=======
-},{}],180:[function(require,module,exports){
-"use strict";
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
             try {
                 for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
@@ -22376,9 +21531,37 @@ Vue.component("order-property-list", {
                         return prev.position < current.position ? prev : current;
                     });
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+Vue.component("item-filter", {
+
+    delimiters: ["${", "}"],
+=======
+    data: function data() {
+        return {
+            inputValue: "",
+            selectedFile: null,
+            waiting: false
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        document.addEventListener("onVariationChanged", function () {
+            if (_this.property.valueType !== "file") {
+                _this.inputValue = "";
+            } else {
+                _this.clearSelectedFile();
+            }
+            _this.setVariationOrderProperty({ propertyId: _this.property.id, value: null });
+        });
+    },
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
                     group.lowestPosition = lowestPosition.position;
 
                     var groupId = group.group ? group.group.id : null;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
                     if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId)) {
                         group.hasError = true;
@@ -22410,20 +21593,32 @@ Vue.component("order-property-list", {
                 return 0;
             });
         },
+<<<<<<< HEAD
+<<<<<<< HEAD
+        facetName: function facetName() {
+            if (this.facet.translationKey && this.facet.translationKey.length > 0) {
+                return _TranslationService2.default.translate("Ceres::Template." + this.facet.translationKey);
+=======
+        hasError: function hasError() {
+            var _this2 = this;
+
+            if (this.variationMarkInvalidProperties && this.inputType === "radio") {
+                return this.variationMissingProperties.find(function (property) {
+                    return property.property.id === _this2.property.id;
+                });
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
         slideTo: function slideTo(position) {
             if (position >= 0 && position < this.sortedGroupedProperties.length) {
                 this.activeSlide = position;
                 this.touchedSlides[this.activeSlide] = true;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
             }
         }
     }
 });
 
-<<<<<<< HEAD
-},{}],62:[function(require,module,exports){
-=======
-},{}],181:[function(require,module,exports){
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+},{}],49:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -22450,25 +21645,13 @@ Vue.component("order-property-list-group", {
 
     created: function created() {
         this.$options.template = this.template;
-<<<<<<< HEAD
     },
+
+<<<<<<< HEAD
+    methods: {
+        updateFacet: function updateFacet(facetValue) {
+            this.$store.dispatch("selectFacet", facetValue);
 =======
-        this.$store.commit("setItemListItems", this.itemData);
-        this.$store.commit("setItemListTotalItems", this.totalItemsData);
-    }
-});
-
-},{}],182:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("item-list-sorting", {
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
     methods: _extends({
         unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
@@ -22502,6 +21685,7 @@ Vue.component("item-list-sorting", {
                     }
                 }
             }
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         },
         isPropertyTypeRadio: function isPropertyTypeRadio(property) {
             var orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
@@ -22516,25 +21700,33 @@ Vue.component("item-list-sorting", {
     }, Vuex.mapMutations(["setVariationOrderProperty"]))
 });
 
-<<<<<<< HEAD
-},{}],63:[function(require,module,exports){
-=======
-},{"services/UrlService":261}],183:[function(require,module,exports){
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+},{}],50:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-<<<<<<< HEAD
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+    delimiters: ["${", "}"],
 =======
-var _utils = require("../../helper/utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+            return value;
+        }
+    }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
+        setPropertyFile: function setPropertyFile(event) {
+            if (event.target && event.target.files && event.target.files.length > 0) {
+                this.selectedFile = event.target.files[0];
+                this.uploadPropertyFile(this.selectedFile);
+            }
+        },
+        uploadPropertyFile: function uploadPropertyFile(file) {
+            var _this3 = this;
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
+=======
 Vue.component("order-property-list-item", {
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
     props: {
         template: {
@@ -22547,18 +21739,23 @@ Vue.component("order-property-list-item", {
 
     data: function data() {
         return {
-<<<<<<< HEAD
             inputValue: "",
             selectedFile: null,
             waiting: false
-=======
-            promiseCount: 0,
-            autocompleteResult: [],
-            selectedAutocompleteIndex: -1,
-            isSearchFocused: false
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
         };
     },
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+    computed: Vuex.mapState({
+        facets: function facets(state) {
+            return state.itemList.facets.sort(function (facetA, facetB) {
+                if (facetA.position > facetB.position) {
+                    return 1;
+                }
+                if (facetA.position < facetB.position) {
+                    return -1;
+=======
 
     computed: _extends({
         inputType: function inputType() {
@@ -22568,6 +21765,7 @@ Vue.component("order-property-list-item", {
             if (valueType === "empty") {
                 if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
                     return "checkbox";
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
                 }
 
                 return "radio";
@@ -22596,6 +21794,31 @@ Vue.component("order-property-list-item", {
         surcharge: function surcharge() {
             return this.property.itemSurcharge || this.property.surcharge;
         }
+<<<<<<< HEAD
+    }),
+=======
+            ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
+                _this3.setVariationOrderProperty({ propertyId: _this3.property.id, value: response });
+            }).fail(function (error) {
+                _this3.clearSelectedFile();
+                _this3._handleValidationErrors(error);
+            }).always(function (response) {
+                _this3.setIsBasketLoading(false);
+                _this3.waiting = false;
+            });
+        },
+        clearSelectedFile: function clearSelectedFile() {
+            this.selectedFile = null;
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
+            this.$refs.fileInput.value = "";
+        },
+        _handleValidationErrors: function _handleValidationErrors(error) {
+            if (error.hasOwnProperty("validation_errors")) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
     }, Vuex.mapState({
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
@@ -22604,11 +21827,12 @@ Vue.component("order-property-list-item", {
             return state.item.variationMarkInvalidProperties;
         }
     }), Vuex.mapGetters(["variationMissingProperties"])),
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
     created: function created() {
         this.$options.template = this.template;
     },
-<<<<<<< HEAD
+
 
     methods: _extends({
         onInputValueChanged: function onInputValueChanged(value) {
@@ -22619,30 +21843,6 @@ Vue.component("order-property-list-item", {
             } else if (this.inputType === "checkbox") {
                 if (!value) {
                     value = null;
-=======
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-            _this.$store.commit("setItemListSearchString", urlParams.query);
-
-            _this.$refs.searchInput.value = !(0, _utils.isNullOrUndefined)(urlParams.query) ? urlParams.query : "";
-        });
-    },
-
-    methods: {
-        prepareSearch: function prepareSearch() {
-            if (this.selectedAutocompleteItem) {
-                if (this.forwardToSingleItem) {
-                    window.open(this.selectedAutocompleteItem.url, "_self", false);
-                } else {
-                    this.$refs.searchInput.value = this.selectedAutocompleteItem.name;
-                    this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
-
-                    this.search();
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
                 }
             } else if (this.inputType === "radio") {
                 this.$emit("radio-change", this.property.id);
@@ -22650,16 +21850,8 @@ Vue.component("order-property-list-item", {
 
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
         },
-<<<<<<< HEAD
         validateInt: function validateInt(value) {
             value = parseInt(value);
-=======
-        search: function search() {
-            if (this.$refs.searchInput.value.length) {
-                if (document.location.pathname === "/search") {
-                    this.updateTitle(this.$refs.searchInput.value);
-                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
             if (isNaN(value)) {
                 value = null;
@@ -22672,38 +21864,11 @@ Vue.component("order-property-list-item", {
         validateFloat: function validateFloat(value) {
             value = parseFloat(value.replace(App.decimalSeparator, "."));
 
-<<<<<<< HEAD
             if (isNaN(value)) {
                 value = null;
-=======
-                    window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
-                }
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
             } else {
                 value = value.toString().replace(".", App.decimalSeparator);
             }
-<<<<<<< HEAD
-=======
-        },
-        updateTitle: function updateTitle(searchString) {
-            var searchPageTitle = document.querySelector("#searchPageTitle");
-            var title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
-
-            if (!(0, _utils.isNullOrUndefined)(searchPageTitle)) {
-                searchPageTitle.innerHTML = "";
-                searchPageTitle.appendChild(document.createTextNode(title));
-            }
-
-            document.title = title + " | " + _TranslationService2.default.translate("Ceres::Template.headerCompanyName");
-        },
-        autocomplete: function autocomplete(searchString) {
-            var _this2 = this;
-
-            if (searchString.length >= 2) {
-                if (this.promiseCount >= Number.MAX_SAFE_INTEGER) {
-                    this.promiseCount = 0;
-                }
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
             this.inputValue = value;
 
@@ -22719,13 +21884,31 @@ Vue.component("order-property-list-item", {
         uploadPropertyFile: function uploadPropertyFile(file) {
             var _this2 = this;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+        if (urlParams.priceMin || urlParams.priceMax) {
+            var priceMin = urlParams.priceMin || "";
+            var priceMax = urlParams.priceMax || "";
+=======
+},{"services/ApiService":254,"services/NotificationService":259}],175:[function(require,module,exports){
+"use strict";
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+=======
             this.setIsBasketLoading(true);
             this.waiting = true;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
             var fileData = new FormData();
 
             fileData.append("fileData", file);
 
+<<<<<<< HEAD
+    methods: {
+        toggleOpeningState: function toggleOpeningState() {
+            var _this = this;
+=======
             ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }).done(function (response) {
                 _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
             }).fail(function (error) {
@@ -22749,6 +21932,7 @@ Vue.component("order-property-list-item", {
                 try {
                     for (var _iterator = Object.values(error.validation_errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var err = _step.value;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
                         NotificationService.error(err[0]);
                     }
@@ -22767,131 +21951,20 @@ Vue.component("order-property-list-item", {
                     }
                 }
             }
-<<<<<<< HEAD
-=======
-        },
-        selectAutocompleteItem: function selectAutocompleteItem(item) {
-            if (this.forwardToSingleItem) {
-                window.open(item.url, "_self", false);
-            } else {
-                this.$refs.searchInput.value = item.name;
-                this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
-
-                this.search();
-            }
-        },
-        keyup: function keyup() {
-            this.selectedAutocompleteIndex--;
-
-            if (this.selectedAutocompleteIndex < 0) {
-                this.selectedAutocompleteIndex = 0;
-            }
-        },
-        keydown: function keydown() {
-            this.selectedAutocompleteIndex++;
-
-            if (this.selectedAutocompleteIndex > this.autocompleteResult.length - 1) {
-                this.selectedAutocompleteIndex = this.autocompleteResult.length - 1;
-            }
-        },
-
-        // hide autocomplete after 100ms to make clicking on it possible
-        setIsSearchFocused: function setIsSearchFocused(value) {
-            var _this3 = this;
-
-            setTimeout(function () {
-                _this3.isSearchFocused = !!value;
-            }, 100);
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
         }
     })
 });
 
-<<<<<<< HEAD
-},{"services/ApiService":126,"services/NotificationService":131}],64:[function(require,module,exports){
+},{"services/ApiService":126,"services/NotificationService":131}],51:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-=======
-},{"../../helper/utils":251,"services/ApiService":254,"services/TranslationService":260,"services/UrlService":261}],184:[function(require,module,exports){
-"use strict";
-
-var _utils = require("../../helper/utils");
-
-Vue.component("item-store-special", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-item-store-special",
-
-    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount", "bundleType"],
-
-    data: function data() {
-        return {
-            tagClass: "",
-            label: "",
-            tagClasses: {
-                1: "bg-danger",
-                2: "bg-primary",
-                default: "bg-success"
-            }
-        };
-    },
-    created: function created() {
-        this.initializeStoreSpecial();
-    },
-
-    methods: {
-        initializeStoreSpecial: function initializeStoreSpecial() {
-            if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-                this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
-            } else {
-                this.tagClass = this.tagClasses.default;
-            }
-
-            this.label = this.getLabel();
-        },
-        getLabel: function getLabel() {
-            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
-                if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
-                    return "";
-                }
-
-                return this.getPercentageSale();
-            }
-
-            if (this.storeSpecial.id === 1 && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
-                return this.getPercentageSale();
-            }
-
-            return this.storeSpecial.names.name;
-        },
-        getPercentageSale: function getPercentageSale() {
-            // eslint-disable-next-line
-            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
 var _number = require("../../helper/number");
 
-<<<<<<< HEAD
 var _utils = require("../../helper/utils");
 
 var _TranslationService = require("../../services/TranslationService");
-=======
-            return "";
-        }
-    },
-
-    watch: {
-        storeSpecial: function storeSpecial() {
-            this.initializeStoreSpecial();
-        }
-    }
-});
-
-},{"../../helper/utils":251}],185:[function(require,module,exports){
-"use strict";
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
 var _TranslationService2 = _interopRequireDefault(_TranslationService);
 
@@ -22968,17 +22041,7 @@ Vue.component("quantity-input", {
         if (!(0, _utils.isNullOrUndefined)(this.variationId)) {
             this.fetchQuantityFromBasket();
         }
-<<<<<<< HEAD
     },
-=======
-    }
-});
-
-},{"services/UrlService":261}],186:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
     computed: _extends({
         variationBasketQuantity: function variationBasketQuantity() {
@@ -23110,13 +22173,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 <<<<<<< HEAD
-},{"../../helper/debounce":118,"../../helper/number":120,"../../helper/utils":123,"../../services/TranslationService":132}],65:[function(require,module,exports){
+<<<<<<< HEAD
+},{"services/UrlService":133}],55:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-filter-tag-list", {
 =======
-},{"services/UrlService":261}],187:[function(require,module,exports){
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+},{"../../helper/debounce":246,"../../helper/number":248,"../../helper/utils":251,"../../services/TranslationService":260}],176:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("single-item", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "itemData", "variationListData", "attributeNameMap", "variationUnits"],
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"../../helper/debounce":118,"../../helper/number":120,"../../helper/utils":123,"../../services/TranslationService":132}],52:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
 Vue.component("single-item", {
 
@@ -23127,6 +22206,7 @@ Vue.component("single-item", {
             isVariationSelected: true
         };
     },
+
 
     computed: _extends({
         isDescriptionTabActive: function isDescriptionTabActive() {
@@ -23147,6 +22227,20 @@ Vue.component("single-item", {
     created: function created() {
         var _this = this;
 
+<<<<<<< HEAD
+    methods: {
+        removeTag: function removeTag(tag) {
+            this.$store.dispatch("selectFacet", tag);
+        }
+    }
+});
+
+<<<<<<< HEAD
+},{}],56:[function(require,module,exports){
+=======
+},{}],177:[function(require,module,exports){
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
         this.$options.template = this.template;
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
@@ -23160,17 +22254,27 @@ Vue.component("single-item", {
     }
 });
 
-<<<<<<< HEAD
-},{}],66:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 "use strict";
 
 var _util = require("util");
 
-var _dom = require("../../helper/dom");
+<<<<<<< HEAD
+<<<<<<< HEAD
+var _TranslationService = require("services/TranslationService");
 =======
-},{"services/TranslationService":260}],188:[function(require,module,exports){
-"use strict";
+var _uniq = require("lodash/uniq");
+
+var _uniq2 = _interopRequireDefault(_uniq);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+var _dom = require("../../helper/dom");
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -23181,6 +22285,46 @@ var VariationData = {};
 
 Vue.component("variation-select", {
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    props: {
+        template: {
+            type: String,
+            default: "#vue-add-to-wish-list"
+        },
+        variationId: Number
+    },
+
+    data: function data() {
+        return {
+            isLoading: false
+=======
+    props: ["attributes", "variations", "variationUnits", "preselect", "unitPreselect", "template"],
+
+    data: function data() {
+        return {
+            // Collection of currently selected variation attributes.
+            selectedAttributes: {},
+            possibleUnitIds: [],
+            selectedUnitId: 0
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+        };
+    },
+
+    computed: _extends({
+        isVariationInWishList: function isVariationInWishList() {
+            return this.wishListIds.includes(this.variationId);
+        }
+    }, Vuex.mapState({
+        wishListIds: function wishListIds(state) {
+            return state.wishList.wishListIds;
+        }
+    })),
+
+    watch: {
+        isVariationInWishList: function isVariationInWishList() {
+            this.changeTooltipText();
+=======
     delimiters: ["${", "}"],
 
     props: ["attributes", "variations", "preselect", "template"],
@@ -23192,9 +22336,11 @@ Vue.component("variation-select", {
         };
     },
 
+
     computed: Vuex.mapState({
         currentVariation: function currentVariation(state) {
             return state.item.variation;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         }
     }),
 
@@ -23204,12 +22350,21 @@ Vue.component("variation-select", {
     mounted: function mounted() {
         var _this = this;
 
+<<<<<<< HEAD
+    methods: {
+        switchState: function switchState() {
+            if (this.isVariationInWishList) {
+                this.removeFromWishList();
+            } else {
+                this.addToWishList();
+=======
         this.$nextTick(function () {
             // initialize selected attributes to be tracked by change detection
             var attributes = {};
 
             for (var attributeId in _this.attributes) {
                 attributes[attributeId] = null;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
             }
             _this.selectedAttributes = attributes;
 
@@ -23229,6 +22384,40 @@ Vue.component("variation-select", {
         });
     },
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
+                    _this2.isLoading = false;
+
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
+                }, function (error) {
+                    _this2.isLoading = false;
+                });
+=======
+                if (!!preselectedVariation && preselectedVariation.length === 1) {
+                    var _attributes = _this.attributes;
+
+                    // set attributes of preselected variation
+                    _this.setAttributes(preselectedVariation[0]);
+
+                    if (preselectedVariation[0].attributes.length > 0 && _this.unitPreselect > 0 || _attributes.length === 0) {
+                        var possibleVariations = _this.filterVariations(_this.selectedAttributes);
+
+                        if (possibleVariations.length > 1) {
+                            _this.setUnits(possibleVariations);
+                            _this.selectedUnitId = _this.unitPreselect;
+                        } else if (_this.variations.length > 1 && _this.attributes.length === 0) {
+                            _this.setUnits(_this.variations);
+                            _this.selectedUnitId = _this.unitPreselect;
+                        }
+                    }
+                }
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+            }
+=======
+
     methods: {
 
         /**
@@ -23243,19 +22432,16 @@ Vue.component("variation-select", {
                     var id = variation.attributes[i].attributeId;
                     var val = variation.attributes[i].attributeValueId;
 
-<<<<<<< HEAD
                     if (!!attributes[id] && attributes[id] != val) {
                         return false;
                     }
                 }
-=======
-},{"services/UrlService":261}],189:[function(require,module,exports){
-"use strict";
->>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
                 return variation.attributes.length > 0;
             });
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         },
+
 
         /**
          * Tests if a given attribute value is not available depending on the current selection.
@@ -23267,10 +22453,36 @@ Vue.component("variation-select", {
             // clone selectedAttributes to avoid touching objects bound to UI
             var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+=======
+        /**
+         * Finds all variations matching a given set of attributes.
+         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
+         * @returns {array}                    A list of matching variations.
+         */
+        filterVariations: function filterVariations(attributes) {
+            var _this2 = this;
+
+            attributes = attributes || this.selectedAttributes;
+            return this.variations.filter(function (variation) {
+                for (var i = 0; i < variation.attributes.length; i++) {
+                    var id = variation.attributes[i].attributeId;
+                    var val = variation.attributes[i].attributeValueId;
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
             attributes[attributeId] = attributeValueId;
             return this.filterVariations(attributes).length > 0;
         },
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+Vue.component("graduated-prices", {
+    props: ["template"],
+=======
         /**
          * Set selected attributes by a given variation.
          * @param {*}           variation   The variation to set as selected
@@ -23278,8 +22490,8 @@ Vue.component("variation-select", {
          */
         setAttributes: function setAttributes(variation) {
             var hasChanges = false;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
-<<<<<<< HEAD
             for (var i = 0; i < variation.attributes.length; i++) {
                 var id = variation.attributes[i].attributeId;
                 var val = variation.attributes[i].attributeValueId;
@@ -23290,7 +22502,18 @@ Vue.component("variation-select", {
                 }
             }
 
+<<<<<<< HEAD
+            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
+=======
+                return variation.attributes.length > 0 || _this2.possibleUnitIds.length > 0;
+            }).filter(function (variation) {
+                return _this2.selectedUnitId === 0 || _this2.selectedUnitId === variation.unitCombinationId;
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+            });
+=======
             return hasChanges;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         },
         isTextCut: function isTextCut(name) {
             if (this.$refs.labelBoxRef) {
@@ -23360,6 +22583,1571 @@ Vue.component("variation-select", {
                 });
             }
         }
+    },
+
+<<<<<<< HEAD
+    methods: {
+        getBundleInnerText: function getBundleInnerText(item) {
+            item.variation.bundleType = null;
+=======
+    watch: {
+        currentVariation: {
+            handler: function handler(newVariation, oldVariation) {
+                if (oldVariation) {
+                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                    var title = document.getElementsByTagName("title")[0].innerHTML;
+
+                    window.history.replaceState({}, title, url);
+                }
+            },
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+            deep: true
+        }
+    }
+});
+
+},{"../../helper/dom":119,"services/ApiService":126,"util":8}],54:[function(require,module,exports){
+"use strict";
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+=======
+                if (possibleVariations.length === 1) {
+                    if (!this.selectedUnitId > 0) {
+                        this.possibleUnitIds = [];
+                    }
+
+                    // only 1 matching variation remaining:
+                    // set remaining attributes if not set already. Will trigger this method again.
+                    if (!this.setAttributes(possibleVariations[0])) {
+                        // all attributes are set => load variation data
+                        this.setVariation(possibleVariations[0].variationId);
+                    } else {
+                        this.onSelectionChange();
+                    }
+                } else if (possibleVariations.length > 1) {
+                    this.setUnits(possibleVariations);
+                } else {
+                    this.setUnits([]);
+                }
+            }
+        },
+        setVariation: function setVariation(variationId) {
+            var _this3 = this;
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+<<<<<<< HEAD
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+=======
+                    _this3.$store.commit("setVariation", response);
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+
+Vue.component("item-image-carousel", {
+=======
+Vue.component("category-image-carousel", {
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+<<<<<<< HEAD
+    delimiters: ["${", "}"],
+
+    props: {
+        imageUrlsData: { type: Array },
+        itemUrl: { type: String },
+        altText: { type: String },
+        titleText: { type: String },
+        showDots: { type: Boolean },
+        showNav: { type: Boolean },
+        disableLazyLoad: {
+            type: Boolean,
+            default: false
+        },
+        enableCarousel: { type: Boolean },
+        template: { type: String }
+    },
+
+    data: function data() {
+        return {
+            $_enableCarousel: false
+        };
+=======
+                    _this3.$emit("is-valid-change", true);
+                });
+            }
+        },
+        setUnits: function setUnits(possibleVariations) {
+            var possibleUnitIds = [];
+
+            if (possibleVariations.length > 0) {
+                possibleUnitIds = (0, _uniq2.default)(possibleVariations.map(function (variation) {
+                    return variation.unitCombinationId;
+                }));
+            }
+
+            if (possibleUnitIds.length > 1) {
+                this.possibleUnitIds = possibleUnitIds;
+            } else {
+                this.selectedUnitId = 0;
+            }
+        }
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+    },
+
+<<<<<<< HEAD
+    computed: _extends({
+        carouselImages: function carouselImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+        },
+        singleImages: function singleImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+        }
+    }, Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    })),
+
+    watch: {
+        currentVariation: {
+            handler: function handler(val, oldVal) {
+                var _this = this;
+
+<<<<<<< HEAD
+                if (val !== oldVal) {
+                    setTimeout(function () {
+                        _this.reInitialize();
+                    }, 1);
+=======
+                    window.history.replaceState({}, title, url);
+                    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: title, url: url } }));
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+    computed: {
+        imageUrls: function imageUrls() {
+            return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
+                if (imageUrlA.position > imageUrlB.position) {
+                    return 1;
+                }
+                if (imageUrlA.position < imageUrlB.position) {
+                    return -1;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+                }
+
+                return 0;
+            });
+        }
+    },
+
+<<<<<<< HEAD
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
+    },
+    mounted: function mounted() {
+<<<<<<< HEAD
+        var _this2 = this;
+=======
+},{"../../helper/dom":247,"lodash/uniq":126,"services/ApiService":254,"util":131}],178:[function(require,module,exports){
+"use strict";
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+        var _this = this;
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+        this.$nextTick(function () {
+            if (_this.$_enableCarousel) {
+                _this.initializeCarousel();
+            }
+        });
+    },
+
+    methods: {
+        initializeCarousel: function initializeCarousel() {
+            var _this2 = this;
+
+            $("#owl-carousel-" + this._uid).owlCarousel({
+                dots: !!this.showDots,
+                items: 1,
+                mouseDrag: false,
+                loop: this.imageUrls.length > 1,
+                lazyLoad: !this.disableLazyLoad,
+                margin: 10,
+                nav: !!this.showNav,
+                navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
+                onTranslated: function onTranslated(event) {
+                    var target = $(event.currentTarget);
+                    var owlItem = $(target.find(".owl-item.active"));
+
+                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
+                },
+
+                onInitialized: function onInitialized(event) {
+                    if (_this2.showNav) {
+                        document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                        document.querySelector("#owl-nav-text-right-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                    }
+                }
+            });
+        },
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.altText;
+
+            return altText;
+        },
+        loadFirstImage: function loadFirstImage() {
+            var itemLazyImage = this.$refs.itemLazyImage;
+
+            if (itemLazyImage) {
+                if (itemLazyImage.loadImage) {
+                    itemLazyImage.loadImage();
+                } else if (itemLazyImage[0] && itemLazyImage[0].loadImage) {
+                    itemLazyImage[0].loadImage();
+                }
+            }
+        }
+    }
+});
+
+},{}],55:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+Vue.component("category-item", {
+
+    delimiters: ["${", "}"],
+
+    template: "#vue-category-item",
+
+<<<<<<< HEAD
+    methods: Vuex.mapMutations(["setVariationOrderProperty"])
+});
+
+<<<<<<< HEAD
+},{}],61:[function(require,module,exports){
+=======
+},{}],179:[function(require,module,exports){
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+"use strict";
+=======
+    props: ["decimalCount", "itemData", "imageUrlAccessor"],
+
+    data: function data() {
+        return {
+            recommendedRetailPrice: 0,
+            variationRetailPrice: 0
+        };
+    },
+
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+    computed: _extends({
+        /**
+         * returns itemData.item.storeSpecial
+         */
+        storeSpecial: function storeSpecial() {
+            return this.itemData.item.storeSpecial;
+        },
+
+
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function texts() {
+            return this.itemData.texts;
+        }
+    }, Vuex.mapState({
+        showNetPrices: function showNetPrices(state) {
+            return state.basket.showNetPrices;
+        }
+    })),
+
+    created: function created() {
+        if (this.itemData.prices.rrp) {
+            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
+        }
+        this.variationRetailPrice = this.itemData.prices.default.price.value;
+    },
+
+
+    methods: {
+        loadFirstImage: function loadFirstImage() {
+            var categoryImageCarousel = this.$refs.categoryImageCarousel;
+
+            if (categoryImageCarousel) {
+                categoryImageCarousel.loadFirstImage();
+            }
+        }
+    }
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+            try {
+                for (var _iterator = groupedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var group = _step.value;
+=======
+});
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+},{}],56:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-lazy-img", {
+
+<<<<<<< HEAD
+            return [];
+=======
+        /**
+         * returns itemData.texts
+         */
+        texts: function texts() {
+            return this.itemData.texts;
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+        }
+    }, Vuex.mapState({
+        variationMarkInvalidProperties: function variationMarkInvalidProperties(state) {
+            return state.item.variationMarkInvalidProperties;
+        }
+    }), Vuex.mapGetters(["variationGroupedProperties", "variationMissingProperties"])),
+=======
+    delimiters: ["${", "}"],
+
+    props: ["imageUrl", "template"],
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+<<<<<<< HEAD
+    methods: {
+        sortGroupProperties: function sortGroupProperties(group) {
+            return group.properties.sort(function (prev, current) {
+                if (prev.position > current.position) {
+                    return 1;
+                }
+                if (prev.position < current.position) {
+                    return -1;
+                }
+
+<<<<<<< HEAD
+                return 0;
+            });
+        },
+        getSortedGroups: function getSortedGroups(groups) {
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+=======
+},{}],180:[function(require,module,exports){
+"use strict";
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+        this.$nextTick(function () {
+            setTimeout(function () {
+                $(_this.$refs.lazyImg).show().lazyload({ threshold: 100 });
+            }, 1);
+        });
+    },
+
+
+    methods: {
+        loadImage: function loadImage() {
+            $(this.$refs.lazyImg).trigger("appear");
+        }
+    }
+});
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+},{}],57:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["categoryId", "template", "itemData", "totalItemsData"],
+
+    data: function data() {
+        return {
+            filterListState: false
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        },
+        items: function items(state) {
+            return state.itemList.items;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setItemListItems", this.itemData);
+        this.$store.commit("setItemListTotalItems", this.totalItemsData);
+    }
+});
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+},{}],62:[function(require,module,exports){
+=======
+},{}],181:[function(require,module,exports){
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{}],58:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-list-sorting", {
+
+    delimiters: ["${", "}"],
+
+    props: ["sortingList", "defaultSorting", "template"],
+
+    data: function data() {
+        return {
+            selectedSorting: {}
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+<<<<<<< HEAD
+<<<<<<< HEAD
+    },
+=======
+        this.$store.commit("setItemListItems", this.itemData);
+        this.$store.commit("setItemListTotalItems", this.totalItemsData);
+    }
+});
+
+},{}],182:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-list-sorting", {
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+        this.setSelectedValue();
+    },
+
+
+    methods: {
+        /**
+         * Set the selected sorting in the vuex storage and trigger the item search.
+         */
+        updateSorting: function updateSorting() {
+            this.$store.dispatch("selectItemListSorting", this.selectedSorting);
+        },
+
+
+        /**
+         * Determine the initial value and set it in the vuex storage.
+         */
+        setSelectedValue: function setSelectedValue() {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            if (urlParams.sorting) {
+                this.selectedSorting = urlParams.sorting;
+            } else {
+                this.selectedSorting = this.defaultSorting;
+            }
+
+            this.$store.commit("setItemListSorting", this.selectedSorting);
+        }
+    }
+});
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+},{}],63:[function(require,module,exports){
+=======
+},{"services/UrlService":261}],183:[function(require,module,exports){
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"services/UrlService":133}],59:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+"use strict";
+
+var _ApiService = require("services/ApiService");
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+=======
+var _utils = require("../../helper/utils");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+var _ApiService2 = _interopRequireDefault(_ApiService);
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-search", {
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-search"
+        },
+        showItemImages: {
+            type: Boolean,
+            default: false
+        },
+        forwardToSingleItem: {
+            type: Boolean,
+            default: App.config.search.forwardToSingleItem
+        }
+    },
+
+    data: function data() {
+        return {
+<<<<<<< HEAD
+<<<<<<< HEAD
+            inputValue: "",
+            selectedFile: null,
+            waiting: false
+=======
+=======
+            currentSearchString: "",
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+            promiseCount: 0,
+            autocompleteResult: [],
+            selectedAutocompleteIndex: -1,
+            isSearchFocused: false
+<<<<<<< HEAD
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+        };
+    },
+
+    computed: _extends({
+        inputType: function inputType() {
+            var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
+            var valueType = this.property.valueType;
+
+            if (valueType === "empty") {
+                if (!orderPropertyGroupingType || orderPropertyGroupingType === "none" || orderPropertyGroupingType === "multi") {
+                    return "checkbox";
+                }
+
+                return "radio";
+            }
+
+            return valueType;
+        },
+        selectedFileName: function selectedFileName() {
+            if (this.selectedFile) {
+                return this.selectedFile.name;
+            }
+
+            return "";
+        },
+        hasError: function hasError() {
+            var _this = this;
+=======
+        };
+    },
+
+
+    computed: {
+        selectedAutocompleteItem: function selectedAutocompleteItem() {
+            var selectedAutocompleteItem = this.autocompleteResult[this.selectedAutocompleteIndex];
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+            if (this.selectedAutocompleteIndex < 0 || !selectedAutocompleteItem) {
+                return null;
+            }
+
+            return selectedAutocompleteItem;
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+    methods: _extends({
+        onInputValueChanged: function onInputValueChanged(value) {
+            if (this.inputType === "int") {
+                value = this.validateInt(value);
+            } else if (this.inputType === "float") {
+                value = this.validateFloat(value);
+            } else if (this.inputType === "checkbox") {
+                if (!value) {
+                    value = null;
+=======
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            _this.$store.commit("setItemListSearchString", urlParams.query);
+
+            _this.$refs.searchInput.value = !(0, _utils.isNullOrUndefined)(urlParams.query) ? urlParams.query : "";
+        });
+    },
+
+    methods: {
+        prepareSearch: function prepareSearch() {
+            if (this.selectedAutocompleteItem) {
+                if (this.forwardToSingleItem) {
+                    window.open(this.selectedAutocompleteItem.url, "_self", false);
+                } else {
+                    this.$refs.searchInput.value = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
+
+                    this.search();
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+                }
+            } else if (this.inputType === "radio") {
+                this.$emit("radio-change", this.property.id);
+            }
+
+            this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
+        },
+<<<<<<< HEAD
+        validateInt: function validateInt(value) {
+            value = parseInt(value);
+=======
+        search: function search() {
+            if (this.$refs.searchInput.value.length) {
+                if (document.location.pathname === "/search") {
+                    this.updateTitle(this.$refs.searchInput.value);
+                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            _this.$store.commit("setItemListSearchString", urlParams.query);
+            _this.currentSearchString = urlParams.query;
+        });
+    },
+
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+    methods: {
+        prepareSearch: function prepareSearch() {
+            if (this.selectedAutocompleteItem) {
+                if (this.forwardToSingleItem) {
+                    window.open(this.selectedAutocompleteItem.url, "_self", false);
+                } else {
+                    this.currentSearchString = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.currentSearchString);
+
+                    this.search();
+                }
+            } else {
+                this.search();
+            }
+
+            $("#searchBox").collapse("hide");
+        },
+        search: function search() {
+            if (this.currentSearchString.length) {
+                if (document.location.pathname === "/search") {
+                    this.updateTitle(this.currentSearchString);
+                    this.$store.dispatch("searchItems", this.currentSearchString);
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if (isNaN(value)) {
+                value = null;
+=======
+                    window.open(searchBaseURL + this.$refs.searchInput.value, "_self", false);
+                }
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+            } else {
+                value = value.toString().replace(".", App.decimalSeparator);
+            }
+<<<<<<< HEAD
+=======
+        },
+        updateTitle: function updateTitle(searchString) {
+            var searchPageTitle = document.querySelector("#searchPageTitle");
+            var title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
+
+            if (!(0, _utils.isNullOrUndefined)(searchPageTitle)) {
+                searchPageTitle.innerHTML = "";
+                searchPageTitle.appendChild(document.createTextNode(title));
+            }
+
+            document.title = title + " | " + _TranslationService2.default.translate("Ceres::Template.headerCompanyName");
+        },
+        autocomplete: function autocomplete(searchString) {
+            var _this2 = this;
+
+            if (searchString.length >= 2) {
+                if (this.promiseCount >= Number.MAX_SAFE_INTEGER) {
+                    this.promiseCount = 0;
+                }
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+                    this.selectedAutocompleteIndex = -1;
+                    this.autocompleteResult = [];
+                } else {
+                    var searchBaseURL = "/search?query=";
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+                    if (App.defaultLanguage !== App.language) {
+                        searchBaseURL = "/" + App.language + "/search?query=";
+                    }
+
+                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
+                }
+            } else {
+                this.preventSearch = false;
+            }
+        },
+        updateTitle: function updateTitle(searchString) {
+            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString);
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + encodeURIComponent(searchString) + " | " + App.config.header.companyName;
+        },
+        autocomplete: function autocomplete(searchString) {
+            var _this2 = this;
+
+            if (searchString.length >= 2) {
+                if (this.promiseCount >= Number.MAX_SAFE_INTEGER) {
+                    this.promiseCount = 0;
+                }
+
+                var promiseCount = ++this.promiseCount;
+
+                _ApiService2.default.get("/rest/io/item/search/autocomplete", { template: "Ceres::ItemList.Components.ItemSearch", query: searchString }).done(function (response) {
+                    if (_this2.promiseCount === promiseCount) {
+                        _this2.transformAutocomplete(response, searchString);
+                    }
+                });
+            } else {
+                this.autocompleteResult = [];
+            }
+        },
+
+
+        // transform the autocomplete result to usable object
+        transformAutocomplete: function transformAutocomplete(data, searchString) {
+            this.autocompleteResult = [];
+            this.selectedAutocompleteIndex = -1;
+
+            if (data && data.documents.length) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = data.documents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var item = _step.value;
+
+<<<<<<< HEAD
+                        NotificationService.error(err[0]);
+=======
+                        var images = this.$options.filters.itemImages(item.data.images, "urlPreview");
+                        var img = this.$options.filters.itemImage(images);
+                        var url = this.$options.filters.itemURL(item.data);
+                        var name = this.$options.filters.itemName(item.data);
+
+                        var displayName = name;
+
+                        var _iteratorNormalCompletion2 = true;
+                        var _didIteratorError2 = false;
+                        var _iteratorError2 = undefined;
+
+                        try {
+                            for (var _iterator2 = searchString.split(" ")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                var split = _step2.value;
+
+                                displayName = displayName.replace(split, "<strong>" + split + "</strong>");
+                            }
+                        } catch (err) {
+                            _didIteratorError2 = true;
+                            _iteratorError2 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                    _iterator2.return();
+                                }
+                            } finally {
+                                if (_didIteratorError2) {
+                                    throw _iteratorError2;
+                                }
+                            }
+                        }
+
+                        this.autocompleteResult.push({
+                            img: img,
+                            url: url,
+                            name: name,
+                            displayName: displayName
+                        });
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+<<<<<<< HEAD
+                }
+            }
+<<<<<<< HEAD
+=======
+        },
+        selectAutocompleteItem: function selectAutocompleteItem(item) {
+            if (this.forwardToSingleItem) {
+                window.open(item.url, "_self", false);
+            } else {
+                this.$refs.searchInput.value = item.name;
+                this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
+
+                this.search();
+            }
+        },
+        keyup: function keyup() {
+            this.selectedAutocompleteIndex--;
+
+            if (this.selectedAutocompleteIndex < 0) {
+                this.selectedAutocompleteIndex = 0;
+            }
+        },
+        keydown: function keydown() {
+            this.selectedAutocompleteIndex++;
+
+            if (this.selectedAutocompleteIndex > this.autocompleteResult.length - 1) {
+                this.selectedAutocompleteIndex = this.autocompleteResult.length - 1;
+            }
+        },
+
+        // hide autocomplete after 100ms to make clicking on it possible
+        setIsSearchFocused: function setIsSearchFocused(value) {
+            var _this3 = this;
+
+            setTimeout(function () {
+                _this3.isSearchFocused = !!value;
+            }, 100);
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+        }
+    })
+});
+
+<<<<<<< HEAD
+},{"services/ApiService":126,"services/NotificationService":131}],64:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+=======
+},{"../../helper/utils":251,"services/ApiService":254,"services/TranslationService":260,"services/UrlService":261}],184:[function(require,module,exports){
+"use strict";
+
+var _utils = require("../../helper/utils");
+
+Vue.component("item-store-special", {
+
+    delimiters: ["${", "}"],
+
+    template: "#vue-item-store-special",
+
+    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount", "bundleType"],
+
+    data: function data() {
+        return {
+            tagClass: "",
+            label: "",
+            tagClasses: {
+                1: "bg-danger",
+                2: "bg-primary",
+                default: "bg-success"
+            }
+        };
+    },
+    created: function created() {
+        this.initializeStoreSpecial();
+    },
+
+    methods: {
+        initializeStoreSpecial: function initializeStoreSpecial() {
+            if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+            } else {
+                this.tagClass = this.tagClasses.default;
+            }
+
+            this.label = this.getLabel();
+        },
+        getLabel: function getLabel() {
+            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
+                    return "";
+=======
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+                }
+
+                return this.getPercentageSale();
+            }
+<<<<<<< HEAD
+
+            if (this.storeSpecial.id === 1 && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
+                return this.getPercentageSale();
+            }
+
+            return this.storeSpecial.names.name;
+        },
+        getPercentageSale: function getPercentageSale() {
+            // eslint-disable-next-line
+            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+
+var _number = require("../../helper/number");
+
+<<<<<<< HEAD
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("../../services/TranslationService");
+=======
+            return "";
+        }
+    },
+
+    watch: {
+        storeSpecial: function storeSpecial() {
+            this.initializeStoreSpecial();
+        }
+    }
+});
+
+},{"../../helper/utils":251}],185:[function(require,module,exports){
+"use strict";
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+var _debounce = require("../../helper/debounce");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("quantity-input", {
+
+    delimiters: ["${", "}"],
+
+    props: {
+        value: {
+            type: Number,
+            required: true
+        },
+        timeout: {
+            type: Number,
+            required: false,
+            default: 500
+        },
+        min: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        max: {
+            type: Number,
+            required: false
+        },
+        interval: {
+            type: Number,
+            required: false,
+            default: 1
+        },
+        template: {
+            type: String,
+            required: true
+        },
+        waiting: {
+            type: Boolean,
+            required: false
+=======
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+        },
+        selectAutocompleteItem: function selectAutocompleteItem(item) {
+            if (this.forwardToSingleItem) {
+                window.open(item.url, "_self", false);
+            } else {
+                this.currentSearchString = item.name;
+                this.$store.commit("setItemListSearchString", this.currentSearchString);
+
+                this.search();
+            }
+        },
+        keyup: function keyup() {
+            this.selectedAutocompleteIndex--;
+
+            if (this.selectedAutocompleteIndex < 0) {
+                this.selectedAutocompleteIndex = 0;
+            }
+        },
+        keydown: function keydown() {
+            this.selectedAutocompleteIndex++;
+
+            if (this.selectedAutocompleteIndex > this.autocompleteResult.length - 1) {
+                this.selectedAutocompleteIndex = this.autocompleteResult.length - 1;
+            }
+        },
+
+
+        // hide autocomplete after 100ms to make clicking on it possible
+        setIsSearchFocused: function setIsSearchFocused(value) {
+            var _this3 = this;
+
+            setTimeout(function () {
+                _this3.isSearchFocused = !!value;
+            }, 100);
+        }
+<<<<<<< HEAD
+<<<<<<< HEAD
+    },
+=======
+    }
+});
+
+},{"services/UrlService":261}],186:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+    }
+});
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+},{"services/ApiService":126,"services/TranslationService":132,"services/UrlService":133}],60:[function(require,module,exports){
+"use strict";
+
+var _utils = require("../../helper/utils");
+
+Vue.component("item-store-special", {
+
+    delimiters: ["${", "}"],
+
+    template: "#vue-item-store-special",
+
+    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount", "bundleType"],
+
+    data: function data() {
+        return {
+            tagClass: "",
+            label: "",
+            tagClasses: {
+                1: "bg-danger",
+                2: "bg-primary",
+                default: "bg-success"
+            }
+        };
+    },
+    created: function created() {
+
+        if (!(0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+            this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        } else {
+            this.tagClass = this.tagClasses.default;
+        }
+
+        this.label = this.getLabel();
+    },
+
+
+    methods: {
+        getLabel: function getLabel() {
+            if ((0, _utils.isNullOrUndefined)(this.storeSpecial)) {
+                if ((0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
+                    return "";
+                }
+
+                return this.getPercentageSale();
+            }
+
+            if (this.storeSpecial.id === 1 && !(0, _utils.isNullOrUndefined)(this.recommendedRetailPrice)) {
+                return this.getPercentageSale();
+            }
+
+            return this.storeSpecial.names.name;
+        },
+        getPercentageSale: function getPercentageSale() {
+            // eslint-disable-next-line
+            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
+
+            if (percent < 0) {
+                return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator) + "%";
+            }
+
+            return "";
+        }
+    }
+});
+
+},{"../../helper/utils":123}],61:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("items-per-page", {
+
+    delimiters: ["${", "}"],
+
+    props: ["paginationValues", "template"],
+
+    data: function data() {
+        return {
+            selectedValue: null
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.setSelectedValueByUrl();
+    },
+
+
+    methods: {
+        itemsPerPageChanged: function itemsPerPageChanged() {
+            this.$store.dispatch("selectItemsPerPage", this.selectedValue);
+        },
+        setSelectedValueByUrl: function setSelectedValueByUrl() {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+            var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
+
+            if (urlParams.items) {
+                if (this.paginationValues.includes(parseInt(urlParams.items))) {
+                    this.selectedValue = urlParams.items;
+                } else {
+                    this.selectedValue = defaultItemsPerPage;
+                }
+            } else {
+                this.selectedValue = defaultItemsPerPage;
+            }
+
+            this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
+        }
+    }
+});
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+},{"../../helper/debounce":118,"../../helper/number":120,"../../helper/utils":123,"../../services/TranslationService":132}],65:[function(require,module,exports){
+=======
+},{"services/UrlService":261}],187:[function(require,module,exports){
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"services/UrlService":133}],62:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("pagination", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            lastPageMax: 0
+        };
+    },
+
+    computed: _extends({
+        pageMax: function pageMax() {
+            if (this.isLoading) {
+                return this.lastPageMax;
+            }
+
+            var pageMax = this.totalItems / parseInt(this.itemsPerPage);
+
+            if (this.totalItems % parseInt(this.itemsPerPage) > 0) {
+                pageMax += 1;
+            }
+
+            this.lastPageMax = parseInt(pageMax) || 1;
+
+            return parseInt(pageMax) || 1;
+        }
+    }, Vuex.mapState({
+        page: function page(state) {
+            return state.itemList.page || 1;
+        },
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        },
+        itemsPerPage: function itemsPerPage(state) {
+            return state.itemList.itemsPerPage;
+        },
+        totalItems: function totalItems(state) {
+            return state.itemList.totalItems;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+        var page = urlParams.page || 1;
+
+        this.$store.commit("setItemListPage", parseInt(page));
+    },
+
+
+    methods: {
+        setPage: function setPage(page) {
+            this.$store.dispatch("selectItemListPage", page);
+
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+    }
+});
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+},{}],66:[function(require,module,exports){
+=======
+},{"services/UrlService":133}],63:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "facet"],
+
+    computed: _extends({
+        facets: function facets() {
+            return this.facet.values.sort(function (facetA, facetB) {
+                if (facetA.position > facetB.position) {
+                    return 1;
+                }
+                if (facetA.position < facetB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+        facetName: function facetName() {
+            if (this.facet.translationKey && this.facet.translationKey.length > 0) {
+                return _TranslationService2.default.translate("Ceres::Template." + this.facet.translationKey);
+            }
+
+            return this.facet.name;
+        }
+    }, Vuex.mapState({
+        selectedFacets: function selectedFacets(state) {
+            return state.itemList.selectedFacets;
+        },
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        }
+    })),
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter";
+    },
+
+
+    methods: {
+        updateFacet: function updateFacet(facetValue) {
+            this.$store.dispatch("selectFacet", facetValue);
+        },
+        isSelected: function isSelected(facetValueId) {
+            return this.selectedFacets.findIndex(function (selectedFacet) {
+                return selectedFacet.id === facetValueId;
+            }) > -1;
+        }
+    }
+});
+
+<<<<<<< HEAD
+var _dom = require("../../helper/dom");
+=======
+},{"services/TranslationService":260}],188:[function(require,module,exports){
+"use strict";
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"services/TranslationService":132}],64:[function(require,module,exports){
+"use strict";
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter-list", {
+
+    delimiters: ["${", "}"],
+
+    props: ["template", "facetData"],
+
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+    computed: Vuex.mapState({
+        facets: function facets(state) {
+            return state.itemList.facets.sort(function (facetA, facetB) {
+                if (facetA.position > facetB.position) {
+                    return 1;
+                }
+                if (facetA.position < facetB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    }),
+
+    created: function created() {
+        this.$store.commit("setFacets", this.facetData);
+
+        this.$options.template = this.template || "#vue-item-filter-list";
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        var selectedFacets = [];
+
+        if (urlParams.facets) {
+            selectedFacets = urlParams.facets.split(",");
+        }
+
+        if (urlParams.priceMin || urlParams.priceMax) {
+            var priceMin = urlParams.priceMin || "";
+            var priceMax = urlParams.priceMax || "";
+
+            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+
+            selectedFacets.push("price");
+        }
+
+        if (selectedFacets.length > 0) {
+            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
+        }
+    },
+
+    methods: {
+        toggleOpeningState: function toggleOpeningState() {
+            var _this = this;
+
+<<<<<<< HEAD
+        /**
+         * Finds all variations matching a given set of attributes.
+         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
+         * @returns {array}                    A list of matching variations.
+         */
+        filterVariations: function filterVariations(attributes) {
+            attributes = attributes || this.selectedAttributes;
+            return this.variations.filter(function (variation) {
+                for (var i = 0; i < variation.attributes.length; i++) {
+                    var id = variation.attributes[i].attributeId;
+                    var val = variation.attributes[i].attributeValueId;
+
+<<<<<<< HEAD
+                    if (!!attributes[id] && attributes[id] != val) {
+                        return false;
+                    }
+                }
+=======
+},{"services/UrlService":261}],189:[function(require,module,exports){
+"use strict";
+>>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+            window.setTimeout(function () {
+                _this.isActive = !_this.isActive;
+            }, 300);
+        }
+    }
+});
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+},{"services/UrlService":133}],65:[function(require,module,exports){
+"use strict";
+
+<<<<<<< HEAD
+        /**
+         * Tests if a given attribute value is not available depending on the current selection.
+         * @param {int}     attributeId         The id of the attribute
+         * @param {int}     attributeValueId    The valueId of the attribute
+         * @returns {boolean}                   True if the value can be combined with the current selection.
+         */
+        isEnabled: function isEnabled(attributeId, attributeValueId) {
+            // clone selectedAttributes to avoid touching objects bound to UI
+            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+=======
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _UrlService = require("services/UrlService");
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+<<<<<<< HEAD
+        /**
+         * Set selected attributes by a given variation.
+         * @param {*}           variation   The variation to set as selected
+         * @returns {boolean}               true if at least one attribute has been changed
+         */
+        setAttributes: function setAttributes(variation) {
+            var hasChanges = false;
+
+<<<<<<< HEAD
+            for (var i = 0; i < variation.attributes.length; i++) {
+                var id = variation.attributes[i].attributeId;
+                var val = variation.attributes[i].attributeValueId;
+=======
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("item-filter-price", {
+
+    delimiters: ["${", "}"],
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-price"
+        }
+    },
+
+    data: function data() {
+        return {
+            priceMin: "",
+            priceMax: "",
+            currency: App.activeCurrency
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter-price";
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        this.priceMin = urlParams.priceMin || "";
+        this.priceMax = urlParams.priceMax || "";
+    },
+
+
+    computed: _extends({
+        isDisabled: function isDisabled() {
+            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
+        }
+    }, Vuex.mapState({
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        }
+    })),
+
+    methods: {
+        selectAll: function selectAll(event) {
+            event.target.select();
+        },
+<<<<<<< HEAD
+        setVariation: function setVariation(variationId) {
+            var _this2 = this;
+
+            if (VariationData[variationId]) {
+                // reuse cached variation data
+                this.$store.commit("setVariation", VariationData[variationId]);
+
+                document.dispatchEvent(new CustomEvent("onVariationChanged", {
+                    detail: {
+                        attributes: VariationData[variationId].attributes,
+                        documents: VariationData[variationId].documents
+                    }
+                }));
+
+                this.$emit("is-valid-change", true);
+            } else {
+                // get variation data from remote
+                ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
+                    // store received variation data for later reuse
+                    VariationData[variationId] = response;
+
+                    _this2.$store.commit("setVariation", response);
+
+                    document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
+
+                    _this2.$emit("is-valid-change", true);
+                });
+            }
+        }
 =======
     props: {
         template: {
@@ -23398,6 +24186,8 @@ Vue.component("variation-select", {
         selectAll: function selectAll(event) {
             event.target.select();
         },
+=======
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         triggerFilter: function triggerFilter() {
             if (!this.isDisabled) {
                 this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
@@ -23405,6 +24195,7 @@ Vue.component("variation-select", {
         }
     }
 });
+<<<<<<< HEAD
 
 },{"services/UrlService":261}],190:[function(require,module,exports){
 "use strict";
@@ -23683,18 +24474,30 @@ Vue.component("live-shopping-item", {
         this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
     },
+=======
 
-    watch: {
-        currentVariation: {
-            handler: function handler(newVariation, oldVariation) {
-                if (oldVariation) {
-                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-                    var title = document.getElementsByTagName("title")[0].innerHTML;
+},{"services/UrlService":133}],66:[function(require,module,exports){
+"use strict";
 
-                    window.history.replaceState({}, title, url);
-                }
-            },
+Vue.component("item-filter-tag-list", {
 
+    delimiters: ["${", "}"],
+
+    props: ["template"],
+
+    computed: Vuex.mapState({
+        tagList: function tagList(state) {
+            return state.itemList.selectedFacets;
+        }
+    }),
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter-tag-list";
+    },
+
+
+<<<<<<< HEAD
 <<<<<<< HEAD
             deep: true
 =======
@@ -23717,15 +24520,24 @@ Vue.component("live-shopping-item", {
         reloadOffer: function reloadOffer() {
             this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+    methods: {
+        removeTag: function removeTag(tag) {
+            this.$store.dispatch("selectFacet", tag);
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
         }
     }
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"../../helper/dom":119,"services/ApiService":126,"util":8}],67:[function(require,module,exports){
 =======
 },{"../../helper/utils":251,"services/TranslationService":260}],193:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{}],67:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -24947,10 +25759,14 @@ Vue.component("popper", {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"../../helper/dom":119,"../../helper/utils":123,"popper.js":4,"services/ModalService":130}],79:[function(require,module,exports){
 =======
 },{"../../helper/dom":247,"../../helper/utils":251,"popper.js":128,"services/ModalService":258}],206:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"../../helper/dom":119,"../../helper/utils":123,"popper.js":5,"services/ModalService":130}],79:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -27765,10 +28581,14 @@ function navigateTo(url) {
 exports.default = { setUrlParams: setUrlParams, getUrlParams: getUrlParams, navigateTo: navigateTo };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"../helper/url":122,"../helper/utils":123,"jquery":2}],134:[function(require,module,exports){
 =======
 },{"../helper/url":250,"../helper/utils":251,"../store/index":264,"jquery":3}],262:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"../helper/url":122,"../helper/utils":123,"jquery":3}],134:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28004,10 +28824,14 @@ function _eval(input) {
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"jquery":2}],135:[function(require,module,exports){
 =======
 },{"jquery":3}],263:[function(require,module,exports){
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
+=======
+},{"jquery":3}],135:[function(require,module,exports){
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 "use strict";
 
 module.exports = function ($) {
@@ -30258,6 +31082,7 @@ exports.default = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"services/ApiService":126}]},{},[124,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,56,57,58,59,60,61,62,63,64,65,66,43,44,52,53,54,55,45,46,47,48,50,49,51,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,118,119,117,120,121,122,123,136,137,138,139,140,141,142,143,144,145,146,147])
 =======
 },{"services/ApiService":254}],277:[function(require,module,exports){
@@ -30285,6 +31110,9 @@ exports.default = function (store) {
 
 var NotificationService = require("services/NotificationService");
 var cloneDeep = require("lodash/cloneDeep");
+=======
+},{"services/ApiService":126}]},{},[124,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,39,40,41,42,36,37,38,43,44,45,46,47,48,49,50,51,52,53,54,55,63,64,65,66,56,57,58,59,61,60,62,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,118,119,117,120,121,122,123,136,137,138,139,140,141,142,143,144,145,146,147])
+>>>>>>> 6ec641e3daddc1ad6cd867e53daa0f39b797a140
 
 },{"lodash/cloneDeep":108,"services/NotificationService":259}]},{},[252,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,162,163,164,165,166,159,160,161,167,168,169,170,171,172,173,174,175,176,177,178,179,187,188,189,190,180,181,182,183,185,184,186,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,246,247,245,248,249,250,251,264,265,266,267,268,269,270,271,272,273,274,275,276,277])
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
