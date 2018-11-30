@@ -247,13 +247,9 @@ var isFunction = function isFunction( obj ) {
       return typeof obj === "function" && typeof obj.nodeType !== "number";
   };
 
-
 var isWindow = function isWindow( obj ) {
 		return obj != null && obj === obj.window;
 	};
-
-
-
 
 	var preservedScriptAttributes = {
 		type: true,
@@ -278,7 +274,6 @@ var isWindow = function isWindow( obj ) {
 		doc.head.appendChild( script ).parentNode.removeChild( script );
 	}
 
-
 function toType( obj ) {
 	if ( obj == null ) {
 		return obj + "";
@@ -292,8 +287,6 @@ function toType( obj ) {
 /* global Symbol */
 // Defining this global in .eslintrc.json would create a danger of using the global
 // unguarded in another place, it seems safer to define global only for this module
-
-
 
 var
 	version = "3.3.1",
@@ -2918,8 +2911,6 @@ return Sizzle;
 
 })( window );
 
-
-
 jQuery.find = Sizzle;
 jQuery.expr = Sizzle.selectors;
 
@@ -2930,9 +2921,6 @@ jQuery.text = Sizzle.getText;
 jQuery.isXMLDoc = Sizzle.isXML;
 jQuery.contains = Sizzle.contains;
 jQuery.escapeSelector = Sizzle.escape;
-
-
-
 
 var dir = function( elem, dir, until ) {
 	var matched = [],
@@ -2949,7 +2937,6 @@ var dir = function( elem, dir, until ) {
 	return matched;
 };
 
-
 var siblings = function( n, elem ) {
 	var matched = [];
 
@@ -2962,10 +2949,7 @@ var siblings = function( n, elem ) {
 	return matched;
 };
 
-
 var rneedsContext = jQuery.expr.match.needsContext;
-
-
 
 function nodeName( elem, name ) {
 
@@ -2973,8 +2957,6 @@ function nodeName( elem, name ) {
 
 };
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
-
-
 
 // Implement the identical functionality for filter and not
 function winnow( elements, qualifier, not ) {
@@ -3062,9 +3044,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 // Initialize a jQuery object
-
 
 // A central reference to the root jQuery(document)
 var rootjQuery,
@@ -3179,7 +3159,6 @@ init.prototype = jQuery.fn;
 
 // Initialize central reference
 rootjQuery = jQuery( document );
-
 
 var rparentsprev = /^(?:parents|prev(?:Until|All))/,
 
@@ -3355,8 +3334,6 @@ jQuery.each( {
 	};
 } );
 var rnothtmlwhite = ( /[^\x20\t\r\n\f]+/g );
-
-
 
 // Convert String-formatted options into Object-formatted ones
 function createOptions( options ) {
@@ -3582,7 +3559,6 @@ jQuery.Callbacks = function( options ) {
 
 	return self;
 };
-
 
 function Identity( v ) {
 	return v;
@@ -3972,7 +3948,6 @@ jQuery.extend( {
 	}
 } );
 
-
 // These usually indicate a programmer mistake during development,
 // warn about them ASAP rather than swallowing them by default.
 var rerrorNames = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;
@@ -3986,17 +3961,11 @@ jQuery.Deferred.exceptionHook = function( error, stack ) {
 	}
 };
 
-
-
-
 jQuery.readyException = function( error ) {
 	window.setTimeout( function() {
 		throw error;
 	} );
 };
-
-
-
 
 // The deferred used on DOM ready
 var readyList = jQuery.Deferred();
@@ -4074,9 +4043,6 @@ if ( document.readyState === "complete" ||
 	window.addEventListener( "load", completed );
 }
 
-
-
-
 // Multifunctional method to get and set values of a collection
 // The value/s can optionally be executed if it's a function
 var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
@@ -4138,7 +4104,6 @@ var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 	return len ? fn( elems[ 0 ], key ) : emptyGet;
 };
 
-
 // Matches dashed string for camelizing
 var rmsPrefix = /^-ms-/,
 	rdashAlpha = /-([a-z])/g;
@@ -4164,9 +4129,6 @@ var acceptData = function( owner ) {
 	//    - Any
 	return owner.nodeType === 1 || owner.nodeType === 9 || !( +owner.nodeType );
 };
-
-
-
 
 function Data() {
 	this.expando = jQuery.expando + Data.uid++;
@@ -4321,8 +4283,6 @@ Data.prototype = {
 var dataPriv = new Data();
 
 var dataUser = new Data();
-
-
 
 //	Implementation Summary
 //
@@ -4492,7 +4452,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 jQuery.extend( {
 	queue: function( elem, type, data ) {
 		var queue;
@@ -4630,7 +4589,6 @@ var pnum = ( /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/ ).source;
 
 var rcssNum = new RegExp( "^(?:([+-])=|)(" + pnum + ")([a-z%]*)$", "i" );
 
-
 var cssExpand = [ "Top", "Right", "Bottom", "Left" ];
 
 var isHiddenWithinTree = function( elem, el ) {
@@ -4671,9 +4629,6 @@ var swap = function( elem, options, callback, args ) {
 
 	return ret;
 };
-
-
-
 
 function adjustCSS( elem, prop, valueParts, tween ) {
 	var adjusted, scale,
@@ -4738,7 +4693,6 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 	}
 	return adjusted;
 }
-
 
 var defaultDisplayMap = {};
 
@@ -4840,8 +4794,6 @@ var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]+)/i );
 
 var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 
-
-
 // We have to close these tags to support XHTML (#13200)
 var wrapMap = {
 
@@ -4864,7 +4816,6 @@ wrapMap.optgroup = wrapMap.option;
 
 wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead;
 wrapMap.th = wrapMap.td;
-
 
 function getAll( context, tag ) {
 
@@ -4889,7 +4840,6 @@ function getAll( context, tag ) {
 	return ret;
 }
 
-
 // Mark scripts as having already been evaluated
 function setGlobalEval( elems, refElements ) {
 	var i = 0,
@@ -4903,7 +4853,6 @@ function setGlobalEval( elems, refElements ) {
 		);
 	}
 }
-
 
 var rhtml = /<|&#?\w+;/;
 
@@ -4996,7 +4945,6 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	return fragment;
 }
 
-
 ( function() {
 	var fragment = document.createDocumentFragment(),
 		div = fragment.appendChild( document.createElement( "div" ) ),
@@ -5022,8 +4970,6 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 } )();
 var documentElement = document.documentElement;
-
-
 
 var
 	rkeyEvent = /^key/,
@@ -5754,7 +5700,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 var
 
 	/* eslint-disable max-len */
@@ -6224,8 +6169,6 @@ var getStyles = function( elem ) {
 
 var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 
-
-
 ( function() {
 
 	// Executing both pixelPosition & boxSizingReliable tests require only one layout
@@ -6316,7 +6259,6 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 	} );
 } )();
 
-
 function curCSS( elem, name, computed ) {
 	var width, minWidth, maxWidth, ret,
 
@@ -6369,7 +6311,6 @@ function curCSS( elem, name, computed ) {
 		ret;
 }
 
-
 function addGetHookIf( conditionFn, hookFn ) {
 
 	// Define the hook, we'll check on the first run if it's really needed.
@@ -6388,7 +6329,6 @@ function addGetHookIf( conditionFn, hookFn ) {
 		}
 	};
 }
-
 
 var
 
@@ -6845,7 +6785,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 function Tween( elem, options, prop, end, easing ) {
 	return new Tween.prototype.init( elem, options, prop, end, easing );
 }
@@ -6960,9 +6899,6 @@ jQuery.fx = Tween.prototype.init;
 
 // Back compat <1.8 extension point
 jQuery.fx.step = {};
-
-
-
 
 var
 	fxNow, inProgress,
@@ -7638,7 +7574,6 @@ jQuery.fx.speeds = {
 	_default: 400
 };
 
-
 // Based off of the plugin by Clint Helfers, with permission.
 // https://web.archive.org/web/20100324014747/http://blindsignals.com/index.php/2009/07/jquery-delay/
 jQuery.fn.delay = function( time, type ) {
@@ -7652,7 +7587,6 @@ jQuery.fn.delay = function( time, type ) {
 		};
 	} );
 };
-
 
 ( function() {
 	var input = document.createElement( "input" ),
@@ -7676,7 +7610,6 @@ jQuery.fn.delay = function( time, type ) {
 	input.type = "radio";
 	support.radioValue = input.value === "t";
 } )();
-
 
 var boolHook,
 	attrHandle = jQuery.expr.attrHandle;
@@ -7806,9 +7739,6 @@ jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( i, name ) 
 		return ret;
 	};
 } );
-
-
-
 
 var rfocusable = /^(?:input|select|textarea|button)$/i,
 	rclickable = /^(?:a|area)$/i;
@@ -7943,16 +7873,12 @@ jQuery.each( [
 	jQuery.propFix[ this.toLowerCase() ] = this;
 } );
 
-
-
-
 	// Strip and collapse whitespace according to HTML spec
 	// https://infra.spec.whatwg.org/#strip-and-collapse-ascii-whitespace
 	function stripAndCollapse( value ) {
 		var tokens = value.match( rnothtmlwhite ) || [];
 		return tokens.join( " " );
 	}
-
 
 function getClass( elem ) {
 	return elem.getAttribute && elem.getAttribute( "class" ) || "";
@@ -8127,9 +8053,6 @@ jQuery.fn.extend( {
 		return false;
 	}
 } );
-
-
-
 
 var rreturn = /\r/g;
 
@@ -8309,14 +8232,9 @@ jQuery.each( [ "radio", "checkbox" ], function() {
 	}
 } );
 
-
-
-
 // Return jQuery for attributes-only inclusion
 
-
 support.focusin = "onfocusin" in window;
-
 
 var rfocusMorph = /^(?:focusinfocus|focusoutblur)$/,
 	stopPropagationCallback = function( e ) {
@@ -8502,7 +8420,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 // Support: Firefox <=44
 // Firefox doesn't have focus(in | out) events
 // Related ticket - https://bugzilla.mozilla.org/show_bug.cgi?id=687787
@@ -8550,8 +8467,6 @@ var nonce = Date.now();
 
 var rquery = ( /\?/ );
 
-
-
 // Cross-browser xml parsing
 jQuery.parseXML = function( data ) {
 	var xml;
@@ -8572,7 +8487,6 @@ jQuery.parseXML = function( data ) {
 	}
 	return xml;
 };
-
 
 var
 	rbracket = /\[\]$/,
@@ -8691,7 +8605,6 @@ jQuery.fn.extend( {
 		} ).get();
 	}
 } );
-
 
 var
 	r20 = /%20/g,
@@ -9529,7 +9442,6 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 	};
 } );
 
-
 jQuery._evalUrl = function( url ) {
 	return jQuery.ajax( {
 		url: url,
@@ -9543,7 +9455,6 @@ jQuery._evalUrl = function( url ) {
 		"throws": true
 	} );
 };
-
 
 jQuery.fn.extend( {
 	wrapAll: function( html ) {
@@ -9611,16 +9522,12 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 jQuery.expr.pseudos.hidden = function( elem ) {
 	return !jQuery.expr.pseudos.visible( elem );
 };
 jQuery.expr.pseudos.visible = function( elem ) {
 	return !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length );
 };
-
-
-
 
 jQuery.ajaxSettings.xhr = function() {
 	try {
@@ -9783,9 +9690,6 @@ jQuery.ajaxTransport( function( options ) {
 	}
 } );
 
-
-
-
 // Prevent auto-execution of scripts when no explicit dataType was provided (See gh-2432)
 jQuery.ajaxPrefilter( function( s ) {
 	if ( s.crossDomain ) {
@@ -9853,9 +9757,6 @@ jQuery.ajaxTransport( "script", function( s ) {
 		};
 	}
 } );
-
-
-
 
 var oldCallbacks = [],
 	rjsonp = /(=)\?(?=&|$)|\?\?/;
@@ -9949,9 +9850,6 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	}
 } );
 
-
-
-
 // Support: Safari 8 only
 // In Safari 8 documents created via document.implementation.createHTMLDocument
 // collapse sibling forms: the second one becomes a child of the first one.
@@ -9962,7 +9860,6 @@ support.createHTMLDocument = ( function() {
 	body.innerHTML = "<form></form><form></form>";
 	return body.childNodes.length === 2;
 } )();
-
 
 // Argument "data" should be string of html
 // context (optional): If specified, the fragment will be created in this context,
@@ -10013,7 +9910,6 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 
 	return jQuery.merge( [], parsed.childNodes );
 };
-
 
 /**
  * Load a url into a page
@@ -10078,9 +9974,6 @@ jQuery.fn.load = function( url, params, callback ) {
 	return this;
 };
 
-
-
-
 // Attach a bunch of functions for handling common AJAX events
 jQuery.each( [
 	"ajaxStart",
@@ -10095,17 +9988,11 @@ jQuery.each( [
 	};
 } );
 
-
-
-
 jQuery.expr.pseudos.animated = function( elem ) {
 	return jQuery.grep( jQuery.timers, function( fn ) {
 		return elem === fn.elem;
 	} ).length;
 };
-
-
-
 
 jQuery.offset = {
 	setOffset: function( elem, options, i ) {
@@ -10319,7 +10206,6 @@ jQuery.each( [ "top", "left" ], function( i, prop ) {
 	);
 } );
 
-
 // Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
 jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 	jQuery.each( { padding: "inner" + name, content: type, "": "outer" + name },
@@ -10366,7 +10252,6 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 	} );
 } );
 
-
 jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
 	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
 	"change select submit keydown keypress keyup contextmenu" ).split( " " ),
@@ -10385,9 +10270,6 @@ jQuery.fn.extend( {
 		return this.mouseenter( fnOver ).mouseleave( fnOut || fnOver );
 	}
 } );
-
-
-
 
 jQuery.fn.extend( {
 
@@ -10472,9 +10354,6 @@ jQuery.isNumeric = function( obj ) {
 		!isNaN( obj - parseFloat( obj ) );
 };
 
-
-
-
 // Register as a named AMD module, since jQuery can be concatenated with other
 // files that may use define, but not via a proper concatenation script that
 // understands anonymous AMD modules. A named AMD is safest and most robust
@@ -10493,9 +10372,6 @@ if ( typeof define === "function" && define.amd ) {
 		return jQuery;
 	} );
 }
-
-
-
 
 var
 
@@ -10523,9 +10399,6 @@ jQuery.noConflict = function( deep ) {
 if ( !noGlobal ) {
 	window.jQuery = window.$ = jQuery;
 }
-
-
-
 
 return jQuery;
 } );
@@ -14208,10 +14081,6 @@ var createClass = function () {
   };
 }();
 
-
-
-
-
 var defineProperty = function (obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -16275,7 +16144,6 @@ var Popper = function () {
   // We can't use class properties because they don't get listed in the
   // class prototype and break stuff like Sinon stubs
 
-
   createClass(Popper, [{
     key: 'update',
     value: function update$$1() {
@@ -16302,7 +16170,6 @@ var Popper = function () {
      * @method scheduleUpdate
      * @memberof Popper
      */
-
 
     /**
      * Collection of utilities useful when writing custom modifiers.
@@ -16345,7 +16212,6 @@ var Popper = function () {
  * An ES6 getter that will return the height of the virtual reference element.
  */
 
-
 Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
 Popper.placements = placements;
 Popper.Defaults = Defaults;
@@ -16353,7 +16219,6 @@ Popper.Defaults = Defaults;
 return Popper;
 
 })));
-
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
@@ -16422,7 +16287,6 @@ function runTimeout(fun) {
         }
     }
 
-
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
@@ -16447,8 +16311,6 @@ function runClearTimeout(marker) {
             return cachedClearTimeout.call(this, marker);
         }
     }
-
-
 
 }
 var queue = [];
@@ -16645,7 +16507,6 @@ exports.format = function(f) {
   return str;
 };
 
-
 // Mark that a method should not be used.
 // Returns a modified function which warns once by default.
 // If --no-deprecation is set, then it is a no-op.
@@ -16679,7 +16540,6 @@ exports.deprecate = function(fn, msg) {
   return deprecated;
 };
 
-
 var debugs = {};
 var debugEnviron;
 exports.debuglog = function(set) {
@@ -16699,7 +16559,6 @@ exports.debuglog = function(set) {
   }
   return debugs[set];
 };
-
 
 /**
  * Echos the value of a value. Trys to print the value out
@@ -16735,7 +16594,6 @@ function inspect(obj, opts) {
 }
 exports.inspect = inspect;
 
-
 // http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
 inspect.colors = {
   'bold' : [1, 22],
@@ -16766,7 +16624,6 @@ inspect.styles = {
   'regexp': 'red'
 };
 
-
 function stylizeWithColor(str, styleType) {
   var style = inspect.styles[styleType];
 
@@ -16778,11 +16635,9 @@ function stylizeWithColor(str, styleType) {
   }
 }
 
-
 function stylizeNoColor(str, styleType) {
   return str;
 }
-
 
 function arrayToHash(array) {
   var hash = {};
@@ -16793,7 +16648,6 @@ function arrayToHash(array) {
 
   return hash;
 }
-
 
 function formatValue(ctx, value, recurseTimes) {
   // Provide a hook for user-specified inspect functions.
@@ -16907,7 +16761,6 @@ function formatValue(ctx, value, recurseTimes) {
   return reduceToSingleString(output, base, braces);
 }
 
-
 function formatPrimitive(ctx, value) {
   if (isUndefined(value))
     return ctx.stylize('undefined', 'undefined');
@@ -16926,11 +16779,9 @@ function formatPrimitive(ctx, value) {
     return ctx.stylize('null', 'null');
 }
 
-
 function formatError(value) {
   return '[' + Error.prototype.toString.call(value) + ']';
 }
-
 
 function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
   var output = [];
@@ -16950,7 +16801,6 @@ function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
   });
   return output;
 }
-
 
 function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
   var name, str, desc;
@@ -17010,7 +16860,6 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
   return name + ': ' + str;
 }
 
-
 function reduceToSingleString(output, base, braces) {
   var numLinesEst = 0;
   var length = output.reduce(function(prev, cur) {
@@ -17030,7 +16879,6 @@ function reduceToSingleString(output, base, braces) {
 
   return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
 }
-
 
 // NOTE: These type checking functions intentionally don't use `instanceof`
 // because it is fragile and can be easily faked with `Object.create()`.
@@ -17116,11 +16964,9 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-
 function pad(n) {
   return n < 10 ? '0' + n.toString(10) : n.toString(10);
 }
-
 
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
               'Oct', 'Nov', 'Dec'];
@@ -17134,12 +16980,10 @@ function timestamp() {
   return [d.getDate(), months[d.getMonth()], time].join(' ');
 }
 
-
 // log is just a thin wrapper to console.log that prepends a timestamp
 exports.log = function() {
   console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
 };
-
 
 /**
  * Inherit the prototype methods from one constructor into another.
@@ -17363,7 +17207,6 @@ Vue.component("add-item-to-basket-overlay", {
         };
     },
 
-
     computed: _extends({
         isLastBasketEntrySet: function isLastBasketEntrySet() {
             return Object.keys(this.latestBasketEntry.item).length !== 0;
@@ -17403,7 +17246,6 @@ Vue.component("add-item-to-basket-overlay", {
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     watch: {
         latestBasketEntry: function latestBasketEntry() {
@@ -17660,7 +17502,6 @@ Vue.component("add-to-basket", {
             this.buttonLockState = value;
         },
 
-
         /**
          * open the AddItemToBasketOverlay
          */
@@ -17673,7 +17514,6 @@ Vue.component("add-to-basket", {
 
             this.$store.commit("setLatestBasketEntry", latestBasketEntry);
         },
-
 
         /**
          * update the property quantity of the current instance
@@ -17732,7 +17572,6 @@ Vue.component("basket-preview", {
         this.$store.dispatch("loadBasketData");
         this.$store.commit("setShowNetPrices", this.showNetPrices);
     },
-
 
     /**
      * Bind to basket and bind the basket items
@@ -17811,7 +17650,6 @@ Vue.component("coupon", {
         };
     },
 
-
     watch: {
         redeemedCouponCode: function redeemedCouponCode(val) {
             this.couponCode = val;
@@ -17844,7 +17682,6 @@ Vue.component("coupon", {
             }
         });
     },
-
 
     methods: {
         redeemCode: function redeemCode() {
@@ -17969,7 +17806,6 @@ Vue.component("basket-list-item", {
         };
     },
 
-
     computed: _extends({
         image: function image() {
             var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
@@ -18056,7 +17892,6 @@ Vue.component("basket-list-item", {
         this.$options.template = this.template;
     },
 
-
     methods: {
 
         /**
@@ -18076,7 +17911,6 @@ Vue.component("basket-list-item", {
                 });
             }
         },
-
 
         /**
          * Update item quantity in basket
@@ -18161,7 +17995,6 @@ Vue.component("accept-gtc-check", {
         };
     },
 
-
     computed: Vuex.mapState({
         showError: function showError(state) {
             return state.checkout.validation.gtc.showError;
@@ -18172,7 +18005,6 @@ Vue.component("accept-gtc-check", {
         this.$options.template = this.template;
         this.$store.commit("setGtcValidator", this.validate);
     },
-
 
     methods: {
         validate: function validate() {
@@ -18224,7 +18056,6 @@ Vue.component("checkout", {
         this.$store.dispatch("setCheckout", this.initialCheckout);
         this.addEventHandler();
     },
-
 
     methods: {
         addEventHandler: function addEventHandler() {
@@ -18429,7 +18260,6 @@ Vue.component("payment-provider-select", {
         this.$store.commit("setPaymentProviderValidator", this.validate);
     },
 
-
     methods: {
         /**
          * Event when changing the payment provider
@@ -18483,7 +18313,6 @@ Vue.component("place-order", {
         };
     },
 
-
     computed: Vuex.mapState({
         checkoutValidation: function checkoutValidation(state) {
             return state.checkout.validation;
@@ -18508,7 +18337,6 @@ Vue.component("place-order", {
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     methods: {
         placeOrder: function placeOrder() {
@@ -18689,7 +18517,6 @@ Vue.component("shipping-privacy-hint-check", {
         this.$options.template = this.template;
     },
 
-
     methods: {
         setValue: function setValue(value) {
             this.$store.commit("setShippingPrivacyHintAccepted", value);
@@ -18751,7 +18578,6 @@ Vue.component("shipping-profile-select", {
         this.$options.template = this.template;
         this.$store.commit("setShippingProfileValidator", this.validate);
     },
-
 
     methods: {
         /**
@@ -18816,7 +18642,6 @@ Vue.component("container-item-list", {
             }
         });
     },
-
 
     computed: {
         columnWidths: function columnWidths() {
@@ -18937,7 +18762,6 @@ Vue.component("accept-privacy-policy-check", {
         this.$options.template = this.template;
     },
 
-
     methods: {
         onValueChanged: function onValueChanged(value) {
             this.$emit("input", value);
@@ -18998,14 +18822,12 @@ Vue.component("address-input-group", {
         };
     },
 
-
     /**
      * Check whether the address data exists. Else, create an empty one
      */
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     methods: {
         /**
@@ -19043,7 +18865,6 @@ Vue.component("address-input-group", {
                 this.emitInputEvent(input, emitInputs[input]);
             }
         },
-
 
         /**
          * @param {string} field
@@ -19104,7 +18925,6 @@ Vue.component("address-select", {
         };
     },
 
-
     computed: _extends({
         selectedAddress: function selectedAddress() {
             return this.$store.getters.getSelectedAddress(this.addressType);
@@ -19142,7 +18962,6 @@ Vue.component("address-select", {
         this.addEventListener();
     },
 
-
     /**
      * Select the address modal
      */
@@ -19154,7 +18973,6 @@ Vue.component("address-select", {
             _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
         });
     },
-
 
     methods: {
         /**
@@ -19168,7 +18986,6 @@ Vue.component("address-select", {
             });
         },
 
-
         /**
          * Update the selected address
          * @param index
@@ -19177,7 +18994,6 @@ Vue.component("address-select", {
             this.$emit("address-changed", address);
         },
 
-
         /**
          * Check whether a company name exists and show it in bold
          * @returns {boolean}
@@ -19185,7 +19001,6 @@ Vue.component("address-select", {
         showNameStrong: function showNameStrong() {
             return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
         },
-
 
         /**
          * Show the add modal
@@ -19212,7 +19027,6 @@ Vue.component("address-select", {
 
             this.addressModal.show();
         },
-
 
         /**
          * Show the edit modal
@@ -19275,7 +19089,6 @@ Vue.component("address-select", {
             return addressToEdit;
         },
 
-
         /**
          * Show the delete modal
          * @param address
@@ -19286,7 +19099,6 @@ Vue.component("address-select", {
             this.updateHeadline();
             this.deleteModal.show();
         },
-
 
         /**
          * Delete the address selected before
@@ -19304,7 +19116,6 @@ Vue.component("address-select", {
             });
         },
 
-
         /**
          * Close the current create/update address modal
          */
@@ -19312,14 +19123,12 @@ Vue.component("address-select", {
             this.addressModal.hide();
         },
 
-
         /**
          * Close the current delete address modal
          */
         closeDeleteModal: function closeDeleteModal() {
             this.deleteModal.hide();
         },
-
 
         /**
          * Dynamically create the header line in the modal
@@ -19347,7 +19156,6 @@ Vue.component("address-select", {
 
             this.headline = headline;
         },
-
 
         /**
          * @param countryId
@@ -19442,7 +19250,6 @@ Vue.component("create-update-address", {
         };
     },
 
-
     computed: {
         addressList: function addressList() {
             this.$store.getters.getAddressList(this.addressType);
@@ -19452,7 +19259,6 @@ Vue.component("create-update-address", {
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     methods: {
         /**
@@ -19499,7 +19305,6 @@ Vue.component("create-update-address", {
             });
         },
 
-
         /**
          * Save the new address or update an existing one
          */
@@ -19510,7 +19315,6 @@ Vue.component("create-update-address", {
                 this.updateAddress();
             }
         },
-
 
         /**
          * Update an address
@@ -19532,7 +19336,6 @@ Vue.component("create-update-address", {
                 }
             });
         },
-
 
         /**
          * Create a new address
@@ -19693,7 +19496,6 @@ Vue.component("invoice-address-select", {
         }
     },
 
-
     /**
      * If no address is related to the user, a popup will open to add an address
      */
@@ -19706,7 +19508,6 @@ Vue.component("invoice-address-select", {
             }
         });
     },
-
 
     methods: {
         /**
@@ -19770,7 +19571,6 @@ Vue.component("shipping-address-select", {
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList });
     },
 
-
     methods: {
         /**
          * Update the delivery address
@@ -19826,7 +19626,6 @@ Vue.component("contact-form", {
         window.sendMail = this.sendMail;
     },
 
-
     methods: {
         validate: function validate(useCapture) {
             var _this = this;
@@ -19861,7 +19660,6 @@ Vue.component("contact-form", {
                 try {
                     for (var _iterator = invalidFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var invalidField = _step.value;
-
 
                         var invalidFieldName = invalidField.lastElementChild.innerHTML;
 
@@ -19986,7 +19784,6 @@ Vue.component("contact-map", {
         });
     },
 
-
     methods: {
         initMap: function initMap() {
             var coordinates = { lat: -34.397, lng: 150.644 };
@@ -20059,7 +19856,6 @@ Vue.component("country-select", {
         };
     },
 
-
     computed: Vuex.mapState({
         shippingCountryId: function shippingCountryId(state) {
             return state.localization.shippingCountryId;
@@ -20084,7 +19880,6 @@ Vue.component("country-select", {
         this.updateSelectedCountry();
     },
 
-
     methods: {
         /**
          * Method to fire when the country has changed
@@ -20094,14 +19889,12 @@ Vue.component("country-select", {
             this.$emit("state-changed", null);
         },
 
-
         /**
          * @param {*} value
          */
         stateChanged: function stateChanged(value) {
             this.$emit("state-changed", parseInt(value));
         },
-
 
         /**
          * @param countryId
@@ -20187,7 +19980,6 @@ Vue.component("registration", {
         this.$options.template = this.template;
     },
 
-
     methods: {
         /**
          * Validate the registration form
@@ -20204,7 +19996,6 @@ Vue.component("registration", {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
-
 
         /**
          * Send the registration
@@ -20248,7 +20039,6 @@ Vue.component("registration", {
             this.billingAddress[field] = value;
             this.billingAddress = Object.assign({}, this.billingAddress);
         },
-
 
         /**
          * Handle the user object which is send to the server
@@ -20323,7 +20113,6 @@ Vue.component("reset-password-form", {
             _this.pwdFields = $("#reset-password-form-" + _this._uid).find(".input-unit");
         });
     },
-
 
     watch: {
         passwordFirst: function passwordFirst(val, oldVal) {
@@ -20451,7 +20240,6 @@ Vue.component("salutation-select", {
         };
     },
 
-
     /**
      * Get the shipping countries
      */
@@ -20470,7 +20258,6 @@ Vue.component("salutation-select", {
             this.currentSalutation = this.salutations.withoutCompany.en;
         }
     },
-
 
     methods: {
         emitInputEvent: function emitInputEvent(value) {
@@ -20561,7 +20348,6 @@ Vue.component("forgot-password-modal", {
         });
     },
 
-
     watch: {
         username: function username(val, oldVal) {
             this.resetError();
@@ -20578,7 +20364,6 @@ Vue.component("forgot-password-modal", {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
-
 
         /**
          *  Reset password
@@ -20651,7 +20436,6 @@ Vue.component("guest-login", {
             });
         });
     },
-
 
     methods: {
         validate: function validate() {
@@ -20728,7 +20512,6 @@ Vue.component("login", {
         });
     },
 
-
     watch: {
         password: function password(val, oldVal) {
             this.resetError();
@@ -20761,7 +20544,6 @@ Vue.component("login", {
                 loginModal.parentNode.removeChild(loginModal);
             }
         },
-
 
         /**
          * Send the login data
@@ -20882,7 +20664,6 @@ Vue.component("user-login-handler", {
         });
     },
 
-
     /**
      * Add the global event listener for login and logout
      */
@@ -20893,7 +20674,6 @@ Vue.component("user-login-handler", {
             _this2.addEventListeners();
         });
     },
-
 
     methods: {
         /**
@@ -20945,7 +20725,6 @@ Vue.component("category-image-carousel", {
         };
     },
 
-
     computed: {
         imageUrls: function imageUrls() {
             return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
@@ -20975,7 +20754,6 @@ Vue.component("category-image-carousel", {
             }
         });
     },
-
 
     methods: {
         initializeCarousel: function initializeCarousel() {
@@ -21052,7 +20830,6 @@ Vue.component("category-item", {
         };
     },
 
-
     computed: _extends({
         /**
          * returns itemData.item.storeSpecial
@@ -21060,7 +20837,6 @@ Vue.component("category-item", {
         storeSpecial: function storeSpecial() {
             return this.itemData.item.storeSpecial;
         },
-
 
         /**
          * returns itemData.texts[0]
@@ -21080,7 +20856,6 @@ Vue.component("category-item", {
         }
         this.variationRetailPrice = this.itemData.prices.default.price.value;
     },
-
 
     methods: {
         loadFirstImage: function loadFirstImage() {
@@ -21116,7 +20891,6 @@ Vue.component("item-lazy-img", {
         });
     },
 
-
     methods: {
         loadImage: function loadImage() {
             $(this.$refs.lazyImg).trigger("appear");
@@ -21138,7 +20912,6 @@ Vue.component("item-list", {
             filterListState: false
         };
     },
-
 
     computed: Vuex.mapState({
         isLoading: function isLoading(state) {
@@ -21182,7 +20955,6 @@ Vue.component("item-list-sorting", {
         this.setSelectedValue();
     },
 
-
     methods: {
         /**
          * Set the selected sorting in the vuex storage and trigger the item search.
@@ -21190,7 +20962,6 @@ Vue.component("item-list-sorting", {
         updateSorting: function updateSorting() {
             this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
-
 
         /**
          * Determine the initial value and set it in the vuex storage.
@@ -21253,7 +21024,6 @@ Vue.component("item-search", {
         };
     },
 
-
     computed: {
         selectedAutocompleteItem: function selectedAutocompleteItem() {
             var selectedAutocompleteItem = this.autocompleteResult[this.selectedAutocompleteIndex];
@@ -21279,7 +21049,6 @@ Vue.component("item-search", {
             _this.currentSearchString = urlParams.query;
         });
     },
-
 
     methods: {
         prepareSearch: function prepareSearch() {
@@ -21342,7 +21111,6 @@ Vue.component("item-search", {
                 this.autocompleteResult = [];
             }
         },
-
 
         // transform the autocomplete result to usable object
         transformAutocomplete: function transformAutocomplete(data, searchString) {
@@ -21449,7 +21217,6 @@ Vue.component("item-search", {
 "use strict";
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
-
         // hide autocomplete after 100ms to make clicking on it possible
         setIsSearchFocused: function setIsSearchFocused(value) {
             var _this3 = this;
@@ -21499,7 +21266,6 @@ Vue.component("item-store-special", {
 
         this.label = this.getLabel();
     },
-
 
     methods: {
         getLabel: function getLabel() {
@@ -21556,7 +21322,6 @@ Vue.component("items-per-page", {
         this.setSelectedValueByUrl();
     },
 
-
     methods: {
         itemsPerPageChanged: function itemsPerPageChanged() {
             this.$store.dispatch("selectItemsPerPage", this.selectedValue);
@@ -21607,7 +21372,6 @@ Vue.component("pagination", {
         };
     },
 
-
     computed: _extends({
         pageMax: function pageMax() {
             if (this.isLoading) {
@@ -21647,7 +21411,6 @@ Vue.component("pagination", {
 
         this.$store.commit("setItemListPage", parseInt(page));
     },
-
 
     methods: {
         setPage: function setPage(page) {
@@ -21744,7 +21507,6 @@ Vue.component("item-filter", {
         this.$options.template = this.template || "#vue-item-filter";
     },
 
-
     methods: {
         updateFacet: function updateFacet(facetValue) {
             this.$store.dispatch("selectFacet", facetValue);
@@ -21791,7 +21553,6 @@ Vue.component("item-filter-list", {
             isActive: false
         };
     },
-
 
 <<<<<<< HEAD
     computed: Vuex.mapState({
@@ -21863,7 +21624,6 @@ Vue.component("item-filter-list", {
         }
     },
 
-
     methods: {
         toggleOpeningState: function toggleOpeningState() {
             var _this = this;
@@ -21912,7 +21672,6 @@ Vue.component("item-filter-price", {
         this.priceMin = urlParams.priceMin || "";
         this.priceMax = urlParams.priceMax || "";
     },
-
 
     computed: _extends({
         isDisabled: function isDisabled() {
@@ -21967,7 +21726,6 @@ Vue.component("single-item", {
     created: function created() {
         this.$options.template = this.template || "#vue-item-filter-tag-list";
     },
-
 
     methods: {
         removeTag: function removeTag(tag) {
@@ -22030,7 +21788,6 @@ Vue.component("add-to-wish-list", {
         };
     },
 
-
     computed: _extends({
         isVariationInWishList: function isVariationInWishList() {
             return this.wishListIds.includes(this.variationId);
@@ -22050,7 +21807,6 @@ Vue.component("add-to-wish-list", {
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     methods: {
         switchState: function switchState() {
@@ -22224,7 +21980,6 @@ Vue.component("item-bundle", {
         });
     },
 
-
     methods: {
         getBundleInnerText: function getBundleInnerText(item) {
             item.variation.bundleType = null;
@@ -22310,7 +22065,6 @@ Vue.component("item-image-carousel", {
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
     },
 
-
     computed: _extends({
         carouselImages: function carouselImages() {
             return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
@@ -22361,7 +22115,6 @@ Vue.component("item-image-carousel", {
             _this2.initThumbCarousel();
         });
     },
-
 
     methods: {
         getImageCount: function getImageCount() {
@@ -22504,7 +22257,6 @@ Vue.component("order-properties", {
         this.$options.template = this.template;
     },
 
-
     methods: Vuex.mapMutations(["setVariationOrderProperty"])
 });
 
@@ -22592,7 +22344,6 @@ Vue.component("order-property-list", {
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     methods: {
         sortGroupProperties: function sortGroupProperties(group) {
@@ -22719,7 +22470,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Vue.component("item-list-sorting", {
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
 
-
     methods: _extends({
         unsetDeselectedRadios: function unsetDeselectedRadios(propertyId) {
             var _this = this;
@@ -22810,7 +22560,6 @@ Vue.component("order-property-list-item", {
         };
     },
 
-
     computed: _extends({
         inputType: function inputType() {
             var orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
@@ -22861,7 +22610,6 @@ Vue.component("order-property-list-item", {
     },
 <<<<<<< HEAD
 
-
     methods: _extends({
         onInputValueChanged: function onInputValueChanged(value) {
             if (this.inputType === "int") {
@@ -22883,7 +22631,6 @@ Vue.component("order-property-list-item", {
             _this.$refs.searchInput.value = !(0, _utils.isNullOrUndefined)(urlParams.query) ? urlParams.query : "";
         });
     },
-
 
     methods: {
         prepareSearch: function prepareSearch() {
@@ -23048,7 +22795,6 @@ Vue.component("order-property-list-item", {
             }
         },
 
-
         // hide autocomplete after 100ms to make clicking on it possible
         setIsSearchFocused: function setIsSearchFocused(value) {
             var _this3 = this;
@@ -23094,7 +22840,6 @@ Vue.component("item-store-special", {
     created: function created() {
         this.initializeStoreSpecial();
     },
-
 
     methods: {
         initializeStoreSpecial: function initializeStoreSpecial() {
@@ -23234,7 +22979,6 @@ Vue.component("quantity-input", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
 
     computed: _extends({
         variationBasketQuantity: function variationBasketQuantity() {
@@ -23384,7 +23128,6 @@ Vue.component("single-item", {
         };
     },
 
-
     computed: _extends({
         isDescriptionTabActive: function isDescriptionTabActive() {
             return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
@@ -23449,7 +23192,6 @@ Vue.component("variation-select", {
         };
     },
 
-
     computed: Vuex.mapState({
         currentVariation: function currentVariation(state) {
             return state.item.variation;
@@ -23487,7 +23229,6 @@ Vue.component("variation-select", {
         });
     },
 
-
     methods: {
 
         /**
@@ -23516,7 +23257,6 @@ Vue.component("variation-select", {
             });
         },
 
-
         /**
          * Tests if a given attribute value is not available depending on the current selection.
          * @param {int}     attributeId         The id of the attribute
@@ -23530,7 +23270,6 @@ Vue.component("variation-select", {
             attributes[attributeId] = attributeValueId;
             return this.filterVariations(attributes).length > 0;
         },
-
 
         /**
          * Set selected attributes by a given variation.
@@ -23645,7 +23384,6 @@ Vue.component("variation-select", {
         this.priceMax = urlParams.priceMax || "";
     },
 
-
     computed: _extends({
         isDisabled: function isDisabled() {
             return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
@@ -23686,7 +23424,6 @@ Vue.component("item-filter-tag-list", {
     created: function created() {
         this.$options.template = this.template || "#vue-item-filter-tag-list";
     },
-
 
     methods: {
         removeTag: function removeTag(tag) {
@@ -23750,7 +23487,6 @@ Vue.component("live-shopping-details", {
 
         this.initializeDataAndTimer();
     },
-
 
     methods: {
         initializeDataAndTimer: function initializeDataAndTimer() {
@@ -24128,7 +23864,6 @@ Vue.component("bank-data-select", {
         this.$options.template = this.template;
     },
 
-
     /**
      * Select the modals
      */
@@ -24141,7 +23876,6 @@ Vue.component("bank-data-select", {
         });
     },
 
-
     methods: {
 
         /**
@@ -24151,7 +23885,6 @@ Vue.component("bank-data-select", {
             this.selectedBankData = bankData;
         },
 
-
         /**
          * Open the modal to add new bank-data
          */
@@ -24159,7 +23892,6 @@ Vue.component("bank-data-select", {
             this.headline = _TranslationService2.default.translate("Ceres::Template.myAccountBankAddDataTitle");
             this.openModal(false);
         },
-
 
         /**
          * Set data to update and open the modal
@@ -24173,7 +23905,6 @@ Vue.component("bank-data-select", {
             this.openModal(true);
         },
 
-
         /**
          * Set data to remove and open the modal
          * @param index
@@ -24185,7 +23916,6 @@ Vue.component("bank-data-select", {
             this.doUpdate = false;
             this.bankDeleteModal.show();
         },
-
 
         /**
          * Open the modal
@@ -24201,7 +23931,6 @@ Vue.component("bank-data-select", {
             this.bankInfoModal.show();
         },
 
-
         /**
          * Set data to change
          * @param index
@@ -24211,7 +23940,6 @@ Vue.component("bank-data-select", {
             this.updateBankData = JSON.parse(JSON.stringify(bankData));
             this.updateBankIndex = index;
         },
-
 
         /**
          * Validate the input-fields-data
@@ -24229,7 +23957,6 @@ Vue.component("bank-data-select", {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
-
 
         /**
          * Update bank-data
@@ -24251,7 +23978,6 @@ Vue.component("bank-data-select", {
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
             });
         },
-
 
         /**
          * Add new bank-data
@@ -24275,7 +24001,6 @@ Vue.component("bank-data-select", {
             });
         },
 
-
         /**
          * Delete bank-data
          */
@@ -24295,7 +24020,6 @@ Vue.component("bank-data-select", {
             });
         },
 
-
         /**
          * Check selection on delete and on add bank-data
          */
@@ -24313,7 +24037,6 @@ Vue.component("bank-data-select", {
             }
         },
 
-
         /**
          * Reset the updateBankData and updateBankIndex
          */
@@ -24323,7 +24046,6 @@ Vue.component("bank-data-select", {
             this.doUpdate = false;
         },
 
-
         /**
          * Close the current bank-modal
          */
@@ -24331,7 +24053,6 @@ Vue.component("bank-data-select", {
             this.bankInfoModal.hide();
             this.resetData();
         },
-
 
         /**
          * Close the current bank-delete-modal
@@ -24376,7 +24097,6 @@ Vue.component("change-payment-method", {
         this.$options.template = this.template;
     },
 
-
     /**
      * Initialize the change payment modal
      */
@@ -24387,7 +24107,6 @@ Vue.component("change-payment-method", {
             _this.changePaymentModal = ModalService.findModal(_this.$refs.changePaymentModal);
         });
     },
-
 
     methods: {
         checkChangeAllowed: function checkChangeAllowed() {
@@ -24493,7 +24212,6 @@ Vue.component("history", {
         this.$options.template = this.template;
     },
 
-
     methods: {
         returnsTabsOpened: function returnsTabsOpened() {
             if (!this.returnsFirstOpened) {
@@ -24540,7 +24258,6 @@ Vue.component("order-history", {
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     methods: {
         setCurrentOrder: function setCurrentOrder(order) {
@@ -24604,7 +24321,6 @@ Vue.component("order-return-history", {
         });
     },
 
-
     methods: {
         setPage: function setPage(page) {
             var _this2 = this;
@@ -24662,7 +24378,6 @@ Vue.component("order-return-history-item", {
         this.$options.template = this.template;
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
     },
-
 
     methods: {
         toggleNaming: function toggleNaming(element) {
@@ -24768,7 +24483,6 @@ Vue.component("newsletter-input", {
         this.$options.template = this.template;
     },
 
-
     methods: {
         validateData: function validateData() {
             var _this = this;
@@ -24823,7 +24537,6 @@ Vue.component("order-return", {
 
         this.$store.commit("setOrderReturnData", this.initOrderData);
     },
-
 
     computed: Vuex.mapState({
         orderData: function orderData(state) {
@@ -24882,7 +24595,6 @@ Vue.component("order-return-item", {
         });
     },
 
-
     computed: {
         orderItemImage: function orderItemImage() {
             return this.$store.getters.getOrderItemImage(this.orderItem.itemVariationId);
@@ -24937,7 +24649,6 @@ Vue.component("mobile-navigation", {
         };
     },
 
-
     computed: _extends({
         parentCategories: function parentCategories() {
             var dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
@@ -24970,7 +24681,6 @@ Vue.component("mobile-navigation", {
             _this.initNavigation();
         });
     },
-
 
     methods: {
         initNavigation: function initNavigation() {
@@ -25215,7 +24925,6 @@ Vue.component("popper", {
         };
     },
 
-
     methods: {
         togglePopper: function togglePopper() {
             this.isVisible = !this.isVisible;
@@ -25262,7 +24971,6 @@ Vue.component("shipping-country-select", {
     created: function created() {
         this.$options.template = this.template;
     },
-
 
     computed: _extends({
         isDisabled: function isDisabled() {
@@ -25380,7 +25088,6 @@ Vue.component("wish-list", {
         };
     },
 
-
     computed: Vuex.mapState({
         wishListItems: function wishListItems(state) {
             return state.wishList.wishListItems;
@@ -25403,7 +25110,6 @@ Vue.component("wish-list", {
             _this.isLoading = false;
         });
     },
-
 
     methods: _extends({
         removeItem: function removeItem(item) {
@@ -30582,6 +30288,5 @@ var cloneDeep = require("lodash/cloneDeep");
 
 },{"lodash/cloneDeep":108,"services/NotificationService":259}]},{},[252,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,162,163,164,165,166,159,160,161,167,168,169,170,171,172,173,174,175,176,177,178,179,187,188,189,190,180,181,182,183,185,184,186,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,246,247,245,248,249,250,251,264,265,266,267,268,269,270,271,272,273,274,275,276,277])
 >>>>>>> a0118875365f2f8b6187544b3a73f8d8f6b85d71
-
 
 //# sourceMappingURL=ceres-app.js.map
