@@ -21147,6 +21147,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   max-width: 150px;
 }
 
+.ht .wrapper-main #page-body {
+  margin-top: 25px;
+}
+
 .ht .static-link-list {
   margin-bottom: 0;
 }
