@@ -96,7 +96,13 @@
 
     {% import _self as sidemenu %}
     {% set urlNow = currentScopeUrl %}
+    {% set rootCategoryID = not config('Ceres.header.root_category_id') ? 1 : config('Ceres.header.root_category_id') %}
 
+    {% if rootCategoryID > 0 %}
+        {%
+            set categories = services.category.getChildren(rootCategoryID, currentLang) 
+        %}
+    {% endif %}
     {% for category in categories %}
 
         {% set urlNow = currentScopeUrl ~ "/" ~ category.details[0].nameUrl %}
